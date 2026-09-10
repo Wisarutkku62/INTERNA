@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', [Controller::class , 'index'])->name('home');
+Route::get('/login' ,[Controller::class , 'login'])->name('login');
+Route::get('/register' ,[Controller::class , 'register'])->name('register');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
