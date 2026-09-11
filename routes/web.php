@@ -2,12 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [Controller::class , 'index'])->name('home');
-Route::get('/login' ,[Controller::class , 'login'])->name('login');
-Route::get('/register' ,[Controller::class , 'register'])->name('register');
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+// แก้ไขบรรทัดนี้ ให้เรียกแสดงหน้า loginmain หรือ welcome โดยตรง
+Route::get('/', function () {
+    return view('partials.loginmain');
 });
 
-require __DIR__.'/settings.php';
+Route::get('/login', function () {
+    return view('partials.loginmain');
+})->name('login');
+
+Route::get('/loginmain', function () {
+    return view('partials.loginmain');
+})->name('loginmain');
+
+require __DIR__ . '/settings.php';

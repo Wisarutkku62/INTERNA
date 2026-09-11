@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="C:\Users\User\Desktop\INTERNA\INTERNA\resources\css\loginmain.css">
+    <link rel="stylesheet" href="{{ asset('css/loginmain.css') }}">
 </head>
 
 <body>
