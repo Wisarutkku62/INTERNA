@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.picture {
+    width: 50vw;                   
+    height: 100vh;                
+    background-image: url('../img/Screenshot\ 2026-08-31\ 234411.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.Login {
+    width: 50vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;       
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+
+.Login_left {
+    width: 100%;               
+    text-align: center;       
+    margin-bottom: 20px;
+}
+
+
+.Back_to_Menu, .Login-title {
+    text-align: center;
+    display: block;
+}
+
