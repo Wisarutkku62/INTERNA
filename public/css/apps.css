@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Prompt', sans-serif;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 8px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  color: #0037ff;
+  width: 22px;
+  height: 22px;
+}
+
+.logo-text {
+  color: #0037ff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 16px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #475569;
+  font-size: 0.85rem;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  transition: color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: #0037ff;
+}
+
+.arrow-icon {
+  width: 11px;
+  height: 11px;
+  stroke: #94a3b8;
+  stroke-width: 2;
+  fill: none;
+  transition: stroke 0.15s ease;
+}
+
+.nav-link:hover .arrow-icon {
+  stroke: #00c795;
+}
+
+.nav-actions .btn-login {
+  background-color: #ffffff;
+  color: #5900ff;
+  border: 2px solid #5900ff;
+  text-decoration: none;
+  font-size: 0.825rem;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 20px;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-actions .btn-regis {
+  background-color: #5900ff;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.825rem;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 20px;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-post:hover {
+  opacity: 0.9;
+}
