@@ -6,6 +6,7 @@
     <title>INTERNA : หาที่ฝึกงาน งานเด็กจบใหม่ @yield('title','INTERNA : หาที่ฝึกงาน งานเด็กจบใหม่')</title>
 </head>
 <body>
-    
+    <nav>
+    </nav>
 </body>
 </html>
