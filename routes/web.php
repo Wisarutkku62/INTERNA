@@ -10,7 +10,8 @@ use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome')->name('home');
+Route::view('/', 'loginmain')->name('home');
+
 
 // AuthController
 Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.showRegister');
