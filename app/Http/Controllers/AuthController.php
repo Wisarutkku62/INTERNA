@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
@@ -27,12 +28,12 @@ class AuthController extends Controller
 
         return redirect()->route('auth.showLogin');
     }
-    public function showLogin();
+    public function showLogin()
     {
-        return view('auth.showLogin')
+        return view('auth.showLogin');
     }
-    public function login();
+    public function login()
     {
-        return view('Index')
+        return view('Index');
     }
 }
