@@ -37,8 +37,15 @@
       <a href="#" class="btn-login">เข้าสู่ระบบ</a>
       <a href="#" class="btn-regis">ลงทะเบียน</a>
     </div>
+<<<<<<< HEAD
   </nav>
 </nav>
 <main>@yield("content")</main>
+=======
+    </nav>
+    <main>
+        @yield('content')
+    </main>
+>>>>>>> f91b86449cc3701821befded6ac3dd7be6734e9a
 </body>
 </html>
