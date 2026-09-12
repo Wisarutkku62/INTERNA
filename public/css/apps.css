@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
-  padding: 8px 24px;
+  padding: 18px 60px;
   border-bottom: 1px solid #f1f5f9;
   width: 100%;
 }
@@ -22,15 +22,9 @@
   text-decoration: none;
 }
 
-.logo-icon {
-  color: #0037ff;
-  width: 22px;
-  height: 22px;
-}
-
 .logo-text {
   color: #0037ff;
-  font-size: 1.1rem;
+  font-size: 1.35rem;
   font-weight: 600;
   letter-spacing: 0.3px;
 }
@@ -39,7 +33,7 @@
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 16px;
+  gap: 36px;
 }
 
 .nav-item {
@@ -50,7 +44,7 @@
 .nav-link {
   text-decoration: none;
   color: #475569;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 400;
   display: flex;
   align-items: center;
@@ -75,29 +69,50 @@
   stroke: #00c795;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: 0.97s;
+}
+
 .nav-actions .btn-login {
   background-color: #ffffff;
   color: #5900ff;
   border: 2px solid #5900ff;
   text-decoration: none;
-  font-size: 0.825rem;
-  font-weight: 500;
-  padding: 5px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 24px;
   border-radius: 20px;
-  transition: opacity 0.2s ease;
+  transition: all 0.3s ease-in-out;
   white-space: nowrap;
+}
+
+.nav-actions .btn-login:hover {
+  box-shadow: 6px 6px 20px rgba(89, 0, 255, 0.4);
+  transform: translateY(-2px);
+  transition: 0.97s;
+  opacity: 0.95;
 }
 
 .nav-actions .btn-regis {
   background-color: #5900ff;
   color: #ffffff;
   text-decoration: none;
-  font-size: 0.825rem;
-  font-weight: 500;
-  padding: 5px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 24px;
   border-radius: 20px;
-  transition: opacity 0.2s ease;
+  transition: all 0.3s ease-in-out;
   white-space: nowrap;
+}
+
+.nav-actions .btn-regis:hover {
+  box-shadow: 6px 6px 20px rgba(89, 0, 255, 0.4);
+  transform: translateY(-2px);
+  transition: 0.97s;
+  opacity: 0.95;
 }
 
 .btn-post:hover {
