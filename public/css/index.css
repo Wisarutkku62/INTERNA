@@ -120,35 +120,3 @@ p {
     border-radius: 15px;
     font-size: 13px;
 }
-
-@media (max-width: 992px) {
-    .banner {
-        flex-direction: column;
-        padding: 20px;
-        gap: 30px;
-    }
-
-    .left-side {
-        width: 100%;
-    }
-
-    .right-side {
-        max-width: 100%;
-        padding-left: 0;
-    }
-}
-
-@media (max-width: 576px) {
-    .left-side {
-        flex-direction: column;
-    }
-
-    .img-box {
-        aspect-ratio: 16 / 9;
-    }
-
-    .img-box2,
-    .img-box3 {
-        aspect-ratio: 16 / 9;
-    }
-}
