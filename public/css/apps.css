@@ -78,8 +78,8 @@
 
 .nav-actions .btn-login {
   background-color: #ffffff;
-  color: #5900ff;
-  border: 2px solid #5900ff;
+  color: #0037ff;
+  border: 2px solid #0037ff;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 600;
@@ -97,7 +97,7 @@
 }
 
 .nav-actions .btn-regis {
-  background-color: #5900ff;
+  background-color: #0037ff;
   color: #ffffff;
   text-decoration: none;
   font-size: 0.9rem;
