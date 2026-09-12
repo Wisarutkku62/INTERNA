@@ -39,7 +39,9 @@
       <a href="#" class="btn-login">เข้าสู่ระบบ</a>
       <a href="#" class="btn-regis">ลงทะเบียน</a>
     </div>
-  </nav>
-</nav>
+    </nav>
+    <main>
+        @yield('content')
+    </main>
 </body>
 </html>
