@@ -2,7 +2,7 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @endpush
-@section("content")
+@section("index")
 <div class="banner">
     <div class="left-side">
             <div class="img-box">

@@ -19,12 +19,9 @@ class AuthController extends Controller
             'role' => ['required', 'string']
         ]);   
         
-        $user = new User();
+        $user = User::create($validated);
 
-        $user->username = $validated['username'];
-        $user->password = $validated['password'];
-        $user->role = $validated['role'];
-        $user->save();
+        Auth::login($user);
 
         return redirect()->route('auth.showLogin');
     }
