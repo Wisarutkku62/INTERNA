@@ -8,19 +8,20 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 5vw;
+    gap: 40px;
     width: 100%;
-    max-width: 100%;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 25px 40px;
     font-family: 'Prompt', sans-serif;
 }
 
+
 .left-side {
     display: flex;
     gap: 15px;
-    flex: 1;
-    min-width: 0;
+    flex: 1.2;
+    min-width: 460px;
 }
 
 .img-box {
@@ -56,11 +57,11 @@
 
 .right-side {
     flex: 1;
-    width: 100%;
+    min-width: 320px;
 }
 
 h1 {
-    font-size: clamp(20px, 2.5vw, 28px);
+    font-size: clamp(22px, 2.5vw, 32px);
     font-weight: bold;
     color: #111111;
     margin-bottom: 10px;
@@ -119,4 +120,61 @@ p {
     padding: 5px 12px;
     border-radius: 15px;
     font-size: 13px;
+}
+
+
+@media (max-width: 1150px) {
+    .banner {
+        flex-direction: column-reverse;
+        gap: 35px;
+        padding: 30px 20px;
+    }
+
+    .left-side,
+    .right-side {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .left-side {
+        max-width: 550px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .banner {
+        padding: 20px 15px;
+        gap: 25px;
+    }
+
+    .left-side {
+        gap: 10px;
+    }
+
+    .img-group {
+        gap: 10px;
+    }
+
+    .search-box {
+        padding: 4px 4px 4px 14px;
+    }
+
+    .search-box input {
+        font-size: 13px;
+    }
+
+    .search-box button {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .tags {
+        gap: 6px;
+    }
+
+    .tags a {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
 }
