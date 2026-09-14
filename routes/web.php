@@ -7,13 +7,13 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EvaluationController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InternController;
 use Illuminate\Support\Facades\Route;
 
 // AuthController
 Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.showRegister');
-Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.showLogin');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
@@ -21,6 +21,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 // InternController
 Route::get('/', [InternController::class , 'index'])->name('intern.home');
 Route::get('/intern', [InternController::class , 'internship'])->name('intern.intern');
+
+//ProfileController
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class , 'profile'])->name('profile.profile');
+});
+
 // Old Controller
 // StudentController
 Route::get('/student/profile', [StudentController::class, 'showProfile'])->name('student.showProfile');

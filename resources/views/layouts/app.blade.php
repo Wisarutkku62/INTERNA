@@ -40,7 +40,7 @@
 
         @guest
         <div class="nav-actions">
-          <a href="{{ route('auth.showLogin')}}" class="btn-login">เข้าสู่ระบบ</a>
+          <a href="{{ route('login')}}" class="btn-login">เข้าสู่ระบบ</a>
           <a href="{{ route('auth.showRegister')}}" class="btn-regis">ลงทะเบียน</a>
         </div>
         @endguest
