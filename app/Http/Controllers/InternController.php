@@ -19,7 +19,7 @@ class InternController extends Controller
             $internship_position = InternshipPosition::where(
                 'iposition_name',
                 'like',
-                '%' . $keyword . '%'
+                '%' . $keyword . '%' 
             )->get();
             
         } else {
