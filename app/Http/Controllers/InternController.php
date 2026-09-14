@@ -11,9 +11,21 @@ class InternController extends Controller
     {
         return view('index');
     } 
-    public function internship()
+    public function internship(Request $request)
     {   
-        $internship_position = InternshipPosition::all();
-        return view('internship',compact('internship_position'));
+        $keyword = $request->keyword;
+
+        if ($keyword) {
+            $internship_position = InternshipPosition::where(
+                'iposition_name',
+                'like',
+                '%' . $keyword . '%'
+            )->get();
+            
+        } else {
+            $internship_position = [] ;
+        }
+
+        return view('internship', compact('internship_position', 'keyword'));
     }
 }

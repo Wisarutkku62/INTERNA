@@ -27,14 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class , 'profile'])->name('profile.profile');
 });
 
-// Old Controller
-// StudentController
-Route::get('/student/profile', [StudentController::class, 'showProfile'])->name('student.showProfile');
-Route::put('/student/profile', [StudentController::class, 'updateProfile'])->name('student.updateProfile');
-
-Route::get('/student/companies', [StudentController::class, 'searchCompanies'])->name('student.searchCompanies');
-Route::post('/student/companies', [StudentController::class, 'addCompany'])->name('student.addCompany');
-
 // CompanyController
 Route::get('/company/profile', [CompanyController::class, 'showProfile'])->name('company.showProfile');
 Route::put('/company/profile', [CompanyController::class, 'updateProfile'])->name('company.updateProfile');
