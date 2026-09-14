@@ -8,20 +8,20 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\InternController;
 use Illuminate\Support\Facades\Route;
-
-Route::view('/', 'welcome')->name('home');
-Route::view('/index', 'index')->name('index');
 
 // AuthController
 Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.showRegister');
-Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
-
 Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.showLogin');
+Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
-
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
+// InternController
+Route::get('/', [InternController::class , 'index'])->name('intern.home');
+Route::get('/intern', [InternController::class , 'internship'])->name('intern.intern');
+// Old Controller
 // StudentController
 Route::get('/student/profile', [StudentController::class, 'showProfile'])->name('student.showProfile');
 Route::put('/student/profile', [StudentController::class, 'updateProfile'])->name('student.updateProfile');

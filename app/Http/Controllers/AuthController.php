@@ -11,11 +11,18 @@ class AuthController extends Controller
     {
         return view('auth.showRegister');
     }
+
+    public function showLogin()
+    {
+        return view('auth.showLogin');
+    }
+
     public function register(Request $request): RedirectResponse 
     {
         $validated = $request->validate([
             'username' => ['required', 'string', 'max:50'],
-            'password' => ['required', 'string'],
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required', 'string']
         ]);   
         
@@ -25,12 +32,30 @@ class AuthController extends Controller
 
         return redirect()->route('auth.showLogin');
     }
-    public function showLogin()
+    
+    public function login(Request $request)
     {
-        return view('auth.showLogin');
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string']
+        ]);  
+
+        if (Auth::attempt($validated)) {
+            $request->session()->regenerate();
+
+            return redirect()->route('intern.intern');
+        }
+
+        return redirect()->back()
+            ->withErrors(['email' => 'Incorrect Email or Password'])
+            ->withInput();
     }
-    public function login()
+
+    public function logout(Request $request)
     {
-        return view('Index');
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
     }
 }
