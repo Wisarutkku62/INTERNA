@@ -27,14 +27,17 @@
                 <p>สำหรับนักศึกษา ผู้หางาน และบริษัทประกาศงาน</p>
             </div>
 
-            <form action="{{ route('auth.login') }}" method="POST">
+            <form action="{{ route('auth.login') }}" method="POST" id="LoginForm">
                 @csrf
                 <div class="form-group">
                     <label for="email">อีเมล</label>
                     <div class="input-box">
                         <span class="icon"></span>
-                        <input type="email" id="email" name="email" placeholder="อีเมล" >
+                        <input type="text" id="email" name="email" placeholder="อีเมล" >
                     </div>
+                    <span class="email-validated" id="email-validated">
+                    
+                    </span>
                 </div>
 
                 <div class="form-group">
@@ -45,6 +48,10 @@
                         <span class="show-password"></span>
                     </div>
 
+                    <span class="password-validated" id="password-validated">
+                    
+                    </span>
+
                     <div class="forgot-password">
                         <a href="{{ url('/forgot-password') }}">ลืมรหัสผ่าน?</a>
                     </div>
@@ -54,6 +61,29 @@
                     <button type="submit">เข้าสู่ระบบ</button>
                 </div>
             </form>
+
+            <script>
+                    let LoginFormJs = document.getElementById('LoginForm')
+                    LoginFormJs.addEventListener('submit', (e) => {
+                        var notFill = false;
+                        const email_value = document.getElementById('email').value;
+                        const password_value = document.getElementById('password').value;
+                    
+                        if(email_value=="") {
+                            document.getElementById("email-validated").innerHTML='กรุณากรอกอีเมล'
+                            notFill = true;
+                    } 
+                    if(password_value=="") {
+                            document.getElementById("password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
+                            notFill = true;
+                    }
+
+                    if (notFill) {
+                        e.preventDefault()
+                    }
+                    });
+                    
+                </script>
 
             <div class="admin-info">
                 ยังไม่มีบัญชี? <a href="{{ url('/register') }}">สมัครสมาชิก</a>

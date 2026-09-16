@@ -32,8 +32,8 @@
                 </div>
 
 
-                <form action="{{ route('auth.register') }}" method='POST'>
-
+                <form action="{{ route('auth.register') }}" method='POST' id="RegForm">
+                    @csrf
                     <div class="form-group">
 
                         <label for="email">
@@ -52,7 +52,9 @@
                                 name="email"
                                 placeholder="อีเมล"
                             >
+                            <span class="email-validated" id="email-validated">
 
+                            </span>
                         </div>
 
                     </div>
@@ -80,6 +82,9 @@
                             <span class="show-password">
                             
                             </span>
+                            <span class="password-validated" id="password-validated">
+
+                            </span>
 
                         </div>
 
@@ -87,7 +92,7 @@
 
                     <div class="form-group">
 
-                        <label for="password">
+                        <label for="password_confirmation">
                             ยืนยันรหัสผ่าน
                         </label>
 
@@ -99,13 +104,17 @@
 
                             <input
                                 type="password"
-                                id="password"
-                                name="password"
+                                id="password_confirmation"
+                                name="password_confirmation"
                                 placeholder="รหัสผ่าน"
                             >
 
                             <span class="show-password">
                             
+                            </span>
+
+                            <span class="password_comfirmation-validated" id="password_comfirmation-validated">
+
                             </span>
 
                         </div>
@@ -120,7 +129,33 @@
                 
 
                 </form>
+                <script>
+                    let RegFormJs = document.getElementById('RegForm')
+                    RegFormJs.addEventListener('submit', (e) => {
+                        var notFill = false;
+                        const email_value = document.getElementById('email').value;
+                        const password_value = document.getElementById('password').value;
+                        const password_comfirmation_value = document.getElementById('password_confirmation').value;
+                    
+                        if(email_value=="") {
+                            document.getElementById("email-validated").innerHTML='กรุณากรอกอีเมล'
+                            notFill = true;
+                    } 
+                    if(password_value=="") {
+                            document.getElementById("password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
+                            notFill = true;
+                    }
+                    if(password_comfirmation_value=="") {
+                            document.getElementById("password_comfirmation-validated").innerHTML='กรุณากรอกยืนยันรหัสผ่าน'
+                            notFill = true;
+                    }
 
+                    if (notFill) {
+                        e.preventDefault()
+                    }
+                    });
+                    
+                </script>
 
                 <div class="admin-info">
                     หรือมีบัญชีอยู่แล้ว? <a href="{{ url('/login') }}">เข้าสู่ระบบ</a>
@@ -133,7 +168,3 @@
     </div>
 
 @endsection
-
-<!-- </body>
-
-</html> -->
