@@ -7,7 +7,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EvaluationController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\InternController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/profile', 'profile')->name('home');
@@ -16,19 +17,20 @@ Route::view('/', 'loginmain')->name('home');
 
 // AuthController
 Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.showRegister');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
-
-Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.showLogin');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
-
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-// StudentController
-Route::get('/student/profile', [StudentController::class, 'showProfile'])->name('student.showProfile');
-Route::put('/student/profile', [StudentController::class, 'updateProfile'])->name('student.updateProfile');
+// InternController
+Route::get('/', [InternController::class , 'index'])->name('intern.home');
+Route::get('/intern', [InternController::class , 'internship'])->name('intern.intern');
 
-Route::get('/student/companies', [StudentController::class, 'searchCompanies'])->name('student.searchCompanies');
-Route::post('/student/companies', [StudentController::class, 'addCompany'])->name('student.addCompany');
+//ProfileController -> Auth Check
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class , 'profile'])->name('profile.profile');
+});
+
 
 // CompanyController
 Route::get('/company/profile', [CompanyController::class, 'showProfile'])->name('company.showProfile');
