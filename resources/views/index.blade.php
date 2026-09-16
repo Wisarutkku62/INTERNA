@@ -31,7 +31,6 @@
         <div class="tags">
             <a href="{{ url('/search?tag=intern') }}">หาที่ฝึกงาน</a>
             <a href="{{ url('/search?tag=fulltime') }}">งานประจำ</a>
-            <a href="{{ url('/search?tag=parttime') }}">งานพาร์ทไทม์</a>
             <a href="{{ url('/search?tag=freshgrad') }}">หางานเด็กจบใหม่</a>
             <a href="{{ url('/search?tag=wfh') }}">งาน work from home</a>
         </div>
