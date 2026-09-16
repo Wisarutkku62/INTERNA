@@ -22,11 +22,15 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::get('/', [InternController::class , 'index'])->name('intern.home');
 Route::get('/intern', [InternController::class , 'internship'])->name('intern.intern');
 
-//ProfileController
+//ProfileController -> Auth Check
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class , 'profile'])->name('profile.profile');
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3012d98d81459ae97aeef8f00cd65c0bb4ea4f45
 // CompanyController
 Route::get('/company/profile', [CompanyController::class, 'showProfile'])->name('company.showProfile');
 Route::put('/company/profile', [CompanyController::class, 'updateProfile'])->name('company.updateProfile');
