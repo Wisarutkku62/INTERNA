@@ -5,15 +5,13 @@
 @endpush
 
 @section('title','Login')
-@section('content')
-
 
 @section('content')
 <div class="login-page">
     
     <!-- ฝั่งซ้าย: รูปภาพ -->
     <div class="left-section">
-        <img src="{{ asset('image/imagelogin_register.png') }}" alt="Login Cover">
+        <img src="{{ asset('image/imagelogin_register1.png') }}" alt="Login Cover">
     </div>
 
     <!-- ฝั่งขวา: ฟอร์ม -->
@@ -29,7 +27,7 @@
                 <p>สำหรับนักศึกษา ผู้หางาน และบริษัทประกาศงาน</p>
             </div>
 
-            <form action="{{ url('/login') }}" method="POST">
+            <form action="{{ route('auth.login') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="email">อีเมล</label>

@@ -11,12 +11,12 @@ class AuthController extends Controller
 {
     public function showRegister()
     {
-        return view('auth.showRegister');
+        return view('register');
     }
 
     public function showLogin()
     {
-        return view('auth.showLogin');
+        return view('login');
     }
 
     public function register(Request $request): RedirectResponse 

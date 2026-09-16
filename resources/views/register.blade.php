@@ -1,28 +1,15 @@
 @extends("layouts.auth")
+
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/register.css') }}?v={{ filemtime(public_path('css/register.css')) }}">
 @endpush
 
-<!-- <!DOCTYPE html>
-<html lang="th">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>INTERN | Register</title>
-    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
-
-</head> -->
-<!-- 
-<body> -->
-
 @section('title','Register')
+
 @section('content')
-   
     <div class="login-page">
         <div class="left-section">
-            <img src="{{ asset('image/imagelogin_register.png') }}" alt="Admin Login Image">
+            <img src="{{ asset('image/imagelogin_register1.png') }}" alt="Admin Login Image">
         </div>
 
         <div class="right-section">
@@ -45,7 +32,7 @@
                 </div>
 
 
-                <form>
+                <form action="{{ route('auth.register') }}" method='POST'>
 
                     <div class="form-group">
 
@@ -98,7 +85,7 @@
 
                     </div>
 
-                     <div class="form-group">
+                    <div class="form-group">
 
                         <label for="password">
                             ยืนยันรหัสผ่าน
@@ -130,13 +117,13 @@
                             ลงทะเบียน
                         </button>
                     </div>
-                   
+                
 
                 </form>
 
 
                 <div class="admin-info">
-                   หรือมีบัญชีอยู่แล้ว? <a href="{{ url('/login') }}">เข้าสู่ระบบ</a>
+                    หรือมีบัญชีอยู่แล้ว? <a href="{{ url('/login') }}">เข้าสู่ระบบ</a>
                 </div>
 
             </div>
