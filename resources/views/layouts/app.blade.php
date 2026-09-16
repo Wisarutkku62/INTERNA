@@ -29,12 +29,6 @@
               ค้นหาตำแหน่งงาน
               <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
             </a>
-            <div class="dropdown-menu">
-              <a href="#">Network Engineer</a>
-              <a href="#">QA Tester</a>
-              <a href="#">Software Tester</a>
-              <a href="#">Frontend Developer</a>
-            </div>
           </li>
           <li class="nav-item"><a href="#" class="nav-link">ค้นหานักศึกษาฝึกงาน</a></li>
           <li class="nav-item"><a href="#" class="nav-link">ค้นหาผู้หางาน</a></li>
