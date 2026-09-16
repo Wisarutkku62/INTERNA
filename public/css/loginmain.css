@@ -1,18 +1,3 @@
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: #FAF8F4;
-}
-
-.picture {
-    width: 50vw;
-    height: 100vh;
-    background-image: url('../img/Screenshot 2026-08-31 234411.png');
-    background-size: cover;
-    background-position: center;
-}
 
 .Login {
     width: 50vw;
@@ -20,60 +5,72 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    padding: 0 90px;
+    align-items: center;
+    padding: 0;
     box-sizing: border-box;
-    background: #FAF8F4;
+    background: #FFFFFF;
+}
+.picture {
+    width: 50vw; 
+    min-height: 100vh;
+    margin: 0px;
+    background-image: url('../img/Picturelogin.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.Login_left, 
+.form {
+    width: 100%;
+    max-width: 420px;
 }
 
 .Login_left {
-    width: 100%;
     text-align: left;
-    margin-bottom: 8px;
 }
 
 .Back_to_Menu {
     display: inline-block;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.02em;
-    color: #6B6357;
-    text-decoration: none;
-    margin-bottom: 40px;
-    padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
-    cursor: pointer;
-    transition: border-color 0.2s ease;
+    margin-bottom: 24px;
 }
 
-.Back_to_Menu:hover {
-    border-bottom-color: #C9A227;
+.Back_to_Menu a {
+    text-decoration: none;
+    color: #6B6357;
+    font-size: 16px;
+    font-family: prompt, sans-serif;
+    transition: color 0.2s ease;
+}
+
+.Back_to_Menu a:hover {
+    color: #C9A227;
 }
 
 .Login-title {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: prompt, sans-serif;
     font-size: 42px;
     font-weight: 700;
     color: #1B2A4A;
-    margin: 0 0 4px 0;
-    padding-left: 18px;
-    border-left: 4px solid #C9A227;
-    line-height: 1.1;
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.login-page {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
 }
 
 h3 {
-    font-family: 'Inter', sans-serif;
+    font-family: prompt, sans-serif;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 17px;
     color: #6B6357;
-    margin: 18px 0 40px 0;
-    max-width: 340px;
+    margin: 0 0 40px 0;
     line-height: 1.5;
-}
-
-.form {
-    width: 100%;
-    max-width: 340px;
+    text-align: left;
 }
 
 .form form {
@@ -87,9 +84,9 @@ h3 {
     border: none;
     border-bottom: 1.5px solid #D8D2C4;
     background: transparent;
-    padding: 8px 2px 10px 2px;
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
+    padding: 14px 2px;
+    font-family: prompt, sans-serif;
+    font-size: 17px;
     color: #1B2A4A;
     box-sizing: border-box;
     outline: none;
@@ -105,43 +102,32 @@ h3 {
 }
 
 .form button {
-    margin-top: 12px;
+    margin-top: 16px;
     width: 100%;
-    padding: 13px 0;
-    background: #1B2A4A;
+    padding: 17px 0;
+    background: #0037ff;
     color: #FAF8F4;
     border: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
+    border-radius: 10px;
+    font-family: prompt, sans-serif;
+    font-size: 17px;
     font-weight: 600;
-    letter-spacing: 0.01em;
     cursor: pointer;
     transition: background 0.2s ease;
 }
 
 .form button:hover {
-    background: #C9A227;
-    color: #1B2A4A;
+    background: black;
+    color: white;
 }
 
-.Register {
-    margin-top: 28px;
+.back-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    transition: transform 0.2s ease;
 }
 
-.Register p {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #6B6357;
-    margin: 0;
-}
-
-.Register a {
-    color: #1B2A4A;
-    font-weight: 600;
-    text-decoration: none;
-    border-bottom: 1.5px solid #C9A227;
-}
-
-.Register a:hover {
-    color: #C9A227;
+.Back_to_Menu a:hover .back-icon {
+    transform: translateX(-3px);
 }
