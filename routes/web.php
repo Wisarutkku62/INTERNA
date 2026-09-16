@@ -73,4 +73,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 });
 
+// Employee Page
+Route::get('/employee', function () {
+    return view('employee');
+})->name('employee');
+
 require __DIR__.'/settings.php';
+            
