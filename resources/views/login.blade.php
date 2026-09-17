@@ -65,29 +65,32 @@
             <script>
                     let LoginFormJs = document.getElementById('LoginForm')
                     LoginFormJs.addEventListener('submit', (e) => {
-                        var notFill = false;
+                        let EmailNotFill = false;
+                        let PasswordNotFill = false;
                         const email_value = document.getElementById('email').value;
                         const password_value = document.getElementById('password').value;
                     
                     if(email_value=="") {
                         document.querySelector(".email-validated").innerHTML='กรุณากรอกอีเมล'
-                        notFill = true;
+                        EmailNotFill = true;
                         document.getElementById('email').classList.add('input-error');
                     } else if (!email_value == "") {
                         document.querySelector(".email-validated").innerHTML=''
+                        EmailNotFill = false;
                         document.getElementById('email').classList.remove('input-error');
                     }
 
                     if(password_value=="") {
                         document.querySelector(".password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
-                        notFill = true;
+                        PasswordNotFill = true;
                         document.getElementById('password').classList.add('input-error');
                     }else if (!password_value == "") {
                         document.querySelector(".password-validated").innerHTML=''
+                        PasswordNotFill = false;
                         document.getElementById('password').classList.remove('input-error');
                     }
 
-                    if (notFill) {
+                    if (EmailNotFill || PasswordNotFill) {
                         e.preventDefault()
                     }
                     });
@@ -95,7 +98,7 @@
                 </script>
 
             <div class="admin-info">
-                ยังไม่มีบัญชี? <a href="{{ url('/register') }}">สมัครสมาชิก</a>
+                ยังไม่มีบัญชี? <a href="{{ route('auth.showRegister') }}">สมัครสมาชิก</a>
             </div>
 
         </div>
