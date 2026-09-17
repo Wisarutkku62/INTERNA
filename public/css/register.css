@@ -269,3 +269,7 @@ text-decoration: none;
 
 }
 
+.input-error {
+  border: 1.5px solid #e53e3e !important;
+  background-color: #fff5f5 !important; /* (ตัวเลือกเสริม) ใส่สีพื้นหลังแดงจางๆ */
+}

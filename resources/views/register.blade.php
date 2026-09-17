@@ -51,12 +51,12 @@
                                 id="email"
                                 name="email"
                                 placeholder="อีเมล"
+                                class=""
                             >
-                            <span class="email-validated" id="email-validated">
-
-                            </span>
                         </div>
+                        <span class="email-validated" id="email-validated">
 
+                        </span>
                     </div>
 
 
@@ -77,17 +77,16 @@
                                 id="password"
                                 name="password"
                                 placeholder="รหัสผ่าน"
+                                class=""
                             >
 
                             <span class="show-password">
                             
                             </span>
-                            <span class="password-validated" id="password-validated">
-
-                            </span>
-
                         </div>
+                        <span class="password-validated" id="password-validated">
 
+                        </span>
                     </div>
 
                     <div class="form-group">
@@ -107,18 +106,16 @@
                                 id="password_confirmation"
                                 name="password_confirmation"
                                 placeholder="รหัสผ่าน"
+                                class=""
                             >
 
                             <span class="show-password">
                             
                             </span>
-
-                            <span class="password_comfirmation-validated" id="password_comfirmation-validated">
-
-                            </span>
-
                         </div>
+                    <span class="password_comfirmation-validated" id="password_comfirmation-validated">
 
+                    </span>
                     </div>
 
                     <div class="buttonsubmit">
@@ -137,17 +134,31 @@
                         const password_value = document.getElementById('password').value;
                         const password_comfirmation_value = document.getElementById('password_confirmation').value;
                     
-                        if(email_value=="") {
-                            document.getElementById("email-validated").innerHTML='กรุณากรอกอีเมล'
-                            notFill = true;
-                    } 
-                    if(password_value=="") {
-                            document.getElementById("password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
-                            notFill = true;
+                    if(email_value=="") {
+                        document.querySelector(".email-validated").innerHTML='กรุณากรอกอีเมล'
+                        notFill = true;
+                        document.getElementById('email').classList.add('input-error')
+                    } else if (!email_value == "") {
+                        document.querySelector("email-validated").innerHTML=''
+                        document.getElementById('email').classList.remove('input-error')
                     }
+
+                    if(password_value=="") {
+                        document.querySelector(".password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
+                        notFill = true;
+                        document.querySelector('.password').classList.add('input-error')
+                    }else if (!password_value == "") {
+                        document.querySelector(".password-validated").innerHTML=''
+                        document.getElementById('password').classList.remove('input-error')
+                    }
+
                     if(password_comfirmation_value=="") {
-                            document.getElementById("password_comfirmation-validated").innerHTML='กรุณากรอกยืนยันรหัสผ่าน'
-                            notFill = true;
+                        document.querySelector(".password_comfirmation-validated").innerHTML='กรุณากรอกยืนยันรหัสผ่าน'
+                        notFill = true;
+                        document.getElementById('password_confirmation').classList.add('input-error')
+                    }else if (!password_comfirmation_value == "") {
+                        document.querySelector(".password_comfirmation-validated").innerHTML=''
+                        document.getElementById('password_confirmation').classList.remove('input-error')
                     }
 
                     if (notFill) {

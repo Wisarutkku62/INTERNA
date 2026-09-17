@@ -33,9 +33,9 @@
                     <label for="email">อีเมล</label>
                     <div class="input-box">
                         <span class="icon"></span>
-                        <input type="text" id="email" name="email" placeholder="อีเมล" >
+                        <input type="text" id="email" name="email" placeholder="อีเมล" class=''>
                     </div>
-                    <span class="email-validated" id="email-validated">
+                    <span class="email-validated">
                     
                     </span>
                 </div>
@@ -48,7 +48,7 @@
                         <span class="show-password"></span>
                     </div>
 
-                    <span class="password-validated" id="password-validated">
+                    <span class="password-validated">
                     
                     </span>
 
@@ -69,13 +69,22 @@
                         const email_value = document.getElementById('email').value;
                         const password_value = document.getElementById('password').value;
                     
-                        if(email_value=="") {
-                            document.getElementById("email-validated").innerHTML='กรุณากรอกอีเมล'
-                            notFill = true;
-                    } 
+                    if(email_value=="") {
+                        document.querySelector(".email-validated").innerHTML='กรุณากรอกอีเมล'
+                        notFill = true;
+                        document.getElementById('email').classList.add('input-error');
+                    } else if (!email_value == "") {
+                        document.querySelector(".email-validated").innerHTML=''
+                        document.getElementById('email').classList.remove('input-error');
+                    }
+
                     if(password_value=="") {
-                            document.getElementById("password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
-                            notFill = true;
+                        document.querySelector(".password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
+                        notFill = true;
+                        document.getElementById('password').classList.add('input-error');
+                    }else if (!password_value == "") {
+                        document.querySelector(".password-validated").innerHTML=''
+                        document.getElementById('password').classList.remove('input-error');
                     }
 
                     if (notFill) {
