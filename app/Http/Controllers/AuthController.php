@@ -22,17 +22,17 @@ class AuthController extends Controller
     public function register(Request $request): RedirectResponse 
     {
         $validated = $request->validate([
-            'username' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'email', 'unique:users'],
+            'email' => ['required', 'string', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'string']
+            'password_confirmation' => ['required', 'string', 'min:8'],
+            // 'role' => ['required', 'string']
         ]);   
-        
-        $user = User::create($validated);
+         $user = User::create([
+            'email' => $validated['email'],
+            'password' => $validated['password'],
+        ]);
 
-        Auth::login($user);
-
-        return redirect()->route('auth.showLogin');
+        return redirect()->route('login'); 
     }
     
     public function login(Request $request)
