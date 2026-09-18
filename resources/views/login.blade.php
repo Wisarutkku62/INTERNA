@@ -14,6 +14,15 @@
         <img src="{{ asset('image/imagelogin_register1.png') }}" alt="Login Cover">
     </div>
 
+    <div class= "toast">
+        <svg class="reg_success_toast_icon1"></svg>
+        <div class="reg_success_toast_message">
+            <span class= "reg_success_toast_message_header">Success</span>
+            <span class= "reg_success_toast_message_text">Register Successfully</span>
+        </div>
+        <svg class="reg_success_toast_icon2"></svg>
+        <div class="progress"></div>
+    </div>
     <!-- ฝั่งขวา: ฟอร์ม -->
     <div class="right-section">
         <div class="login-container">
