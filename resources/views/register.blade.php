@@ -30,8 +30,7 @@
                     </p>
 
                 </div>
-
-
+                
                 <form action="{{ route('auth.register') }}" method='POST' id="RegForm">
                     @csrf
                     <div class="form-group">

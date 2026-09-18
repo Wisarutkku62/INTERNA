@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('login');
+        return redirect()->route('login')->with('succuss','Register Successfully');
     }
     
     public function login(Request $request)

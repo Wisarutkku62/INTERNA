@@ -26,7 +26,9 @@
                 <h1>เข้าสู่ระบบ</h1>
                 <p>สำหรับนักศึกษา ผู้หางาน และบริษัทประกาศงาน</p>
             </div>
-
+            @if(session('success'))
+                <p><strong>{{ session('success') }}</strong></p>
+            @endif
             <form action="{{ route('auth.login') }}" method="POST" id="LoginForm">
                 @csrf
                 <div class="form-group">
