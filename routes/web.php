@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/naja', 'application');
 // Public / Landing Routes
-Route::get('/', [InternController::class, 'index'])->name('home');
+Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
 Route::view('/loginmain', 'loginmain')->name('loginmain');
 

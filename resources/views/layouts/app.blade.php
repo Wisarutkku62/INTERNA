@@ -13,7 +13,7 @@
 <body>
     <header>
       <nav class="navbar">
-        <a href="#" class="logo">
+        <a href="{{ route('index')}}" class="logo">
           <span class="logo-text">INTERNA</span>
         </a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
@@ -25,7 +25,7 @@
       <div class="nav-container" id="navContainer">
         <ul class="nav-menu">
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link">
+            <a href="{{ route('intern.intern')}}" class="nav-link">
               ค้นหาตำแหน่งงาน
               <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
             </a>
@@ -41,8 +41,11 @@
         </ul>
 
         @auth
-         <div class="nav-actions">
-          <a href="{{ route('login')}}" class="btn-log-out">ออกจากระบบ</a>
+        <div class="nav-actions">
+          <form action="{{ route('auth.logout')}}" method="POST">
+            @csrf
+            <button type="submit">Logout</button>
+          </form>
         @endauth
 
         @guest
@@ -57,25 +60,5 @@
 <main>
   @yield("content")
 </main>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const menuToggle = document.getElementById('menuToggle');
-  const navContainer = document.getElementById('navContainer');
-
-  menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navContainer.classList.toggle('active');
-  });
-
-  document.querySelectorAll('.has-dropdown > .nav-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-      if (window.innerWidth <= 992) {
-        e.preventDefault();
-        link.parentElement.classList.toggle('open');
-      }
-    });
-  });
-});
-</script>
 </body>
 </html>

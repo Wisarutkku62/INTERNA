@@ -30,7 +30,7 @@
                     </p>
 
                 </div>
-                
+
                 <form action="{{ route('auth.register') }}" method='POST' id="RegForm">
                     @csrf
                     <div class="form-group">
@@ -39,7 +39,7 @@
                             อีเมล
                         </label>
 
-                        <div class="input-box">
+                        <div class="input-box" id="input-box-email">
 
                             <span class="icon">
                                 
@@ -65,7 +65,7 @@
                             รหัสผ่าน
                         </label>
 
-                        <div class="input-box">
+                        <div class="input-box" id="input-box-password">
 
                             <span class="icon">
                                 
@@ -95,7 +95,7 @@
                             ยืนยันรหัสผ่าน
                         </label>
 
-                        <div class="input-box">
+                        <div class="input-box" id="input-box-password_confirmation">
 
                             <span class="icon">
                                 
@@ -127,6 +127,16 @@
                 
 
                 </form>
+
+                @error('email')
+                <script>
+                    document.querySelector(".email-validated").innerHTML='{{$message}}'
+                    document.getElementById('input-box-email').classList.add('input-error')
+                    document.getElementById('input-box-password').classList.add('input-error')
+                    document.getElementById('input-box-password_confirmation').classList.add('input-error')
+                </script>
+                @enderror
+
                 <script>
                     let RegFormJs = document.getElementById('RegForm')
                     RegFormJs.addEventListener('submit', (e) => {
@@ -141,44 +151,44 @@
                     if(email_value=="") {
                         document.querySelector(".email-validated").innerHTML='กรุณากรอกอีเมล'
                         EmailNotFill = true;
-                        document.getElementById('email').classList.add('input-error')
+                        document.getElementById('input-box-email').classList.add('input-error')
                     } else if (!email_value == "") {
                         document.querySelector(".email-validated").innerHTML=''
                         EmailNotFill = false;
-                        document.getElementById('email').classList.remove('input-error')
+                        document.getElementById('input-box-email').classList.remove('input-error')
                     }
 
                     if(password_value=="") {
                         document.querySelector(".password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
                         PasswordNotFill = true;
-                        document.getElementById('password').classList.add('input-error')
+                        document.getElementById('input-box-password').classList.add('input-error')
                     }else if (!password_value == "") {
                         document.querySelector(".password-validated").innerHTML=''
                         PasswordNotFill = false;
-                        document.getElementById('password').classList.remove('input-error')
+                        document.getElementById('input-box-password').classList.remove('input-error')
                     }
 
                     if(password_confirmation_value=="") {
                         document.querySelector(".password_confirmation-validated").innerHTML='กรุณากรอกยืนยันรหัสผ่าน'
                         PasswordConfirmationNotFill = true;
-                        document.getElementById('password_confirmation').classList.add('input-error')
+                        document.getElementById('input-box-password_confirmation').classList.add('input-error')
                     }else if (!password_confirmation_value == "") {
                         document.querySelector(".password_confirmation-validated").innerHTML=''
                         PasswordConfirmationNotFill = false;
-                        document.getElementById('password_confirmation').classList.remove('input-error')
+                        document.getElementById('input-box-password_confirmation').classList.remove('input-error')
                     }
 
                     if (PasswordNotFill == false) {
                         if(password_value.length < 8 ) {
                             document.querySelector('.password-validated').innerHTML = 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัว'
                             PasswordNotEight = true;
-                            document.getElementById('password').classList.add('input-error')
-                            document.getElementById('password_confirmation').classList.add('input-error')
+                            document.getElementById('input-box-password_confirmation').classList.add('input-error')
+                            document.getElementById('input-box-password').classList.add('input-error')
                         } else if (password_value.length >= 8) {
                             document.querySelector('.password-validated').innerHTML = ''
                             PasswordNotEight = false;
-                            document.getElementById('password').classList.remove('input-error')
-                            document.getElementById('password_confirmation').classList.remove('input-error')
+                            document.getElementById('input-box-password_confirmation').classList.remove('input-error')
+                            document.getElementById('input-box-password').classList.remove('input-error')
                         }
                     }
                     
@@ -188,18 +198,18 @@
                             document.querySelector('.password_confirmation-validated').innerHTML = 'รหัสผ่านไม่ตรงกัน'
                             document.querySelector('.password-validated').innerHTML = 'รหัสผ่านไม่ตรงกัน'
                             PasswordConfirmationNotFill = true;
-                            document.getElementById('password').classList.add('input-error')
-                            document.getElementById('password_confirmation').classList.add('input-error')
+                            document.getElementById('input-box-password').classList.add('input-error')
+                            document.getElementById('input-box-password_confirmation').classList.add('input-error')
                         } else if (password_value === password_confirmation_value) {
                             document.querySelector('.password_confirmation-validated').innerHTML = ''
                             document.querySelector('.password-validated').innerHTML = ''
                             PasswordConfirmationNotFill = false;
-                            document.getElementById('password').classList.remove('input-error')
-                            document.getElementById('password_confirmation').classList.remove('input-error')
+                            document.getElementById('input-box-password').classList.remove('input-error')
+                            document.getElementById('input-box-password_confirmation').classList.remove('input-error')
                         }
                         } else if (PasswordNotEight) {
                             document.querySelector('.password_confirmation-validated').innerHTML = 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัว'
-                            document.getElementById('password_confirmation').classList.add('input-error')
+                            document.getElementById('input-box-password_confirmation').classList.add('input-error')
                         }
 
                     }

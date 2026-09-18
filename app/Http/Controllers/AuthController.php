@@ -26,8 +26,15 @@ class AuthController extends Controller
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             // 'role' => ['required', 'string']
+        ], [
+        'email.unique' => 'อีเมลนี้ถูกลงทะเบียนไปแล้ว'
         ]);   
-            $user = User::create([
+
+        if (Auth::attempt($validated)) {
+            return redirect()->back();
+        };
+
+        User::create([
             'email' => $validated['email'],
             'password' => $validated['password'],
             'role' => 'student',
@@ -51,15 +58,18 @@ class AuthController extends Controller
         }
 
         return redirect()->back()
-            ->withErrors(['email' => 'Incorrect Email or Password'])
+            ->withErrors(['email' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'])
+            ->withErrors(['password' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'])
             ->withInput();
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): RedirectResponse 
     {
             Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        return redirect()->back();
     }
 }

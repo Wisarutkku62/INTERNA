@@ -40,7 +40,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="email">อีเมล</label>
-                    <div class="input-box">
+                    <div class="input-box" id="input-box-email">
                         <span class="icon"></span>
                         <input type="text" id="email" name="email" placeholder="อีเมล" class='' value="{{old('email')}}">
                     </div>
@@ -51,7 +51,7 @@
 
                 <div class="form-group">
                     <label for="password">รหัสผ่าน</label>
-                    <div class="input-box">
+                    <div class="input-box" id="input-box-password">
                         <span class="icon"></span>
                         <input type="password" id="password" name="password" placeholder="รหัสผ่าน" >
                         <span class="show-password"></span>
@@ -75,16 +75,16 @@
                 <script>
                     document.querySelector(".email-validated").innerHTML='{{$message}}'
                     document.querySelector(".password-validated").innerHTML='{{$message}}'
-                    document.querySelector('.input-box').classList.add('input-error')
-                    document.querySelector('.input-box').classList.add('input-error');
+                    document.getElementById('input-box-email').classList.add('input-error');
+                    document.getElementById('input-box-password').classList.add('input-error');
                 </script>
             @enderror
             @error('password')
                 <script>
                     document.querySelector(".email-validated").innerHTML='{{$message}}'
                     document.querySelector(".password-validated").innerHTML='{{$message}}'
-                    document.getElementById('email').classList.add('input-error')
-                    document.getElementById('password').classList.add('input-error');
+                    document.getElementById('input-box-email').classList.add('input-error');
+                    document.getElementById('input-box-password').classList.add('input-error');
                 </script>
             @enderror
 
@@ -101,21 +101,21 @@
                     if(email_value=="") {
                         document.querySelector(".email-validated").innerHTML='กรุณากรอกอีเมล'
                         EmailNotFill = true;
-                        document.querySelector('.input-box').classList.add('input-error');
+                        document.getElementById('input-box-email').classList.add('input-error');
                     } else if (!email_value == "") {
                         document.querySelector(".email-validated").innerHTML=''
                         EmailNotFill = false;
-                        document.querySelector('.input-box').classList.remove('input-error');
+                        document.getElementById('input-box-email').classList.remove('input-error');
                     }
 
                     if(password_value=="") {
                         document.querySelector(".password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
                         PasswordNotFill = true;
-                        document.querySelector('.input-box').classList.add('input-error');
+                        document.getElementById('input-box-password').classList.add('input-error');
                     }else if (!password_value == "") {
                         document.querySelector(".password-validated").innerHTML=''
                         PasswordNotFill = false;
-                        document.querySelector('.input-box').classList.remove('input-error');
+                        document.getElementById('input-box-password').classList.remove('input-error');
                     }
 
                     if (EmailNotFill || PasswordNotFill) {
