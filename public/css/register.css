@@ -269,3 +269,16 @@ text-decoration: none;
 
 }
 
+.email-validated,
+.password-validated,
+.password_confirmation-validated {
+  color: #e53e3e; /* สีแดง */
+  font-size: 14px;
+  margin-top: 4px;
+  display: block;
+}
+
+.input-error {
+  border: 1.5px solid #e53e3e !important;
+  background-color: #fff5f5 !important; /* (ตัวเลือกเสริม) ใส่สีพื้นหลังแดงจางๆ */
+}

@@ -26,16 +26,18 @@
                 <h1>เข้าสู่ระบบ</h1>
                 <p>สำหรับนักศึกษา ผู้หางาน และบริษัทประกาศงาน</p>
             </div>
-
+            @if(session('success'))
+                <p><strong>{{ session('success') }}</strong></p>
+            @endif
             <form action="{{ route('auth.login') }}" method="POST" id="LoginForm">
                 @csrf
                 <div class="form-group">
                     <label for="email">อีเมล</label>
                     <div class="input-box">
                         <span class="icon"></span>
-                        <input type="text" id="email" name="email" placeholder="อีเมล" >
+                        <input type="text" id="email" name="email" placeholder="อีเมล" class=''>
                     </div>
-                    <span class="email-validated" id="email-validated">
+                    <span class="email-validated">
                     
                     </span>
                 </div>
@@ -48,7 +50,7 @@
                         <span class="show-password"></span>
                     </div>
 
-                    <span class="password-validated" id="password-validated">
+                    <span class="password-validated">
                     
                     </span>
 
@@ -65,20 +67,32 @@
             <script>
                     let LoginFormJs = document.getElementById('LoginForm')
                     LoginFormJs.addEventListener('submit', (e) => {
-                        var notFill = false;
+                        let EmailNotFill = false;
+                        let PasswordNotFill = false;
                         const email_value = document.getElementById('email').value;
                         const password_value = document.getElementById('password').value;
                     
-                        if(email_value=="") {
-                            document.getElementById("email-validated").innerHTML='กรุณากรอกอีเมล'
-                            notFill = true;
-                    } 
-                    if(password_value=="") {
-                            document.getElementById("password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
-                            notFill = true;
+                    if(email_value=="") {
+                        document.querySelector(".email-validated").innerHTML='กรุณากรอกอีเมล'
+                        EmailNotFill = true;
+                        document.getElementById('email').classList.add('input-error');
+                    } else if (!email_value == "") {
+                        document.querySelector(".email-validated").innerHTML=''
+                        EmailNotFill = false;
+                        document.getElementById('email').classList.remove('input-error');
                     }
 
-                    if (notFill) {
+                    if(password_value=="") {
+                        document.querySelector(".password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
+                        PasswordNotFill = true;
+                        document.getElementById('password').classList.add('input-error');
+                    }else if (!password_value == "") {
+                        document.querySelector(".password-validated").innerHTML=''
+                        PasswordNotFill = false;
+                        document.getElementById('password').classList.remove('input-error');
+                    }
+
+                    if (EmailNotFill || PasswordNotFill) {
                         e.preventDefault()
                     }
                     });
@@ -86,7 +100,7 @@
                 </script>
 
             <div class="admin-info">
-                ยังไม่มีบัญชี? <a href="{{ url('/register') }}">สมัครสมาชิก</a>
+                ยังไม่มีบัญชี? <a href="{{ route('auth.showRegister') }}">สมัครสมาชิก</a>
             </div>
 
         </div>

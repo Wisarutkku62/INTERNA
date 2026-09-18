@@ -30,9 +30,11 @@ class AuthController extends Controller
          $user = User::create([
             'email' => $validated['email'],
             'password' => $validated['password'],
+            'role' => 'student',
         ]);
 
-        return redirect()->route('login'); 
+
+        return redirect()->route('login')->with('succuss','Register Successfully');
     }
     
     public function login(Request $request)
