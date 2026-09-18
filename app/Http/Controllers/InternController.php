@@ -26,6 +26,6 @@ class InternController extends Controller
             $internship_position = [] ;
         }
 
-        return view('internship', compact('internship_position', 'keyword'));
+        return view('application', compact('internship_position', 'keyword'));
     }
 }

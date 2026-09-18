@@ -41,7 +41,8 @@
         </ul>
 
         @auth
-        
+         <div class="nav-actions">
+          <a href="{{ route('login')}}" class="btn-log-out">ออกจากระบบ</a>
         @endauth
 
         @guest
