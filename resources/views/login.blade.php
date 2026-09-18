@@ -35,16 +35,14 @@
                 <h1>เข้าสู่ระบบ</h1>
                 <p>สำหรับนักศึกษา ผู้หางาน และบริษัทประกาศงาน</p>
             </div>
-            @if(session('success'))
-                <p><strong>{{ session('success') }}</strong></p>
-            @endif
+
             <form action="{{ route('auth.login') }}" method="POST" id="LoginForm">
                 @csrf
                 <div class="form-group">
                     <label for="email">อีเมล</label>
                     <div class="input-box">
                         <span class="icon"></span>
-                        <input type="text" id="email" name="email" placeholder="อีเมล" class=''>
+                        <input type="text" id="email" name="email" placeholder="อีเมล" class='' value="{{old('email')}}">
                     </div>
                     <span class="email-validated">
                     
@@ -55,7 +53,7 @@
                     <label for="password">รหัสผ่าน</label>
                     <div class="input-box">
                         <span class="icon"></span>
-                        <input type="password" id="password" name="password" placeholder="รหัสผ่าน">
+                        <input type="password" id="password" name="password" placeholder="รหัสผ่าน" >
                         <span class="show-password"></span>
                     </div>
 
@@ -73,6 +71,23 @@
                 </div>
             </form>
 
+            @error('email')
+                <script>
+                    document.querySelector(".email-validated").innerHTML='{{$message}}'
+                    document.querySelector(".password-validated").innerHTML='{{$message}}'
+                    document.querySelector('.input-box').classList.add('input-error')
+                    document.querySelector('.input-box').classList.add('input-error');
+                </script>
+            @enderror
+            @error('password')
+                <script>
+                    document.querySelector(".email-validated").innerHTML='{{$message}}'
+                    document.querySelector(".password-validated").innerHTML='{{$message}}'
+                    document.getElementById('email').classList.add('input-error')
+                    document.getElementById('password').classList.add('input-error');
+                </script>
+            @enderror
+
             <script>
                     let LoginFormJs = document.getElementById('LoginForm')
                     LoginFormJs.addEventListener('submit', (e) => {
@@ -81,24 +96,26 @@
                         const email_value = document.getElementById('email').value;
                         const password_value = document.getElementById('password').value;
                     
+
+                    
                     if(email_value=="") {
                         document.querySelector(".email-validated").innerHTML='กรุณากรอกอีเมล'
                         EmailNotFill = true;
-                        document.getElementById('email').classList.add('input-error');
+                        document.querySelector('.input-box').classList.add('input-error');
                     } else if (!email_value == "") {
                         document.querySelector(".email-validated").innerHTML=''
                         EmailNotFill = false;
-                        document.getElementById('email').classList.remove('input-error');
+                        document.querySelector('.input-box').classList.remove('input-error');
                     }
 
                     if(password_value=="") {
                         document.querySelector(".password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
                         PasswordNotFill = true;
-                        document.getElementById('password').classList.add('input-error');
+                        document.querySelector('.input-box').classList.add('input-error');
                     }else if (!password_value == "") {
                         document.querySelector(".password-validated").innerHTML=''
                         PasswordNotFill = false;
-                        document.getElementById('password').classList.remove('input-error');
+                        document.querySelector('.input-box').classList.remove('input-error');
                     }
 
                     if (EmailNotFill || PasswordNotFill) {
@@ -106,7 +123,8 @@
                     }
                     });
                     
-                </script>
+            </script>
+
 
             <div class="admin-info">
                 ยังไม่มีบัญชี? <a href="{{ route('auth.showRegister') }}">สมัครสมาชิก</a>
