@@ -5,6 +5,7 @@
   font-family: 'Prompt', sans-serif;
 }
 
+
 .navbar {
   max-width: 1280px;
   margin: 0 auto;
@@ -190,6 +191,43 @@
 .menu-toggle.active span:nth-child(3) {
   transform: translateY(-7.5px) rotate(-45deg);
 }
+
+.footer {
+  background-color: #1e293b;
+  color: #cbd5e1;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 220px;
+}
+
+.footer-col p {
+  color: #ffffff;
+  margin-top: 6px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  float: right;
+}
+.footer-text {
+  color: #fff;
+  font-size: 1.40rem;
+  font-weight: 600;
+}
+
 
 @media (max-width:992px) {
   .navbar {
