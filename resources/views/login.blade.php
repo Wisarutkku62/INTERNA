@@ -7,6 +7,17 @@
 @section('title','Login')
 
 @section('content')
+<div class="toast">
+  <div class="toast-content">
+    <span class="check-symbol">&#10003;</span>
+    <div class="toast-message">
+      <span class="text text-1">Success</span>
+      <span class="text text-2">Register Successfully</span>
+    </div>
+  </div>
+  <span class="close-symbol">&times;</span>
+  <div class="progress"></div>
+</div>
 <div class="login-page">
     
     <!-- ฝั่งซ้าย: รูปภาพ -->
@@ -14,15 +25,7 @@
         <img src="{{ asset('image/imagelogin_register1.png') }}" alt="Login Cover">
     </div>
 
-    <div class= "toast">
-        <svg class="reg_success_toast_icon1"></svg>
-        <div class="reg_success_toast_message">
-            <span class= "reg_success_toast_message_header">Success</span>
-            <span class= "reg_success_toast_message_text">Register Successfully</span>
-        </div>
-        <svg class="reg_success_toast_icon2"></svg>
-        <div class="progress"></div>
-    </div>
+    
     <!-- ฝั่งขวา: ฟอร์ม -->
     <div class="right-section">
         <div class="login-container">
@@ -67,7 +70,7 @@
                 </div>
 
                 <div class="buttonsubmit">
-                    <button type="submit">เข้าสู่ระบบ</button>
+                    <button type="submit" id="loginBtn ">เข้าสู่ระบบ</button>
                 </div>
             </form>
 
@@ -89,6 +92,17 @@
             @enderror
 
             <script>
+                    const toast = document.querySelector('.toast');
+                    const closeBtn = document.querySelector('.close-symbol');
+                    let toastTimeout;
+
+                    if (closeBtn) {
+                     closeBtn.addEventListener('click', () => {
+                      toast.classList.remove('active');
+                      clearTimeout(toastTimeout);
+                    });
+                }
+
                     let LoginFormJs = document.getElementById('LoginForm')
                     LoginFormJs.addEventListener('submit', (e) => {
                         let EmailNotFill = false;
@@ -120,6 +134,17 @@
 
                     if (EmailNotFill || PasswordNotFill) {
                         e.preventDefault()
+                    } else {
+                      e.preventDefault(); 
+                        toast.classList.add('active');
+                        setTimeout(() => {
+                        window.location.href = '/'; 
+                        }, 2000);
+
+                    clearTimeout(toastTimeout);
+                    toastTimeout = setTimeout(() => {
+                        toast.classList.remove('active');
+                    }, 3000);
                     }
                     });
                     

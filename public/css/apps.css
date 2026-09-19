@@ -212,7 +212,7 @@
     align-items: flex-start;
     background: #fff;
     border-bottom: 1px solid #f1f5f9;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .06);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
   }
 
   .nav-container.active {

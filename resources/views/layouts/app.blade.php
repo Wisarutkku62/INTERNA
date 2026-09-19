@@ -31,7 +31,7 @@
             </a>
           </li>
           <li class="nav-item"><a href="#" class="nav-link">ค้นหานักศึกษาฝึกงาน</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">ค้นหาผู้หางาน</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">ประเมินผล</a></li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               สำหรับบริษัท
