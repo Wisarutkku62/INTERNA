@@ -24,8 +24,8 @@ class InternController extends Controller
             );
         }
         
-        $internship_position = $datas->get();
+        $internship_positions = $datas->get();
 
-        return view('application', compact('internship_position'));
+        return view('application', compact('internship_positions' , 'keyword'));
     }
 }
