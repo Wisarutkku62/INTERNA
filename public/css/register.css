@@ -120,9 +120,9 @@ html, body {
 .back {
     display: inline-block;
     margin-bottom: 20px;
-    color: #8a959b;
+    color: #3f4244;
     text-decoration: none;
-    font-size: 1px;
+    font-size: 15px;
     font-weight: 500;
 }
 
@@ -269,3 +269,16 @@ text-decoration: none;
 
 }
 
+.email-validated,
+.password-validated,
+.password_confirmation-validated {
+  color: #e53e3e; /* สีแดง */
+  font-size: 14px;
+  margin-top: 4px;
+  display: block;
+}
+
+.input-error {
+  border: 1.5px solid #e53e3e !important;
+  background-color: #fff5f5 !important; /* (ตัวเลือกเสริม) ใส่สีพื้นหลังแดงจางๆ */
+}

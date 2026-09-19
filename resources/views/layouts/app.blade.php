@@ -13,19 +13,25 @@
 <body>
     <header>
       <nav class="navbar">
-        <a href="#" class="logo">
+        <a href="{{ route('index')}}" class="logo">
           <span class="logo-text">INTERNA</span>
         </a>
-
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+    
+      <div class="nav-container" id="navContainer">
         <ul class="nav-menu">
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item dropdown">
+            <a href="{{ route('intern.intern')}}" class="nav-link">
               ค้นหาตำแหน่งงาน
               <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
             </a>
           </li>
           <li class="nav-item"><a href="#" class="nav-link">ค้นหานักศึกษาฝึกงาน</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">ค้นหาผู้หางาน</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">ประเมินผล</a></li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               สำหรับบริษัท
@@ -35,7 +41,11 @@
         </ul>
 
         @auth
-        
+        <div class="nav-actions">
+          <form action="{{ route('auth.logout')}}" method="POST">
+            @csrf
+            <button type="submit">Logout</button>
+          </form>
         @endauth
 
         @guest
@@ -44,6 +54,7 @@
           <a href="{{ route('auth.showRegister')}}" class="btn-regis">ลงทะเบียน</a>
         </div>
         @endguest
+      </div>
       </nav>
     </header>
 <main>
