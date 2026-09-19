@@ -5,138 +5,79 @@
 @endpush
 
 @section('content')
-    <h1 class="profile-title">ข้อมูลส่วนตัว</h1>
+<div class="profile-page-wrapper">
+    <div class="profile-container">
 
-    <form name="profileForm" action="" method="post" class="profile" onsubmit="handleFormSubmit(event)">
-        @csrf
-        <div class="avatar-section full-width">
-            <div class="avatar-wrapper">
-                <img id="avatar-preview" src="/img/profile.png" alt="Profile Picture">
-            </div>
-            <div class="file-upload">
-                <label for="profile_picture" class="btn-upload">เลือกรูปโปรไฟล์</label>
-                <input type="file" id="profile_picture" name="profile_picture" accept="image/*"
-                    onchange="previewImage(event)" class="PictureProfile">
+        <div class="profile-left">
+            <h1 id="title">ข้อมูลส่วนตัว</h1>
+            <div class="picprofile">
+                <img id="avatar-preview" src="{{ $user->profile_img ?? '/img/profile.png' }}" alt="Profile Picture" class="profiles">
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="fname">ชื่อ</label>
-            <input type="text" name="fname" placeholder="ชื่อ" class="input-field">
-        </div>
-
-        <div class="form-group">
-            <label for="lname">นามสกุล</label>
-            <input type="text" name="lname" placeholder="นามสกุล" class="input-field">
-        </div>
-
-        <div class="form-group full-width">
-            <label>เพศ</label>
-            <div class="gender-group">
-                <label class="radio-item"><input type="radio" name="gender" value="male" class="Radio"> ชาย</label>
-                <label class="radio-item"><input type="radio" name="gender" value="female" class="Radio"> หญิง</label>
-                <label class="radio-item"><input type="radio" name="gender" value="LGBTQIA+" class="Radio"> LGBTQIA+</label>
+        <div class="profile-right">
+            <div class="profile-field half">
+                <label for="fname">ชื่อ</label>
+                <div class="field-value">{{ $user->fname ?? '' }}</div>
             </div>
-        </div>
 
-        <div class="form-group full-width">
-            <label>วันเกิด</label>
-            <div class="birthday-group">
-                <select name="day" class="Birthday">
-                    <option value="">วันที่</option>
-                    @for ($day = 1; $day <= 31; $day++)
-                        <option value="{{ $day }}">{{ $day }}</option>
-                    @endfor
-                </select>
-                <select name="month" class="Birthday">
-                    <option value="">เดือน</option>
-                    @php
-                        $months = [1 => 'มกราคม', 2 => 'กุมภาพันธ์', 3 => 'มีนาคม', 4 => 'เมษายน', 5 => 'พฤษภาคม', 6 => 'มิถุนายน', 7 => 'กรกฎาคม', 8 => 'สิงหาคม', 9 => 'กันยายน', 10 => 'ตุลาคม', 11 => 'พฤศจิกายน', 12 => 'ธันวาคม'];
-                    @endphp
-                    @foreach ($months as $key => $month)
-                        <option value="{{ $key }}">{{ $month }}</option>
-                    @endforeach
-                </select>
-                <select name="year" class="Birthday">
-                    <option value="">พ.ศ.</option>
-                    @for ($year = date('Y') + 543; $year >= 2500; $year--)
-                        <option value="{{ $year }}">{{ $year }}</option>
-                    @endfor
-                </select>
+            <div class="profile-field half">
+                <label for="lname">นามสกุล</label>
+                <div class="field-value">{{ $user->lname ?? '' }}</div>
             </div>
+
+            <div class="profile-field half">
+                <label>เพศ</label>
+                <div class="field-value">{{ $user->gender ?? '' }}</div>
+            </div>
+
+            <div class="profile-field half">
+                <label>วันเกิด</label>
+                <div class="birthday-inputs">
+                    <div class="field-value">{{ $user->birth_day ?? 'วัน' }}</div>
+                    <div class="field-value">{{ $user->birth_month ?? 'เดือน' }}</div>
+                    <div class="field-value">{{ $user->birth_year ?? 'ปี' }}</div>
+                </div>
+            </div>
+
+            <div class="profile-field half">
+                <label for="nationality">สัญชาติ</label>
+                <div class="field-value">{{ $user->nationality ?? '' }}</div>
+            </div>
+
+            <div class="profile-field half">
+                <label for="religion">ศาสนา</label>
+                <div class="field-value">{{ $user->religion ?? '' }}</div>
+            </div>
+
+            <div class="profile-field half">
+                <label for="education">ระดับการศึกษา</label>
+                <div class="field-value">{{ $user->education ?? '' }}</div>
+            </div>
+
+            <div class="profile-field half">
+                <label for="phone">โทรศัพท์</label>
+                <div class="field-value">{{ $user->phone ?? '' }}</div>
+            </div>
+
+            <div class="profile-field">
+                <label for="email">อีเมล</label>
+                <div class="field-value">{{ $user->email ?? '' }}</div>
+            </div>
+
+            <div class="profile-field">
+                <label for="address">ที่อยู่</label>
+                <div class="field-value">{{ $user->address ?? '' }}</div>
+            </div>
+
+            <div class="profile-field bio-field">
+                <label for="bio">ข้อมูลส่วนตัวเพิ่มเติม</label>
+                <div class="field-value">{{ $user->bio ?? '' }}</div>
+            </div>
+
+            <a href="{{ route('newprofile') }}" class="Edit_profile">แก้ไขข้อมูล</a>
         </div>
 
-        <div class="form-group">
-            <label for="nationality">สัญชาติ</label>
-            <input type="text" name="nationality" placeholder="สัญชาติ" class="input-field">
-        </div>
-
-        <div class="form-group">
-            <label for="religion">ศาสนา</label>
-            <input type="text" name="religion" placeholder="ศาสนา" class="input-field">
-        </div>
-
-        <div class="form-group">
-            <label for="education">ระดับการศึกษา</label>
-            <select name="education" id="education" class="input-field">
-                <option value="" disabled selected>ระดับการศึกษา</option>
-                <option value="high_school">มัธยมศึกษาปีที่ 6</option>
-                <option value="bachelor">ปริญญาตรี</option>
-                <option value="master">ปริญญาโท</option>
-                <option value="doctorate">ปริญญาเอก</option>
-                <option value="diploma">ปวส.</option>
-                <option value="diploma">ปวช.</option>
-                <option value="diploma">อนุปริญญา</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="phone">โทรศัพท์</label>
-            <input type="tel" name="phone" placeholder="โทรศัพท์" class="input-field">
-        </div>
-
-        <div class="form-group full-width">
-            <label for="email">อีเมล</label>
-            <input type="email" name="email" placeholder="อีเมล" class="input-field">
-        </div>
-
-        <div class="form-group full-width">
-            <label for="address">ที่อยู่</label>
-            <input type="text" name="address" placeholder="ที่อยู่" class="input-field">
-        </div>
-
-        <div class="form-group full-width">
-            <label for="bio">ข้อมูลส่วนตัวเพิ่มเติม</label>
-            <textarea name="bio" placeholder="ข้อมูลส่วนตัว" class="input-field" rows="4"></textarea>
-        </div>
-
-        <button type="submit" class="btn-submit">บันทึกข้อมูล</button>
-    </form>
-
-    <div id="toast" class="toast">บันทึกข้อมูลเรียบร้อยแล้ว!</div>
-
-    <script>
-        function showToast(message = "บันทึกข้อมูลเรียบร้อยแล้ว!") {
-            const toast = document.getElementById('toast');
-            toast.innerText = message;
-            toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 3000);
-        }
-
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            showToast("บันทึกข้อมูลเรียบร้อยแล้ว!");
-        }
-
-        function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function () {
-                const output = document.getElementById('avatar-preview');
-                output.src = reader.result;
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    </script>
-
-  
+    </div>
+</div>
 @endsection

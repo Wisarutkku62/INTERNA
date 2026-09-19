@@ -1,0 +1,134 @@
+@php
+    // สร้างข้อมูลจำลองชั่วคราว เพื่อให้เปิดดู UI ได้โดยไม่ติด Error
+    $documents = $documents ?? collect([
+        (object) [
+            'id' => 1,
+            'name' => 'เรซูเม่ / ประวัติส่วนตัว (Resume / CV)',
+            'description' => 'ไฟล์ประวัติการศึกษา ประสบการณ์โปรเจกต์ และทักษะเครื่องมือออกแบบ',
+            'is_required' => true,
+            'is_uploaded' => false, // ลองเปลี่ยนเป็น true เพื่อทดสอบดูสถานะ "อัปโหลดแล้ว"
+            'file_name' => 'resume_demo.pdf'
+        ]
+    ]);
+
+      $document = $Resume ?? collect([
+        (object) [
+            'id' => 2,
+            'name' => 'แฟ้มสะสมผลงาน',
+            'description' => 'นำเสนอผลงานของตนเอง',
+            'is_required' => true,
+            'is_uploaded' => false, // ลองเปลี่ยนเป็น true เพื่อทดสอบดูสถานะ "อัปโหลดแล้ว"
+            'file_name' => 'resume_demo.pdf'
+        ]
+    ]);
+@endphp
+@extends('layouts.app')
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/document.css') }}?v={{ filemtime(public_path('css/document.css')) }}">
+@endpush
+
+@section('content')
+    <div class="head">
+        <a href="{{ url()->previous() }}" class="back-bt">
+            <img src="{{ asset('img/lukson.png') }}" alt="กลับ" class="back-icon">
+            <span>งานทั้งหมด</span>
+        </a>
+    </div>
+
+    <div class="document-section">
+        <div class="section-title">
+            <div class="title-left">
+                <div class="blue-bar"></div>
+                <h3>1. เอกสารบังคับตามประกาศรับสมัคร <span class="mark-required">*</span></h3>
+            </div>
+        </div>
+
+        @foreach($documents as $doc)
+
+            <div class="doc-card">
+                <div class="doc-info">
+                    <div class="doc-icon">📄</div>
+                    <div class="doc-detail">
+                        <h4>
+                            {{ $doc->name }}
+                            @if($doc->is_required)
+                                <span class="mark-required">*</span>
+                            @endif
+
+                            @if($doc->is_uploaded)
+                                <span class="badge-status badge-uploaded">อัปโหลดแล้ว</span>
+                            @else
+                                <span class="badge-status badge-pending">ยังไม่ได้อัปโหลด</span>
+                            @endif
+                        </h4>
+                        <p>{{ $doc->description }}</p>
+                    </div>
+                </div>
+
+                @if($doc->is_uploaded)
+                    <div class="file-uploaded-info">
+                        📎 <strong>ไฟล์ที่อัปโหลดไว้:</strong> {{ $doc->file_name }}
+                    </div>
+                @else
+                    <div class="upload-box">
+                        <label for="doc_{{ $doc->id }}"><strong>เลือกไฟล์เอกสารที่ต้องการอัปโหลด:</strong></label>
+                        <input type="file" name="documents[{{ $doc->id }}]" id="doc_{{ $doc->id }}" accept=".pdf,.doc,.docx"
+                            @if($doc->is_required) required @endif>
+                        <div class="upload-hint">รองรับไฟล์ PDF</div>
+                    </div>
+                @endif
+            </div>
+        @endforeach
+
+
+
+
+        <div class="document-section">
+            <div class="section-title">
+                <div class="title-left">
+                    <div class="blue-bar"></div>
+                    <h3>2.แฟ้มสะสมผลงาน (porfolio) <span class="mark-required">*</span></h3>
+                </div>
+            </div>
+
+            @foreach($document as $Resume)
+
+            <div class="doc-card">
+                <div class="doc-info">
+                    <div class="doc-icon">📄</div>
+                    <div class="doc-detail">
+                        <h4>
+                            {{ $doc->name }}
+                            @if($doc->is_required)
+                                <span class="mark-required">*</span>
+                            @endif
+
+                            @if($doc->is_uploaded)
+                                <span class="badge-status badge-uploaded">อัปโหลดแล้ว</span>
+                            @else
+                                <span class="badge-status badge-pending">ยังไม่ได้อัปโหลด</span>
+                            @endif
+                        </h4>
+                        <p>{{ $doc->description }}</p>
+                    </div>
+                </div>
+
+                @if($doc->is_uploaded)
+                    <div class="file-uploaded-info">
+                         <strong>ไฟล์ที่อัปโหลดไว้:</strong> {{ $doc->file_name }}
+                    </div>
+                @else
+                    <div class="upload-box">
+                        <label for="doc_{{ $doc->id }}"><strong>เลือกไฟล์เอกสารที่ต้องการอัปโหลด:</strong></label>
+                        <input type="file" name="documents[{{ $doc->id }}]" id="doc_{{ $doc->id }}" accept=".pdf,.doc,.docx"
+                            @if($doc->is_required) required @endif>
+                        <div class="upload-hint">รองรับไฟล์ PDF</div>
+                    </div>
+                @endif
+            </div>
+        @endforeach
+            <div class="next-btn-container">
+                <button type="submit" class="btn-next">บันทึกและไปหน้าถัดไป ➔</button>
+            </div>
+        </div>
+@endsection
