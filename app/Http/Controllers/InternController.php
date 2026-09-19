@@ -18,7 +18,7 @@ class InternController extends Controller
 
         if ($keyword) {
         $datas->where(
-            'iposition_name',
+            'position_name',
             'LIKE',
             '%' . $keyword . '%' 
             );

@@ -25,10 +25,13 @@
         </div>
     </div>
     <div class="job-list">
+
+        @foreach($internship_positions as $position)
+
         <div class="job-card">
             <div class="job-card-head">
-    <h1 class="job-company">Lazy Code Company</h1>
-    <h3 class="job-title">DevOps Engineer</h3>
+    <h1 class="job-company">{{ $position->company->company_name }} </h1>
+    <h3 class="job-title"> {{ $position->position_name }} </h3>
             </div>
             <div class="job-card-body">
         <div class="job-info-row">
@@ -36,7 +39,7 @@
            สถานที่ปฏิบัติงาน
           </div>
           <div class="info-value">
-             AIS พัทยา
+             {{ $position->company->company_address }}
           </div>
         </div>
 
@@ -44,14 +47,14 @@
           <div class="info-label">
              เงินเดือน
           </div>
-          <div class="info-value">25,000 - 30,000 บาท</div>
+          <div class="info-value">{{ $position->position_allowance }}</div>
         </div>
 
         <div class="job-info-row">
           <div class="info-label">
              อัตรา
           </div>
-          <div class="info-value"> 3 อัตรา</div>
+          <div class="info-value"> {{ $position->position_capacity }}</div>
         </div>
       </div>
       <div class="job-card-footer">
@@ -59,8 +62,10 @@
           สัมภาษณ์งานออนไลน์
         </div>
         <button class="detail-btn">ดูรายละเอียดงาน</button>
+        <!-- {{ $position->company->company_description }} -->
       </div>
         </div>
+    @endforeach
     </div>
 </div>
 @endsection
