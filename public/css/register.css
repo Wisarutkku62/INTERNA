@@ -120,9 +120,9 @@ html, body {
 .back {
     display: inline-block;
     margin-bottom: 20px;
-    color: #8a959b;
+    color: #3f4244;
     text-decoration: none;
-    font-size: 1px;
+    font-size: 15px;
     font-weight: 500;
 }
 

@@ -16,9 +16,8 @@
 
             <div class="login-container">
 
-                <a href="{{ url('/') }}" class="back"" class="back">
-                    <span>‹</span>
-                    กลับสู่หน้าหลัก
+                <a href="{{ url('/') }}" class="back" class="back">
+                    <span>‹</span>กลับสู่หน้าหลัก
                 </a>
 
                 <div class="header">

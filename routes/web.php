@@ -77,5 +77,27 @@ Route::get('/employee', function () {
     return view('employee');
 })->name('employee');
 
+//train
+Route::get('/train', function () {
+    return view('train');
+})->name('train');
+
+//fulltimejob
+Route::get('/Fulltimejob', function () {
+    return view('Fulltimejob');
+})->name('Fulltimejob');
+
+//parttime
+Route::get('/parttime', function () {
+    return view('parttime');
+})->name('parttime');
+
+//trainee
+Route::get('/trainee', function () {
+    return view('trainee');
+})->name('trainee');
+
+
+
 require __DIR__.'/settings.php';
             
