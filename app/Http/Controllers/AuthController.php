@@ -29,10 +29,7 @@ class AuthController extends Controller
         ], [
         'email.unique' => 'อีเมลนี้ถูกลงทะเบียนไปแล้ว'
         ]);   
-
-        if (Auth::attempt($validated)) {
-            return redirect()->back();
-        };
+        
 
         User::create([
             'email' => $validated['email'],
@@ -41,7 +38,7 @@ class AuthController extends Controller
         ]);
 
 
-        return redirect()->route('login')->with('succuss','Register Successfully');
+        return redirect()->route('login')->with('success','Register Successfully');
     }
     
     public function login(Request $request)

@@ -1,7 +1,6 @@
 <?php
-
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdvisorController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
@@ -11,17 +10,17 @@ use App\Http\Controllers\InternController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-<<<<<<< HEAD
-Route::view('/profile', 'profile')->name('home');
-Route::view('/', 'loginmain')->name('home');
-    
-=======
-Route::view('/naja', 'evaluation');
 // Public / Landing Routes
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
 Route::view('/loginmain', 'loginmain')->name('loginmain');
->>>>>>> origin/main
+
+
+// Employee Routes
+Route::get('/train', [EmployeeController::class, 'train'])->name('train');
+Route::get('/Fulltimejob', [EmployeeController::class, 'fulltime'])->name('Fulltimejob');
+Route::get('/parttime', [EmployeeController::class, 'parttime'])->name('parttime');
+Route::get('/trainee', [EmployeeController::class, 'trainee'])->name('trainee');
 
 // AuthController
 Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.showRegister');
@@ -34,6 +33,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::middleware('auth')->group(function () {
     // ProfileController
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.profile');
+    Route::get('/evaluation', [ProfileController::class, 'evaluation'])->name('evaluation');
+    Route::post('/evaluation', [ProfileController::class, 'saveEvaluation'])->name('evaluation.save');
+
 
     // CompanyController
     Route::get('/company/profile', [CompanyController::class, 'showProfile'])->name('company.showProfile');
@@ -54,13 +56,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/documents', [DocumentController::class, 'upload'])->name('document.upload');
     Route::put('/documents/{id}', [DocumentController::class, 'resubmit'])->name('document.resubmit');
 
-    // AdvisorController
-    Route::get('/advisor/requests', [AdvisorController::class, 'listRequests'])->name('advisor.listRequests');
-    Route::put('/advisor/requests/{id}/approve', [AdvisorController::class, 'approve'])->name('advisor.approve');
-    Route::put('/advisor/requests/{id}/reject', [AdvisorController::class, 'reject'])->name('advisor.reject');
-    Route::get('/advisor/appointments', [AdvisorController::class, 'listAppointments'])->name('advisor.listAppointments');
-    Route::post('/advisor/appointments', [AdvisorController::class, 'createAppointment'])->name('advisor.createAppointment');
-
     // EvaluationController
     Route::get('/evaluations/{applicationId}', [EvaluationController::class, 'show'])->name('evaluation.show');
     Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evaluation.store');
@@ -77,32 +72,6 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 });
-
-// Employee Page
-Route::get('/employee', function () {
-    return view('employee');
-})->name('employee');
-
-//train
-Route::get('/train', function () {
-    return view('train');
-})->name('train');
-
-//fulltimejob
-Route::get('/Fulltimejob', function () {
-    return view('Fulltimejob');
-})->name('Fulltimejob');
-
-//parttime
-Route::get('/parttime', function () {
-    return view('parttime');
-})->name('parttime');
-
-//trainee
-Route::get('/trainee', function () {
-    return view('trainee');
-})->name('trainee');
-
 
 
 require __DIR__.'/settings.php';

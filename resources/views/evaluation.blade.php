@@ -9,7 +9,9 @@
             <h1 class="card-title">แบบประเมินผลการฝึกงาน</h1>
             <p class="card-subtitle">กรุณากรอกคะแนนประเมินและข้อเสนอแนะสำหรับนักศึกษาฝึกงาน</p>
         </div>
-    <form action="#" method="POST">
+
+    <form action="{{ route('evaluation.save') }}" method="POST">
+        
     @csrf
     <div class="info-box">
                 <div class="info-item">

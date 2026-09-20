@@ -15,12 +15,20 @@
                 </button>
             </form>
             <div class="filter-dropdown-box">
-                <select name="type" class="filter-select">
+                <select name="type" class="filter-select" onchange="goPage(this.value)">
                     <option value="" disabled selected hidden>ตัวกรอง</option>
-                    <option value="fulltime">งานประจำ</option>
-                    <option value="parttime">พาร์ทไทม์</option>
-                    <option value="internship">ฝึกงาน</option>
+
+                    <option value="{{ route('Fulltimejob') }}">งานประจำ</option>
+                    <option value="{{ route('parttime') }}">พาร์ทไทม์</option>
+                    <option value="{{ route('train') }}">ฝึกงาน</option>
                 </select>
+
+                <script>
+                function goPage(url) {
+                    window.location.href = url;
+                }
+                </script>
+                
             </div>
         </div>
     </div>
