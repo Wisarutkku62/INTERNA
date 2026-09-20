@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\InternController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route; 
+use Illuminate\Support\Facades\Auth;
 
 // Public / Landing Routes
 Route::get('/', [InternController::class, 'index'])->name('index');
@@ -32,21 +34,10 @@ Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 
-// Profile Page
-// เพิ่มข้อมูลโปรไฟล์
-Route::get('/newprofile', function () {
-    return view('newprofile');
-})->name('newprofile');
-
 // Authenticated Routes ต้อง Login ก่อนใช้งาน
-
-// ProfileController
 Route::middleware('auth')->group(function () {
     // ProfileController
-    Route::get('/newprofile', function () {
-        return view('newprofile');
-    })->name('newprofile');
-    
+    Route::get('/newprofile', [ProfileController::class, 'newProfile'])->name('newprofile');
     Route::post('/profile', [ProfileController::class, 'saveProfile'])->name('profile.save');
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.profile');
     Route::get('/evaluation', [ProfileController::class, 'evaluation'])->name('evaluation');

@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <label for="fname">ชื่อ</label>
-            <input type="text" name="fname" value="{{ old('fname') }}" placeholder="ชื่อ" class="input-field">
+            <input type="text" name="fname" value="{{ old('fname'),$user->student->student_fname }}" placeholder="ชื่อ" class="input-field">
         </div>
 
         <div class="form-group">

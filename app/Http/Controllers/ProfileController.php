@@ -9,9 +9,20 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-     public function profile()
+    public function newProfile()
     {
-        $user = Auth::user()->load('student');
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->load('student');
+
+        return view('newprofile', compact('user'));
+    }
+
+    public function profile()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->load('student');
 
         return view('profile', compact('user'));
     }

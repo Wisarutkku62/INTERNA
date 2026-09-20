@@ -83,7 +83,7 @@
                 <div class="field-value">{{ $user->student->student_bio ?? '' }}</div>
             </div>
 
-            <a href="{{ route('newprofile') }}" class="Edit_profile">แก้ไขข้อมูล</a>
+            <a href="{{ route('newprofile', $user->id) }}" class="Edit_profile">แก้ไขข้อมูล</a>
         </div>
 
     </div>
