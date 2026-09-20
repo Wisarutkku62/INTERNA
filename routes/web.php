@@ -8,13 +8,13 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\InternController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route; 
 
 // Public / Landing Routes
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
 Route::view('/loginmain', 'loginmain')->name('loginmain');
-
+Route::view('/login/admin', 'loginadmin')->name('loginadmin');
 
 // Employee Routes
 Route::get('/train', [EmployeeController::class, 'train'])->name('train');
@@ -31,7 +31,16 @@ Route::post('/login/admin', [AuthController::class, 'loginAdmin'])->name('auth.l
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-// Authenticated Routes (ต้อง Login ก่อนใช้งาน)
+
+// Profile Page
+// เพิ่มข้อมูลโปรไฟล์
+Route::get('/newprofile', function () {
+    return view('newprofile');
+})->name('newprofile');
+
+// Authenticated Routes ต้อง Login ก่อนใช้งาน
+
+// ProfileController
 Route::middleware('auth')->group(function () {
     // ProfileController
     Route::get('/newprofile', function () {
