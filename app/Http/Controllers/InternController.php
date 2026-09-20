@@ -13,18 +13,18 @@ class InternController extends Controller
     } 
     public function internship(Request $request)
     {   
-        $datas = InternshipPosition::query();
+        $query = InternshipPosition::query();
         $keyword = $request->keyword;
 
         if ($keyword) {
-        $datas->where(
+        $query->where(
             'position_name',
             'LIKE',
             '%' . $keyword . '%' 
             );
         }
         
-        $internship_positions = $datas->get();
+        $internship_positions = $query->get();
 
         return view('application', compact('internship_positions' , 'keyword'));
     }
