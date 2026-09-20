@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdvisorController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
@@ -28,6 +27,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::middleware('auth')->group(function () {
     // ProfileController
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.profile');
+    
+});
+
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+// Auth Admin
+Route::middleware('auth')->group(function () {
+    // ProfileController
+    
 });
 
 // Verified Auth Group

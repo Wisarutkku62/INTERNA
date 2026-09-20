@@ -72,6 +72,7 @@
                     document.getElementById('input-box-password').classList.add('input-error');
                 </script>
             @enderror
+
             @error('password')
                 <script>
                     document.querySelector(".email-validated").innerHTML='{{$message}}'

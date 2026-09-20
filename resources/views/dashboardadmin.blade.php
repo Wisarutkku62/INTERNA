@@ -16,19 +16,19 @@
             <div class="sidebar-title">เมนูผู้ดูแลระบบ</div>
             <div class="admin-menu">
                 <a href="?tab=dashboard" class="menu-link {{ $activeTab == 'dashboard' ? 'active' : '' }}">
-                    📊 สรุปภาพรวมและรายงาน
+                    สรุปภาพรวมและรายงาน
                 </a>
                 <a href="?tab=users" class="menu-link {{ $activeTab == 'users' ? 'active' : '' }}">
-                    👥 จัดการผู้ใช้งาน & Advisor
+                    จัดการ User
                 </a>
                 <a href="?tab=companies" class="menu-link {{ $activeTab == 'companies' ? 'active' : '' }}">
-                    🏢 จัดการข้อมูลบริษัท
+                    จัดการข้อมูลบริษัท
                 </a>
                 <a href="?tab=internships" class="menu-link {{ $activeTab == 'internships' ? 'active' : '' }}">
-                    🎓 ข้อมูลการฝึกงาน
+                    ข้อมูลการฝึกงาน
                 </a>
                 <a href="?tab=documents" class="menu-link {{ $activeTab == 'documents' ? 'active' : '' }}">
-                    📄 เอกสารและผลประเมิน
+                    เอกสารและผลประเมิน
                 </a>
             </div>
         </div>
@@ -64,8 +64,7 @@
             @elseif($activeTab == 'users')
                 <div class="content-card">
                     <div class="card-header">
-                        <h3 class="card-title">จัดการข้อมูลนักศึกษา และ Advisor</h3>
-                        <a href="#" class="btn-add">+ เพิ่มผู้ใช้งาน</a>
+                        <h3 class="card-title">จัดการข้อมูลนักศึกษา</h3>
                     </div>
 
                     <div class="table-responsive">
@@ -75,18 +74,16 @@
                                     <th>รหัส</th>
                                     <th>ชื่อ-นามสกุล</th>
                                     <th>บทบาท</th>
-                                    <th>Advisor</th>
                                     <th>สิทธิ์ระบบ</th>
                                     <th>จัดการ</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($users ?? [] as $user)
+                                @forelse($users as $user)
                                 <tr>
                                     <td>{{ $user->code }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->role }}</td>
-                                    <td>{{ $user->advisor_name ?? '-' }}</td>
                                     <td><span class="badge badge-success">{{ $user->permission_status }}</span></td>
                                     <td>
                                         <button class="btn-action btn-edit">แก้ไข</button>
@@ -107,7 +104,6 @@
                 <div class="content-card">
                     <div class="card-header">
                         <h3 class="card-title">จัดการข้อมูลและอนุมัติบริษัท</h3>
-                        <a href="#" class="btn-add">+ เพิ่มบริษัท</a>
                     </div>
 
                     <div class="table-responsive">
