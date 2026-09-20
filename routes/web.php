@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
@@ -8,11 +9,20 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\InternController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route; 
+use Illuminate\Support\Facades\Auth;
 
 // Public / Landing Routes
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
+Route::view('/loginmain', 'loginmain')->name('loginmain');
+Route::view('/login/admin', 'loginadmin')->name('loginadmin');
+
+// Employee Routes
+Route::get('/train', [EmployeeController::class, 'train'])->name('train');
+Route::get('/Fulltimejob', [EmployeeController::class, 'fulltime'])->name('Fulltimejob');
+Route::get('/parttime', [EmployeeController::class, 'parttime'])->name('parttime');
+Route::get('/trainee', [EmployeeController::class, 'trainee'])->name('trainee');
 
 // AuthController
 Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.showRegister');
@@ -23,50 +33,21 @@ Route::post('/login/admin', [AuthController::class, 'loginAdmin'])->name('auth.l
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-// Authenticated Routes (ต้อง Login ก่อนใช้งาน)
-Route::middleware('auth')->group(function () {
-    // ProfileController
-    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.profile');
-    
-});
 
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-// Auth Admin
+// Authenticated Routes ต้อง Login ก่อนใช้งาน
 Route::middleware('auth')->group(function () {
     // ProfileController
-    
+    Route::get('/newprofile', [ProfileController::class, 'newProfile'])->name('newprofile');
+    Route::post('/profile', [ProfileController::class, 'saveProfile'])->name('profile.save');
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.profile');
+    Route::get('/evaluation', [ProfileController::class, 'evaluation'])->name('evaluation');
+    Route::post('/evaluation', [ProfileController::class, 'saveEvaluation'])->name('evaluation.save');
 });
 
 // Verified Auth Group
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 });
-
-// Employee Page
-Route::get('/employee', function () {
-    return view('employee');
-})->name('employee');
-
-//train
-Route::get('/train', function () {
-    return view('train');
-})->name('train');
-
-//fulltimejob
-Route::get('/Fulltimejob', function () {
-    return view('Fulltimejob');
-})->name('Fulltimejob');
-
-//parttime
-Route::get('/parttime', function () {
-    return view('parttime');
-})->name('parttime');
-
-//trainee
-Route::get('/trainee', function () {
-    return view('trainee');
-})->name('trainee');
-
 
 
 require __DIR__.'/settings.php';
