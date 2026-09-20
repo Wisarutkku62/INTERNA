@@ -1,3 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: 'Prompt', sans-serif;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -170,6 +178,22 @@ h3 {
 .form button:hover {
     background: black;
     color: white;
+}
+
+.email-validated,
+.password-validated {
+    color: #e53e3e; 
+    font-size: 14px;
+    margin-top: 4px;
+    display: block;
+    
+}
+
+
+.input-error {
+    border: 1.5px solid #e53e3e !important ;
+    background-color: #fff5f5 !important ; 
+    border-radius: 24px;
 }
 
 @media (max-width: 992px) {

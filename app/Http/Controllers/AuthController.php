@@ -19,6 +19,11 @@ class AuthController extends Controller
         return view('login');
     }
 
+    public function showLoginAdmin()
+    {
+        return view('loginadmin');
+    }
+
     public function register(Request $request): RedirectResponse 
     {
         $validated = $request->validate([
@@ -30,9 +35,9 @@ class AuthController extends Controller
         'email.unique' => 'อีเมลนี้ถูกลงทะเบียนไปแล้ว'
         ]);   
 
-        if (Auth::attempt($validated)) {
-            return redirect()->back();
-        };
+        // if (Auth::attempt($validated)) {
+        //     return redirect()->back();
+        // };
 
         User::create([
             'email' => $validated['email'],
@@ -41,10 +46,10 @@ class AuthController extends Controller
         ]);
 
 
-        return redirect()->route('login')->with('succuss','Register Successfully');
+        return redirect()->route('login')->with('success','Register Successfully');
     }
     
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'email' => ['required', 'email'],
@@ -71,5 +76,36 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->back();
+    }
+
+    public function loginAdmin(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required','password']
+        ]);
+
+        if (Auth::validate($validated)) {
+
+            $user = User::where('email', $request->email)->first();
+
+            if ($user->role !== 'admin') { 
+                return redirect()->back()
+                ->withErrors([
+                    'email' => 'คุณไม่มีสิทธิ์เข้าใช้งานในส่วนนี้ (เฉพาะ Admin เท่านั้น)',
+                ]);
+            }
+
+            Auth::login($user);
+            $request->session()->regenerate();
+
+            return redirect()->intended('dashboard');
+        }
+
+        return redirect()->back()
+        ->withErrors([ 
+            'email' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
+            'password' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'
+        ]);
     }
 }

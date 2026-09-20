@@ -128,7 +128,8 @@
 }
 
 .btn-login,
-.btn-regis {
+.btn-regis,
+.btn-logout {
   display: inline-block;
   padding: 10px 24px;
   font-size: 0.9rem;
@@ -150,13 +151,14 @@
   color: #fff;
 }
 
-.btn-log-out {
-  background: #fff;
-  color: #0037ff;
+.btn-logout {
+  background: #0037ff;
+  color: #fff;
 }
 
 .btn-login:hover,
-.btn-regis:hover {
+.btn-regis:hover,
+.btn-logout:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
 }

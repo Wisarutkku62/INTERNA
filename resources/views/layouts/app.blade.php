@@ -44,7 +44,7 @@
         <div class="nav-actions">
           <form action="{{ route('auth.logout')}}" method="POST">
             @csrf
-            <button type="submit">Logout</button>
+            <button type="submit" class="btn-logout">ออกจากระบบ</button>
           </form>
         @endauth
 
