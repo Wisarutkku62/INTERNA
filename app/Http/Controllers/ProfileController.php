@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,18 +11,14 @@ class ProfileController extends Controller
 {
     public function newProfile()
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
-        $user->load('student');
 
         return view('newprofile', compact('user'));
     }
 
     public function profile()
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
-        $user->load('student');
 
         return view('profile', compact('user'));
     }
@@ -30,8 +26,8 @@ class ProfileController extends Controller
     public function saveProfile(Request $request)
     {
         $request->validate([
-            'fname' => ['required', 'string', 'max:100'],
-            'lname' => ['required', 'string', 'max:100'],
+            'fname' => ['nullable', 'string', 'max:100'],
+            'lname' => ['nullable', 'string', 'max:100'],
             'gender' => ['nullable', 'string'],
             'day' => ['nullable'],
             'month' => ['nullable'],
