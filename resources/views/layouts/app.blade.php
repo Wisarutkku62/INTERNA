@@ -16,27 +16,11 @@
         <a href="{{ route('index')}}" class="logo">
           <span class="logo-text">INTERNA</span>
         </a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-    
       <div class="nav-container" id="navContainer">
         <ul class="nav-menu">
-          <li class="nav-item dropdown">
-            <a href="{{ route('intern.intern')}}" class="nav-link">
-              ค้นหาตำแหน่งงาน
-              <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-            </a>
-          </li>
-          <li class="nav-item"><a href="#" class="nav-link">ค้นหานักศึกษาฝึกงาน</a></li>
+          <li class="nav-item"><a href="{{ route('intern.intern')}}" class="nav-link">ค้นหาตำแหน่งงาน</a></li>
           <li class="nav-item"><a href="#" class="nav-link">ประเมินผล</a></li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              สำหรับบริษัท
-            </a>
-          </li>
+          <li class="nav-item"><a href="#" class="nav-link">สำหรับบริษัท</a></li>
           <li class="nav-item"><a href="#" class="nav-link">ติดต่อเรา</a></li>
         </ul>
 
@@ -46,6 +30,9 @@
             @csrf
             <button type="submit" class="btn-logout">ออกจากระบบ</button>
           </form>
+          <a href="#" class="profile-link"> 
+          <img src="{{ asset('image/profile_m.png') }}" alt="Profile" class="user-avatar"></a>
+        </div>
         @endauth
 
         @guest

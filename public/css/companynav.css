@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Prompt', sans-serif;
+}
+
+.navbar {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-bottom: 1px solid #f1f5f9;
+    position: relative;
+    z-index: 1000;
+}
+
+.logo {
+    text-decoration: none;
+}
+
+.logo-text {
+    color: #0037ff;
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.nav-container,
+.nav-menu,
+.nav-actions {
+    display: flex;
+    align-items: center;
+}
+
+.nav-container,
+.nav-menu {
+    gap: 36px;
+}
+
+.nav-menu {
+    list-style: none;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #475569;
+    font-size: 0.95rem;
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: #0037ff;
+}
+
+.nav-actions {
+    gap: 16px;
+}
+
+.btn-login,
+.btn-regis,
+.btn-logout {
+    display: inline-block;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 20px;
+    border: 2px solid #0037ff;
+    transition: all .2s;
+}
+
+.btn-login {
+    background: #fff;
+    color: #0037ff;
+}
+
+.btn-regis {
+    background: #0037ff;
+    color: #fff;
+}
+
+.btn-logout {
+    background: #0037ff;
+    color: #fff;
+}
+
+.btn-login:hover,
+.btn-regis:hover,
+.btn-logout:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
+}
+
+.footer {
+    background-color: #1e293b;
+    color: #cbd5e1;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 220px;
+}
+
+.footer-col p {
+    color: #ffffff;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    float: right;
+}
+
+.footer-text {
+    color: #fff;
+    font-size: 1.40rem;
+    font-weight: 600;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #0037ff;
+    cursor: pointer;
+    display: block;
+}
+
+.profile-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
