@@ -5,16 +5,17 @@
   font-family: 'Prompt', sans-serif;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
+body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  margin: 0;
 }
-
-main, .main-content {
-  flex: 1 0 auto;
+main {
+  flex: 1; 
+  width: 100%;
+}
+header {
   width: 100%;
 }
 
@@ -118,6 +119,7 @@ main, .main-content {
 }
 
 .footer {
+  flex-shrink: 0;
   background-color: #1e293b;
   color: #cbd5e1;
   padding-top: 20px;
@@ -145,7 +147,7 @@ main, .main-content {
   margin-top: 6px;
   margin-bottom: 15px;
   font-size: 1rem;
-  float: right;
+  text-align: right;
 }
 
 .footer-text {
