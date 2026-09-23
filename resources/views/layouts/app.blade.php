@@ -52,7 +52,8 @@
     </header>
 <main>
   @yield("content")
-  <footer class="footer">
+</main>
+ <footer class="footer">
     <div class="footer-container">
       <div class="footer-col">
         <span class="footer-text">INTERNA</span> 
@@ -60,6 +61,5 @@
       </div>
     </div>
   </footer>
-</main>
 </body>
 </html>
