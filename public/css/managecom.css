@@ -110,6 +110,7 @@
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
+    transition: all .4s;
 }
 
 .btn-edit:hover{
@@ -167,6 +168,7 @@
     border: 1px solid #0037ff;
     color: #0037ff;
     background: #ffffff;
+    transition: all .4s;
 }
 
 .btn-blue:hover {
@@ -178,6 +180,7 @@
     border: 1px solid #edf2f7;
     color: #2d3748;
     background: #ffffff;
+    transition: all .4s;
 }
 
 .btn-gray:hover {
