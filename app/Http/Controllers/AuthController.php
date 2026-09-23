@@ -85,7 +85,7 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required','password']
+            'password' => ['required','string']
         ]);
 
         if (Auth::validate($validated)) {

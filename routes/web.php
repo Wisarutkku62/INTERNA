@@ -38,7 +38,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::middleware('auth')->group(function () {
     // ProfileController
     Route::get('/newprofile', [ProfileController::class, 'newProfile'])->name('newprofile');
-    Route::post('/profile', [ProfileController::class, 'saveProfile'])->name('profile.save');
+    Route::put('/profile/save', [ProfileController::class, 'saveProfile'])->name('profile.save');
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.profile');
     Route::get('/evaluation', [ProfileController::class, 'evaluation'])->name('evaluation');
     Route::post('/evaluation', [ProfileController::class, 'saveEvaluation'])->name('evaluation.save');
