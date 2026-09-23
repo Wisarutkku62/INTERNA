@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
 
+Route::view('/com', 'managecom')->name('managecom');
 // Public / Landing Routes
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');

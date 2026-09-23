@@ -1,0 +1,291 @@
+.dashboard-wrapper {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: 'Prompt', sans-serif;
+    color: #2d3748;
+    padding: 30px 60px;
+}
+
+.profile-card {
+    width: 320px;
+    flex-shrink: 0;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.grid-top {
+    display: flex;
+    gap: 20px;
+}
+
+.grid-top>section {
+    flex: 1;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid #edf2f7;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    box-sizing: border-box;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 16px 0;
+}
+
+
+.profile-card {
+    text-align: center;
+}
+
+.logo-section {
+    margin: 15px 0;
+}
+
+.logo-box {
+    width: 100px;
+    height: 100px;
+    background: #e2e8f0;
+    border-radius: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+}
+
+.building-icon {
+    width: 50px;
+    color: #cbd5e0;
+}
+
+.btn-camera {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-label {
+    font-size: 0.85rem;
+    color: #718096;
+}
+
+.welcome-title {
+    font-size: 1.1rem;
+    margin: 25px;
+}
+
+.btn-edit {
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 25px;
+    padding: 8px;
+    background: #ffffff;
+    border: 1px solid #2d3748;
+    color: #2d3748;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-edit:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
+}
+
+
+.text-commend{
+    font-size: 14px;
+    margin-top: 10px;
+    color: red;
+}
+
+.stats-grid {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    flex: 1;
+    background: #f8fafc;
+    border: 1px solid #edf2f7;
+    border-radius: 8px;
+    padding: 15px 5px;
+    text-align: center;
+}
+
+.stat-num {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #718096;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-blue {
+    border: 1px solid #0037ff;
+    color: #0037ff;
+    background: #ffffff;
+}
+
+.btn-blue:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
+}
+
+.btn-gray {
+    border: 1px solid #edf2f7;
+    color: #2d3748;
+    background: #ffffff;
+}
+
+.btn-gray:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-header .card-title {
+    margin: 0;
+}
+
+.link-more {
+    font-size: 0.85rem;
+    color: #a0aec0;
+    text-decoration: none;
+}
+.link-more:hover{
+    color: #0037ff;
+}
+
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.link-more {
+    font-size: 0.85rem;
+    color: #a0aec0;
+    text-decoration: none;
+}
+.state{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.interview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 220px;   
+    overflow-y: auto;        
+    padding-right: 6px;
+}
+
+.interview-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #edf2f7;
+}
+
+.interview-time {
+    text-align: center;
+    padding-right: 12px;
+    border-right: 2px solid #e2e8f0;
+}
+
+.time-num {
+    display: block;
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: #2d3748;
+}
+
+.time-date {
+    font-size: 0.75rem;
+    color: #0037ff;
+}
+
+.interview-info {
+    flex: 1;
+    padding-left: 12px;
+}
+
+.interview-info strong {
+    font-size: 0.9rem;
+    display: block;
+}
+
+.interview-info p {
+    margin: 2px 0 0;
+    font-size: 0.8rem;
+    color: #718096;
+}
+
+.badge-status {
+    background: #0037ff;
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: bold;
+}
