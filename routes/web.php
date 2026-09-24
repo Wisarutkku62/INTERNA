@@ -18,7 +18,9 @@ Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
 Route::view('/loginmain', 'loginmain')->name('loginmain');
 Route::view('/login/admin', 'loginadmin')->name('loginadmin');
-
+Route::view('apt','evaluationstd')->name('evaluationstd');
+Route::view('qwe','managecom')->name('managecom');
+Route::view('doc','document')->name('document');
 // Employee Routes
 Route::get('/train', [EmployeeController::class, 'train'])->name('train');
 Route::get('/Fulltimejob', [EmployeeController::class, 'fulltime'])->name('Fulltimejob');
