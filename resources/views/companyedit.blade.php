@@ -13,7 +13,7 @@
                 <img src="{{ isset($company->company_profile) && $company->company_profile ? asset('storage/' . $company->company_profile) : asset('img/profile.png') }}" alt="Profile Picture">
             </div>
             <div class="file-upload">
-                <label for="company_profile" class="btn-upload">เลือกรูปโปรไฟล์</label>
+                <label for="company_profile" class="btn-upload">เลือกรูปโปรไฟล์บริษัท</label>
                 <input type="file" id="company_profile" name="company_profile" accept="image/*" class="PictureProfile">
             </div>
         </div>
