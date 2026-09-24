@@ -24,22 +24,10 @@
         <div class="grid-top">
             <section class="card job-card">
                 <h3 class="card-title">ตำแหน่งงานของคุณ</h3>
-                
-                <div class="stats-grid">
                     <div class="stat-item">
                         <span class="stat-num">0</span>
                         <span class="stat-label">ทั้งหมด</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-num">0</span>
-                        <span class="stat-label">เผยแพร่</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-num">0</span>
-                        <span class="stat-label">ไม่เผยแพร่</span>
-                    </div>
-                </div>
-
+                    </div>  
                 <div class="button-group">
                     <a href="#" class="btn-action btn-blue">
                     สร้างประกาศงาน
@@ -55,6 +43,39 @@
     </div>
 
     <div class="interview-list">
+        <div class="interview-item">
+            <div class="interview-time">
+                <span class="time-num">10:30</span>
+                <span class="time-date">วันนี้</span>
+            </div>
+            <div class="interview-info">
+                <strong>สมชาย ใจดี</strong>
+                <p>ตำแหน่ง: UX/UI Designer</p>
+            </div>
+            <span class="badge-status">สัมภาษณ์ออนไลน์</span>
+        </div>
+        <div class="interview-item">
+            <div class="interview-time">
+                <span class="time-num">10:30</span>
+                <span class="time-date">วันนี้</span>
+            </div>
+            <div class="interview-info">
+                <strong>สมชาย ใจดี</strong>
+                <p>ตำแหน่ง: UX/UI Designer</p>
+            </div>
+            <span class="badge-status">สัมภาษณ์ออนไลน์</span>
+        </div>
+        <div class="interview-item">
+            <div class="interview-time">
+                <span class="time-num">10:30</span>
+                <span class="time-date">วันนี้</span>
+            </div>
+            <div class="interview-info">
+                <strong>สมชาย ใจดี</strong>
+                <p>ตำแหน่ง: UX/UI Designer</p>
+            </div>
+            <span class="badge-status">สัมภาษณ์ออนไลน์</span>
+        </div>
         <div class="interview-item">
             <div class="interview-time">
                 <span class="time-num">10:30</span>
