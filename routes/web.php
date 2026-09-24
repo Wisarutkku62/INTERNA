@@ -34,6 +34,8 @@ Route::post('/login/admin', [AuthController::class, 'loginAdmin'])->name('auth.l
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
+
+// Authenticated Routes (ต้อง Login ก่อนใช้งาน)
 Route::middleware('auth')->group(function () {
     // ProfileController
     Route::get('/newprofile', [ProfileController::class, 'newProfile'])->name('newprofile');

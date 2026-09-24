@@ -1,318 +1,220 @@
-* {
-    box-sizing: border-box; 
+.doc-page-wrapper {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    background-color: #f7f9fc;
+    font-family: 'Prompt', sans-serif;
+    color: #2d3748;
+    padding: 30px 20px;
+    box-sizing: border-box;
 }
 
-.head {
-    padding: 20px;
-    background-color: white;
-    margin-left: 50px;
+.headbtm {
+    margin-left:310px ;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
 }
 
-.back-bt {
+.back-bta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    text-decoration: none; 
+    text-decoration: none;
     color: #000;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 500;
+    border-radius: 10px;
+    padding: 8px 16px;
+    transition: all 0.2s ease;
+    font-family: 'prompt',sans-serif;
 }
 
-.back-icon {
-    width: 16px;
-    height: 16px;
-    object-fit: contain;
-    transition: transform 0.2s ease;
-}
-
-.back-bt:hover {
+.back-bta:hover {
     color: #0037ff;
+    border-color: #0037ff;
 }
 
-.back-bt:hover .back-icon {
+
+.back-icons {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.back-bta:hover .back-icons {
     transform: translateX(-3px);
 }
 
-/* ส่วน Styling สำหรับระบบเอกสาร */
-.document-section {
-    max-width: 700px;
+.doc-container {
+    max-width: 1100px;
     margin: 0 auto;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.section-title {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+    flex-direction: column;
+    gap: 24px;
 }
 
-.title-left {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.page-header {
+    margin-bottom: 8px;
 }
 
-.blue-bar {
-    width: 5px;
-    height: 20px;
-    background-color: #0d6efd;
-    border-radius: 2px;
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 6px 0;
 }
 
-.title-left h3 {
-    font-size: 16px;
-    color: #333;
+.page-subtitle {
+    font-size: 14px;
+    color: #0f172a;
     margin: 0;
 }
-
-.mark-required { color: red; }
-.count-text { font-size: 12px; color: #888; }
 
 .doc-card {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 15px;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 24px 28px;
+    box-shadow: 0 6px 20px rgba(149, 157, 165, 0.07);
+    border: 1px solid #edf2f7;
 }
 
-.doc-info {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 15px;
-}
-
-.doc-icon {
-    width: 38px;
-    height: 38px;
-    background-color: #e7f1ff;
-    color: #0d6efd;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.card-title {
     font-size: 18px;
-}
-
-.doc-detail h4 {
-    font-size: 15px;
-    color: #222;
-    margin: 0 0 4px 0;
-}
-
-.badge-status {
-    display: inline-block;
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 12px;
-    margin-left: 5px;
-}
-
-/* ป้ายสถานะ: ยังไม่ได้อัปโหลด */
-.badge-pending {
-    background-color: #eee;
-    color: #666;
-}
-
-/* 🟢 ป้ายสถานะ: อัปโหลดแล้ว (วงสีเขียว ตัวหนังสือสีขาว) */
-.badge-uploaded {
-    background-color: #198754;
-    color: #ffffff;
-    font-weight: 500;
-}
-
-.doc-detail p {
-    font-size: 13px;
-    color: #666;
-    margin: 0;
-}
-
-.upload-box {
-    border: 2px dashed #bbb;
-    background-color: #fafafa;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-}
-
-.upload-box input[type="file"] {
-    display: block;
-    margin: 10px auto 0 auto;
-    font-size: 13px;
-}
-
-.upload-hint {
-    font-size: 11px;
-    color: #888;
-    margin-top: 6px;
-}
-
-.file-uploaded-info {
-    background-color: #f8f9fa;
-    border: 1px solid #d1e7dd;
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 13px;
-    color: #0f5132;
-}
-
-.next-btn-container {
-    margin-top: 15px;
-    text-align: right;
-}
-
-.btn-next {
-    background-color: #0d6efd;
-    color: white;
-    padding: 10px 24px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.btn-next:hover {
-    background-color: #0b5ed7;
-}
-
-/* ปรับแต่งไอคอนการ์ด */
-.doc-icon {
-    background-color: #e6f7f0;
-    color: #0d9488;
-}
-
-/* สีข้อความจำเป็น */
-.mark-required {
-    color: #e53e3e;
-    font-weight: normal;
-    font-size: 13px;
-}
-
-/* Badge สถานะสีเขียวอ่อน */
-.badge-uploaded {
-    background-color: #e6f4ea;
-    color: #137333;
-    font-weight: 500;
-    border-radius: 12px;
-    padding: 3px 10px;
-}
-
-/* แถบ Tab เลือกสลับประเภท */
-.tab-container {
-    display: flex;
-    gap: 10px;
-    background-color: #f1f5f9;
-    padding: 4px;
-    border-radius: 10px;
-    margin: 15px 0;
-}
-
-.tab-btn {
-    flex: 1;
-    padding: 8px 12px;
-    border: none;
-    background: transparent;
-    border-radius: 8px;
-    font-size: 13px;
-    color: #64748b;
-    cursor: pointer;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-.tab-btn.active {
-    background-color: #ffffff;
-    color: #0d6efd;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    font-weight: bold;
-}
-
-/* ส่วน Input URL */
-.url-input-section {
-    margin-top: 10px;
-}
-
-.url-label {
-    display: block;
-    font-size: 12px;
-    color: #475569;
-    font-weight: bold;
-    margin-bottom: 6px;
-}
-
-.url-input-group {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.url-input-wrapper {
-    position: relative;
-    flex: 1;
-    display: flex;
-    align-items: center;
-}
-
-.globe-icon {
-    position: absolute;
-    left: 12px;
-    font-size: 14px;
-    color: #94a3b8;
-}
-
-.url-input {
-    width: 100%;
-    padding: 10px 140px 10px 36px;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    font-size: 13px;
+    font-weight: 600;
     color: #1e293b;
-    outline: none;
-    background-color: #ffffff;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 12px;
 }
 
-.url-input:focus {
-    border-color: #0d6efd;
+
+.upload-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    
+    margin-right: 50px;
 }
 
-.public-badge {
-    position: absolute;
-    right: 8px;
-    background-color: #e6f4ea;
-    color: #137333;
-    font-size: 11px;
-    padding: 4px 8px;
-    border-radius: 6px;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.form-label {
+    font-size: 14px;
+    width: 500px;
     font-weight: 500;
-}
-
-/* ปุ่มทดสอบเปิดลิงก์ */
-.btn-test-link {
-    padding: 10px 16px;
-    background-color: #f1f5f9;
     color: #334155;
-    text-decoration: none;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 14px;
     border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    font-family: 'Prompt', sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #0037ff;
+}
+
+.btn-submit {
+    background: #0037ff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 10px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 55, 255, 0.15);
+    transition: all 0.2s;
+}
+
+.btn-submit:hover {
+    background: #0022b3;
+}
+
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+
+.doc-table th {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.doc-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+    vertical-align: middle;
+}
+
+
+.badge {
+    padding: 4px 12px;
+    border-radius: 20px;
     font-size: 12px;
-    font-weight: bold;
-    white-space: nowrap;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    border: 1px solid #e2e8f0;
+    font-weight: 500;
+    display: inline-block;
 }
 
-.btn-test-link:hover {
-    background-color: #e2e8f0;
+.badge-pending { background: #fffbeb; color: #d97706; }
+.badge-success { background: #f0fdf4; color: #16a34a; }
+.badge-rejected { background: #fef2f2; color: #dc2626; }
+
+
+.reject-reason {
+    font-size: 12px;
+    color: #dc2626;
+    margin-top: 4px;
+    background: #fff1f2;
+    padding: 6px 10px;
+    border-radius: 6px;
 }
 
-.url-hint-text {
-    font-size: 11px;
-    color: #64748b;
-    margin-top: 8px;
+.btn-reupload {
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+}
+
+.btn-reupload:hover {
+    background: #e2e8f0;
+}
+
+@media (max-width: 768px) {
+    .upload-form-grid {
+        grid-template-columns: 1fr;
+    }
 }
