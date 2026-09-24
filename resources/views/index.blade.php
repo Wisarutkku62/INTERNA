@@ -8,14 +8,14 @@
 <div class="banner">
     <div class="left-side">
         <div class="img-box">
-            <img src="{{ asset('img/ChatGPT Image 12 ก.ย. 2569 17_05_04.png') }}" alt="pic1">
+            <img src="{{ asset('image/imagelogin_register1.png') }}" alt="pic1">
         </div>
         <div class="img-group">
             <div class="img-box2">
-                <img src="{{ asset('img/ChatGPT Image 12 ก.ย. 2569 17_05_04.png') }}" alt="pic2">
+                <img src="{{ asset('image/2.png') }}" alt="pic2">
             </div>
             <div class="img-box3">
-                <img src="{{ asset('img/ChatGPT Image 12 ก.ย. 2569 17_05_04.png') }}" alt="pic3">
+                <img src="{{ asset('image/3.png') }}" alt="pic3">
             </div>
         </div>
     </div>
