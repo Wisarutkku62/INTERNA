@@ -32,7 +32,8 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             // 'role' => ['required', 'string']
         ], [
-        'email.unique' => 'อีเมลนี้ถูกลงทะเบียนไปแล้ว'
+        'email.unique' => 'อีเมลนี้ถูกลงทะเบียนไปแล้ว',
+        'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง'
         ]);   
 
         // if (Auth::attempt($validated)) {
@@ -54,12 +55,14 @@ class AuthController extends Controller
         $validated = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'string']
+        ], [
+        'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง'
         ]);  
 
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
 
-            return redirect()->route('intern.intern');
+            return redirect()->route('index');
         }
 
         return redirect()->back()
@@ -82,7 +85,7 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required','password']
+            'password' => ['required','string']
         ]);
 
         if (Auth::validate($validated)) {

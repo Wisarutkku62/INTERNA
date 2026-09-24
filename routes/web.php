@@ -34,8 +34,6 @@ Route::post('/login/admin', [AuthController::class, 'loginAdmin'])->name('auth.l
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-
-// Authenticated Routes ต้อง Login ก่อนใช้งาน
 Route::middleware('auth')->group(function () {
     // ProfileController
     Route::get('/newprofile', [ProfileController::class, 'newProfile'])->name('newprofile');
@@ -43,6 +41,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.profile');
     Route::get('/evaluation', [ProfileController::class, 'evaluation'])->name('evaluation');
     Route::post('/evaluation', [ProfileController::class, 'saveEvaluation'])->name('evaluation.save');
+
+    // AdminController
+    Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+    Route::delete('/admin/companies/{id}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
 });
 
 // Verified Auth Group
