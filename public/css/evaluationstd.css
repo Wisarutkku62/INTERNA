@@ -1,0 +1,222 @@
+.evl-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+    font-family: 'Sarabun', 'Kanit', sans-serif;
+    color: #2d2d2d;
+}
+
+.evl-heading {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.evl-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0037ff;
+}
+
+.evl-section {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.evl-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e5f2ec;
+    color: #0037ff;
+}
+
+.evl-status-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.evl-status-top {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.evl-status-company {
+    color: #0037ff;
+    font-weight: 400;
+}
+
+.evl-progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #0037ff;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.evl-progress-fill {
+    height: 100%;
+    background: #0037ff;
+    border-radius: 999px;
+}
+
+.evl-progress-percent {
+    align-self: flex-end;
+    font-size: 13px;
+    color: #0037ff;
+    font-weight: 600;
+}
+
+.evl-stepper {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.evl-stepper::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    height: 2px;
+    background: #e5e5e5;
+    z-index: 0;
+}
+
+.evl-step {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+}
+
+.evl-step-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #e5e5e5;
+    margin-bottom: 8px;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1px #e5e5e5;
+}
+
+.evl-step-label {
+    font-size: 12px;
+    color: #777;
+    max-width: 90px;
+}
+
+.evl-step-done .evl-step-dot {
+    background: #0037ff;
+    box-shadow: 0 0 0 1px #0037ff;
+}
+
+.evl-step-done .evl-step-label {
+    color: #0037ff;
+    font-weight: 600;
+}
+
+.evl-step-current .evl-step-dot {
+    background: #f0ad4e;
+    box-shadow: 0 0 0 1px #f0ad4e;
+}
+
+.evl-step-current .evl-step-label {
+    color: #d9822b;
+    font-weight: 600;
+}
+
+.evl-score-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.evl-score-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.evl-score-topic {
+    flex: 0 0 160px;
+    font-size: 14px;
+}
+
+.evl-score-bar {
+    flex: 1;
+    height: 8px;
+    background: #eef4f0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.evl-score-fill {
+    height: 100%;
+    background: #0037ff;
+    border-radius: 999px;
+}
+
+.evl-score-value {
+    flex: 0 0 32px;
+    text-align: right;
+    font-weight: 600;
+    color: #0037ff;
+}
+
+.evl-comment-card {
+    background: #f4f9f6;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.evl-comment-text {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.evl-comment-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #0037ff;
+}
+
+.evl-empty {
+    text-align: center;
+    color: #0037ff;
+    padding: 12px;
+}
+
+@media (max-width: 600px) {
+    .evl-status-top {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .evl-step-label {
+        font-size: 10px;
+        max-width: 60px;
+    }
+
+    .evl-score-topic {
+        flex: 0 0 100px;
+        font-size: 13px;
+    }
+
+    .evl-comment-footer {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
