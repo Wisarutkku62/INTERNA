@@ -42,6 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/evaluation', [ProfileController::class, 'evaluation'])->name('evaluation');
     Route::post('/evaluation', [ProfileController::class, 'saveEvaluation'])->name('evaluation.save');
 
+    //DocumentController
+    Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
+    Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
+
     // AdminController
     Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
