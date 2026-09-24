@@ -31,20 +31,10 @@
                     <h2 class="card-title">ตำแหน่งงานที่สมัคร</h2>
                     <ul class="approval-list">
                         <li class="approval-done">
-                            <span class="approval-icon">✅</span>
-                            <span>ส่งเอกสารฝึกงาน</span>
-                        </li>
-                        <li class="approval-done">
-                            <span class="approval-icon">✅</span>
-                            <span>อาจารย์นิเทศตรวจสอบ</span>
-                        </li>
-                        <li class="approval-current">
-                            <span class="approval-icon">⏳</span>
-                            <span>บริษัทประเมินผล</span>
-                        </li>
-                        <li class="approval-pending">
-                            <span class="approval-icon">⬜</span>
-                            <span>อนุมัติผลสำเร็จ</span>
+                            <div>
+                                <div>ตำแหน่ง:</div>
+                                <div>บริษัท:</div>
+                            </div>
                         </li>
                     </ul>
                 </section>

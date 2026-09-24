@@ -226,6 +226,7 @@
 }
 
 .approval-list {
+    display: block;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -252,6 +253,13 @@
     color: #2d3748;
 }
 
+/* เปลี่ยนให้เรียงต่อกันเป็นแนวตั้ง */
+.approval-done {
+    flex-direction: column !important;
+    align-items: flex-start !important; 
+    gap: 4px; 
+}
+
 .approval-current {
     color: #d9822b;
     font-weight: bold;
@@ -272,6 +280,8 @@
 .card-title-left {
     text-align: left;
 }
+
+
 
 @media (max-width: 900px) {
     .dashboard-wrapper {
