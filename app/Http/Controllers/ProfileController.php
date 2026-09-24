@@ -77,7 +77,7 @@ class ProfileController extends Controller
     
     public function evaluation()
     {
-        return view ('evaluation.profile');
+        return view ('evaluation');
     }
 
     public function saveEvaluation(Request $request)
