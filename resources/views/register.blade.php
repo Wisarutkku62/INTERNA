@@ -30,6 +30,7 @@
 
                 </div>
 
+                
                 <form action="{{ route('auth.register') }}" method='POST' id="RegForm">
                     @csrf
                     <div class="form-group">
@@ -88,6 +89,7 @@
                         </span>
                     </div>
 
+
                     <div class="form-group">
 
                         <label for="password_confirmation">
@@ -117,6 +119,19 @@
 
                     </span>
                     </div>
+
+                      <!-- ปุ่มเลือก role -->
+                <form action="/" class="user-select-form">
+                    <div class="radio-option">
+                        <input type="radio" id="student" name="user_type" value="Student">
+                        <label for="student">นักศึกษา</label>
+                    </div>
+    
+                    <div class="radio-option">
+                        <input type="radio" id="company" name="user_type" value="Company">
+                        <label for="company">บริษัท</label>
+                    </div>
+                </form>
 
                     <div class="buttonsubmit">
                         <button type="submit">
