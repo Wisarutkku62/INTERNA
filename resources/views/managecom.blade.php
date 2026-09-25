@@ -106,7 +106,7 @@
                 <strong>สมชาย ใจดี</strong>
                 <p>ตำแหน่ง: UX/UI Designer</p>
             </div>
-            <span class="badge-status">สัมภาษณ์ออนไซต์</span>
+            <span class="badge-status">รอการยืนยัน</span>
             </div>
              <div class="interview-item">
                 <div class="interview-time">
@@ -116,7 +116,7 @@
                 <strong>สมชาย ใจดี</strong>
                 <p>ตำแหน่ง: UX/UI Designer</p>
             </div>
-            <span class="badge-status">สัมภาษณ์ออนไซต์</span>
+            <span class="badge-status">รอการยืนยัน</span>
             </div>
              <div class="interview-item">
                 <div class="interview-time">
@@ -126,7 +126,7 @@
                 <strong>สมชาย ใจดี</strong>
                 <p>ตำแหน่ง: UX/UI Designer</p>
             </div>
-            <span class="badge-status">สัมภาษณ์ออนไซต์</span>
+            <span class="badge-status">รอการยืนยัน</span>
             </div>
              <div class="interview-item">
                 <div class="interview-time">
@@ -136,7 +136,7 @@
                 <strong>สมชาย ใจดี</strong>
                 <p>ตำแหน่ง: UX/UI Designer</p>
             </div>
-            <span class="badge-status">สัมภาษณ์ออนไซต์</span>
+            <span class="badge-status">รอการยืนยัน</span>
             </div>
         </div>
         </div>

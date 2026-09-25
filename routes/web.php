@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 Route::view('/com', 'managecom')->name('managecom');
 Route::view('/editt', 'companyedit')->name('companyedit');
 Route::view('/an', 'announcement')->name('announcement');
+Route::view('/all', 'alljob')->name('alljob');
 // Public / Landing Routes
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
