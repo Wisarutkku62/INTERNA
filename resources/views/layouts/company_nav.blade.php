@@ -23,14 +23,14 @@
           <li class="nav-item"><a href="#" class="nav-link">ติดต่อเรา</a></li>
         </ul>
         @auth
-        <div class="nav-actions">
+         <div class="nav-actions">
         <div class="profile-dropdown">
           <input type="checkbox" id="profile-toggle" class="profile-toggle">
           <label for="profile-toggle" class="profile-label"> 
             <img src="{{ asset('image/profile_m.png') }}" alt="Profile" class="user-avatar">
           </label>
           <div class="dropdown-menu">
-            <a href="{{route('company.overview')}}" class="dropdown-item">ภาพรวม</a>
+            <a href="#" class="dropdown-item">ภาพรวม</a>
             <a href="#" class="dropdown-item">โปรไฟล์</a>
             <form action="{{ route('auth.logout')}}" method="POST" class="logout-form">
               @csrf
