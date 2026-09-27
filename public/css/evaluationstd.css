@@ -226,13 +226,12 @@
 }
 
 .approval-list {
-    display: block;
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .approval-list li {
@@ -251,13 +250,9 @@
 
 .approval-done {
     color: #2d3748;
-}
-
-/* เปลี่ยนให้เรียงต่อกันเป็นแนวตั้ง */
-.approval-done {
     flex-direction: column !important;
-    align-items: flex-start !important; 
-    gap: 4px; 
+    align-items: flex-start !important;
+    gap: 4px;
 }
 
 .approval-current {
@@ -281,7 +276,67 @@
     text-align: left;
 }
 
+.evaluation-result-box {
+    margin-top: 5px;
+}
 
+.score-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #edf2f7;
+    margin-bottom: 15px;
+}
+
+.label-title {
+    display: block;
+    font-size: 0.85rem;
+    color: #718096;
+    margin-bottom: 4px;
+}
+
+.type-value {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2d3748;
+}
+
+.score-num {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #0037ff;
+}
+
+.score-max {
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #a0aec0;
+    margin-left: 4px;
+}
+
+.comment-box {
+    background: #ffffff;
+    border: 1px solid #edf2f7;
+    padding: 15px 20px;
+    border-radius: 8px;
+}
+
+.comment-title {
+    display: block;
+    font-size: 0.9rem;
+    color: #2d3748;
+    margin-bottom: 6px;
+}
+
+.comment-text {
+    color: #718096;
+    margin: 0;
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
 
 @media (max-width: 900px) {
     .dashboard-wrapper {

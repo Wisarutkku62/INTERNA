@@ -20,14 +20,17 @@ Route::view('/loginmain', 'loginmain')->name('loginmain');
 Route::view('/login/admin', 'loginadmin')->name('loginadmin');
 Route::view('apt','evaluationstd')->name('evaluationstd');
 Route::view('qwe','managecom')->name('managecom');
-Route::view('/doc','student.document')->name('document');
+
+Route::get('/doc', [DocumentController::class, 'index'])->name('documents.index');
+Route::post('/doc', [DocumentController::class, 'store'])->name('documents.store');
+
 // Employee Routes
 Route::get('/train', [EmployeeController::class, 'train'])->name('train');
 Route::get('/Fulltimejob', [EmployeeController::class, 'fulltime'])->name('Fulltimejob');
 Route::get('/parttime', [EmployeeController::class, 'parttime'])->name('parttime');
 Route::get('/trainee', [EmployeeController::class, 'trainee'])->name('trainee');
 
-    //Login & Register | AuthController 
+//Login & Register | AuthController 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.showRegister');
 Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -43,6 +46,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.profile');
     Route::get('/evaluation', [ProfileController::class, 'evaluation'])->name('evaluation');
     Route::post('/evaluation', [ProfileController::class, 'saveEvaluation'])->name('evaluation.save');
+    Route::get('/student/evaluation', [EvaluationController::class, 'index'])->name('student.evaluation');
     
 });
 

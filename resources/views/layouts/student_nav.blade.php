@@ -25,8 +25,8 @@
             </a>
           </li>
           <li class="nav-item"><a href="{{ route('trainee') }}" class="nav-link">ค้นหานักศึกษาฝึกงาน</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">ประเมินผล</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">สำหรับบริษัท</a></li>
+          <!-- <li class="nav-item"><a href="#" class="nav-link">ประเมินผล</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">สำหรับบริษัท</a></li> -->
           <li class="nav-item"><a href="#" class="nav-link">ติดต่อเรา</a></li>
         </ul>
 
@@ -38,7 +38,7 @@
             <img src="{{ asset('image/profile_m.png') }}" alt="Profile" class="user-avatar">
           </label>
           <div class="dropdown-menu">
-            <a href="#" class="dropdown-item">ภาพรวม</a>
+            <a href="{{route('student.evaluation')}}" class="dropdown-item">ภาพรวม</a>
             <a href="{{route('profile.profile')}}" class="dropdown-item">โปรไฟล์</a>
             <form action="{{ route('auth.logout')}}" method="POST" class="logout-form">
               @csrf
