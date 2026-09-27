@@ -11,12 +11,8 @@ use App\Http\Controllers\InternController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
-<<<<<<< Updated upstream
-
-=======
 Route::view('/yed','company.announcementedit');
 Route::view('/hee','company.interviewcompany');
->>>>>>> Stashed changes
 Route::view('/mg','company.ManageInternship');
 Route::view('/mf','company.InformationandHistory');
 Route::view('/mt','company.evaluation');
