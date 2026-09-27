@@ -1,0 +1,131 @@
+
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+.back {
+    display: inline-block;
+    color: #666666;
+    text-decoration: none;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.back:hover {
+    color: #0052FF;
+}
+
+.job-layout {
+    display: flex;
+    gap: 20px;
+}
+
+.main-content {
+    flex: 3; 
+}
+
+.sidebar {
+    flex: 1;
+}
+
+
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.job-title {
+    font-size: 24px;
+    margin: 0 0 5px 0;
+    color: #1e293b;
+}
+
+.company-name {
+    font-size: 16px;
+    color: #64748b;
+    margin: 0 0 15px 0;
+}
+
+.info-row {
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.info-label {
+    color: #64748b;
+    display: inline-block;
+    width: 110px;
+}
+
+.info-value {
+    font-weight: bold;
+}
+
+.text-blue {
+    color: #0052FF;
+}
+
+.tags {
+    margin: 15px 0;
+}
+
+.tag-blue {
+    display: inline-block;
+    background-color: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+.tag-green {
+    display: inline-block;
+    background-color: #dcfce7;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.btn-primary {
+    background-color: #0052FF;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #003ecc;
+}
+
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.section-body {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.section-body ul {
+    padding-left: 20px;
+    margin: 0;
+}

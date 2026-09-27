@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\InternshipPosition;
+use Illuminate\Support\Facades\Auth;
 
 class InternController extends Controller
 {
     public function index()
-    {
-        return view('index');
+    {   
+        $user = Auth::user();
+
+        return view('index', compact('user'));
     } 
     public function internship(Request $request)
     {   

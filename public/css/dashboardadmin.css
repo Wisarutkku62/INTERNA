@@ -1,3 +1,31 @@
+.head {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.back-bt {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #4a5568;
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.2s ease;
+}
+
+.back-bt:hover {
+    color: #0037ff;
+}
+
+.back-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* Page Layout */
 .admin-page-wrapper {
     width: 100%;
     min-height: calc(100vh - 80px);
@@ -23,6 +51,23 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     border: 1px solid #edf2f7;
     flex-shrink: 0;
+}
+
+/* ปุ่มเพิ่มเติมสำหรับหน้าตรวจสอบเอกสาร */
+.btn-approve {
+    background: #dcfce7;
+    color: #15803d;
+}
+.btn-approve:hover {
+    background: #bbf7d0;
+}
+
+.btn-reject {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+.btn-reject:hover {
+    background: #fecaca;
 }
 
 .sidebar-title {
@@ -73,6 +118,7 @@
     padding: 24px 28px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     border: 1px solid #edf2f7;
+    margin-bottom: 24px;
 }
 
 .card-header {
@@ -88,7 +134,6 @@
     color: #1a202c;
     margin: 0;
 }
-
 
 .stats-grid {
     display: grid;
@@ -117,7 +162,6 @@
     font-weight: 700;
     color: #0037ff;
 }
-
 
 .table-responsive {
     width: 100%;
@@ -149,7 +193,6 @@
     background-color: #f8fafc;
 }
 
-
 .btn-add {
     background: #0037ff;
     color: #ffffff;
@@ -160,6 +203,7 @@
     font-size: 14px;
     text-decoration: none;
     cursor: pointer;
+    display: inline-block;
 }
 
 .btn-add:hover {
@@ -174,6 +218,7 @@
     cursor: pointer;
     text-decoration: none;
     margin-right: 4px;
+    display: inline-block;
 }
 
 .btn-edit { background: #edf2f7; color: #2d3748; }
@@ -183,11 +228,40 @@
     padding: 4px 10px;
     border-radius: 12px;
     font-size: 12px;
+    display: inline-block;
 }
 
 .badge-success { background: #c6f6d5; color: #22543d; }
 .badge-warning { background: #feebc8; color: #744210; }
+.badge-danger { background: #fed7d7; color: #9b2c2c; }
 
+/* Additional Styles for Forms */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #4a5568;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #0037ff;
+}
 
 @media (max-width: 992px) {
     .admin-container { flex-direction: column; }

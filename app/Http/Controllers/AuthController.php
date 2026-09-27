@@ -11,17 +11,17 @@ class AuthController extends Controller
 {
     public function showRegister()
     {
-        return view('register');
+        return view('auth.register');
     }
 
     public function showLogin()
     {
-        return view('login');
+        return view('auth.login');
     }
 
     public function showLoginAdmin()
     {
-        return view('loginadmin');
+        return view('auth.loginadmin');
     }
 
     public function register(Request $request): RedirectResponse 
@@ -30,7 +30,7 @@ class AuthController extends Controller
             // 'username' => ['required', 'string', 'max:50'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            // 'role' => ['required', 'string']
+            'role' => ['required', 'string']
         ], [
         'email.unique' => 'อีเมลนี้ถูกลงทะเบียนไปแล้ว',
         'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง'
@@ -43,7 +43,7 @@ class AuthController extends Controller
         User::create([
             'email' => $validated['email'],
             'password' => $validated['password'],
-            'role' => 'student',
+            'role' => $validated['role'],
         ]);
 
 

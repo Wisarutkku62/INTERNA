@@ -282,3 +282,50 @@ text-decoration: none;
   border: 1.5px solid #e53e3e !important;
   background-color: #fff5f5 !important; /* (ตัวเลือกเสริม) ใส่สีพื้นหลังแดงจางๆ */
 }
+
+/*ส่วนของ role ให้ user เลือกก่อนสมัคร*/
+
+.user-select-form {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  /* width: 100%; */
+}
+
+
+.radio-option {
+  flex: 1;
+  position: relative;
+}
+
+
+.radio-option input {
+  display: none;
+}
+
+
+.radio-option label {
+
+  /* display: inline-block; */
+  float: left;
+  width: 49%;
+  padding: 12px 0;
+  margin: 2px;
+  text-align: center;
+  background-color: #f8fafc;
+  border: 2px solid #2563eb;
+  border-radius: 10px;
+  color: #2563eb;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+  transition: all 0.2s ease;
+
+}
+.radio-option input:checked + label {
+  background-color: #3877fe;
+  color: #ffffff;
+}
+

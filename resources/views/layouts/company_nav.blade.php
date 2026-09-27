@@ -24,13 +24,21 @@
         </ul>
         @auth
         <div class="nav-actions">
-          <form action="{{ route('auth.logout')}}" method="POST">
-            @csrf
-            <button type="submit" class="btn-logout">ออกจากระบบ</button>
-          </form>
-           <a href="#" class="profile-link"> 
-          <img src="{{ asset('image/profile_m.png') }}" alt="Profile" class="user-avatar"></a>
+        <div class="profile-dropdown">
+          <input type="checkbox" id="profile-toggle" class="profile-toggle">
+          <label for="profile-toggle" class="profile-label"> 
+            <img src="{{ asset('image/profile_m.png') }}" alt="Profile" class="user-avatar">
+          </label>
+          <div class="dropdown-menu">
+            <a href="{{route('company.overview')}}" class="dropdown-item">ภาพรวม</a>
+            <a href="#" class="dropdown-item">โปรไฟล์</a>
+            <form action="{{ route('auth.logout')}}" method="POST" class="logout-form">
+              @csrf
+              <button type="submit" class="dropdown-item logout-btn">ออกจากระบบ</button>
+            </form>
+          </div>
         </div>
+      </div>
         @endauth
 
         @guest
