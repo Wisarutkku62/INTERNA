@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('student_email', 100);
             $table->char('student_phone', 10)->nullable();
             $table->string('student_address', 200)->nullable();
+            $table->string('student_profile')->nullable();
             $table->timestamps();
             $table->softDeletes();
 });
