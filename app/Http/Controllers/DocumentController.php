@@ -3,72 +3,63 @@
 namespace App\Http\Controllers;
 
 use App\Models\Document;
-use App\Models\Application;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class DocumentController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $user = Auth::user();
-        $student = Student::where('user_id', $user->id ?? 1)->first();
         
-        $uploadedDocs = collect();
+        $student = Student::where('user_id', $user->id ?? 1)->first();
+
         if ($student) {
-            // ดึงรายการเอกสารทั้งหมดของนักศึกษา
-            $uploadedDocs = Document::where('student_id', $student->id)
+            $documents = Document::where('student_id', $student->id)
                 ->orderByDesc('id')
                 ->get();
+        } else {
+            $documents = collect();
         }
 
-        return view('document', compact('uploadedDocs'));
+        return view('document', compact('documents'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'document_file' => 'required|file|mimes:pdf,doc,docx|max:10240',
+            'file' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:20480'],
         ]);
 
-        $user = Auth::user();
-        $student = Student::where('user_id', $user->id ?? 1)->firstOrFail();
-        $application = Application::where('student_id', $student->id)->latest()->first();
+        if ($request->hasFile('file')) {
+            $user = Auth::user();
 
-        DB::transaction(function () use ($request, $student, $application) {
-            if ($request->hasFile('document_file')) {
-                $file = $request->file('document_file');
-                if ($file->isValid()) {
-                    $filePath = $file->store("documents/student_{$student->id}", 'public');
+            $student = Student::firstOrCreate(
+                ['user_id' => $user->id ?? 1],
+                [
+                    'student_fname' => $user->name ?? 'Student',
+                    'student_lname' => 'User',
+                    'student_email' => $user->email ?? 'student@example.com',
+                ]
+            );
 
-                    // บันทึกไฟล์เอกสารทั่วไป
-                    $document = Document::create([
-                        'student_id' => $student->id,
-                        'document_type' => 'เอกสารฝึกงาน',
-                        'document_file_path' => $filePath,
-                    ]);
+            $path = $request->file('file')->store('documents', 'public');
 
-                    if ($application) {
-                        DB::table('applications_documents')->updateOrInsert(
-                            [
-                                'application_id' => $application->id,
-                                'document_id' => $document->id,
-                            ],
-                            [
-                                'appdoc_status' => 'pending',
-                                'appdoc_remark' => 'อัปโหลดเอกสารเรียบร้อยแล้ว',
-                                'updated_at' => now(),
-                                'created_at' => now(),
-                            ]
-                        );
-                    }
-                }
-            }
-        });
+            $document = new Document();
+            $document->student_id = $student->id;
+            $document->document_type = 'เอกสารฝึกงาน';
+            $document->document_file_path = Storage::url($path);
+            $document->save();
 
-        return redirect()->back()->with('success', 'บันทึกและอัปโหลดเอกสารเรียบร้อยแล้ว');
+            return redirect()
+                ->route('documents.index')
+                ->with('success', 'ส่งไฟล์เอกสารเรียบร้อยแล้ว');
+        }
+
+        return back()->with('error', 'กรุณาเลือกไฟล์เอกสาร');
     }
 }

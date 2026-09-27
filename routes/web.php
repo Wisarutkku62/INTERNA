@@ -60,14 +60,15 @@ Route::middleware(['auth', 'role:company'])->group(function () {
 
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/login/admin', [AuthController::class, 'showLoginAdmin'])->name('auth.showLoginAdmin');
-    Route::post('/login/admin', [AuthController::class, 'loginAdmin'])->name('auth.loginAdmin');
-});
+// Admin Login
+Route::get('/login/admin', [AuthController::class, 'showLoginAdmin'])->name('auth.showLoginAdmin');
+Route::post('/login/admin', [AuthController::class, 'loginAdmin'])->name('auth.loginAdmin');
 
-// Route::middleware(['auth', 'verified'])->group(function () {
-//     Route::view('dashboard', 'dashboard')->name('dashboard');
-// });
+Route::middleware(['auth',])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboardadmin');
+    })->name('admin.dashboard');
+});
 
 
 require __DIR__.'/settings.php';
