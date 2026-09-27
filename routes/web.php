@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 Route::view('/mg','company.ManageInternship');
 Route::view('/mf','company.InformationandHistory');
+
 // Public
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
@@ -47,6 +48,8 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/evaluation', [ProfileController::class, 'evaluation'])->name('evaluation');
     Route::post('/evaluation', [ProfileController::class, 'saveEvaluation'])->name('evaluation.save');
     Route::get('/student/evaluation', [EvaluationController::class, 'index'])->name('student.evaluation');
+    Route::get('/appointment', [ProfileController::class, 'appointment'])->name('appointment');
+    Route::post('/appointment', [ProfileController::class, 'updateAppointment'])->name('appointment.update');
     
 });
 

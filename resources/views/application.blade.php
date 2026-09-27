@@ -86,6 +86,7 @@
                 <div class="job-card-media">
                     <img src="{{ asset('img/Picturelogin.png') }}" alt="picture">
                     <button class="detail-btn">ดูรายละเอียดงาน</button>
+                    
                 </div>
             </div>
         </div>
