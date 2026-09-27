@@ -11,6 +11,7 @@ use App\Http\Controllers\InternController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
+
 Route::view('/mg','company.ManageInternship');
 Route::view('/mf','company.InformationandHistory');
 // Public
