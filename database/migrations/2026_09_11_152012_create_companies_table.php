@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('contact_position');
             $table->char('contact_phone' , 10)->nullable();
             $table->string('contact_email', 100)->nullable();
+            $table->string('company_logo')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

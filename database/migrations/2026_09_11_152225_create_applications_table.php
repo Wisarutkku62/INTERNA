@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('internship_position_id')->constrained();
             $table->foreignId('student_id')->constrained();
             $table->string('application_status');
+            $table->text('reject_reason')->nullable();
+            $table->enum('reject_stage', ['resume', 'interview'])->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
