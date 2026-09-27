@@ -64,10 +64,11 @@ Route::middleware(['auth', 'role:company'])->group(function () {
 Route::get('/login/admin', [AuthController::class, 'showLoginAdmin'])->name('auth.showLoginAdmin');
 Route::post('/login/admin', [AuthController::class, 'loginAdmin'])->name('auth.loginAdmin');
 
-Route::middleware(['auth',])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboardadmin');
-    })->name('admin.dashboard');
+// Admin Protected Routes
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+    Route::delete('/admin/companies/{id}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
 });
 
 
