@@ -43,7 +43,7 @@
     </div>
 
    <div class="job-list">
-    @foreach($internship_positions as $position)
+    @forelse($internship_positions as $position)
         <div class="job-card">
             <div class="job-card-left">
                 <div class="job-card-head">
@@ -85,11 +85,15 @@
             <div class="job-card-right">
                 <div class="job-card-media">
                     <img src="{{ asset('img/Picturelogin.png') }}" alt="picture">
-                    <button class="detail-btn">ดูรายละเอียดงาน</button>
+                    <form action="{{route('intern.detail', $position->id)}}" method="GET">
+                        <button type='submit' class="detail-btn">ดูรายละเอียดงาน</button>
+                    </form>
                 </div>
             </div>
         </div>
-    @endforeach
+    @empty
+        <p>ไม่พบข้อมูล</p>
+    @endforelse
 </div>
 </div>
 @endsection

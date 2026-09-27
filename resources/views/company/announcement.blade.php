@@ -7,7 +7,7 @@
 @section('content')
 <div class="form-card">
     <div class="form-header">
-        <a href="{{route('company.announcement.all')}}" class="back-btn" title="ย้อนกลับ">&larr;</a>
+        <a href="{{route('company.overview')}}" class="back-btn" title="ย้อนกลับ">&larr;</a>
         <h2>สร้างประกาศงานใหม่</h2>
     </div>
     <form action="{{route('company.announcement.create')}}" method="POST">

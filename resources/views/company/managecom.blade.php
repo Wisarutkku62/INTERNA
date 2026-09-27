@@ -17,7 +17,7 @@
         </div>
 
         <h3 class="welcome-title">{{$user?->company?->company_name}}</h3>
-        <a href="#" class="btn-edit">แก้ไขข้อมูลบริษัท</a>
+        <a href="{{route('company.edit.profile')}}" class="btn-edit">แก้ไขข้อมูลบริษัท</a>
         <p class="text-commend">กรุณากรอกข้อมูลบริษัทให้ครบก่อนยืนยันตัวตน</p>
     </aside>
 

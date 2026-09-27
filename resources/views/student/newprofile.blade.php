@@ -20,9 +20,9 @@
 
     <h1 class="profile-title">ข้อมูลส่วนตัว</h1>
 
-    <form name="profileForm" action="{{ route('profile.save') }}" method="POST" class="profile" enctype="multipart/form-data">
+    <form name="profileForm" action="{{ route('profile.save') }}" method="POST" class="profile">
         @csrf
-        
+        @method('PUT')
         <div class="avatar-section full-width">
             <div class="avatar-wrapper">
                 <img id="avatar-preview" src="/img/profile.png" alt="Profile Picture">

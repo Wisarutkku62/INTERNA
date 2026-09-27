@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('internship_position_id')->constrained();
+            $table->foreignId('internship_position_id')->constrained()->onDelete('cascade');
             $table->foreignId('student_id')->constrained();
             $table->string('application_status');
             $table->text('reject_reason')->nullable();

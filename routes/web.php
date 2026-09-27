@@ -11,15 +11,16 @@ use App\Http\Controllers\InternController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
+
 Route::view('/mg','company.ManageInternship');
 Route::view('/mf','company.InformationandHistory');
+Route::view('/mt','company.evaluation');
+Route::view('/ct','company.companydetail');
+Route::view('/ct','company.companydetail');
 // Public
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
-Route::view('/loginmain', 'loginmain')->name('loginmain');
-Route::view('/login/admin', 'loginadmin')->name('loginadmin');
-Route::view('apt','evaluationstd')->name('evaluationstd');
-Route::view('qwe','managecom')->name('managecom');
+Route::get('/intern/detail/{id}', [InternController::class, 'internship_detail'])->name('intern.detail');
 
 Route::get('/doc', [DocumentController::class, 'index'])->name('documents.index');
 Route::post('/doc', [DocumentController::class, 'store'])->name('documents.store');
@@ -41,22 +42,23 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 // Authenticated 
 Route::middleware(['auth', 'role:student'])->group(function () {
     // ProfileController
-    Route::get('/newprofile', [ProfileController::class, 'newProfile'])->name('newprofile');
-    Route::put('/profile/save', [ProfileController::class, 'saveProfile'])->name('profile.save');
-    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.profile');
-    Route::get('/evaluation', [ProfileController::class, 'evaluation'])->name('evaluation');
-    Route::post('/evaluation', [ProfileController::class, 'saveEvaluation'])->name('evaluation.save');
-    Route::get('/student/evaluation', [EvaluationController::class, 'index'])->name('student.evaluation');
-    
+Route::get('/newprofile', [ProfileController::class, 'newProfile'])->name('newprofile');
+Route::put('/profile/save', [ProfileController::class, 'saveProfile'])->name('profile.save');
+Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.profile');
+Route::get('/evaluation', [ProfileController::class, 'evaluation'])->name('evaluation');
+Route::post('/evaluation', [ProfileController::class, 'saveEvaluation'])->name('evaluation.save');
+Route::get('/student/evaluation', [EvaluationController::class, 'index'])->name('student.evaluation');
 });
 
 Route::middleware(['auth', 'role:company'])->group(function () {
-    Route::get('/company/overview', [CompanyController::class, 'overview'])->name('company.overview');
-    Route::get('/company/profile/edit', [CompanyController::class, 'editProfile'])->name('company.edit.profile');
-    Route::get('/company/job_announcement', [CompanyController::class, 'announcement'])->name('company.announcement');
-    Route::post('/company/job_announcement/create', [CompanyController::class, 'announcement_create'])->name('company.announcement.create');
-    Route::get('/company/job_announcement/all',[CompanyController::class, 'announcement_all'])->name('company.announcement.all');
-    Route::get('/company/job_announcement/all',[CompanyController::class, 'announcement_all'])->name('company.announcement.all');
+Route::get('/company/overview', [CompanyController::class, 'overview'])->name('company.overview');
+Route::get('/company/edit_profile', [CompanyController::class, 'editProfile'])->name('company.edit.profile');
+Route::put('/company/edit_profile/edit', [CompanyController::class, 'editProfileSave'])->name('company.edit.profile.save');
+Route::get('/company/job_announcement', [CompanyController::class, 'announcement'])->name('company.announcement');
+Route::post('/company/job_announcement/create', [CompanyController::class, 'announcement_create'])->name('company.announcement.create');
+Route::get('/company/job_announcement/all',[CompanyController::class, 'announcement_all'])->name('company.announcement.all');
+Route::delete('/company/job_announcement/delete/{id}', [CompanyController::class, 'delete'])->name('company.announcement.delete');
+Route::get('/company/history',[CompanyController::class, 'history'])->name('company.history');
 
 });
 
@@ -66,9 +68,9 @@ Route::post('/login/admin', [AuthController::class, 'loginAdmin'])->name('auth.l
 
 // Admin Protected Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
-    Route::delete('/admin/companies/{id}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+Route::delete('/admin/companies/{id}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
 });
 
 

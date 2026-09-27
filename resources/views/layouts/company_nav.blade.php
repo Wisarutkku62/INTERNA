@@ -30,7 +30,7 @@
             <img src="{{ asset('image/profile_m.png') }}" alt="Profile" class="user-avatar">
           </label>
           <div class="dropdown-menu">
-            <a href="#" class="dropdown-item">ภาพรวม</a>
+            <a href="{{route('company.overview')}}" class="dropdown-item">ภาพรวม</a>
             <a href="#" class="dropdown-item">โปรไฟล์</a>
             <form action="{{ route('auth.logout')}}" method="POST" class="logout-form">
               @csrf
