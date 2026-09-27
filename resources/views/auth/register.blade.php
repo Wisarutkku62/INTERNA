@@ -120,18 +120,17 @@
                     </span>
                     </div>
 
-                      <!-- ปุ่มเลือก role -->
-                <form action="/" class="user-select-form">
+
                     <div class="radio-option">
-                        <input type="radio" id="student" name="user_type" value="Student">
+                        <input type="radio" id="student" name="role" value="student" checked>
                         <label for="student">นักศึกษา</label>
                     </div>
     
                     <div class="radio-option">
-                        <input type="radio" id="company" name="user_type" value="Company">
+                        <input type="radio" id="company" name="role" value="company">
                         <label for="company">บริษัท</label>
                     </div>
-                </form>
+
 
                     <div class="buttonsubmit">
                         <button type="submit">
@@ -161,6 +160,7 @@
                         const email_value = document.getElementById('email').value;
                         const password_value = document.getElementById('password').value;
                         const password_confirmation_value = document.getElementById('password_confirmation').value;
+                        const role_value = document.querySelector('input[name="role"]:checked').value;
                     
                     if(email_value=="") {
                         document.querySelector(".email-validated").innerHTML='กรุณากรอกอีเมล'
@@ -191,7 +191,7 @@
                         PasswordConfirmationNotFill = false;
                         document.getElementById('input-box-password_confirmation').classList.remove('input-error')
                     }
-
+                    
                     if (PasswordNotFill == false) {
                         if(password_value.length < 8 ) {
                             document.querySelector('.password-validated').innerHTML = 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัว'
@@ -245,5 +245,4 @@
         </div>
 
     </div>
-
 @endsection

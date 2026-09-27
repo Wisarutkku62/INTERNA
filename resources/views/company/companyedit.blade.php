@@ -6,8 +6,9 @@
 
 @section('content')
 
-    <form name="profileForm"  method="POST" enctype="multipart/form-data" class="profile">
-        @csrf     
+    <form name="profileForm"  method="POST" class="profile">
+        @csrf
+        @method('PUT')
         <div class="avatar-section full-width">
             <div class="avatar-wrapper">
                 <img src="{{ isset($company->company_profile) && $company->company_profile ? asset('storage/' . $company->company_profile) : asset('img/profile.png') }}" alt="Profile Picture">

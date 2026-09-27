@@ -133,3 +133,10 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
         }
+
+        .empty-enroll{
+            text-align: center;
+            font-size: 14px;
+            font-weight: 400;
+            color: #718096;
+        }

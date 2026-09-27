@@ -40,7 +40,7 @@
                     @endphp
                     <div class="field-value">{{ $user->student?->student_birthday ? Carbon::parse($user->student->student_birthday)->format('j') : 'วัน' }}</div>
                     <div class="field-value">{{ $user->student?->student_birthday ? Carbon::parse($user->student->student_birthday)->locale('th')->translatedFormat('F') : 'เดือน' }}</div>
-                    <div class="field-value">{{ $user->student?->student_birthday ? (Carbon::parse($user->student->student_birthday)->format('Y') + 543) : 'ปี' }}</div>
+                    <div class="field-value">{{ $user->student?->student_birthday ? (Carbon::parse($user->student->student_birthday)->format('Y')) : 'ปี' }}</div>
                 </div>
             </div>
 

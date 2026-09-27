@@ -22,7 +22,7 @@
 
     <form name="profileForm" action="{{ route('profile.save') }}" method="POST" class="profile" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
+        
         <div class="avatar-section full-width">
             <div class="avatar-wrapper">
                 <img id="avatar-preview" src="/img/profile.png" alt="Profile Picture">
@@ -47,8 +47,8 @@
         <div class="form-group full-width">
             <label>เพศ</label>
             <div class="gender-group">
-                <label class="radio-item"><input type="radio" name="gender" value="male" class="Radio" {{($user->student->student_gender ?? '') == 'male' ? 'checked' : '' }}> ชาย</label>
-                <label class="radio-item"><input type="radio" name="gender" value="female" class="Radio" {{($user->student->student_gender ?? '') == 'female' ? 'checked' : '' }}> หญิง</label>
+                <label class="radio-item"><input type="radio" name="gender" value="ชาย" class="Radio" {{($user->student->student_gender ?? '') == 'ชาย' ? 'checked' : '' }}> ชาย</label>
+                <label class="radio-item"><input type="radio" name="gender" value="หญิง" class="Radio" {{($user->student->student_gender ?? '') == 'หญิง' ? 'checked' : '' }}> หญิง</label>
                 <label class="radio-item"><input type="radio" name="gender" value="LGBTQIA+" class="Radio" {{($user->student->student_gender ?? '') == 'LGBTQIA+' ? 'checked' : '' }}> LGBTQIA+</label>
             </div>
         </div>
@@ -114,7 +114,7 @@
 
         <div class="form-group full-width">
             <label for="email">อีเมล</label>
-            <input type="email" name="email" value="{{ $user->email ?? '' }}" placeholder="อีเมล" class="input-field">
+                <div class="input-field">{{ $user->student->student_email ?? $user->email }}</div>
         </div>
 
         <div class="form-group full-width">

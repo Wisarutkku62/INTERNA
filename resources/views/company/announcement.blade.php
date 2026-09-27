@@ -7,10 +7,10 @@
 @section('content')
 <div class="form-card">
     <div class="form-header">
-        <a href="#" class="back-btn" title="ย้อนกลับ">&larr;</a>
+        <a href="{{route('company.announcement.all')}}" class="back-btn" title="ย้อนกลับ">&larr;</a>
         <h2>สร้างประกาศงานใหม่</h2>
     </div>
-    <form action="#" method="POST">
+    <form action="{{route('company.announcement.create')}}" method="POST">
         @csrf
         <div class="form-group">
             <label for="title">ชื่อตำแหน่งงาน</label>
@@ -62,7 +62,6 @@
             <textarea id="description" name="description" rows="4" placeholder="ระบุรายละเอียดหน้าที่รับผิดชอบ..."></textarea>
         </div>
         <div class="form-actions">
-            <button type="button" class="btn btn-cancel">ยกเลิก</button>
             <button type="submit" class="btn btn-submit">บันทึกประกาศ</button>
         </div>
     </form>

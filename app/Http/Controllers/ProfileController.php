@@ -13,14 +13,14 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        return view('newprofile', compact('user'));
+        return view('student.newprofile', compact('user'));
     }
 
     public function profile()
     {
         $user = Auth::user();
 
-        return view('profile', compact('user'));
+        return view('student.profile', compact('user'));
     }
 
     public function saveProfile(Request $request)
@@ -36,7 +36,6 @@ class ProfileController extends Controller
             'religion' => ['nullable', 'string'],
             'education' => ['nullable', 'string'],
             'phone' => ['nullable', 'string', 'max:10'],
-            'email' => ['required', 'email'],
             'address' => ['nullable', 'string', 'max:200'],
             'bio' => ['nullable', 'string'],
         ]);
@@ -44,7 +43,7 @@ class ProfileController extends Controller
         $birthday = null;
 
         if ($request->day && $request->month && $request->year) {
-            $birthday = ($request->year - 543) . '-' .
+            $birthday = ($request->year) . '-' .
                         str_pad($request->month, 2, '0', STR_PAD_LEFT) . '-' .
                         str_pad($request->day, 2, '0', STR_PAD_LEFT);
         }
@@ -60,7 +59,6 @@ class ProfileController extends Controller
                 'student_nationality' => $request->nationality,
                 'student_degree' => $request->education,
                 'student_bio' => $request->bio,
-                'student_email' => $request->email,
                 'student_phone' => $request->phone,
                 'student_address' => $request->address,
             ]
@@ -79,5 +77,9 @@ class ProfileController extends Controller
     public function saveEvaluation(Request $request)
     {
     // เดี๋ยวค่อยเขียนบันทึก DB
+    }
+    public function overview()
+    {
+        return view('ManageInternship');
     }
 }
