@@ -7,7 +7,7 @@
 @section('content')
 <div class="form-card">
     <div class="form-header">
-        <a href="{{route('company.announcement.all')}}" class="back-btn" title="ย้อนกลับ">&larr;</a>
+        <a href="{{route('company.overview')}}" class="back-btn" title="ย้อนกลับ">&larr;</a>
         <h2>แก้ไขประกาศงาน</h2>
     </div>
     <form action="{{route('company.announcement.create')}}" method="POST">
@@ -26,7 +26,7 @@
                     <option value="HR & Admin">HR & Admin</option>
                 </select>
             </div>
-           <div class="form-group col">
+            <div class="form-group col">
                 <label for="capacity">จำนวนรับ (คน)</label>
                 <input type="number" id="capacity" name="capacity" min="1" placeholder="เช่น 2" required>
             </div>
@@ -39,12 +39,14 @@
                     <option value="On-site">On-site</option>
                     <option value="Online">Online</option>
                 </select>
+            </div>
             <div class="form-group col">
                 <label for="work_type">รูปแบบสัมภาษณ์</label>
                 <select id="interview_type" name="interview_type">
                     <option value="On-site">On-site</option>
                     <option value="Online">Online</option>
                 </select>
+        </div>
         </div>
         <div class="form-row">
             <div class="form-group col">

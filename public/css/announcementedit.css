@@ -92,6 +92,17 @@ label {
     font-family: 'Prompt', sans-serif;
 }
 
+.btn-cancel {
+    background-color: #ffffff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    transition: all .4s;
+}
+/* .btn-cancel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
+} */
+
 .btn-submit {
     background-color: #2563eb;
     color: #ffffff;
@@ -102,5 +113,3 @@ label {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
 }
-
-
