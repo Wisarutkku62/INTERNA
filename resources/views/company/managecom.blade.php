@@ -44,9 +44,10 @@
     </div>
 
     <div class="interview-list">
+        @foreach($interviews as $interview)
         <div class="interview-item">
             <div class="interview-time">
-                <span class="time-num">10:30</span>
+                <span class="time-num">{{$interview->interview_start_time}}</span>
                 <span class="time-date">วันนี้</span>
             </div>
             <div class="interview-info">
@@ -55,6 +56,7 @@
             </div>
             <span class="badge-status">สัมภาษณ์ออนไลน์</span>
         </div>
+        @endforeach
     </div>
             </section>
         </div>

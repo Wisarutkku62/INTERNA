@@ -5,30 +5,36 @@
 @endpush
 @section('content')
 <div class="container">
-    <a href="#" class="back">&larr; ย้อนกลับ</a>
+    <a href="{{route('intern.intern')}}" class="back">&larr; ย้อนกลับ</a>
 
     <div class="job-layout">
         <div class="main-content">
             <div class="card">
-                <h1 class="job-title">Network Engineer</h1>
-                <p class="company-name">AIS</p>
+                <h1 class="job-title">{{$positions?->position_name}} </h1>
+                <p class="company-name">{{$positions?->company?->company_name}}</p>
 
                 <div class="info-row">
                     <span class="info-label">หมวดหมู่ :</span>
-                    <span class="info-value">IT</span>
+                    <span class="info-value">{{$positions?->position_category}}</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">เบี้ยเลี้ยง :</span>
-                    <span class="info-value text-blue">19,000 บาท</span>
+                    <span class="info-value text-blue">{{$positions?->position_allowance}} บาท</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">จำนวนรับสมัคร :</span>
-                    <span class="info-value">2 อัตรา</span>
+                    <span class="info-value">{{$positions?->position_capacity}} อัตรา</span>
                 </div>
 
                 <div class="tags">
-                    <span class="tag-blue">สัมภาษณ์งานออนไลน์ (Online)</span>
-                    <span class="tag-green">Hybrid</span>
+                    <span class="tag-blue">
+                        @if ($positions?->position_interview_type == 'Onsite')
+                        สัมภาษณ์งานออนไซต์
+                        @elseif ($positions?->position_interview_type == 'Online')
+                        สัมภาษณ์งานออนไลน์
+                        @endif
+                    </span>
+                    <span class="tag-green">{{$positions?->position_worktype}}</span>
                 </div>
 
                 <div>
@@ -39,15 +45,16 @@
             <div class="card">
                 <div class="section-title">รายละเอียดงาน</div>
                 <div class="section-body">
-                    ดูแลและบริหารจัดการระบบเครือข่ายคอมพิวเตอร์ (Network Infrastructure) ขององค์กร...
+                    {{$positions?->position_description}}
                 </div>
 
                 <div class="section-title">คุณสมบัติผู้สมัคร</div>
                 <div class="section-body">
-                    <ul>
+                    <!-- <ul>
                         <li>วุฒิการศึกษาระดับปริญญาตรี สาขา IT หรือที่เกี่ยวข้อง</li>
                         <li>มีความเข้าใจพื้นฐานเกี่ยวกับ Routing & Switching</li>
-                    </ul>
+                    </ul> -->
+                    {{$positions?->position_qualification}}
                 </div>
             </div>
         </div>

@@ -229,6 +229,10 @@ class DatabaseSeeder extends Seeder
                 'company_id' => 1,
                 'position_name' => 'Web Developer Intern (Laravel)',
                 'position_description' => 'พัฒนาและปรับปรุงระบบ Web Application ด้วย Laravel',
+                'position_qualification'  => '- กำลังศึกษาในสาขาที่เกี่ยวข้องกับการออกแบบ หรือไอที
+                                                - สามารถใช้งาน Figma หรือ Adobe XD ได้ดี
+                                                - มี Portfolio แสดงผลงานการออกแบบ UI/UX อย่างน้อย 2-3 งาน
+                                                - เข้าใจหลักการของ Responsive Design',
                 'position_category' => 'Software Development',
                 'position_capacity' => 2,
                 'position_allowance' => 300.00,
@@ -243,6 +247,10 @@ class DatabaseSeeder extends Seeder
                 'company_id' => 1,
                 'position_name' => 'Front-end Developer Intern (React/Vue)',
                 'position_description' => 'ออกแบบและพัฒนา UI สวยงามตามแบบ Design System',
+                'position_qualification'  => '- กำลังศึกษาชั้นปีที่ 3 หรือ 4 สาขาวิชาวิทยาการคอมพิวเตอร์ หรือสาขาที่เกี่ยวข้อง
+                                                - มีความรู้พื้นฐาน PHP, HTML, CSS, JavaScript และ MySQL
+                                                - เคยผ่านการใช้งาน Git Version Control มาก่อน
+                                                - สามารถทำงานร่วมกันเป็นทีมและพร้อมเรียนรู้สิ่งใหม่ๆ',
                 'position_category' => 'Frontend Development',
                 'position_capacity' => 2,
                 'position_allowance' => 300.00,
@@ -257,6 +265,10 @@ class DatabaseSeeder extends Seeder
                 'company_id' => 2,
                 'position_name' => 'Backend API Developer Intern',
                 'position_description' => 'ออกแบบและเขียน RESTful API สื่อสารกับระบบบริการอื่น',
+                'position_qualification'  => '- กำลังศึกษาชั้นปีที่ 3 หรือ 4 สาขาวิชาวิทยาการคอมพิวเตอร์ หรือสาขาที่เกี่ยวข้อง
+                                                - มีความรู้พื้นฐาน PHP, HTML, CSS, JavaScript และ MySQL
+                                                - เคยผ่านการใช้งาน Git Version Control มาก่อน
+                                                - สามารถทำงานร่วมกันเป็นทีมและพร้อมเรียนรู้สิ่งใหม่ๆ',
                 'position_category' => 'Backend Development',
                 'position_capacity' => 1,
                 'position_allowance' => 350.00,
@@ -271,6 +283,10 @@ class DatabaseSeeder extends Seeder
                 'company_id' => 3,
                 'position_name' => 'System Admin / DevOps Intern',
                 'position_description' => 'ดูแลเซิร์ฟเวอร์ และช่วยการ Deploy บน Docker/Cloud',
+                'position_qualification'  => '- กำลังศึกษาชั้นปีที่ 3 หรือ 4 สาขาวิชาวิทยาการคอมพิวเตอร์ หรือสาขาที่เกี่ยวข้อง
+                                                - มีความรู้พื้นฐาน PHP, HTML, CSS, JavaScript และ MySQL
+                                                - เคยผ่านการใช้งาน Git Version Control มาก่อน
+                                                - สามารถทำงานร่วมกันเป็นทีมและพร้อมเรียนรู้สิ่งใหม่ๆ',
                 'position_category' => 'Infrastructure',
                 'position_capacity' => 1,
                 'position_allowance' => 300.00,
@@ -285,6 +301,10 @@ class DatabaseSeeder extends Seeder
                 'company_id' => 4,
                 'position_name' => 'UI/UX Designer Intern',
                 'position_description' => 'ออกแบบ Wireframe/Prototype หน้าจอเว็บและแอปพลิเคชันด้วย Figma',
+                'position_qualification'  => '- กำลังศึกษาชั้นปีที่ 3 หรือ 4 สาขาวิชาวิทยาการคอมพิวเตอร์ หรือสาขาที่เกี่ยวข้อง
+                                                - มีความรู้พื้นฐาน PHP, HTML, CSS, JavaScript และ MySQL
+                                                - เคยผ่านการใช้งาน Git Version Control มาก่อน
+                                                - สามารถทำงานร่วมกันเป็นทีมและพร้อมเรียนรู้สิ่งใหม่ๆ',
                 'position_category' => 'Design',
                 'position_capacity' => 2,
                 'position_allowance' => 250.00,

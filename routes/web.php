@@ -67,11 +67,11 @@ Route::get('/login/admin', [AuthController::class, 'showLoginAdmin'])->name('aut
 Route::post('/login/admin', [AuthController::class, 'loginAdmin'])->name('auth.loginAdmin');
 
 // Admin Protected Routes
-Route::middleware(['auth', 'role:admin'])->group(function () {
+// Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
 Route::delete('/admin/companies/{id}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
-});
+// });
 
 
 require __DIR__.'/settings.php';
