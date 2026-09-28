@@ -17,7 +17,7 @@ Route::view('/mg','company.ManageInternship');
 Route::view('/mf','company.InformationandHistory');
 Route::view('/mt','company.evaluation');
 Route::view('/ct','company.companydetail');
-Route::view('/ct','company.companydetail');
+Route::view('/you','company.managecom');
 // Public
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
@@ -60,7 +60,6 @@ Route::post('/company/job_announcement/create', [CompanyController::class, 'anno
 Route::get('/company/job_announcement/all',[CompanyController::class, 'announcement_all'])->name('company.announcement.all');
 Route::delete('/company/job_announcement/delete/{id}', [CompanyController::class, 'delete'])->name('company.announcement.delete');
 Route::get('/company/history',[CompanyController::class, 'history'])->name('company.history');
-
 });
 
 // Admin Login
