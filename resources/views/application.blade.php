@@ -9,6 +9,10 @@
     <div class="header-section">
         <h1 class="page-title">งานทั้งหมด</h1>    
     </div>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     <form action="{{ route('intern.intern') }}" method="GET" class="filter-container">
         <div class="search-main-box">
             <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="ค้นหาชื่อตำแหน่งงาน หรือ ชื่อบริษัท..." class="search-input">
