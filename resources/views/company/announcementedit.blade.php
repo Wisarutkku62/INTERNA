@@ -37,13 +37,14 @@
                 <select id="work_type" name="work_type">
                     <option value="Hybrid">Hybrid</option>
                     <option value="On-site">On-site</option>
-                    <option value="Remote">Remote</option>
+                    <option value="Online">Online</option>
                 </select>
-            </div>
             <div class="form-group col">
-                <label for="location">สถานที่ทำงาน</label>
-                <input type="text" id="location" name="location" value="น้ำพอง">
-            </div>
+                <label for="work_type">รูปแบบสัมภาษณ์</label>
+                <select id="interview_type" name="interview_type">
+                    <option value="On-site">On-site</option>
+                    <option value="Online">Online</option>
+                </select>
         </div>
         <div class="form-row">
             <div class="form-group col">
