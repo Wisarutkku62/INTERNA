@@ -81,4 +81,14 @@ class ProfileController extends Controller
     {
         return view('ManageInternship');
     }
+    public function appointment()
+    {
+    return view('appointment');
+    }
+    public function updateAppointment(Request $request)
+    {
+    $action = $request->input('action');
+
+    return back()->with('success', 'บันทึกสถานะการนัดหมายเรียบร้อยแล้ว');
+    }
 }

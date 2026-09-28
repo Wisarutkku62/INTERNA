@@ -34,6 +34,8 @@ class InternController extends Controller
 
     public function internship_detail($id)
     {
-    
+        $positions = InternshipPosition::findOrFail($id);
+
+        return view('company.positiondetail', compact('positions'));
     }
 }

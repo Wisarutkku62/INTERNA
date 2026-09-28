@@ -29,4 +29,8 @@ public function latestEvaluation()
     {
         return $this->hasOne(Evaluation::class)->latestOfMany();
     }
+public function interview()
+    {
+        return $this->hasOne(Interview::class);
+    }
 }
