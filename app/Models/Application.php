@@ -25,4 +25,12 @@ public function evaluations()
     {
         return $this->hasMany(Evaluation::class);
     }
+public function latestEvaluation()
+    {
+        return $this->hasOne(Evaluation::class)->latestOfMany();
+    }
+public function interview()
+    {
+        return $this->hasOne(Interview::class);
+    }
 }

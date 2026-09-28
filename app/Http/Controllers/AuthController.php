@@ -11,17 +11,17 @@ class AuthController extends Controller
 {
     public function showRegister()
     {
-        return view('register');
+        return view('auth.register');
     }
 
     public function showLogin()
     {
-        return view('login');
+        return view('auth.login');
     }
 
     public function showLoginAdmin()
     {
-        return view('loginadmin');
+        return view('auth.loginadmin');
     }
 
     public function register(Request $request): RedirectResponse 
@@ -30,9 +30,10 @@ class AuthController extends Controller
             // 'username' => ['required', 'string', 'max:50'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            // 'role' => ['required', 'string']
+            'role' => ['required', 'string']
         ], [
-        'email.unique' => 'อีเมลนี้ถูกลงทะเบียนไปแล้ว'
+        'email.unique' => 'อีเมลนี้ถูกลงทะเบียนไปแล้ว',
+        'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง'
         ]);   
 
         // if (Auth::attempt($validated)) {
@@ -42,7 +43,7 @@ class AuthController extends Controller
         User::create([
             'email' => $validated['email'],
             'password' => $validated['password'],
-            'role' => 'student',
+            'role' => $validated['role'],
         ]);
 
 
@@ -54,12 +55,14 @@ class AuthController extends Controller
         $validated = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'string']
+        ], [
+        'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง'
         ]);  
 
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
 
-            return redirect()->route('intern.intern');
+            return redirect()->route('index');
         }
 
         return redirect()->back()
@@ -82,7 +85,7 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required','password']
+            'password' => ['required','string']
         ]);
 
         if (Auth::validate($validated)) {
@@ -99,7 +102,7 @@ class AuthController extends Controller
             Auth::login($user);
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            return redirect()->route('admin.dashboard');
         }
 
         return redirect()->back()

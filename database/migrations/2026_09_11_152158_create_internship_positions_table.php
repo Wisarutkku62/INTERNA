@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained();
             $table->string('position_name');
             $table->string('position_description')->nullable();
+            $table->string('position_qualification')->nullable();
             $table->string('position_category');
             $table->integer('position_capacity');
             $table->decimal('position_allowance');
