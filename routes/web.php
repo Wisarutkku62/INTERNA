@@ -72,5 +72,15 @@ Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->nam
 Route::delete('/admin/companies/{id}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
 });
 
+//view 
+Route::view('information-and-history', 'InformationandHistory')->name('information-history');
+
+Route::view('/p', 'profile')->name('profile');
+
+//sutdentInformation
+Route::view('/studentInformation', 'studentInformation')->name('studentInformation');
+
+//managecom
+Route::view('/managecom', 'managecom')->name('managecom');
 
 require __DIR__.'/settings.php';
