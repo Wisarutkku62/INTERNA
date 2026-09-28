@@ -52,22 +52,25 @@
                     <span>จัดการ</span>
                 </div>
                 <div class="apm-table-row">
-                    <span>$</span>
-                    <span>$</span>
-                    <span>$</span>
-                    <span>$</span>
+                    <span>-</span>
+                    <span>-</span>
+                    <span>-</span>
+                    <span>
+                        <form action="{{ route('appointment.update') }}" method="POST" class="action-form" style="display: inline-block;">
+                            @csrf
+                            <input type="hidden" name="action" value="confirm">
+                            <button type="submit" class="success">ยืนยัน</button>
+                        </form>
+
+                        <form action="{{ route('appointment.update') }}" method="POST" class="action-form" style="display: inline-block;">
+                            @csrf
+                            <input type="hidden" name="action" value="reschedule">
+                            <button type="submit" class="reschedule">ขอเลื่อนนัด</button>
+                        </form>
+                    </span>
                 </div>
             </div>
-
-            <form action="{{ route('appointment') }}" method="POST" class="action-form">
-    @csrf
-    <button type="submit" class="success">ยืนยัน</button>
-</form>
-
-<form action="{{ route('appointment') }}" method="POST" class="action-form">
-    @csrf
-    <button type="submit" class="reschedule">ขอเลื่อนนัด</button>
-</form>
-
         </div>
+
+    </div>
 @endsection
