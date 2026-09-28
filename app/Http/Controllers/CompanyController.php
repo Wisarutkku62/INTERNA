@@ -6,6 +6,7 @@ use App\Models\Application;
 use App\Models\InternshipPosition;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Models\Interview;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 class CompanyController extends Controller
@@ -21,8 +22,14 @@ class CompanyController extends Controller
         })
         ->with(['student', 'internshipPosition'])
         ->get();
+    
+    $interviews = Interview::whereHas('Application', function ($query) use ($companyId) {
+            $query->where('company_id', $companyId);
+        })
+        ->with(['application'])
+        ->get();
 
-    return view('company.managecom', compact('user', 'applicants'));
+    return view('company.managecom', compact('user', 'applicants', 'interviews'));
     }
     public function editProfile() 
     {
@@ -87,8 +94,7 @@ class CompanyController extends Controller
         $internshippositions->workdate = $validated['work_date'];
         $internshippositions->worktype = $validated['work_time'];
         $internshippositions->location = $validated('location');
-        // ไม่มีใน DB
-        $internshippositions->qualifications = $validated['qualifications'];
+        $internshippositions->position_qualification = $validated['qualifications'];
         
         $internshippositions->save();
     }
