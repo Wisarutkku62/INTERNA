@@ -27,12 +27,8 @@
                 </select>
             </div>
             <div class="form-group col">
-                <label for="job_type">ประเภทงาน </label>
-                <select id="job_type" name="job_type" required>
-                    <option value="Full-time">Full-time</option>
-                    <option value="Part-time">Part-time</option>
-                    <option value="Contract">Contract</option>
-                </select>
+                <label for="capacity">จำนวนรับ (คน)</label>
+                <input type="number" id="capacity" name="capacity" min="1" placeholder="เช่น 2" required>
             </div>
         </div>
         <div class="form-row">
@@ -47,6 +43,44 @@
             <div class="form-group col">
                 <label for="location">สถานที่ทำงาน</label>
                 <input type="text" id="location" name="location" value="น้ำพอง">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="start_day">วันเริ่มทำงาน</label>
+                <select id="start_day" name="start_day" required>
+                    <option value="" disabled selected>เลือกวัน...</option>
+                    <option value="จันทร์">จันทร์</option>
+                    <option value="อังคาร">อังคาร</option>
+                    <option value="พุธ">พุธ</option>
+                    <option value="พฤหัสบดี">พฤหัสบดี</option>
+                    <option value="ศุกร์">ศุกร์</option>
+                    <option value="เสาร์">เสาร์</option>
+                    <option value="อาทิตย์">อาทิตย์</option>
+                </select>
+            </div>
+            <div class="form-group col">
+                <label for="end_day">วันสิ้นสุดทำงาน</label>
+                <select id="end_day" name="end_day" required>
+                    <option value="" disabled selected>เลือกวัน...</option>
+                    <option value="จันทร์">จันทร์</option>
+                    <option value="อังคาร">อังคาร</option>
+                    <option value="พุธ">พุธ</option>
+                    <option value="พฤหัสบดี">พฤหัสบดี</option>
+                    <option value="ศุกร์">ศุกร์</option>
+                    <option value="เสาร์">เสาร์</option>
+                    <option value="อาทิตย์">อาทิตย์</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="work_start_time">เวลาเริ่มทำงาน</label>
+                <input type="time" id="work_start_time" name="work_start_time" value="08:30" required>
+            </div>
+            <div class="form-group col">
+                <label for="work_end_time">เวลาเลิกทำงาน</label>
+                <input type="time" id="work_end_time" name="work_end_time" value="17:30" required>
             </div>
         </div>
         <div class="form-group">
