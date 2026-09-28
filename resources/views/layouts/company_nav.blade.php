@@ -23,7 +23,7 @@
           <li class="nav-item"><a href="#" class="nav-link">ติดต่อเรา</a></li>
         </ul>
         @auth
-        <div class="nav-actions">
+         <div class="nav-actions">
         <div class="profile-dropdown">
           <input type="checkbox" id="profile-toggle" class="profile-toggle">
           <label for="profile-toggle" class="profile-label"> 

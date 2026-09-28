@@ -6,7 +6,6 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class ProfileController extends Controller
 {
     public function newProfile()
@@ -71,7 +70,7 @@ class ProfileController extends Controller
     
     public function evaluation()
     {
-        return view ('evaluation.profile');
+        return view ('evaluation');
     }
 
     public function saveEvaluation(Request $request)
@@ -81,5 +80,15 @@ class ProfileController extends Controller
     public function overview()
     {
         return view('ManageInternship');
+    }
+    public function appointment()
+    {
+    return view('appointment');
+    }
+    public function updateAppointment(Request $request)
+    {
+    $action = $request->input('action');
+
+    return back()->with('success', 'บันทึกสถานะการนัดหมายเรียบร้อยแล้ว');
     }
 }

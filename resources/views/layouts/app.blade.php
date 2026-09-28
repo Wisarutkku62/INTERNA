@@ -3,8 +3,8 @@
         @include('layouts.company_nav')
     @elseif (auth()->user()->role === 'student')
         @include('layouts.student_nav')
-    <!-- @elseif (auth()->user()->role === 'admin')
-        @include('partials.nav_admin') -->
+    @elseif (auth()->user()->role === 'admin')
+        @include('layouts.student_nav')
     @endif
 @else
     @include('layouts.student_nav')

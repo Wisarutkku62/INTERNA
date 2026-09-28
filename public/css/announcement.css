@@ -53,7 +53,9 @@ label {
     color: #374151;
 }
 
-input[type="text"], select, textarea {
+.form-group input,
+.form-group select,
+.form-group textarea {
     width: 100%;
     padding: 10px;
     font-size: 14px;
@@ -61,13 +63,17 @@ input[type="text"], select, textarea {
     border-radius: 8px;
     box-sizing: border-box; 
     outline: none;
-    font-family: 'Prompt', sans-serif;
+    color: #111827;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-input[type="text"]:focus, 
-select:focus, 
-textarea:focus {
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
     border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .form-actions {

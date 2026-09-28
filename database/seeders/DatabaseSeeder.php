@@ -50,6 +50,13 @@ class DatabaseSeeder extends Seeder
                 'role' => 'company',
                 'created_at' => $now, 'updated_at' => $now
             ],
+            [
+                'id' => 6,
+                'email' => 'admin1@example.com',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+                'created_at' => $now, 'updated_at' => $now
+            ]
         ]);
 
         // 2. students (5 rows: เชื่อมกับ user_id 1 และ 2)[cite: 4]

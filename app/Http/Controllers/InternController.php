@@ -31,4 +31,9 @@ class InternController extends Controller
 
         return view('application', compact('internship_positions' , 'keyword'));
     }
+
+    public function internship_detail($id)
+    {
+    
+    }
 }

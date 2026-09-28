@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="form">
-                    <form action="{{ route('auth.loginAdmin')}}" method='post' id='LoginAdminForm'>
+                    <form action="{{ route('auth.loginAdmin') }}" method="POST" id="LoginAdminForm">
                         @csrf
                         <div class="form-group">
                             <label for="email">อีเมล</label>
@@ -67,40 +67,43 @@
                 document.getElementById('input-box-password').classList.add('input-error');
             </script>
         @enderror
+<script>
+    let LoginAdminFormJS = document.getElementById('LoginAdminForm');
+    
+    if (LoginAdminFormJS) {
+        LoginAdminFormJS.addEventListener('submit', function(e) {
+            let EmailNotFill = false;
+            let PasswordNotFill = false;
 
-        <script>
-            let LoginAdminFormJS = document.getElementById('LoginAdminForm')
-            LoginAdminFormJS.addEventListener('submit', (e) => {
-                let EmailNotFill = false;
-                let PasswordNotFill = false;
-                const email_value = document.getElementById('email').value;
-                const password_value = document.getElementById('password').value;
+            const email_value = document.getElementById('email').value.trim();
+            const password_value = document.getElementById('password').value.trim();
 
-            if(email_value=="") {
-                document.querySelector(".email-validated").innerHTML='กรุณากรอกอีเมล'
+            // เช็กช่อง Email
+            if (email_value === "") {
+                document.querySelector(".email-validated").innerHTML = 'กรุณากรอกอีเมล';
                 EmailNotFill = true;
                 document.getElementById('input-box-email').classList.add('input-error');
-            } else if (!email_value == "") {
-                document.querySelector(".email-validated").innerHTML=''
-                EmailNotFill = false;
+            } else {
+                document.querySelector(".email-validated").innerHTML = '';
                 document.getElementById('input-box-email').classList.remove('input-error');
             }
 
-            if(password_value=="") {
-                document.querySelector(".password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
+            // เช็กช่อง Password
+            if (password_value === "") {
+                document.querySelector(".password-validated").innerHTML = 'กรุณากรอกรหัสผ่าน';
                 PasswordNotFill = true;
                 document.getElementById('input-box-password').classList.add('input-error');
-            }else if (!password_value == "") {
-                document.querySelector(".password-validated").innerHTML=''
-                PasswordNotFill = false;
+            } else {
+                document.querySelector(".password-validated").innerHTML = '';
                 document.getElementById('input-box-password').classList.remove('input-error');
             }
 
+            // ถ้้ายังไม่กรอกช่องใดช่องหนึ่ง ให้หยุดการส่งฟอร์ม
             if (EmailNotFill || PasswordNotFill) {
-                e.preventDefault()
+                e.preventDefault();
             }
-            });
-
-        </script>
+        });
+    }
+</script>
     </div>
 @endsection

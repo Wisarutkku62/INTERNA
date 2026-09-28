@@ -6,12 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
 {
-    public function student() 
+    protected $table = 'documents';
+
+    protected $fillable = [
+        'student_id',
+        'document_type',
+        'document_file_path',
+    ];
+
+    public function student()
     {
         return $this->belongsTo(Student::class);
     }
 
-public function applicationDocuments() 
+    public function applicationDocuments()
     {
         return $this->hasMany(ApplicationDocument::class);
     }

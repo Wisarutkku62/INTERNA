@@ -21,8 +21,17 @@
                         <p class="salary">{{$position?->position_allowance}} บาท/เดือน</p>
                     </div>
                     <div class="job-actions">
-                        <button type="button" class="btn-action btn-edit">แก้ไข</button>
-                        <button type="button" class="btn-action btn-delete">ลบ</button>
+                        <form action="#" method='POST'>
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn-action btn-edit">แก้ไข</button>
+                        </form>
+                        <form action="{{route('company.announcement.delete', $position->id)}}" method='POST'>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn-action btn-delete">ลบ</button>
+                        </form>
+                        
                     </div>
                 </div>
             </div>

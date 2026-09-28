@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\InternshipPosition;
 use Illuminate\Http\Request;
+use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 class CompanyController extends Controller
 {
     public function overview()
-{
+    {
     $user = Auth::user();
     
     $companyId = $user?->company?->id;
@@ -21,10 +23,39 @@ class CompanyController extends Controller
         ->get();
 
     return view('company.managecom', compact('user', 'applicants'));
-}
+    }
     public function editProfile() 
     {
-        return view('company.companyedit');
+        $user = Auth::user();
+
+        return view('company.companyedit', compact('user'));
+    }
+    public function editProfileSave(Request $request)
+    {
+        $validated = $request->validate([
+            'company_name'        => ['required', 'string', 'max:100'],
+            'company_description' => ['nullable', 'string'],
+            'company_address'     => ['required', 'string', 'max:200'],
+            'company_website'     => ['nullable', 'url', 'max:100'],
+            'contact_name'        => ['required', 'string', 'max:50'],
+            'contact_position'    => ['required', 'string', 'max:50'],
+            'contact_phone'       => ['nullable', 'string', 'max:10'],
+            'contact_email'       => ['nullable', 'email', 'max:100'],
+            'company_logo_image'  => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+        ]);
+
+        if ($request->hasFile('company_logo_image')) {
+            $validated['company_logo_image'] = $request->file('company_logo_image')->store('logos', 'public');
+        }
+
+        Company::updateOrCreate(
+            ['user_id' => Auth::id()],
+            $validated
+        );
+
+        return redirect()
+            ->route('company.overview')
+            ->with('success', 'บันทึกโปรไฟล์เรียบร้อยแล้ว');
     }
     public function announcement()
     {
@@ -70,5 +101,18 @@ class CompanyController extends Controller
         $positions = InternshipPosition::where('company_id', $companyId)->get();
 
         return view('company.alljob', compact('user','positions'));
+    }
+    public function history()
+    {
+        return view('company.InformationandHistory');
+    }
+    
+    public function delete(int $id): RedirectResponse
+    {
+        $internshippositions_delete = InternshipPosition::findOrFail($id);
+
+        $internshippositions_delete->delete();
+
+        return redirect()->back();
     }
 }
