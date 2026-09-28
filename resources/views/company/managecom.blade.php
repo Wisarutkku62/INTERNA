@@ -52,7 +52,10 @@
                             <strong>สมชาย ใจดี</strong>
                             <p>ตำแหน่ง: UX/UI Designer</p>
                         </div>
-                        <span class="badge-status">สัมภาษณ์ออนไลน์</span>
+                        <div class="badge-group">
+                          <span class="badge-status">สัมภาษณ์ออนไลน์</span>
+                            <a href="{{route('company.announcement.all')}}" class="info-more">จัดการ</a>
+                        </div>
                     </div>
                 </div>
             </section>
