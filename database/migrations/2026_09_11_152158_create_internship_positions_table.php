@@ -20,8 +20,10 @@ return new class extends Migration
             $table->string('position_category');
             $table->integer('position_capacity');
             $table->decimal('position_allowance');
-            $table->string('position_workdate');
-            $table->string('position_worktime');
+            $table->string('position_start_date');
+            $table->string('position_end_date');
+            $table->string('position_start_time');
+            $table->string('position_end_time');
             $table->string('position_worktype');
             $table->string('position_interview_type');
             $table->timestamps();

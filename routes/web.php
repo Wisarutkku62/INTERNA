@@ -18,6 +18,7 @@ Route::view('/mf','company.InformationandHistory');
 Route::view('/mt','company.evaluation');
 Route::view('/ct','company.companydetail');
 Route::view('/kehee','company.manageinterview');
+Route::view('/ke','company.viewresume');
 // Public
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
@@ -58,6 +59,8 @@ Route::put('/company/edit_profile/edit', [CompanyController::class, 'editProfile
 Route::get('/company/job_announcement', [CompanyController::class, 'announcement'])->name('company.announcement');
 Route::post('/company/job_announcement/create', [CompanyController::class, 'announcement_create'])->name('company.announcement.create');
 Route::get('/company/job_announcement/all',[CompanyController::class, 'announcement_all'])->name('company.announcement.all');
+Route::get('/company/job_announcement/edit/{id}',[CompanyController::class, 'announcement_edit'])->name('company.announcement.edit');
+Route::put('/company/job_announcement/edit/{id}/update',[CompanyController::class, 'announcement_update'])->name('company.announcement.update');
 Route::delete('/company/job_announcement/delete/{id}', [CompanyController::class, 'delete'])->name('company.announcement.delete');
 Route::get('/company/history',[CompanyController::class, 'history'])->name('company.history');
 });

@@ -9,28 +9,33 @@ use App\Models\Company;
 use App\Models\Interview;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Symfony\Component\VarDumper\Caster\RedisCaster;
+
 class CompanyController extends Controller
 {
     public function overview()
-    {
+{
     $user = Auth::user();
-    
     $companyId = $user?->company?->id;
+
 
     $applicants = Application::whereHas('internshipPosition', function ($query) use ($companyId) {
             $query->where('company_id', $companyId);
         })
         ->with(['student', 'internshipPosition'])
         ->get();
-    
-    $interviews = Interview::whereHas('Application', function ($query) use ($companyId) {
+
+    $interviews = Interview::whereHas('application.internshipPosition', function ($query) use ($companyId) {
             $query->where('company_id', $companyId);
         })
-        ->with(['application'])
+        ->with([
+            'application.student',            
+            'application.internshipPosition'  
+        ])
         ->get();
 
     return view('company.managecom', compact('user', 'applicants', 'interviews'));
-    }
+}
     public function editProfile() 
     {
         $user = Auth::user();
@@ -68,35 +73,41 @@ class CompanyController extends Controller
     {
         return view('company.announcement');
     }
-    public function announcement_create(Request $request)
+    public function announcement_create(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'title' => ['string', 'max:100', 'required'],
-            'department' => ['string', 'max:100', 'required'],
-            'job_type' => ['string', 'required'],
-            'work_type' => ['string', 'required'],
-            'location' => ['string', 'max:100', 'required'],
-            'salary' => ['integer', 'required', 'min:0'],
-            'qualifications' => ['string', 'required'],
-            'description' => ['string', 'required']
+            'position_name' => ['string', 'max:100', 'required'],
+            'position_category' => ['string', 'max:100', 'required'],
+            'position_capacity' => ['integer', 'min:0' , 'required'],
+            'position_worktype' => ['string', 'required'],
+            'position_interview_type' => ['string', 'required'],
+            'position_start_date' => ['required', 'string'],
+            'position_end_date' => ['required', 'string'],
+            'position_start_time' => ['required', 'date_format:H:i'],
+            'position_end_time' => ['required', 'date_format:H:i'],
+            'position_allowance' => ['integer', 'required', 'min:0'],
+            'position_qualification' => ['string', 'required'],
+            'position_description' => ['string', 'required']
         ]);
 
-        $internshippositions = new InternshipPosition();
-
-        $internshippositions->position_name = $validated['title'];
-        $internshippositions->position_description = $validated['description'];
-        $internshippositions->position_category = $validated['department'];
-        $internshippositions->position_capacity = $validated['department'];
-        $internshippositions->salary = $validated['salary'];
-        $internshippositions->job_type = $validated['job_type'];
-        $internshippositions->position_worktype = $validated['work_type'];
-        $internshippositions->position_interview_type = $validated['work_type'];
-        $internshippositions->workdate = $validated['work_date'];
-        $internshippositions->worktype = $validated['work_time'];
-        $internshippositions->location = $validated('location');
-        $internshippositions->position_qualification = $validated['qualifications'];
+        $position = new InternshipPosition();
+        $position->company_id = Auth::user()->company->id;
+        $position->position_name = $validated['position_name'];
+        $position->position_description = $validated['position_description'];
+        $position->position_qualification = $validated['position_qualification'];
+        $position->position_category = $validated['position_category'];
+        $position->position_capacity = $validated['position_capacity'];
+        $position->position_allowance = $validated['position_allowance'];
+        $position->position_start_date = $validated['position_start_date'];
+        $position->position_end_date = $validated['position_end_date'];
+        $position->position_start_time = $validated['position_start_time'];
+        $position->position_end_time = $validated['position_end_time'];
+        $position->position_worktype = $validated['position_worktype'];
+        $position->position_interview_type = $validated['position_interview_type'];
         
-        $internshippositions->save();
+        $position->save();
+
+        return redirect()->route('company.announcement.all');
     }
     public function announcement_all()
     {
@@ -120,5 +131,48 @@ class CompanyController extends Controller
         $internshippositions_delete->delete();
 
         return redirect()->back();
+    }
+
+    public function announcement_edit(int $id)
+    {
+        $internshippositions_edit = InternshipPosition::findOrFail($id);
+
+        return view('company.announcementedit', compact('internshippositions_edit'));
+    }
+    public function announcement_update(Request $request , int $id): RedirectResponse
+    {
+        $position = InternshipPosition::findOrFail($id);
+
+        $validated = $request->validate([
+            'position_name' => ['string', 'max:100', 'required'],
+            'position_category' => ['string', 'max:100', 'required'],
+            'position_capacity' => ['integer', 'min:0' , 'required'],
+            'position_worktype' => ['string', 'required'],
+            'position_interview_type' => ['string', 'required'],
+            'position_start_date' => ['required', 'string'],
+            'position_end_date' => ['required', 'string'],
+            'position_start_time' => ['required', 'date_format:H:i'],
+            'position_end_time' => ['required', 'date_format:H:i'],
+            'position_allowance' => ['integer', 'required', 'min:0'],
+            'position_qualification' => ['string', 'required'],
+            'position_description' => ['string', 'required']
+        ]);
+
+        $position->position_name = $validated['position_name'];
+        $position->position_description = $validated['position_description'];
+        $position->position_qualification = $validated['position_qualification'];
+        $position->position_category = $validated['position_category'];
+        $position->position_capacity = $validated['position_capacity'];
+        $position->position_allowance = $validated['position_allowance'];
+        $position->position_start_date = $validated['position_start_date'];
+        $position->position_end_date = $validated['position_end_date'];
+        $position->position_start_time = $validated['position_start_time'];
+        $position->position_end_time = $validated['position_end_time'];
+        $position->position_worktype = $validated['position_worktype'];
+        $position->position_interview_type = $validated['position_interview_type'];
+
+        $position->save();
+
+        return redirect()->route('company.announcement.all');
     }
 }

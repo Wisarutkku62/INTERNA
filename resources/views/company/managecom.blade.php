@@ -42,22 +42,21 @@
                     <h3 class="card-title">นัดหมายสัมภาษณ์เร็วๆ นี้</h3>
                 </div>
 
-                <div class="interview-list">
-                    <div class="interview-item">
-                        <div class="interview-time">
-                            <span class="time-num">10:30</span>
-                            <span class="time-date">วันนี้</span>
-                        </div>
-                        <div class="interview-info">
-                            <strong>สมชาย ใจดี</strong>
-                            <p>ตำแหน่ง: UX/UI Designer</p>
-                        </div>
-                        <div class="badge-group">
-                          <span class="badge-status">สัมภาษณ์ออนไลน์</span>
-                            <a href="{{route('company.announcement.all')}}" class="info-more">จัดการ</a>
-                        </div>
-                    </div>
-                </div>
+    <div class="interview-list">
+        @foreach($interviews as $interview)
+        <div class="interview-item">
+            <div class="interview-time">
+                <span class="time-num">{{$interview?->interview_start_time}}</span>
+                <span class="time-date">{{$interview?->interview_date}}</span>
+            </div>
+            <div class="interview-info">
+                <strong>{{$interview?->application?->student?->student_fname}} {{$interview?->application?->student?->student_lname}}</strong>
+                <p>ตำแหน่ง: {{$interview?->application?->internshipPosition?->position_name}}</p>
+            </div>
+            <span class="badge-status">สัมภาษณ์ออนไลน์</span>
+        </div>
+        @endforeach
+    </div>
             </section>
         </div>
         

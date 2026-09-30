@@ -224,97 +224,97 @@ class DatabaseSeeder extends Seeder
 
         // 4. internship_positions (5 rows: เชื่อมกับ company_id 1-5)[cite: 7]
         DB::table('internship_positions')->insert([
-            [
-                'id' => 1,
-                'company_id' => 1,
-                'position_name' => 'Web Developer Intern (Laravel)',
-                'position_description' => 'พัฒนาและปรับปรุงระบบ Web Application ด้วย Laravel',
-                'position_qualification'  => '- กำลังศึกษาในสาขาที่เกี่ยวข้องกับการออกแบบ หรือไอที
-                                                - สามารถใช้งาน Figma หรือ Adobe XD ได้ดี
-                                                - มี Portfolio แสดงผลงานการออกแบบ UI/UX อย่างน้อย 2-3 งาน
-                                                - เข้าใจหลักการของ Responsive Design',
-                'position_category' => 'Software Development',
-                'position_capacity' => 2,
-                'position_allowance' => 300.00,
-                'position_workdate' => 'จันทร์ - ศุกร์',
-                'position_worktime' => '08:30 - 17:30',
-                'position_worktype' => 'Onsite',
-                'position_interview_type' => 'Online',
-                'created_at' => $now, 'updated_at' => $now
-            ],
-            [
-                'id' => 2,
-                'company_id' => 1,
-                'position_name' => 'Front-end Developer Intern (React/Vue)',
-                'position_description' => 'ออกแบบและพัฒนา UI สวยงามตามแบบ Design System',
-                'position_qualification'  => '- กำลังศึกษาชั้นปีที่ 3 หรือ 4 สาขาวิชาวิทยาการคอมพิวเตอร์ หรือสาขาที่เกี่ยวข้อง
-                                                - มีความรู้พื้นฐาน PHP, HTML, CSS, JavaScript และ MySQL
-                                                - เคยผ่านการใช้งาน Git Version Control มาก่อน
-                                                - สามารถทำงานร่วมกันเป็นทีมและพร้อมเรียนรู้สิ่งใหม่ๆ',
-                'position_category' => 'Frontend Development',
-                'position_capacity' => 2,
-                'position_allowance' => 300.00,
-                'position_workdate' => 'จันทร์ - ศุกร์',
-                'position_worktime' => '09:00 - 18:00',
-                'position_worktype' => 'Hybrid',
-                'position_interview_type' => 'Online',
-                'created_at' => $now, 'updated_at' => $now
-            ],
-            [
-                'id' => 3,
-                'company_id' => 2,
-                'position_name' => 'Backend API Developer Intern',
-                'position_description' => 'ออกแบบและเขียน RESTful API สื่อสารกับระบบบริการอื่น',
-                'position_qualification'  => '- กำลังศึกษาชั้นปีที่ 3 หรือ 4 สาขาวิชาวิทยาการคอมพิวเตอร์ หรือสาขาที่เกี่ยวข้อง
-                                                - มีความรู้พื้นฐาน PHP, HTML, CSS, JavaScript และ MySQL
-                                                - เคยผ่านการใช้งาน Git Version Control มาก่อน
-                                                - สามารถทำงานร่วมกันเป็นทีมและพร้อมเรียนรู้สิ่งใหม่ๆ',
-                'position_category' => 'Backend Development',
-                'position_capacity' => 1,
-                'position_allowance' => 350.00,
-                'position_workdate' => 'จันทร์ - ศุกร์',
-                'position_worktime' => '08:30 - 17:30',
-                'position_worktype' => 'Onsite',
-                'position_interview_type' => 'Onsite',
-                'created_at' => $now, 'updated_at' => $now
-            ],
-            [
-                'id' => 4,
-                'company_id' => 3,
-                'position_name' => 'System Admin / DevOps Intern',
-                'position_description' => 'ดูแลเซิร์ฟเวอร์ และช่วยการ Deploy บน Docker/Cloud',
-                'position_qualification'  => '- กำลังศึกษาชั้นปีที่ 3 หรือ 4 สาขาวิชาวิทยาการคอมพิวเตอร์ หรือสาขาที่เกี่ยวข้อง
-                                                - มีความรู้พื้นฐาน PHP, HTML, CSS, JavaScript และ MySQL
-                                                - เคยผ่านการใช้งาน Git Version Control มาก่อน
-                                                - สามารถทำงานร่วมกันเป็นทีมและพร้อมเรียนรู้สิ่งใหม่ๆ',
-                'position_category' => 'Infrastructure',
-                'position_capacity' => 1,
-                'position_allowance' => 300.00,
-                'position_workdate' => 'จันทร์ - ศุกร์',
-                'position_worktime' => '09:00 - 18:00',
-                'position_worktype' => 'Onsite',
-                'position_interview_type' => 'Online',
-                'created_at' => $now, 'updated_at' => $now
-            ],
-            [
-                'id' => 5,
-                'company_id' => 4,
-                'position_name' => 'UI/UX Designer Intern',
-                'position_description' => 'ออกแบบ Wireframe/Prototype หน้าจอเว็บและแอปพลิเคชันด้วย Figma',
-                'position_qualification'  => '- กำลังศึกษาชั้นปีที่ 3 หรือ 4 สาขาวิชาวิทยาการคอมพิวเตอร์ หรือสาขาที่เกี่ยวข้อง
-                                                - มีความรู้พื้นฐาน PHP, HTML, CSS, JavaScript และ MySQL
-                                                - เคยผ่านการใช้งาน Git Version Control มาก่อน
-                                                - สามารถทำงานร่วมกันเป็นทีมและพร้อมเรียนรู้สิ่งใหม่ๆ',
-                'position_category' => 'Design',
-                'position_capacity' => 2,
-                'position_allowance' => 250.00,
-                'position_workdate' => 'จันทร์ - ศุกร์',
-                'position_worktime' => '09:00 - 18:00',
-                'position_worktype' => 'Remote',
-                'position_interview_type' => 'Online',
-                'created_at' => $now, 'updated_at' => $now
-            ],
-        ]);
+        [
+            'id' => 1,
+            'company_id' => 1,
+            'position_name' => 'Web Developer Intern (Laravel)',
+            'position_description' => 'พัฒนาและปรับปรุงระบบ Web Application ด้วย Laravel',
+            'position_qualification'  => "- กำลังศึกษาในสาขาที่เกี่ยวข้องกับการออกแบบ หรือไอที\n- สามารถใช้งาน Figma หรือ Adobe XD ได้ดี\n- มี Portfolio แสดงผลงานการออกแบบ UI/UX อย่างน้อย 2-3 งาน\n- เข้าใจหลักการของ Responsive Design",
+            'position_category' => 'Software Development',
+            'position_capacity' => 2,
+            'position_allowance' => 300.00,
+            'position_start_date' => '2026-11-01',
+            'position_end_date' => '2027-03-31',
+            'position_start_time' => '08:30',
+            'position_end_time' => '17:30',
+            'position_worktype' => 'Onsite',
+            'position_interview_type' => 'Online',
+            'created_at' => $now,
+            'updated_at' => $now
+        ],
+        [
+            'id' => 2,
+            'company_id' => 1,
+            'position_name' => 'Front-end Developer Intern (React/Vue)',
+            'position_description' => 'ออกแบบและพัฒนา UI สวยงามตามแบบ Design System',
+            'position_qualification'  => "- กำลังศึกษาชั้นปีที่ 3 หรือ 4 สาขาวิชาวิทยาการคอมพิวเตอร์ หรือสาขาที่เกี่ยวข้อง\n- มีความรู้พื้นฐาน PHP, HTML, CSS, JavaScript และ MySQL\n- เคยผ่านการใช้งาน Git Version Control มาก่อน\n- สามารถทำงานร่วมกันเป็นทีมและพร้อมเรียนรู้สิ่งใหม่ๆ",
+            'position_category' => 'Frontend Development',
+            'position_capacity' => 2,
+            'position_allowance' => 300.00,
+            'position_start_date' => 'Monday',
+            'position_end_date' => 'Friday',
+            'position_start_time' => '09:00',
+            'position_end_time' => '18:00',
+            'position_worktype' => 'Hybrid',
+            'position_interview_type' => 'Online',
+            'created_at' => $now,
+            'updated_at' => $now
+        ],
+        [
+            'id' => 3,
+            'company_id' => 2,
+            'position_name' => 'Backend API Developer Intern',
+            'position_description' => 'ออกแบบและเขียน RESTful API สื่อสารกับระบบบริการอื่น',
+            'position_qualification'  => "- กำลังศึกษาชั้นปีที่ 3 หรือ 4 สาขาวิชาวิทยาการคอมพิวเตอร์ หรือสาขาที่เกี่ยวข้อง\n- มีความรู้พื้นฐาน PHP, HTML, CSS, JavaScript และ MySQL\n- เคยผ่านการใช้งาน Git Version Control มาก่อน\n- สามารถทำงานร่วมกันเป็นทีมและพร้อมเรียนรู้สิ่งใหม่ๆ",
+            'position_category' => 'Backend Development',
+            'position_capacity' => 1,
+            'position_allowance' => 350.00,
+            'position_start_date' => 'Monday',
+            'position_end_date' => 'Friday',
+            'position_start_time' => '08:30',
+            'position_end_time' => '17:30',
+            'position_worktype' => 'Onsite',
+            'position_interview_type' => 'Onsite',
+            'created_at' => $now,
+            'updated_at' => $now
+        ],
+        [
+            'id' => 4,
+            'company_id' => 3,
+            'position_name' => 'System Admin / DevOps Intern',
+            'position_description' => 'ดูแลเซิร์ฟเวอร์ และช่วยการ Deploy บน Docker/Cloud',
+            'position_qualification'  => "- กำลังศึกษาชั้นปีที่ 3 หรือ 4 สาขาวิชาวิทยาการคอมพิวเตอร์ หรือสาขาที่เกี่ยวข้อง\n- มีความรู้พื้นฐาน PHP, HTML, CSS, JavaScript และ MySQL\n- เคยผ่านการใช้งาน Git Version Control มาก่อน\n- สามารถทำงานร่วมกันเป็นทีมและพร้อมเรียนรู้สิ่งใหม่ๆ",
+            'position_category' => 'Infrastructure',
+            'position_capacity' => 1,
+            'position_allowance' => 300.00,
+            'position_start_date' => 'Monday',
+            'position_end_date' => 'Friday',
+            'position_start_time' => '09:00',
+            'position_end_time' => '18:00',
+            'position_worktype' => 'Onsite',
+            'position_interview_type' => 'Online',
+            'created_at' => $now,
+            'updated_at' => $now
+        ],
+        [
+            'id' => 5,
+            'company_id' => 4,
+            'position_name' => 'UI/UX Designer Intern',
+            'position_description' => 'ออกแบบ Wireframe/Prototype หน้าจอเว็บและแอปพลิเคชันด้วย Figma',
+            'position_qualification'  => "- กำลังศึกษาชั้นปีที่ 3 หรือ 4 สาขาวิชาวิทยาการคอมพิวเตอร์ หรือสาขาที่เกี่ยวข้อง\n- มีความรู้พื้นฐาน PHP, HTML, CSS, JavaScript และ MySQL\n- เคยผ่านการใช้งาน Git Version Control มาก่อน\n- สามารถทำงานร่วมกันเป็นทีมและพร้อมเรียนรู้สิ่งใหม่ๆ",
+            'position_category' => 'Design',
+            'position_capacity' => 2,
+            'position_allowance' => 250.00,
+            'position_start_date' => 'Monday',
+            'position_end_date' => 'Friday',
+            'position_start_time' => '09:00',
+            'position_end_time' => '18:00',
+            'position_worktype' => 'Remote',
+            'position_interview_type' => 'Online',
+            'created_at' => $now,
+            'updated_at' => $now
+        ],
+    ]);
 
         // 5. documents (5 rows: เชื่อมกับ student_id 1-5)[cite: 5]
         DB::table('documents')->insert([
