@@ -16,6 +16,7 @@
     margin-bottom: 20px;
     color: #1a202c;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 }
 html, body {
     overflow-x: clip;
@@ -24,10 +25,17 @@ html, body {
 =======
 }
 
+=======
+}
+
+>>>>>>> Stashed changes
 html, body {
     overflow-x: clip;
 }
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 .header-section {
     margin-bottom: 12px;
@@ -122,7 +130,34 @@ html, body {
     outline: none;
     transition: border-color 0.2s;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+}
+
+.filter-select:focus {
+    border-color: #0037ff;
+}
+
+.btn-clear-filter {
+    display: inline-flex;
+    align-items: center;
+    height: 42px;
+    padding: 0 16px;
+    font-size: 0.85rem;
+    color: #e53e3e;
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-clear-filter:hover {
+    background: #fed7d7;
+>>>>>>> Stashed changes
 }
 
 .filter-select:focus {

@@ -22,6 +22,7 @@
 
             <div class="welcome-title">ยินดีต้อนรับ</div>
             <a href="{{ route('newprofile') }}" class="btn-edit">แก้ไขข้อมูลส่วนตัว</a>
+             <a href="{{ route('newprofile') }}" class="btn-manage">จัดการเอกสาร</a>
         </div>
 
         <div class="main-content">
