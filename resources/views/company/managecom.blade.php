@@ -79,7 +79,7 @@
                         </div>
                         <div class="badge-group">
                             <span class="badge-status">{{$applicant->internshipposition->position_interview_type}}</span>
-                            <a href="{{route('company.announcement.all')}}" class="info-more">ดูรายละเอียดเพิ่มเติม</a>
+                            <a href="{{route('company.applicants.profile', $applicant->id)}}" class="info-more">ดูรายละเอียดเพิ่มเติม</a>
                         </div>
                     </div>
                 @empty

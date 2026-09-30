@@ -7,6 +7,7 @@ use App\Models\InternshipPosition;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\Interview;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 
@@ -183,5 +184,13 @@ class CompanyController extends Controller
         $interview = $application->interview;
 
         return view('company.studentinformation', compact('application', 'interview'));
+    }
+
+    public function applicants_profile(int $id)
+    {   
+        $applicants_profile = Application::with(['student', 'internshipPosition', 'interview'])
+        ->findOrFail($id);
+
+    return view('company.studentInformation', compact('applicants_profile'));
     }
 }

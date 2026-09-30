@@ -35,17 +35,17 @@
 
             <div class="profile-field half">
                 <span class="field-label">ชื่อ</span>
-                <p class="field-text">{{ $user->fname ?? '-' }}</p>
+                <p class="field-text">{{ $applicants_profile?->student?->student_fname ?? '-' }}</p>
             </div>
 
             <div class="profile-field half">
                 <span class="field-label">นามสกุล</span>
-                <p class="field-text">{{ $user->lname ?? '-' }}</p>
+                <p class="field-text">{{ $applicants_profile?->student?->student_lname ?? '-' }}</p>
             </div>
 
             <div class="profile-field half">
                 <span class="field-label">เพศ</span>
-                <p class="field-text">{{ $user->gender ?? '-' }}</p>
+                <p class="field-text">{{ $applicants_profile?->student?->student_gender ?? '-' }}</p>
             </div>
 
             <div class="profile-field half">
@@ -61,37 +61,37 @@
 
             <div class="profile-field half">
                 <span class="field-label">สัญชาติ</span>
-                <p class="field-text">{{ $user->nationality ?? '-' }}</p>
+                <p class="field-text">{{ $applicants_profile?->student?->student_nationality ?? '-' }}</p>
             </div>
 
             <div class="profile-field half">
                 <span class="field-label">ศาสนา</span>
-                <p class="field-text">{{ $user->religion ?? '-' }}</p>
+                <p class="field-text">{{ $applicants_profile?->student?->student_religion ?? '-' }}</p>
             </div>
 
             <div class="profile-field half">
                 <span class="field-label">ระดับการศึกษา</span>
-                <p class="field-text">{{ $user->education ?? '-' }}</p>
+                <p class="field-text">{{ $applicants_profile?->student?->student_degree ?? '-' }}</p>
             </div>
 
             <div class="profile-field half">
                 <span class="field-label">โทรศัพท์</span>
-                <p class="field-text">{{ $user->phone ?? '-' }}</p>
+                <p class="field-text">{{ $applicants_profile?->student?->student_phone ?? '-' }}</p>
             </div>
 
             <div class="profile-field full">
                 <span class="field-label">อีเมล</span>
-                <p class="field-text">{{ $user->email ?? '-' }}</p>
+                <p class="field-text">{{ $applicants_profile?->student?->student_email ?? '-' }}</p>
             </div>
 
             <div class="profile-field full">
                 <span class="field-label">ที่อยู่</span>
-                <p class="field-text">{{ $user->address ?? '-' }}</p>
+                <p class="field-text">{{ $applicants_profile?->student?->student_address ?? '-' }}</p>
             </div>
 
             <div class="profile-field full bio-field">
                 <span class="field-label">ข้อมูลส่วนตัวเพิ่มเติม</span>
-                <p class="field-text bio-text">{{ $user->bio ?? '-' }}</p>
+                <p class="field-text bio-text">{{ $applicants_profile?->student?->student_bio ?? '-' }}</p>
             </div>
 
         </div>
@@ -99,44 +99,33 @@
     </div>
 
 
-
-    @if($interview)
     <div class="interview-card">
         <div class="profile-header">
-            <h1 id="title">ข้อมูลนัดสัมภาษณ์</h1>
+            <h1 id="title">ข้อมูลตำแหน่งงาน</h1>
         </div>
 
         <h2 class="candidate-name">
-            {{ $application->student->student_fname ?? '' }} {{ $application->student->student_lname ?? '' }}
+            {{ $applicants_profile?->internshipPosition?->position_name ?? '-' }}
         </h2>
 
-        <div class="interview-details">
             <div class="interview-row">
-                <span class="detail-label">ตำแหน่ง:</span>
-                <span class="detail-value bold">{{ $application->internshipPosition->position_title ?? '-' }}</span>
+                <span class="detail-label">รายละเอียด:</span>
+                <span class="detail-value bold">{{ $applicants_profile?->internshipPosition?->position_description ?? '-' }}</span>
             </div>
 
             <div class="interview-row">
-                <span class="detail-label">วันที่:</span>
-                <span class="detail-value bold">{{ $interview->interview_date }}</span>
+                <span class="detail-label">คุณสมบัติ:</span>
+                <span class="detail-value bold">{{ $applicants_profile?->internshipPosition?->position_qualification ?? '-' }}</span>
             </div>
 
-            <div class="interview-row">
-                <span class="detail-label">เวลา:</span>
-                <span class="detail-value bold">{{ $interview->interview_start_time }}</span>
-            </div>
+         
+        <div class="profile-actions">
+            <a href="{{ route('newprofile') }}" class="resume">ดูเอกสาร</a>
+            <a href="{{ route('newprofile') }}" class="interview">สร้างนัดสัมภาษณ์</a>
+        </div>
+        
 
-            <div class="interview-row">
-                <span class="detail-label">รูปแบบสัมภาษณ์:</span>
-                <span class="detail-value bold">{{ $interview->interview_mode == 'onsite' ? 'On-site' : 'Online' }}</span>
-            </div>
-
-            <div class="interview-row">
-                <span class="detail-label">สถานที่/รายละเอียด:</span>
-                <span class="detail-value bold">{{ $interview->interview_location ?? '-' }}</span>
-            </div>
         </div>
     </div>
-    @endif
 </div>
 @endsection

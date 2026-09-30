@@ -23,7 +23,7 @@
         @csrf
         <div class="form-group">
             <label for="position_name">ชื่อตำแหน่งงาน</label>
-            <input type="text" id="position_name" name="position_name" placeholder="เช่น Backend Developer" required>
+            <input type="text" id="position_name" name="position_name" placeholder="เช่น Backend Developer" >
             <span class="position_name-validated" id="position_name-validated">
 
             </span>
@@ -57,7 +57,7 @@
                     <option value="On-site">On-site</option>
                     <option value="Online">Online</option>
                 </select>
-                <span class="position_worktype" id="position_worktype">
+                <span class="position_worktype-validated" id="position_worktype-validated">
 
                 </span>
             </div>
@@ -67,7 +67,7 @@
                     <option value="On-site">On-site</option>
                     <option value="Online">Online</option>
                 </select>
-                <span class="position_interview_type" id="position_interview_type">
+                <span class="position_interview_type-validated" id="position_interview_type-validated">
 
                 </span>
         </div>
@@ -179,103 +179,107 @@
     if(name_value == "") {
         document.querySelector('.position_name-validated').innerHTML='กรุณากรอกชื่อตำแหน่ง'
         nameNotFill = true;
-        // document.getElementById('') ใส่classList.add
+        document.getElementById('position_name').classList.add('input-error');
     } else if (name_value != ""){
         document.querySelector('.position_name-validated').innerHTML=''
         nameNotFill = false;
-        // document.getElementById('') ใส่classList.remove
+        document.getElementById('position_name').classList.remove('input-error');
     }
 
     if(description_value == "") {
         document.querySelector('.position_description-validated').innerHTML='กรุณากรอกรายละเอียดตำแหน่ง'
         descriptionNotFill = true;
-        // document.getElementById('') ใส่classList.add
+        document.getElementById('position_description').classList.add('input-error');
     } else if (name_value != ""){
         document.querySelector('.position_description-validated').innerHTML=''
         descriptionNotFill = false;
-        // document.getElementById('') ใส่classList.remove
+        document.getElementById('position_description').classList.remove('input-error');
     }
 
     if(qualification_value == "") {
         document.querySelector('.position_qualification-validated').innerHTML='กรุณากรอกคุณสมบัติของผู้สมัคร'
         qualificationNotFill = true;
-        // document.getElementById('') ใส่classList.add
+        document.getElementById('position_qualification').classList.add('input-error');
     } else if (name_value != ""){
         document.querySelector('.position_qualification-validated').innerHTML=''
         qualificationNotFill = false;
-        // document.getElementById('') ใส่classList.remove
+        document.getElementById('position_qualification').classList.remove('input-error');
     }
 
     if(category_value == "") {
         document.querySelector('.position_category-validated').innerHTML='กรุณาเลือกหมวดหมู่ตำแหน่ง'
         categoryNotFill = true;
-        // document.getElementById('') ใส่classList.add
+        document.getElementById('position_category').classList.add('input-error');
     } else if (category_value != ""){
         document.querySelector('.position_category-validated').innerHTML=''
         categoryNotFill = false;
-        // document.getElementById('') ใส่classList.remove
+        document.getElementById('position_category').classList.remove('input-error');
     }
 
     if(capacity_value == "") {
         document.querySelector('.position_capacity-validated').innerHTML='กรุณากรอกอัตราที่รับสมัคร'
         capacityNotFill = true;
-        // document.getElementById('') ใส่classList.add
+        document.getElementById('position_capacity').classList.add('input-error');
     } else if (capacity_value != ""){
         document.querySelector('.position_capacity-validated').innerHTML=''
         capacityNotFill = false;
-        // document.getElementById('') ใส่classList.remove
+        document.getElementById('position_capacity').classList.remove('input-error');
     }
 
     if(allowance_value == "") {
         document.querySelector('.position_allowance-validated').innerHTML='กรุณากรอกเบี้ยเลี้ยง'
         allowanceNotFill = true;
-        // document.getElementById('') ใส่classList.add
+        document.getElementById('position_allowance').classList.add('input-error');
     } else if (allowance_value != ""){
         document.querySelector('.position_allowance-validated').innerHTML=''
         allowanceNotFill = false;
-        // document.getElementById('') ใส่classList.remove
+        document.getElementById('position_allowance').classList.remove('input-error');
     }
 
     if(start_day_value == "") {
         document.querySelector('.position_start_date-validated').innerHTML='กรุณาเลือกวันเริ่มงาน'
         start_dayNotFill = true;
-        // document.getElementById('') ใส่classList.add
+        document.getElementById('position_start_date').classList.add('input-error');
     } else if (start_day_value != ""){
         document.querySelector('.position_start_date-validated').innerHTML=''
         start_dayNotFill = false;
-        // document.getElementById('') ใส่classList.remove
+        document.getElementById('position_start_date').classList.remove('input-error');
     }
 
     if(end_day_value == "") {
         document.querySelector('.position_end_date-validated').innerHTML='กรุณาเลือกวันจบงาน'
         end_dayNotFill = true;
-        // document.getElementById('') ใส่classList.add
+        document.getElementById('position_end_date').classList.add('input-error');
     } else if (end_day_value != ""){
         document.querySelector('.position_end_date-validated').innerHTML=''
         end_dayNotFill = false;
-        // document.getElementById('') ใส่classList.remove
+        document.getElementById('position_end_date').classList.remove('input-error');
     }
 
-    if(name_value == "") {
-        document.querySelector('.position_name-validated').innerHTML='กรุณากรอกชื่อตำแหน่ง'
-        nameNotFill = true;
-        // document.getElementById('') ใส่classList.add
-    } else if (name_value != ""){
-        document.querySelector('.position_name-validated').innerHTML=''
-        nameNotFill = false;
-        // document.getElementById('') ใส่classList.remove
+    if(worktype_value == "") {
+        document.querySelector('.position_worktype-validated').innerHTML='กรุณาเลือกประเภทการทำงาน'
+        worktypeNotFill = true;
+        document.getElementById('position_worktype').classList.add('input-error');
+    } else if (worktype_value != ""){
+        document.querySelector('.position_worktype-validated').innerHTML=''
+        worktypeNotFill = false;
+        document.getElementById('position_worktype').classList.remove('input-error');
     }
 
-    if(name_value == "") {
-        document.querySelector('.position_name-validated').innerHTML='กรุณากรอกชื่อตำแหน่ง'
-        nameNotFill = true;
-        // document.getElementById('') ใส่classList.add
-    } else if (name_value != ""){
-        document.querySelector('.position_name-validated').innerHTML=''
-        nameNotFill = false;
-        // document.getElementById('') ใส่classList.remove
+    if(interview_value == "") {
+        document.querySelector('.position_interview_type-validated').innerHTML='กรุณาเลือกประเภทการสัมภาษณ์งาน'
+        interviewtypeNotFill = true;
+        document.getElementById('position_interview_type').classList.add('input-error');
+    } else if (interview_value != ""){
+        document.querySelector('.position_interview_type-validated').innerHTML=''
+        interviewtypeNotFill = false;
+        document.getElementById('position_interview_type').classList.remove('input-error');
     }
-        })
+
+    if (nameNotFill || descriptionNotFill || qualificationNotFill ||categoryNotFill || capacityNotFill || allowanceNotFill || start_dayNotFill || end_dayNotFill || start_timeNotFill || end_timeNotFill || worktypeNotFill || interviewtypeNotFill) {
+        e.preventDefault()
+    }
+        });
 
 </script>
 @endsection
