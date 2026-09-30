@@ -17,7 +17,8 @@ Route::view('/mf','InformationandHistory');
 Route::view('/mt','company.evaluation');
 Route::view('/ct','company.companydetail');
 Route::view('/kehee','company.manageinterview');
-Route::view('/ke','company.viewresume');
+Route::view('/ke','company.viewdocument');
+Route::view('/jj','company.profilecompany');
 // Public
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
