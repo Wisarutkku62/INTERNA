@@ -9,34 +9,33 @@ use App\Models\Company;
 use App\Models\Interview;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 class CompanyController extends Controller
 {
     public function overview()
-{
-    $user = Auth::user();
-    $companyId = $user?->company?->id;
+    {
+        $user = Auth::user();
+        $companyId = $user?->company?->id;
 
 
-    $applicants = Application::whereHas('internshipPosition', function ($query) use ($companyId) {
+        $applicants = Application::whereHas('internshipPosition', function ($query) use ($companyId) {
             $query->where('company_id', $companyId);
         })
-        ->with(['student', 'internshipPosition'])
-        ->get();
+            ->with(['student', 'internshipPosition'])
+            ->get();
 
-    $interviews = Interview::whereHas('application.internshipPosition', function ($query) use ($companyId) {
+        $interviews = Interview::whereHas('application.internshipPosition', function ($query) use ($companyId) {
             $query->where('company_id', $companyId);
         })
-        ->with([
-            'application.student',            
-            'application.internshipPosition'  
-        ])
-        ->get();
+            ->with([
+                'application.student',
+                'application.internshipPosition'
+            ])
+            ->get();
 
-    return view('company.managecom', compact('user', 'applicants', 'interviews'));
-}
-    public function editProfile() 
+        return view('company.managecom', compact('user', 'applicants', 'interviews'));
+    }
+    public function editProfile()
     {
         $user = Auth::user();
 
@@ -78,7 +77,7 @@ class CompanyController extends Controller
         $validated = $request->validate([
             'position_name' => ['string', 'max:100', 'required'],
             'position_category' => ['string', 'max:100', 'required'],
-            'position_capacity' => ['integer', 'min:0' , 'required'],
+            'position_capacity' => ['integer', 'min:0', 'required'],
             'position_worktype' => ['string', 'required'],
             'position_interview_type' => ['string', 'required'],
             'position_start_date' => ['required', 'string'],
@@ -104,7 +103,7 @@ class CompanyController extends Controller
         $position->position_end_time = $validated['position_end_time'];
         $position->position_worktype = $validated['position_worktype'];
         $position->position_interview_type = $validated['position_interview_type'];
-        
+
         $position->save();
 
         return redirect()->route('company.announcement.all');
@@ -112,18 +111,18 @@ class CompanyController extends Controller
     public function announcement_all()
     {
         $user = Auth::user();
-    
+
         $companyId = $user?->company?->id;
 
         $positions = InternshipPosition::where('company_id', $companyId)->get();
 
-        return view('company.alljob', compact('user','positions'));
+        return view('company.alljob', compact('user', 'positions'));
     }
     public function history()
     {
         return view('company.InformationandHistory');
     }
-    
+
     public function delete(int $id): RedirectResponse
     {
         $internshippositions_delete = InternshipPosition::findOrFail($id);
@@ -139,14 +138,14 @@ class CompanyController extends Controller
 
         return view('company.announcementedit', compact('internshippositions_edit'));
     }
-    public function announcement_update(Request $request , int $id): RedirectResponse
+    public function announcement_update(Request $request, int $id): RedirectResponse
     {
         $position = InternshipPosition::findOrFail($id);
 
         $validated = $request->validate([
             'position_name' => ['string', 'max:100', 'required'],
             'position_category' => ['string', 'max:100', 'required'],
-            'position_capacity' => ['integer', 'min:0' , 'required'],
+            'position_capacity' => ['integer', 'min:0', 'required'],
             'position_worktype' => ['string', 'required'],
             'position_interview_type' => ['string', 'required'],
             'position_start_date' => ['required', 'string'],
@@ -174,5 +173,15 @@ class CompanyController extends Controller
         $position->save();
 
         return redirect()->route('company.announcement.all');
+
+    }
+    public function studentInformation($id)
+    {
+    
+        $application = Application::with(['student', 'internshipPosition', 'interview'])->findOrFail($id);
+
+        $interview = $application->interview;
+
+        return view('company.studentinformation', compact('application', 'interview'));
     }
 }

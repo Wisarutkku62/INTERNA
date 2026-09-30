@@ -12,9 +12,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
 Route::view('/yed','company.announcementedit');
-Route::view('/hee','company.interviewcompany');
 Route::view('/mg','company.ManageInternship');
-Route::view('/mf','company.InformationandHistory');
+Route::view('/mf','InformationandHistory');
 Route::view('/mt','company.evaluation');
 Route::view('/ct','company.companydetail');
 Route::view('/kehee','company.manageinterview');
@@ -50,6 +49,7 @@ Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.pro
 Route::get('/evaluation', [ProfileController::class, 'evaluation'])->name('evaluation');
 Route::post('/evaluation', [ProfileController::class, 'saveEvaluation'])->name('evaluation.save');
 Route::get('/student/evaluation', [EvaluationController::class, 'index'])->name('student.evaluation');
+
 });
 
 Route::middleware(['auth', 'role:company'])->group(function () {
@@ -63,6 +63,9 @@ Route::get('/company/job_announcement/edit/{id}',[CompanyController::class, 'ann
 Route::put('/company/job_announcement/edit/{id}/update',[CompanyController::class, 'announcement_update'])->name('company.announcement.update');
 Route::delete('/company/job_announcement/delete/{id}', [CompanyController::class, 'delete'])->name('company.announcement.delete');
 Route::get('/company/history',[CompanyController::class, 'history'])->name('company.history');
+Route::get('/interview/create/{id}', [CompanyController::class, 'createInterview'])->name('interviews.create');
+Route::post('/interviews/store', [CompanyController::class, 'storeInterview'])->name('interviews.store');
+Route::get('/student/information/{id}', [CompanyController::class, 'studentInformation'])->name('student.information');
 });
 
 // Admin Login
