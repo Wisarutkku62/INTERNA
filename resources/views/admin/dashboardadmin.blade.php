@@ -97,7 +97,7 @@ $activeTab = request('tab', 'dashboard');
                                 <td>{{ $user->student->student_email ?? $user->email }}</td>
                                 <td>{{ $user->student->student_phone ?? '-' }}</td>
                                 <td>
-                                    <button class="btn-action btn-edit">แก้ไข</button>
+                                    <a href="{{ route('newprofile', ['user_id' => $user->id]) }}" class="btn-action btn-edit" style="text-decoration: none; display: inline-block;">แก้ไข</a>
 
                                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้งานรายนี้?');">
                                         @csrf
