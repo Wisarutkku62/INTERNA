@@ -18,6 +18,9 @@ Route::view('/mt','company.evaluation');
 Route::view('/ct','company.companydetail');
 Route::view('/kehee','company.manageinterview');
 Route::view('/ke','company.viewresume');
+Route::view('/ka','company.manageinterview');
+Route::view('/kq','company.studentInformation');
+Route::view('/ks','company.interviewcompany');
 // Public
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
@@ -62,6 +65,7 @@ Route::get('/company/job_announcement/all',[CompanyController::class, 'announcem
 Route::get('/company/job_announcement/edit/{id}',[CompanyController::class, 'announcement_edit'])->name('company.announcement.edit');
 Route::put('/company/job_announcement/edit/{id}/update',[CompanyController::class, 'announcement_update'])->name('company.announcement.update');
 Route::delete('/company/job_announcement/delete/{id}', [CompanyController::class, 'delete'])->name('company.announcement.delete');
+Route::get('/company/applicant/{id}',[CompanyController::class, 'applicants_profile'])->name('company.applicants.profile');
 Route::get('/company/history',[CompanyController::class, 'history'])->name('company.history');
 Route::get('/interview/create/{id}', [CompanyController::class, 'createInterview'])->name('interviews.create');
 Route::post('/interviews/store', [CompanyController::class, 'storeInterview'])->name('interviews.store');
