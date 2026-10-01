@@ -257,3 +257,22 @@ tr:last-child td {
     align-items: center;
     white-space: nowrap;
 }
+.form-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #111827;
+}
+.back-btn{
+    font-size: 30px;
+    font-weight: bold;
+    color: #111827;
+    text-decoration: none;
+    line-height: 1;
+}

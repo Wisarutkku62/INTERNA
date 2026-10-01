@@ -6,7 +6,10 @@
 
 @section('content')
    <div class="page-container">
-
+    <div class="form-header">
+        <a href="{{route('company.overview')}}" class="back-btn" title="ย้อนกลับ">&larr;</a>
+        <h2>ย้อนกลับ</h2>
+    </div>
     <div class="card applicant-card">
         <div class="applicant-profile">
             <div class="applicant-avatar"></div>
