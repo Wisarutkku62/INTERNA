@@ -22,12 +22,14 @@ class CompanyController extends Controller
         $applicants = Application::whereHas('internshipPosition', function ($query) use ($companyId) {
             $query->where('company_id', $companyId);
         })
-            ->with(['student', 'internshipPosition'])
-            ->get();
+        ->whereDoesntHave('interview')
+        ->with(['student', 'internshipPosition'])
+        ->get();
 
-        $interviews = Interview::whereHas('application.internshipPosition', function ($query) use ($companyId) {
-            $query->where('company_id', $companyId);
-        })
+        $interviews = Interview::where('interview_result', 'pending') 
+    ->whereHas('application.internshipPosition', function ($query) use ($companyId) {
+        $query->where('company_id', $companyId);
+            })
             ->with([
                 'application.student',
                 'application.internshipPosition'
@@ -176,7 +178,7 @@ class CompanyController extends Controller
         return redirect()->route('company.announcement.all');
 
     }
-    public function studentInformation($id)
+    public function studentInformation(int $id)
     {
     
         $application = Application::with(['student', 'internshipPosition', 'interview'])->findOrFail($id);
@@ -193,4 +195,88 @@ class CompanyController extends Controller
 
     return view('company.studentInformation', compact('applicants_profile'));
     }
+
+    public function viewresume()
+    {
+        return view('company.viewdocument');
+    }
+
+    public function createInterview(int $id)
+    {
+        $applicants = Application::with(['student', 'internshipPosition'])
+        ->findOrFail($id);
+        return view('company.interviewcompany', compact('applicants'));
+    }
+
+    public function storeInterview(Request $request, int $id)
+{
+    $request->merge([
+        'interview_date'       => "{$request->year}-{$request->month}-{$request->day}",
+        'interview_start_time' => "{$request->hour}:{$request->minute}",
+    ]);
+
+
+    $validated = $request->validate([
+        'interview_date'       => 'required' ,'date',
+        'interview_start_time' => 'required' ,'date_format:H:i',
+        'interview_mode'       => 'required' ,'in:onsite,online',
+        'interview_location'   => 'nullable' ,'string' ,'max:255',
+        'email_details'        => 'nullable' ,'string',
+    ], [
+        'interview_start_time.date_format' => 'กรุณาเลือกเวลาเริ่มสัมภาษณ์ให้ครบถ้วน (ชั่วโมงและนาที)',
+    ]);
+
+    $interview = new Interview();
+
+    $interview->application_id       = $id;
+    $interview->interview_date       = $validated['interview_date'];
+    $interview->interview_start_time = $validated['interview_start_time'];
+    $interview->interview_mode       = $validated['interview_mode'];
+    $interview->interview_location   = $validated['interview_location'] ?? null;
+    $interview->email_details        = $validated['email_details'] ?? null;
+    $interview->interview_result     = 'pending'; 
+
+    $interview->save();
+
+    return redirect()->route('company.overview')->with('success', 'สร้างนัดสัมภาษณ์งานเรียบร้อยแล้ว');
+}
+
+public function profile()
+    {
+        $user = Auth::user();
+
+        return view('company.profilecompany', compact('user'));
+    }
+
+public function interview_evaluation(int $id)
+{   
+    $user = Auth::user();
+
+    $companyId = $user?->company?->id;
+
+    $applicants = Application::whereHas('internshipPosition', function ($query) use ($companyId) {
+            $query->where('company_id', $companyId);
+        })
+        ->with(['student', 'internshipPosition', 'interview'])
+        ->findOrFail($id);
+    return view('company.manageinterview', compact('applicants'));
+}
+
+public function interview_evaluation_update(Request $request, int $id)
+{   
+    $validated = $request->validate([
+        'interview_result' => 'required|string',
+        'email_details'    => 'nullable|string'
+    ], [
+        'interview_result.required' => 'กรุณาเลือกสถานะผู้สมัคร',
+    ]);
+    $interview = Interview::where('application_id', $id)->firstOrFail();
+
+    $interview->interview_result = $validated['interview_result'];
+    $interview->email_details    = $validated['email_details'] ?? null;
+
+    $interview->save();
+
+    return redirect()->route('company.overview')->with('success', 'บันทึกผลการประเมินเรียบร้อยแล้ว');
+}
 }

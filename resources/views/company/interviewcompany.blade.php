@@ -28,9 +28,8 @@
         </div>
     @endif
 
-    <form class="appointment-form" action="{{ route('interviews.store') }}" method="POST">
+    <form class="appointment-form" action="{{ route('interviews.store', $applicants->id) }}" method="POST">
         @csrf
-        <input type="hidden" name="application_id" value="{{ $application->id }}">
 
         <div class="form-group">
             <label class="form-label">ผู้สมัคร</label>
@@ -43,12 +42,12 @@
                 <div class="applicant-details">
                     <div class="applicant-name-row">
                         <h2 class="applicant-name">
-                            {{ $application->student->student_fname ?? '-' }} {{ $application->student->student_lname ?? '' }}
+                            {{ $applicants->student->student_fname ?? '-' }} {{ $applicants->student->student_lname ?? '' }}
                         </h2>
                         <span class="badge-status">นักศึกษาฝึกงาน</span>
                     </div>
-                    <p class="applicant-contact">โทรศัพท์ : {{ $application->student->student_phone ?? '-' }}</p>
-                    <p class="applicant-contact">อีเมล : {{ $application->student->student_email ?? '-' }}</p>
+                    <p class="applicant-contact">โทรศัพท์ : {{ $applicants?->student?->student_phone ?? '-' }}</p>
+                    <p class="applicant-contact">อีเมล : {{ $applicants?->student?->student_email ?? '-' }}</p>
                 </div>
             </div>
         </div>
@@ -56,21 +55,21 @@
         <div class="form-group">
             <label class="form-label">ตำแหน่งงาน</label>
             <p class="job-title-text">
-                {{ $application->internshipPosition->position_title ?? 'ไม่ระบุตำแหน่ง' }}
+                {{ $applicants?->internshipPosition?->position_name ?? 'ไม่ระบุตำแหน่ง' }}
             </p>
         </div>
 
         <div class="form-group">
             <label class="form-label">วันที่สัมภาษณ์</label>
             <div class="select-group">
-                <select name="day" class="form-select">
+                <select name="day" class="form-select" required>
                     @for($d = 1; $d <= 31; $d++)
                         <option value="{{ sprintf('%02d', $d) }}" {{ date('d') == $d ? 'selected' : '' }}>
                             {{ $d }}
                         </option>
                     @endfor
                 </select>
-                <select name="month" class="form-select">
+                <select name="month" class="form-select" required>
                     @php
                         $months = [1=>'มกราคม', 2=>'กุมภาพันธ์', 3=>'มีนาคม', 4=>'เมษายน', 5=>'พฤษภาคม', 6=>'มิถุนายน', 7=>'กรกฎาคม', 8=>'สิงหาคม', 9=>'กันยายน', 10=>'ตุลาคม', 11=>'พฤศจิกายน', 12=>'ธันวาคม'];
                     @endphp
@@ -80,7 +79,7 @@
                         </option>
                     @endforeach
                 </select>
-                <select name="year" class="form-select">
+                <select name="year" class="form-select" required>
                     <option value="2026" selected>2569</option>
                     <option value="2027">2570</option>
                 </select>
@@ -111,21 +110,22 @@
             <label class="form-label">รูปแบบการสัมภาษณ์</label>
             <div class="radio-group">
                 <label class="radio-option">
-                    <input type="radio" name="interview_type" value="onsite" checked>
+                    <input type="radio" name="interview_mode" value="onsite" checked>
                     <span>สัมภาษณ์ On-site</span>
                 </label>
+                
                 <label class="radio-option">
-                    <input type="radio" name="interview_type" value="online">
+                    <input type="radio" name="interview_mode" value="online">
                     <span>สัมภาษณ์ Online</span>
                 </label>
             </div>
-            <input type="text" name="location_detail" class="form-input full-width mt-2" 
+            <input type="text" name="interview_location" class="form-input full-width mt-2" 
                    placeholder="ที่อยู่สถานที่สัมภาษณ์งาน หรือ ลิงก์ห้องประชุมออนไลน์">
         </div>
 
         <div class="form-group">
             <label class="form-label">เนื้อหาเพิ่มเติมในอีเมล</label>
-            <textarea name="email_content" class="form-textarea full-width" rows="4" 
+            <textarea name="email_details" class="form-textarea full-width" rows="4" 
                       placeholder="เช่น รายละเอียดที่ผู้สมัครควรทราบ เพื่อทำการเตรียมตัวในวันสัมภาษณ์"></textarea>
         </div>
 

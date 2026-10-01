@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('application_id')->constrained()->onDelete('cascade');
             $table->date('interview_date');                    
-            $table->time('interview_start_time');                  
-            $table->time('interview_end_time')->nullable();          
+            $table->time('interview_start_time');                          
             $table->enum('interview_mode', ['onsite', 'online']);    
             $table->string('interview_location', 255)->nullable();   
             $table->text('email_details')->nullable();               

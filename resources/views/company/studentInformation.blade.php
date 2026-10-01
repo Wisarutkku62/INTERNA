@@ -120,8 +120,8 @@
 
          
         <div class="profile-actions">
-            <a href="{{ route('newprofile') }}" class="resume">ดูเอกสาร</a>
-            <a href="{{ route('newprofile') }}" class="interview">สร้างนัดสัมภาษณ์</a>
+            <a href="{{ route('company.viewresume') }}" class="resume">ดูเอกสาร</a>
+            <a href="{{ route('interviews.create',$applicants_profile->id ) }}" class="interview">สร้างนัดสัมภาษณ์</a>
         </div>
         
 

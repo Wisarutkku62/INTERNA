@@ -43,7 +43,7 @@
                 </div>
 
     <div class="interview-list">
-        @foreach($interviews as $interview)
+        @forelse($interviews as $interview)
         <div class="interview-item">
             <div class="interview-time">
                 <span class="time-num">{{$interview?->interview_start_time}}</span>
@@ -55,10 +55,12 @@
             </div>
             <div class="group-text">
             <span class="badge-status">สัมภาษณ์ออนไลน์</span>
-            <a href="#" class="btn-estimate">ประเมินผลสัมภาษณ์</a>
+            <a href="{{route('company.interview_evaluation', $interview)}}" class="btn-estimate">ประเมินผลสัมภาษณ์</a>
             </div>
         </div>
-        @endforeach
+        @empty
+            <p class="empty-enroll">ไม่พบข้อมูลผู้สมัคร</p>
+        @endforelse
     </div>
             </section>
         </div>
