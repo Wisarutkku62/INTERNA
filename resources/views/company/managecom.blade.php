@@ -53,7 +53,10 @@
                 <strong>{{$interview?->application?->student?->student_fname}} {{$interview?->application?->student?->student_lname}}</strong>
                 <p>ตำแหน่ง: {{$interview?->application?->internshipPosition?->position_name}}</p>
             </div>
+            <div class="group-text">
             <span class="badge-status">สัมภาษณ์ออนไลน์</span>
+            <a href="#" class="btn-estimate">ประเมินผลสัมภาษณ์</a>
+            </div>
         </div>
         @endforeach
     </div>

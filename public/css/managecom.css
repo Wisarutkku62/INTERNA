@@ -259,7 +259,7 @@
     background: #0037ff;
     color: #fff;
     font-size: 0.75rem;
-    padding: 4px 8px;
+    padding: 4px 14px;
     border-radius: 6px;
     font-weight: bold;
 }
@@ -276,7 +276,7 @@
     text-decoration: none;
 }
 .info-more:hover{
-     transform: translateY(-2px);
+    transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
 }
 
@@ -285,4 +285,25 @@
     font-size: 14px;
     font-weight: 400;
     color: #718096;
+}
+.btn-estimate{
+    border: 1px solid #0037ff;
+    background: #fff;
+    color: #0037ff;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all .4s;
+    text-decoration: none;
+}
+.btn-estimate:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
+}
+.group-text{
+    display: flex;   
+    flex-direction:column;
+    align-items: flex-end;
+    gap: 8px;
 }
