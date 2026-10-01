@@ -59,6 +59,6 @@
             <textarea id="company_description" name="company_description" placeholder="รายละเอียดบริษัท" class="input-field" rows="4">{{ $user?->company?->company_description ?? '' }}</textarea>
         </div>
 
-        <button type="submit" class="btn-submit">บันทึกข้อมูล</button>
+       
     </form>
 @endsection

@@ -23,11 +23,12 @@
         <table>
             <thead>
                 <tr>
-                    <th style="width: 35%;">ชื่อเอกสาร</th>
+                    <th style="width: 25%;">ชื่อเอกสาร</th>
                     <th style="width: 15%;">รหัสเอกสาร</th>
-                    <th style="width: 18%;">วันที่ยื่น</th>
+                    <th style="width: 15%;">วันที่ยื่น</th>
                     <th style="width: 15%;">สถานะ</th>
-                    <th style="width: 17%;">การจัดการ</th>
+                    <th style="width: 15%;">การจัดการ</th>
+                    <th style="width: 15%;">อนุมัติเอกสาร</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +40,9 @@
                     <td>28 ก.ย. 2569</td>
                     <td><span class="badge pending">รอตรวจสอบ</span></td>
                     <td><button class="btn-action">ตรวจสอบเอกสาร</button></td>
+                    <td class="group"><button class="btn-accept">อนุมัติ</button>
+                    <button class="btn-reject">ไม่อนุมัติ</button></td>
+                    
                 </tr>
                 <tr>
                     <td>
@@ -48,6 +52,8 @@
                     <td>27 ก.ย. 2569</td>
                     <td><span class="badge approved">อนุมัติแล้ว</span></td>
                     <td><button class="btn-action">ตรวจสอบเอกสาร</button></td>
+                    <td class="group"><button class="btn-accept">อนุมัติ</button>
+                    <button class="btn-reject">ไม่อนุมัติ</button></td>
                 </tr>
                 <tr>
                     <td>
@@ -57,6 +63,8 @@
                     <td>25 ก.ย. 2569</td>
                     <td><span class="badge rejected">ต้องแก้ไข</span></td>
                     <td><button class="btn-action">ตรวจสอบเอกสาร</button></td>
+                    <td class="group"><button class="btn-accept">อนุมัติ</button>
+                    <button class="btn-reject">ไม่อนุมัติ</button></td>
                 </tr>
                 <tr>
                     <td>
@@ -66,6 +74,8 @@
                     <td>25 ก.ย. 2569</td>
                     <td><span class="badge rejected">ต้องแก้ไข</span></td>
                     <td><button class="btn-action">ตรวจสอบเอกสาร</button></td>
+                    <td class="group"><button class="btn-accept">อนุมัติ</button>
+                    <button class="btn-reject">ไม่อนุมัติ</button></td>
                 </tr>
                 <tr>
                     <td>
@@ -75,6 +85,8 @@
                     <td>25 ก.ย. 2569</td>
                     <td><span class="badge rejected">ต้องแก้ไข</span></td>
                     <td><button class="btn-action">ตรวจสอบเอกสาร</button></td>
+                    <td class="group"><button class="btn-accept">อนุมัติ</button>
+                    <button class="btn-reject">ไม่อนุมัติ</button></td>
                 </tr>
             </tbody>
         </table>

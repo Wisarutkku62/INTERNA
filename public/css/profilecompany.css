@@ -138,21 +138,3 @@ textarea.input-field {
     cursor: pointer;
     accent-color: #2563eb;
 }
-
-.btn-submit {
-    grid-column: 1 / -1;
-    background-color: #2563eb;
-    color: #ffffff;
-    padding: 14px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-top: 12px;
-}
-
-.btn-submit:hover {
-    background-color: #1d4ed8;
-}
