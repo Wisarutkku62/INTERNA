@@ -11,7 +11,15 @@ use App\Http\Controllers\InternController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
-
+Route::view('/yed','company.announcementedit');
+Route::view('/mg','company.ManageInternship');
+Route::view('/mf','InformationandHistory');
+Route::view('/mt','company.evaluation');
+Route::view('/ct','company.companydetail');
+Route::view('/kehee','company.manageinterview');
+Route::view('/ke','company.viewdocument');
+Route::view('/jj','company.profilecompany');
+Route::view('/u','contactus');
 // Public
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
