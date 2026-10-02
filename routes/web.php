@@ -17,6 +17,7 @@ Route::view('/mt','company.evaluation');
 Route::view('/ct','company.companydetail');
 Route::view('/ct','company.companydetail');
 Route::view('oom','viewresume');
+Route::view('/wsxz','recheck');
 // Public
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
