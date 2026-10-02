@@ -59,6 +59,9 @@ Route::get('/student/information/{id}', [CompanyController::class, 'studentInfor
 Route::get('/company/viewresume', [CompanyController::class, 'viewresume'])->name('company.viewresume');
 Route::get('/company/interviewresult/{id}', [CompanyController::class, 'interview_evaluation'])->name('company.interview_evaluation');
 Route::put('/company/interviewresult/{id}/update', [CompanyController::class, 'interview_evaluation_update'])->name('company.interview_evaluation_update');
+Route::get('/student/information/{id}', [CompanyController::class, 'studentInformation'])->name('student.information');
+Route::get('/company/interviews/create/{id}', [CompanyController::class, 'interviewCreate'])->name('interviews.create'); //นัดหมายสัมภาษณ์
+Route::post('/company/interviews/store', [CompanyController::class, 'interviewStore'])->name('interviews.store');
 });
 
 // Admin Login
