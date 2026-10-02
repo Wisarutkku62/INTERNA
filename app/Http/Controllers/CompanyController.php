@@ -7,6 +7,7 @@ use App\Models\InternshipPosition;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\Interview;
+use App\Models\ApplicationDocument;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -196,10 +197,34 @@ class CompanyController extends Controller
     return view('company.studentInformation', compact('applicants_profile'));
     }
 
-    public function viewresume()
+    public function viewresume(int $id)
     {
-        return view('company.viewdocument');
+        $application = Application::with(['student', 'applicationDocuments.document'])->findOrFail($id);
+
+    $student = $application->student;
+    $documents = $application->applicationDocuments;
+
+    return view('company.viewdocument', compact('application', 'student', 'documents'));
     }
+
+    public function updateDocumentStatus(Request $request, $id)
+{
+    $request->validate([
+        'status' => 'required|in:approved,rejected',
+    ]);
+
+    $appDoc = ApplicationDocument::findOrFail($id);
+    
+    if (isset($appDoc->appdoc_status)) {
+        $appDoc->appdoc_status = $request->status;
+    } else {
+        $appDoc->status = $request->status;
+    }
+    
+    $appDoc->save();
+
+    return redirect()->back()->with('success', 'อัปเดตสถานะเอกสารเรียบร้อยแล้ว');
+}
 
     public function createInterview(int $id)
     {

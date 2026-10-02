@@ -57,7 +57,8 @@ Route::get('/company/history',[CompanyController::class, 'history'])->name('comp
 Route::get('interview/create/{id}', [CompanyController::class, 'createInterview'])->name('interviews.create');
 Route::post('/interviews/store/{id}', [CompanyController::class, 'storeInterview'])->name('interviews.store');
 Route::get('/student/information/{id}', [CompanyController::class, 'studentInformation'])->name('student.information');
-Route::get('/company/viewresume', [CompanyController::class, 'viewresume'])->name('company.viewresume');
+Route::get('/company/viewresume/{id}', [CompanyController::class, 'viewresume'])->name('company.viewresume');
+Route::put('/company/viewresume/{id}/update', [CompanyController::class, 'updateDocumentStatus'])->name('document.updateStatus');
 Route::get('/company/interviewresult/{id}', [CompanyController::class, 'interview_evaluation'])->name('company.interview_evaluation');
 Route::put('/company/interviewresult/{id}/update', [CompanyController::class, 'interview_evaluation_update'])->name('company.interview_evaluation_update');
 });

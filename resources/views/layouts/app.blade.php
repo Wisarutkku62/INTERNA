@@ -4,7 +4,7 @@
     @elseif (auth()->user()->role === 'student')
         @include('layouts.student_nav')
     @elseif (auth()->user()->role === 'admin')
-        @include('layouts.student_nav')
+        @include('layouts.admin_nav')
     @endif
 @else
     @include('layouts.student_nav')

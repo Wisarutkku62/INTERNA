@@ -5,23 +5,37 @@
 @endpush
 
 @section('content')
-   <div class="page-container">
+<div class="page-container">
     <div class="form-header">
-        <a href="{{route('company.overview')}}" class="back-btn" title="ย้อนกลับ">&larr;</a>
+        <a href="{{ route('company.overview') }}" class="back-btn" title="ย้อนกลับ">&larr;</a>
         <h2>ย้อนกลับ</h2>
     </div>
+
     <div class="card applicant-card">
         <div class="applicant-profile">
-            <div class="applicant-avatar"></div>
+            <div class="applicant-avatar">
+                @if(isset($student->profile_image))
+                    <img src="{{ asset('storage/' . $student->profile_image) }}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                @endif
+            </div>
             <div class="applicant-details">
-                <h2>นายกมลณัฐ สุวรรณสุข</h2>
+                <h2>
+                    {{ $student->first_name ?? $student->name ?? 'ไม่ระบุชื่อ' }} 
+                    {{ $student->last_name ?? '' }}
+                </h2>
             </div>
         </div>
     </div>
 
+    @if(session('success'))
+        <div class="alert alert-success" style="padding: 10px; margin-bottom: 15px; background-color: #d4edda; color: #155724; border-radius: 5px;">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="card table-card">
         <div class="table-header-title">
-            <h3>รายการเอกสารที่ยื่นมา (5 รายการ)</h3>
+            <h3>รายการเอกสารที่ยื่นมา ({{ $documents->count() }} รายการ)</h3>
         </div>
         <table>
             <thead>
@@ -35,65 +49,70 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <div class="name-doc">ประวัติส่วนตัว</div>
-                    </td>
-                    <td>DOC-101</td>
-                    <td>28 ก.ย. 2569</td>
-                    <td><span class="badge pending">รอตรวจสอบ</span></td>
-                    <td><button class="btn-action">ตรวจสอบเอกสาร</button></td>
-                    <td class="group"><button class="btn-accept">อนุมัติ</button>
-                    <button class="btn-reject">ไม่อนุมัติ</button></td>
-                    
-                </tr>
-                <tr>
-                    <td>
-                        <div class="name-doc">ประวัติอาชญากรรม</div>
-                    </td>
-                    <td>DOC-102</td>
-                    <td>27 ก.ย. 2569</td>
-                    <td><span class="badge approved">อนุมัติแล้ว</span></td>
-                    <td><button class="btn-action">ตรวจสอบเอกสาร</button></td>
-                    <td class="group"><button class="btn-accept">อนุมัติ</button>
-                    <button class="btn-reject">ไม่อนุมัติ</button></td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="name-doc">แผนการฝึกงานและเค้าโครงโครงงาน</div>
-                    </td>
-                    <td>DOC-103</td>
-                    <td>25 ก.ย. 2569</td>
-                    <td><span class="badge rejected">ต้องแก้ไข</span></td>
-                    <td><button class="btn-action">ตรวจสอบเอกสาร</button></td>
-                    <td class="group"><button class="btn-accept">อนุมัติ</button>
-                    <button class="btn-reject">ไม่อนุมัติ</button></td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="name-doc">หนังสือยินยอมเข้าร่วมการฝึกงาน</div>
-                    </td>
-                    <td>DOC-104</td>
-                    <td>25 ก.ย. 2569</td>
-                    <td><span class="badge rejected">ต้องแก้ไข</span></td>
-                    <td><button class="btn-action">ตรวจสอบเอกสาร</button></td>
-                    <td class="group"><button class="btn-accept">อนุมัติ</button>
-                    <button class="btn-reject">ไม่อนุมัติ</button></td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="name-doc">ใบรับรองผลการเรียน (Transcript)</div>
-                    </td>
-                    <td>DOC-105</td>
-                    <td>25 ก.ย. 2569</td>
-                    <td><span class="badge rejected">ต้องแก้ไข</span></td>
-                    <td><button class="btn-action">ตรวจสอบเอกสาร</button></td>
-                    <td class="group"><button class="btn-accept">อนุมัติ</button>
-                    <button class="btn-reject">ไม่อนุมัติ</button></td>
-                </tr>
+                @forelse($documents as $appDoc)
+                    <tr>
+                        <td>
+                            <div class="name-doc">
+                                {{ $appDoc->document->document_name ?? $appDoc->document_name ?? 'เอกสารไม่มีชื่อ' }}
+                            </div>
+                        </td>
+                        <td>
+                            {{ $appDoc->document->doc_code ?? $appDoc->doc_code ?? 'DOC-' . (100 + $appDoc->id) }}
+                        </td>
+                        <td>
+                            {{ \Carbon\Carbon::parse($appDoc->created_at)->locale('th')->isoFormat('D MMM YYYY') }}
+                        </td>
+                        <td>
+                            @php
+                                $status = $appDoc->appdoc_status ?? $appDoc->status;
+                            @endphp
+
+                            @if($status == 'approved' || $status == 'อนุมัติแล้ว')
+                                <span class="badge approved">อนุมัติแล้ว</span>
+                            @elseif($status == 'rejected' || $status == 'ต้องแก้ไข')
+                                <span class="badge rejected">ต้องแก้ไข</span>
+                            @else
+                                <span class="badge pending">รอตรวจสอบ</span>
+                            @endif
+                        </td>
+                        <td>
+                            @php
+                                $filePath = $appDoc->document->file_path ?? $appDoc->file_path ?? null;
+                            @endphp
+
+                            @if($filePath)
+                                <a href="{{ asset('storage/' . $filePath) }}" target="_blank" style="text-decoration: none;">
+                                    <button type="button" class="btn-action">ตรวจสอบเอกสาร</button>
+                                </a>
+                            @else
+                                <button type="button" class="btn-action" disabled style="opacity: 0.5;">ไม่มีไฟล์</button>
+                            @endif
+                        </td>
+                        <td class="group">
+                            <form action="{{ route('document.updateStatus', $appDoc->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="status" value="approved">
+                                <button type="submit" class="btn-accept">อนุมัติ</button>
+                            </form>
+
+                            <form action="{{ route('document.updateStatus', $appDoc->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="status" value="rejected">
+                                <button type="submit" class="btn-reject">ไม่อนุมัติ</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 20px;">
+                            ยังไม่มีรายการเอกสารที่ยื่นมา
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
-
 </div>
 @endsection
