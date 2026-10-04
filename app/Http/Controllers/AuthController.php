@@ -111,4 +111,5 @@ class AuthController extends Controller
             'password' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'
         ]);
     }
+
 }

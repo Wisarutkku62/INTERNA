@@ -43,7 +43,7 @@
                 </div>
 
     <div class="interview-list">
-        @foreach($interviews as $interview)
+        @forelse($interviews as $interview)
         <div class="interview-item">
             <div class="interview-time">
                 <span class="time-num">{{$interview?->interview_start_time}}</span>
@@ -53,9 +53,14 @@
                 <strong>{{$interview?->application?->student?->student_fname}} {{$interview?->application?->student?->student_lname}}</strong>
                 <p>ตำแหน่ง: {{$interview?->application?->internshipPosition?->position_name}}</p>
             </div>
+            <div class="group-text">
             <span class="badge-status">สัมภาษณ์ออนไลน์</span>
+            <a href="{{route('company.interview_evaluation', $interview)}}" class="btn-estimate">ประเมินผลสัมภาษณ์</a>
+            </div>
         </div>
-        @endforeach
+        @empty
+            <p class="empty-enroll">ไม่พบข้อมูลผู้สมัคร</p>
+        @endforelse
     </div>
             </section>
         </div>
@@ -76,7 +81,7 @@
                         </div>
                         <div class="badge-group">
                             <span class="badge-status">{{$applicant->internshipposition->position_interview_type}}</span>
-                            <a href="{{route('company.announcement.all')}}" class="info-more">ดูรายละเอียดเพิ่มเติม</a>
+                            <a href="{{route('company.applicants.profile', $applicant->id)}}" class="info-more">ดูรายละเอียดเพิ่มเติม</a>
                         </div>
                     </div>
                 @empty

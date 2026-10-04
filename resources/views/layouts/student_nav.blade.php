@@ -24,7 +24,7 @@
               <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
             </a>
           </li>
-          <li class="nav-item"><a href="{{ route('trainee') }}" class="nav-link">ค้นหานักศึกษาฝึกงาน</a></li>
+          <!-- <li class="nav-item"><a href="{{ route('intern.intern') }}" class="nav-link">ค้นหานักศึกษาฝึกงาน</a></li> -->
           <!-- <li class="nav-item"><a href="#" class="nav-link">ประเมินผล</a></li>
           <li class="nav-item"><a href="#" class="nav-link">สำหรับบริษัท</a></li> -->
           <li class="nav-item"><a href="#" class="nav-link">ติดต่อเรา</a></li>

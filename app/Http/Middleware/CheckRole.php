@@ -20,6 +20,10 @@ class CheckRole
         return redirect()->route('login');
     }
 
+    if (Auth::user()->role === 'admin') {
+        return $next($request);
+    }
+
     if (Auth::user()->role !== $role) {
         abort(403, 'คุณไม่มีสิทธิ์เข้าถึงหน้านี้');
     }

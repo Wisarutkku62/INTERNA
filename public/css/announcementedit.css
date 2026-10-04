@@ -113,3 +113,10 @@ label {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
 }
+
+.validated {
+    color: #e53e3e; 
+    font-size: 14px;
+    margin-top: 4px;
+    display: block;
+}
