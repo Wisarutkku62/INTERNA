@@ -3,97 +3,114 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/application.css') }}">
 @endpush
+
 @section('content')
 <div class="application-page">
-    <div class="navbar">
-        <h1>งานทั้งหมด</h1>    
-        <div class="search-container">
-            <form class="search-box" action="{{ route('intern.intern') }}" method="GET" id='searchForm'>
-                <input type="text" placeholder="ค้นหาตำแหน่งงาน" name="keyword" id="keyword">
-                <button type="submit" class="search-btn">
-                    ค้นหา
-                </button>
-            </form>
-            <div class="filter-dropdown-box">
-                <select name="type" class="filter-select" onchange="goPage(this.value)">
-                    <option value="" disabled selected hidden>ตัวกรอง</option>
-
-                    <option value="{{ route('Fulltimejob') }}">งานประจำ</option>
-                    <option value="{{ route('parttime') }}">พาร์ทไทม์</option>
-                    <option value="{{ route('train') }}">ฝึกงาน</option>
-                </select>
-
-                <script>
-                function goPage(url) {
-                    window.location.href = url;
-                }
-                </script>
-                
-            </div>
-        </div>
-        <!-- <script>
-            let searchFormJS = document.getElementById('searchForm')
-            searchFormJS.addEventListener('submit', (e) => {
-                const search_value = document.getElementById('searchbox').value;
-                if (search_value == '') {
-                    e.preventDefault()
-                }
-            })
-        </script> -->
+    <div class="header-section">
+        <h1 class="page-title">งานทั้งหมด</h1>    
     </div>
-
-   <div class="job-list">
-    @forelse($internship_positions as $position)
-        <div class="job-card">
-            <div class="job-card-left">
-                <div class="job-card-head">
-                    <h1 class="job-company">{{ $position->position_name }}</h1>
-                    <h3 class="job-title">{{ $position->company->company_name }}</h3>
-                </div>
-
-                <div class="job-card-body">
-                    <div class="job-info-row">
-                        <div class="info-label">หมวดหมู่ :</div>
-                        <div class="info-value">{{ $position->position_category }}</div>
-                    </div>
-                    <div class="job-info-row">
-                        <div class="info-label">เบี้ยเลี้ยง :</div>
-                        <div class="info-value">{{ number_format($position->position_allowance) }}</div>
-                    </div>
-                    <div class="job-info-row">
-                        <div class="info-label">จำนวนรับสมัคร :</div>
-                        <div class="info-value">{{ $position->position_capacity }} อัตรา</div>
-                    </div>
-                </div>
-
-                <div class="job-card-footer">
-                    @if ($position->position_interview_type == 'Online')
-                        <div class="interview">สัมภาษณ์งานออนไลน์ (Online)</div>
-                    @elseif ($position->position_interview_type == 'Onsite')
-                        <div class="interview">สัมภาษณ์งานออนไซต์ (Onsite)</div>
-                    @endif 
-
-                    @if ($position->position_worktype == 'Online')
-                        <div class="worktype">Work From Home</div>
-                    @elseif ($position->position_worktype == 'Onsite')
-                        <div class="worktype">Onsite</div>
-                    @elseif ($position->position_worktype == 'Hybrid')
-                        <div class="worktype">Hybrid</div>
-                    @endif 
-                </div>
-            </div>
-            <div class="job-card-right">
-                <div class="job-card-media">
-                    <img src="{{ asset('img/Picturelogin.png') }}" alt="picture">
-                    <form action="{{route('intern.detail', $position->id)}}" method="GET">
-                        <button type='submit' class="detail-btn">ดูรายละเอียดงาน</button>
-                    </form>
-                </div>
-            </div>
+    <form action="{{ route('intern.intern') }}" method="GET" class="filter-container">
+        <div class="search-main-box">
+            <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="ค้นหาชื่อตำแหน่งงาน หรือ ชื่อบริษัท..." class="search-input">
+            <button type="submit" class="search-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                ค้นหา
+            </button>
         </div>
-    @empty
-        <p>ไม่พบข้อมูล</p>
-    @endforelse
-</div>
+
+        <div class="filter-bar">
+            <div class="filter-item">
+                <label for="category">หมวดหมู่งาน</label>
+                <select name="category" id="category" class="filter-select" onchange="this.form.submit()">
+                    <option value="">หมวดหมู่ทั้งหมด</option>
+                    <option value="IT / Software" {{ request('category') == 'IT / Software' ? 'selected' : '' }}>IT / Software</option>
+                    <option value="Design / Graphic" {{ request('category') == 'Design / Graphic' ? 'selected' : '' }}>Design / Graphic</option>
+                    <option value="Marketing" {{ request('category') == 'Marketing' ? 'selected' : '' }}>Marketing</option>
+                    <option value="Business / Admin" {{ request('category') == 'Business / Admin' ? 'selected' : '' }}>Business / Admin</option>
+                </select>
+            </div>
+
+            <div class="filter-item">
+                <label for="worktype">รูปแบบการทำงาน</label>
+                <select name="worktype" id="worktype" class="filter-select" onchange="this.form.submit()">
+                    <option value="">รูปแบบทั้งหมด</option>
+                    <option value="Online" {{ request('worktype') == 'Online' ? 'selected' : '' }}>Work From Home</option>
+                    <option value="Onsite" {{ request('worktype') == 'Onsite' ? 'selected' : '' }}>Onsite</option>
+                    <option value="Hybrid" {{ request('worktype') == 'Hybrid' ? 'selected' : '' }}>Hybrid</option>
+                </select>
+            </div>
+
+            <div class="filter-item">
+                <label for="interview_type">การสัมภาษณ์</label>
+                <select name="interview_type" id="interview_type" class="filter-select" onchange="this.form.submit()">
+                    <option value="">การสัมภาษณ์ทั้งหมด</option>
+                    <option value="Online" {{ request('interview_type') == 'Online' ? 'selected' : '' }}>สัมภาษณ์ออนไลน์</option>
+                    <option value="Onsite" {{ request('interview_type') == 'Onsite' ? 'selected' : '' }}>สัมภาษณ์ออนไซต์</option>
+                </select>
+            </div>
+
+            @if(request()->anyFilled(['keyword', 'category', 'worktype', 'interview_type']))
+                <a href="{{ route('intern.intern') }}" class="btn-clear-filter">ล้างตัวกรอง</a>
+            @endif
+        </div>
+    </form>
+
+    <div class="job-list">
+        @forelse($internship_positions as $position)
+            <div class="job-card">
+                <div class="job-card-left">
+                    <div class="job-card-head">
+                        <h2 class="job-company">{{ $position->position_name }}</h2>
+                        <h3 class="job-title">{{ $position->company?->company_name }}</h3>
+                    </div>
+
+                    <div class="job-card-body">
+                        <div class="job-info-row">
+                            <span class="info-label">หมวดหมู่ :</span>
+                            <span class="info-value">{{ $position->position_category }}</span>
+                        </div>
+                        <div class="job-info-row">
+                            <span class="info-label">เบี้ยเลี้ยง :</span>
+                            <span class="info-value">{{ number_format($position->position_allowance) }} บาท/วัน</span>
+                        </div>
+                        <div class="job-info-row">
+                            <span class="info-label">จำนวนรับสมัคร :</span>
+                            <span class="info-value">{{ $position->position_capacity }} อัตรา</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card-footer">
+                        @if ($position->position_interview_type == 'Online')
+                            <span class="badge badge-interview">สัมภาษณ์งานออนไลน์ (Online)</span>
+                        @elseif ($position->position_interview_type == 'Onsite')
+                            <span class="badge badge-interview">สัมภาษณ์งานออนไซต์ (Onsite)</span>
+                        @endif 
+
+                        @if ($position->position_worktype == 'Online')
+                            <span class="badge badge-worktype">Work From Home</span>
+                        @elseif ($position->position_worktype == 'Onsite')
+                            <span class="badge badge-worktype">Onsite</span>
+                        @elseif ($position->position_worktype == 'Hybrid')
+                            <span class="badge badge-worktype">Hybrid</span>
+                        @endif 
+                    </div>
+                </div>
+
+                <div class="job-card-right">
+                    <div class="job-card-media">
+                        <img src="{{ asset('img/Picturelogin.png') }}" alt="company picture">
+                        <a href="{{ route('intern.detail', $position->id) }}" class="detail-btn">ดูรายละเอียดงาน</a>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="empty-state">
+                <p>ไม่พบข้อมูลตำแหน่งงานที่คุณค้นหา</p>
+            </div>
+        @endforelse
+    </div>
 </div>
 @endsection

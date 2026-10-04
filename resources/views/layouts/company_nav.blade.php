@@ -31,7 +31,7 @@
           </label>
           <div class="dropdown-menu">
             <a href="{{route('company.overview')}}" class="dropdown-item">ภาพรวม</a>
-            <a href="#" class="dropdown-item">โปรไฟล์</a>
+            <a href="{{route('company.profile')}}" class="dropdown-item">โปรไฟล์</a>
             <form action="{{ route('auth.logout')}}" method="POST" class="logout-form">
               @csrf
               <button type="submit" class="dropdown-item logout-btn">ออกจากระบบ</button>

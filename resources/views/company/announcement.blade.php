@@ -10,94 +10,266 @@
         <a href="{{route('company.overview')}}" class="back-btn" title="ย้อนกลับ">&larr;</a>
         <h2>สร้างประกาศงานใหม่</h2>
     </div>
-    <form action="{{route('company.announcement.create')}}" method="POST">
+    <form action="{{route('company.announcement.create')}}" method="POST" id='form'>
         @csrf
         <div class="form-group">
-            <label for="title">ชื่อตำแหน่งงาน</label>
-            <input type="text" id="title" name="title" placeholder="เช่น Backend Developer" required>
+            <label for="position_name">ชื่อตำแหน่งงาน</label>
+            <input type="text" id="position_name" name="position_name" placeholder="เช่น Backend Developer" >
+            <span class="position_name-validated validated" id="position_name-validated">
+
+            </span>
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="department">แผนก/ฝ่าย </label>
-                <select id="department" name="department" required>
+                <label for="position_category">แผนก/ฝ่าย </label>
+                <select id="position_category" name="position_category" >
                     <option value="Technology & IT">Technology & IT</option>
                     <option value="Design & Creative">Design & Creative</option>
                     <option value="Marketing">Marketing</option>
                     <option value="HR & Admin">HR & Admin</option>
                 </select>
+                <span class="position_category-validated validated" id="position_category-validated">
+                    
+                </span>
             </div>
             <div class="form-group col">
-                <label for="capacity">จำนวนรับ (คน)</label>
-                <input type="number" id="capacity" name="capacity" min="1" placeholder="เช่น 2" required>
+                <label for="position_capacity">จำนวนรับ (คน)</label>
+                <input type="number" id="position_capacity" name="position_capacity" min="1" placeholder="เช่น 2" >
+                <span class="position_capacity-validated validated" id="position_capacity-validated">
+
+                </span>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="work_type">รูปแบบการทำงาน</label>
-                <select id="work_type" name="work_type">
+                <label for="position_worktype">รูปแบบการทำงาน</label>
+                <select id="position_worktype" name="position_worktype">
                     <option value="Hybrid">Hybrid</option>
                     <option value="On-site">On-site</option>
-                    <option value="Remote">Remote</option>
+                    <option value="Online">Online</option>
                 </select>
+                <span class="position_worktype-validated validated" id="position_worktype-validated">
+
+                </span>
             </div>
             <div class="form-group col">
-                <label for="location">สถานที่ทำงาน</label>
-                <input type="text" id="location" name="location" value="น้ำพอง">
+                <label for="position_interview_type">รูปแบบสัมภาษณ์</label>
+                <select id="position_interview_type" name="position_interview_type">
+                    <option value="On-site">On-site</option>
+                    <option value="Online">Online</option>
+                </select>
+                <span class="position_interview_type-validated validated" id="position_interview_type-validated">
+
+                </span>
+        </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="position_start_date">วันเริ่มทำงาน</label>
+                <select id="position_start_date" name="position_start_date" >
+                    <option value="" disabled selected>เลือกวัน...</option>
+                    <option value="Monday">จันทร์</option>
+                    <option value="Tuesday">อังคาร</option>
+                    <option value="Wednesday">พุธ</option>
+                    <option value="Thursday">พฤหัสบดี</option>
+                    <option value="Friday">ศุกร์</option>
+                    <option value="Saturday">เสาร์</option>
+                    <option value="Sunday">อาทิตย์</option>
+                </select>
+                <span class="position_start_day-validated validated" id="position_start_day-validated">
+
+                </span>
+            </div>
+            <div class="form-group col">
+                <label for="position_end_date">วันสิ้นสุดทำงาน</label>
+                <select id="position_end_date" name="position_end_date" >
+                    <option value="" disabled selected>เลือกวัน...</option>
+                    <option value="Monday">จันทร์</option>
+                    <option value="Tuesday">อังคาร</option>
+                    <option value="Wednesday">พุธ</option>
+                    <option value="Thursday">พฤหัสบดี</option>
+                    <option value="Friday">ศุกร์</option>
+                    <option value="Saturday">เสาร์</option>
+                    <option value="Sunday">อาทิตย์</option>
+                </select>
+                <span class="position_end_day-validated validated" id="position_end_day-validated">
+                    
+                </span>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="start_day">วันเริ่มทำงาน</label>
-                <select id="start_day" name="start_day" required>
-                    <option value="" disabled selected>เลือกวัน...</option>
-                    <option value="จันทร์">จันทร์</option>
-                    <option value="อังคาร">อังคาร</option>
-                    <option value="พุธ">พุธ</option>
-                    <option value="พฤหัสบดี">พฤหัสบดี</option>
-                    <option value="ศุกร์">ศุกร์</option>
-                    <option value="เสาร์">เสาร์</option>
-                    <option value="อาทิตย์">อาทิตย์</option>
-                </select>
+                <label for="position_start_time">เวลาเริ่มทำงาน</label>
+                <input type="time" id="position_start_time" name="position_start_time" value="08:30" >
+                <span class="position_start_time-validated validated" id="position_start_time-validated">
+                    
+                </span>
             </div>
             <div class="form-group col">
-                <label for="end_day">วันสิ้นสุดทำงาน</label>
-                <select id="end_day" name="end_day" required>
-                    <option value="" disabled selected>เลือกวัน...</option>
-                    <option value="จันทร์">จันทร์</option>
-                    <option value="อังคาร">อังคาร</option>
-                    <option value="พุธ">พุธ</option>
-                    <option value="พฤหัสบดี">พฤหัสบดี</option>
-                    <option value="ศุกร์">ศุกร์</option>
-                    <option value="เสาร์">เสาร์</option>
-                    <option value="อาทิตย์">อาทิตย์</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col">
-                <label for="work_start_time">เวลาเริ่มทำงาน</label>
-                <input type="time" id="work_start_time" name="work_start_time" value="08:30" required>
-            </div>
-            <div class="form-group col">
-                <label for="work_end_time">เวลาเลิกทำงาน</label>
-                <input type="time" id="work_end_time" name="work_end_time" value="17:30" required>
+                <label for="position_end_time">เวลาเลิกทำงาน</label>
+                <input type="time" id="position_end_time" name="position_end_time" value="17:30" >
+                <span class="position_end_time-validated validated" id="position_end_time-validated">
+                    
+                </span>
             </div>
         </div>
         <div class="form-group">
-            <label for="salary">อัตราเงินเดือน </label>
-            <input type="text" id="salary" name="salary" placeholder="เช่น 4-5 บาท/เดือน" required>
+            <label for="position_allowance">อัตราเงินเดือน </label>
+            <input type="text" id="position_allowance" name="position_allowance" placeholder="เช่น 4-5 บาท/เดือน" >
+            <span class="position_allowance-validated validated" id="position_allowance-validated">
+                    
+            </span>
         </div>
         <div class="form-group">
-            <label for="qualifications">คุณสมบัติผู้สมัคร</label>
-            <textarea id="qualifications" name="qualifications" rows="3" placeholder="ระบุคุณสมบัติเบื้องต้น..."></textarea>
+            <label for="position_qualification">คุณสมบัติผู้สมัคร</label>
+            <textarea id="position_qualification" name="position_qualification" rows="3" placeholder="ระบุคุณสมบัติเบื้องต้น..."></textarea>
+            <span class="position_qualification-validated validated" id="position_qualification-validated">
+                    
+            </span>
         </div>
         <div class="form-group">
-            <label for="description">รายละเอียดงาน</label>
-            <textarea id="description" name="description" rows="4" placeholder="ระบุรายละเอียดหน้าที่รับผิดชอบ..."></textarea>
+            <label for="position_description">รายละเอียดงาน</label>
+            <textarea id="position_description" name="position_description" rows="4" placeholder="ระบุรายละเอียดหน้าที่รับผิดชอบ..."></textarea>
+            <span class="position_description-validated validated" id="position_description-validated">
+                    
+            </span>
         </div>
         <div class="form-actions">
             <button type="submit" class="btn btn-submit">บันทึกประกาศ</button>
         </div>
     </form>
 </div>
+<script>
+    let announcementForm = document.getElementById('form');
+
+announcementForm.addEventListener('submit', (e) => {
+    let hasError = false;
+
+    const name = document.getElementById('position_name');
+    const description = document.getElementById('position_description');
+    const qualification = document.getElementById('position_qualification');
+    const category = document.getElementById('position_category');
+    const capacity = document.getElementById('position_capacity');
+    const allowance = document.getElementById('position_allowance');
+    const startDate = document.getElementById('position_start_date');
+    const endDate = document.getElementById('position_end_date');
+    const startTime = document.getElementById('position_start_time');
+    const endTime = document.getElementById('position_end_time');
+    const worktype = document.getElementById('position_worktype');
+    const interview = document.getElementById('position_interview_type');
+
+    if (name.value.trim() === "") {
+        document.querySelector('.position_name-validated').innerHTML = 'กรุณากรอกชื่อตำแหน่ง';
+        name.classList.add('input-error');
+        hasError = true;
+    } else {
+        document.querySelector('.position_name-validated').innerHTML = '';
+        name.classList.remove('input-error');
+    }
+
+    if (description.value.trim() === "") {
+        document.querySelector('.position_description-validated').innerHTML = 'กรุณากรอกรายละเอียดตำแหน่ง';
+        description.classList.add('input-error');
+        hasError = true;
+    } else { 
+        document.querySelector('.position_description-validated').innerHTML = '';
+        description.classList.remove('input-error');
+    }
+
+    if (qualification.value.trim() === "") {
+        document.querySelector('.position_qualification-validated').innerHTML = 'กรุณากรอกคุณสมบัติของผู้สมัคร';
+        qualification.classList.add('input-error');
+        hasError = true;
+    } else { 
+        document.querySelector('.position_qualification-validated').innerHTML = '';
+        qualification.classList.remove('input-error');
+    }
+
+    if (category.value.trim() === "") {
+        document.querySelector('.position_category-validated').innerHTML = 'กรุณาเลือกหมวดหมู่ตำแหน่ง';
+        category.classList.add('input-error');
+        hasError = true;
+    } else {
+        document.querySelector('.position_category-validated').innerHTML = '';
+        category.classList.remove('input-error');
+    }
+
+    if (capacity.value.trim() === "") {
+        document.querySelector('.position_capacity-validated').innerHTML = 'กรุณากรอกอัตราที่รับสมัคร';
+        capacity.classList.add('input-error');
+        hasError = true;
+    } else {
+        document.querySelector('.position_capacity-validated').innerHTML = '';
+        capacity.classList.remove('input-error');
+    }
+
+    if (allowance.value.trim() === "") {
+        document.querySelector('.position_allowance-validated').innerHTML = 'กรุณากรอกเบี้ยเลี้ยง';
+        allowance.classList.add('input-error');
+        hasError = true;
+    } else {
+        document.querySelector('.position_allowance-validated').innerHTML = '';
+        allowance.classList.remove('input-error');
+    }
+
+    if (startDate.value.trim() === "") {
+        document.querySelector('.position_start_day-validated').innerHTML = 'กรุณาเลือกวันเริ่มงาน';
+        startDate.classList.add('input-error');
+        hasError = true;
+    } else {
+        document.querySelector('.position_start_day-validated').innerHTML = '';
+        startDate.classList.remove('input-error');
+    }
+
+    if (endDate.value.trim() === "") {
+        document.querySelector('.position_end_day-validated').innerHTML = 'กรุณาเลือกวันจบงาน';
+        endDate.classList.add('input-error');
+        hasError = true;
+    } else {
+        document.querySelector('.position_end_day-validated').innerHTML = '';
+        endDate.classList.remove('input-error');
+    }
+
+    if (startTime.value.trim() === "") {
+        document.querySelector('.position_start_time-validated').innerHTML = 'กรุณาเลือกเวลาเริ่มงาน';
+        startTime.classList.add('input-error');
+        hasError = true;
+    } else {
+        document.querySelector('.position_start_time-validated').innerHTML = '';
+        startTime.classList.remove('input-error');
+    }
+
+    if (endTime.value.trim() === "") {
+        document.querySelector('.position_end_time-validated').innerHTML = 'กรุณาเลือกเวลาเลิกงาน';
+        endTime.classList.add('input-error');
+        hasError = true;
+    } else {
+        document.querySelector('.position_end_time-validated').innerHTML = '';
+        endTime.classList.remove('input-error');
+    }
+
+    if (worktype.value.trim() === "") {
+        document.querySelector('.position_worktype-validated').innerHTML = 'กรุณาเลือกประเภทการทำงาน';
+        worktype.classList.add('input-error');
+        hasError = true;
+    } else {
+        document.querySelector('.position_worktype-validated').innerHTML = '';
+        worktype.classList.remove('input-error');
+    }
+
+    if (interview.value.trim() === "") {
+        document.querySelector('.position_interview_type-validated').innerHTML = 'กรุณาเลือกประเภทการสัมภาษณ์งาน';
+        interview.classList.add('input-error');
+        hasError = true;
+    } else {
+        document.querySelector('.position_interview_type-validated').innerHTML = '';
+        interview.classList.remove('input-error');
+    }
+
+    if (hasError) {
+        e.preventDefault();
+    }
+});
+
+</script>
 @endsection

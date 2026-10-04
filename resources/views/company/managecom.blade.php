@@ -25,38 +25,42 @@
         <div class="grid-top">
             <section class="card job-card">
                 <h3 class="card-title">ตำแหน่งงานของคุณ</h3>
-                    <div class="stat-item">
-                        <span class="stat-num">{{$user?->company?->internshippositions?->count() ?? 0}}</span>
-                        <span class="stat-label">ทั้งหมด</span>
-                    </div>  
+                <div class="stat-item">
+                    <span class="stat-num">{{$user?->company?->internshippositions?->count() ?? 0}}</span>
+                    <span class="stat-label">ทั้งหมด</span>
+                </div>  
                 <div class="button-group">
                     <a href="{{route('company.announcement')}}" class="btn-action btn-blue">
-                    สร้างประกาศงาน
+                        สร้างประกาศงาน
                     </a>
                     <a href="{{route('company.announcement.all')}}" class="btn-action btn-gray">ดูงานทั้งหมด</a>
                 </div>
             </section>
 
             <section class="card package-card">
-            <div class="card-header">
-        <h3 class="card-title">นัดหมายสัมภาษณ์เร็วๆ นี้</h3>
-        <a href="#" class="link-more">ดูทั้งหมด</a>
-    </div>
+                <div class="card-header">
+                    <h3 class="card-title">นัดหมายสัมภาษณ์เร็วๆ นี้</h3>
+                </div>
 
     <div class="interview-list">
-        @foreach($interviews as $interview)
+        @forelse($interviews as $interview)
         <div class="interview-item">
             <div class="interview-time">
-                <span class="time-num">{{$interview->interview_start_time}}</span>
-                <span class="time-date">วันนี้</span>
+                <span class="time-num">{{$interview?->interview_start_time}}</span>
+                <span class="time-date">{{$interview?->interview_date}}</span>
             </div>
             <div class="interview-info">
-                <strong>สมชาย ใจดี</strong>
-                <p>ตำแหน่ง: UX/UI Designer</p>
+                <strong>{{$interview?->application?->student?->student_fname}} {{$interview?->application?->student?->student_lname}}</strong>
+                <p>ตำแหน่ง: {{$interview?->application?->internshipPosition?->position_name}}</p>
             </div>
+            <div class="group-text">
             <span class="badge-status">สัมภาษณ์ออนไลน์</span>
+            <a href="{{route('company.interview_evaluation', $interview)}}" class="btn-estimate">ประเมินผลสัมภาษณ์</a>
+            </div>
         </div>
-        @endforeach
+        @empty
+            <p class="empty-enroll">ไม่พบข้อมูลผู้สมัคร</p>
+        @endforelse
     </div>
             </section>
         </div>
@@ -64,29 +68,26 @@
         <section class="card applicants-card">
             <div class="card-header">
                 <h3 class="card-title">ผู้สมัครล่าสุด</h3>
-                <a href="#" class="link-more">ดูทั้งหมด</a>
             </div>
-        @forelse ($applicants as $applicant)
-            <div class="state">
-                <div class="interview-list">
+            <div class="interview-list">
+                @forelse ($applicants as $applicant)
                     <div class="interview-item">
                         <div class="interview-time">
                             <span class="time-num">{{$applicant->created_at}}</span>
                         </div>
-                    <div class="interview-info">
-                        <strong>{{$applicant->student->student_fname}} {{$applicant->student->student_lname}}</strong>
-                        <p>{{$applicant->internshipposition->position_name}}</p>
+                        <div class="interview-info">
+                            <strong>{{$applicant->student->student_fname}} {{$applicant->student->student_lname}}</strong>
+                            <p>{{$applicant->internshipposition->position_name}}</p>
+                        </div>
+                        <div class="badge-group">
+                            <span class="badge-status">{{$applicant->internshipposition->position_interview_type}}</span>
+                            <a href="{{route('company.applicants.profile', $applicant->id)}}" class="info-more">ดูรายละเอียดเพิ่มเติม</a>
+                        </div>
                     </div>
-                    <span class="badge-status">{{$applicant->internshipposition->position_interview_type}}</span>
-                </div>
+                @empty
+                    <p class="empty-enroll">ไม่พบข้อมูลผู้สมัคร</p>
+                @endforelse
             </div>
-            <span class="badge-status">รอการยืนยัน</span>
-            </div>
-        @empty
-            <p class='empty-enroll'>ไม่พบข้อมูลผู้สมัคร</p>
-        @endforelse
-        </div>
-    </div>
         </section>
     </main>
 </div>

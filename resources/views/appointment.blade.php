@@ -56,13 +56,13 @@
                     <span>-</span>
                     <span>-</span>
                     <span>
-                        <form action="{{ route('appointment.update') }}" method="POST" class="action-form" style="display: inline-block;">
+                        <form action="#" method="POST" class="action-form" style="display: inline-block;">
                             @csrf
                             <input type="hidden" name="action" value="confirm">
                             <button type="submit" class="success">ยืนยัน</button>
                         </form>
 
-                        <form action="{{ route('appointment.update') }}" method="POST" class="action-form" style="display: inline-block;">
+                        <form action="#" method="POST" class="action-form" style="display: inline-block;">
                             @csrf
                             <input type="hidden" name="action" value="reschedule">
                             <button type="submit" class="reschedule">ขอเลื่อนนัด</button>

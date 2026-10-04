@@ -2,16 +2,16 @@
     display: flex;
     gap: 20px;
     width: 100%;
-    padding: 20px;
+    padding: 30px 60px;
     box-sizing: border-box;
     font-family: 'Prompt', sans-serif;
     color: #2d3748;
-    padding: 30px 60px;
 }
 
 .profile-card {
     width: 320px;
     flex-shrink: 0;
+    text-align: center;
 }
 
 .main-content {
@@ -27,7 +27,7 @@
     gap: 20px;
 }
 
-.grid-top>section {
+.grid-top > section {
     flex: 1;
 }
 
@@ -45,11 +45,6 @@
     font-weight: bold;
     text-align: center;
     margin: 0 0 16px 0;
-}
-
-
-.profile-card {
-    text-align: center;
 }
 
 .logo-section {
@@ -113,13 +108,12 @@
     transition: all .4s;
 }
 
-.btn-edit:hover{
+.btn-edit:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
 }
 
-
-.text-commend{
+.text-commend {
     font-size: 14px;
     margin-top: 10px;
     color: red;
@@ -192,38 +186,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .card-header .card-title {
     margin: 0;
-}
-
-.link-more {
-    font-size: 0.85rem;
-    color: #a0aec0;
-    text-decoration: none;
-}
-.link-more:hover{
-    color: #0037ff;
-}
-
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.link-more {
-    font-size: 0.85rem;
-    color: #a0aec0;
-    text-decoration: none;
-}
-.state{
-    margin-bottom: 10px;
-    margin-top: 10px;
 }
 
 .interview-list {
@@ -243,12 +210,14 @@
     padding: 10px 12px;
     border-radius: 8px;
     border: 1px solid #edf2f7;
+    gap: 12px;
 }
 
 .interview-time {
     text-align: center;
     padding-right: 12px;
     border-right: 2px solid #e2e8f0;
+    flex-shrink: 0;
 }
 
 .time-num {
@@ -279,17 +248,62 @@
     color: #718096;
 }
 
+.badge-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
 .badge-status {
     background: #0037ff;
     color: #fff;
     font-size: 0.75rem;
-    padding: 4px 8px;
+    padding: 4px 14px;
     border-radius: 6px;
     font-weight: bold;
 }
-.empty-enroll{
+
+.info-more {
+    border: 1px solid #0037ff;
+    background: #fff;
+    color: #0037ff;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all .4s;
+    text-decoration: none;
+}
+.info-more:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
+}
+
+.empty-enroll {
     text-align: center;
     font-size: 14px;
     font-weight: 400;
     color: #718096;
+}
+.btn-estimate{
+    border: 1px solid #0037ff;
+    background: #fff;
+    color: #0037ff;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all .4s;
+    text-decoration: none;
+}
+.btn-estimate:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
+}
+.group-text{
+    display: flex;   
+    flex-direction:column;
+    align-items: flex-end;
+    gap: 8px;
 }

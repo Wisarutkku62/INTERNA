@@ -21,9 +21,8 @@
                         <p class="salary">{{$position?->position_allowance}} บาท/เดือน</p>
                     </div>
                     <div class="job-actions">
-                        <form action="#" method='POST'>
+                        <form action="{{route('company.announcement.edit', $position->id)}}" method='GET'>
                             @csrf
-                            @method('PUT')
                             <button type="submit" class="btn-action btn-edit">แก้ไข</button>
                         </form>
                         <form action="{{route('company.announcement.delete', $position->id)}}" method='POST'>
