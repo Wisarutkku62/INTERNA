@@ -16,19 +16,19 @@
             <div class="stat-card card-all">
                 <div class="stat-info">
                     <span class="stat-label">ผู้สมัครทั้งหมด</span>
-                    <span class="stat-value">120</span>
+                    <span class="stat-value">{{$applicants->count()}}</span>
                 </div>
             </div>
             <div class="stat-card card-passed">
                 <div class="stat-info">
                     <span class="stat-label">ผ่านการสัมภาษณ์</span>
-                    <span class="stat-value">35</span>
+                    <span class="stat-value">{{$applicants_interview_passed->count()}}</span>
                 </div>
             </div>
             <div class="stat-card card-failed">
                 <div class="stat-info">
                     <span class="stat-label">ไม่ผ่านการสัมภาษณ์</span>
-                    <span class="stat-value">15</span>
+                    <span class="stat-value">{{$applicants_interview_failed->count()}}</span>
                 </div>
             </div>
             <div class="stat-card card-interning">
@@ -49,90 +49,46 @@
                             <th>ตำแหน่งที่สมัคร</th>
                             <th>บริษัท</th>
                             <th>สถานะปัจจุบัน</th>
-                            <th>วันที่อัปเดต</th>
+                            <th>วันที่สมัคร
+                                
+                            </th>
                             <th class="text-center">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                        @forelse ($applicants as $applicant)
                         <tr>
                             <td>
                                 <div class="user-profile">
-                                    <div class="avatar">สม</div>
+                                    <div class="avatar"></div>
                                     <div>
-                                        <div class="user-name">สมชาย สายลุย</div>
-                                        <div class="user-email">somchai@example.com</div>
+                                        <div class="user-name">{{$applicant?->student?->student_fname ?? ''}} {{$applicant?->student?->student_lname ?? ''}}</div>
+                                        <div class="user-email">{{$applicant?->student?->student_email ?? ''}}</div>
                                     </div>
                                 </div>
                             </td>
-                            <td>Web Developer</td>
-                            <td>วิทยาการคอมพิวเตอร์ (มข.)</td>
-                            <td><span class="badge badge-passed">ผ่านการสัมภาษณ์</span></td>
-                            <td>20 ก.ย. 2026</td>
+                            <td>{{$applicant?->internshipPosition?->position_name ?? ''}}</td>
+                            <td>{{$applicant?->internshipPosition?->company?->company_name ?? ''}}</td>
+                            <td><span class="badge badge-passed">
+                                @if ($applicant?->interview?->interview_result == 'passed')
+                                    ผ่านการสัมภาษณ์
+                                @elseif ($applicant?->interview?->interview_result == 'failed')
+                                    ไม่ผ่านการสัมภาษณ์
+                                @elseif ($applicant?->interview?->interview_result == 'pending')
+                                    กำลังรอดำเนินการ
+                                @endif
+                            </span></td>
+                            <td>{{$applicant?->updated_at}}</td>
                             <td class="text-center">
                                 <button class="btn-action btn-view">ดูรายละเอียด</button>
                                 <button class="btn-action btn-edit">แก้ไข</button>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>
-                                <div class="user-profile">
-                                    <div class="avatar bg-avatar-red">สม</div>
-                                    <div>
-                                        <div class="user-name">สมหญิง สุขใจ</div>
-                                        <div class="user-email">somying@example.com</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>UX/UI Designer</td>
-                            <td>เทคโนโลยีสารสนเทศ (มข.)</td>
-                            <td><span class="badge badge-failed">ไม่ผ่านการสัมภาษณ์</span></td>
-                            <td>18 ก.ย. 2026</td>
-                            <td class="text-center">
-                                <button class="btn-action btn-view">ดูรายละเอียด</button>
-                                <button class="btn-action btn-edit">แก้ไข</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="user-profile">
-                                    <div class="avatar bg-avatar-purple">กิต</div>
-                                    <div>
-                                        <div class="user-name">กิตติศักดิ์ มั่นคง</div>
-                                        <div class="user-email">kittisak@example.com</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Data Analyst</td>
-                            <td>วิศวกรรมคอมพิวเตอร์ (มข.)</td>
-                            <td><span class="badge badge-interning">กำลังฝึกงาน</span></td>
-                            <td>01 ก.ย. 2026</td>
-                            <td class="text-center">
-                                <button class="btn-action btn-view">ดูรายละเอียด</button>
-                                <button class="btn-action btn-edit">แก้ไข</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="user-profile">
-                                    <div class="avatar bg-avatar-orange">อนั</div>
-                                    <div>
-                                        <div class="user-name">อนันต์ รักดี</div>
-                                        <div class="user-email">anan@example.com</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Backend Developer</td>
-                            <td>วิทยาการคอมพิวเตอร์ (มมส.)</td>
-                            <td><span class="badge badge-pending">รอการสัมภาษณ์</span></td>
-                            <td>24 ก.ย. 2026</td>
-                            <td class="text-center">
-                                <button class="btn-action btn-view">ดูรายละเอียด</button>
-                                <button class="btn-action btn-edit">แก้ไข</button>
-                            </td>
-                        </tr>
+                        @empty
+                            <span>
+                                ไม่พบผู้สมัครในระบบ
+                            </span>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

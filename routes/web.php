@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
 
+
 // Public
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
@@ -63,6 +64,7 @@ Route::get('/company/viewresume/{id}', [CompanyController::class, 'viewresume'])
 Route::put('/company/viewresume/{id}/update', [CompanyController::class, 'updateDocumentStatus'])->name('document.updateStatus');
 Route::get('/company/interviewresult/{id}', [CompanyController::class, 'interview_evaluation'])->name('company.interview_evaluation');
 Route::put('/company/interviewresult/{id}/update', [CompanyController::class, 'interview_evaluation_update'])->name('company.interview_evaluation_update');
+Route::get('/company/applicants', [CompanyController::class, 'applicants_all'])->name('company.applicants.all');
 });
 
 // Admin Login
@@ -76,7 +78,5 @@ Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->nam
 Route::delete('/admin/companies/{id}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
 Route::delete('/admin/documents/{id}', [AdminController::class, 'destroyDocument'])->name('admin.documents.destroy');
 });
-
-Route::view('/c','recheck');
 
 require __DIR__.'/settings.php';

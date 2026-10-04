@@ -303,4 +303,28 @@ public function editProfile($id = null)
     $company = $id ? Company::findOrFail($id) : Auth::user()->company;
     return view('company.companyedit', compact('company'));
 }
+public function applicants_all()
+{
+    $user = Auth::user();
+
+    $companyId = $user?->company?->id;
+
+    $applicants = Application::with('student')
+    ->whereHas('internshipPosition', function ($query) use ($companyId) {
+        $query->where('company_id', $companyId);
+    })
+    ->get();
+
+    $applicants_interview_passed =  Application::whereHas('internshipPosition', function ($query) use ($companyId) {
+            $query->where('company_id', $companyId)
+            ->where('interview_result', 'passed');
+        });
+    
+    $applicants_interview_failed =  Application::whereHas('internshipPosition', function ($query) use ($companyId) {
+            $query->where('company_id', $companyId)
+            ->where('interview_result', 'failed');
+        });
+
+    return view('recheck', compact('applicants','applicants_interview_passed','applicants_interview_failed'));
+}
 }
