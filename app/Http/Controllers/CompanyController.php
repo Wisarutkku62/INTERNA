@@ -39,12 +39,6 @@ class CompanyController extends Controller
 
         return view('company.managecom', compact('user', 'applicants', 'interviews'));
     }
-    public function editProfile()
-    {
-        $user = Auth::user();
-
-        return view('company.companyedit', compact('user'));
-    }
     public function editProfileSave(Request $request)
     {
         $validated = $request->validate([
@@ -303,5 +297,10 @@ public function interview_evaluation_update(Request $request, int $id)
     $interview->save();
 
     return redirect()->route('company.overview')->with('success', 'บันทึกผลการประเมินเรียบร้อยแล้ว');
+}
+public function editProfile($id = null)
+{
+    $company = $id ? Company::findOrFail($id) : Auth::user()->company;
+    return view('company.companyedit', compact('company'));
 }
 }

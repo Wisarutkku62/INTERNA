@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\Company;
 use App\Models\Application;
 use App\Models\Evaluation;
+use App\Models\Document;
 use App\Models\ApplicationDocument;
 use Illuminate\Http\Request;
 
@@ -18,37 +19,42 @@ class AdminController extends Controller
         $activeTab = $request->query('tab', 'dashboard');
 
         $stats = [
-            'total_students'     => Student::count(),
-            'active_interns'     => class_exists(Application::class) ? Application::where('application_status', 'approved')->count() : 0,
-            'total_companies'    => class_exists(Company::class) ? Company::count() : 0,
-            'passed_evaluations' => class_exists(Evaluation::class) ? Evaluation::where('evaluation_score', '>=', 50)->count() : 0,
+            'total_students' => Student::count(),
+            'active_interns' => Application::whereIn('application_status', ['approved', 'อนุมัติ', 'กำลังฝึกงาน'])->count(),
+            'total_companies' => Company::count(),
+            'passed_evaluations' => Evaluation::where('evaluation_score', '>=', 50)->count(),
         ];
 
-        $users = [];
-        $companies = [];
-        $internships = [];
-        $documents = [];
+        $users              = [];
+        $companies          = [];
+        $internships        = [];
+        $documents          = [];
+        $recentApplications = [];
 
-        if ($activeTab == 'users') {
-            $users = User::with('student')->orderBy('id', 'asc')->get();
-        } elseif ($activeTab == 'companies' && class_exists(Company::class)) {
+        if ($activeTab == 'dashboard') {
+            $recentApplications = Application::with(['student', 'internshipPosition.company'])
+                ->latest()
+                ->get();
+        } elseif ($activeTab == 'users') {
+            $users = User::whereHas('student')->with('student')->orderBy('id', 'asc')->get();
+        } elseif ($activeTab == 'companies') {
             $companies = Company::orderBy('id', 'asc')->get();
-        } elseif ($activeTab == 'internships' && class_exists(Application::class)) {
+        } elseif ($activeTab == 'internships') {
             $internships = Application::with(['student', 'internshipPosition.company'])->orderBy('id', 'asc')->get();
-        } elseif ($activeTab == 'documents' && class_exists(ApplicationDocument::class)) {
-            $documents = ApplicationDocument::with(['application.student', 'document'])->orderBy('id', 'asc')->get();
+        } elseif ($activeTab == 'documents') {
+
+            $documents = Document::with('student')->orderBy('id', 'desc')->get();
         }
 
-       return view('admin.dashboardadmin', compact(
+        return view('admin.dashboardadmin', compact(
             'stats',
             'users',
             'companies',
             'internships',
-            'documents'
+            'documents',
+            'recentApplications'
         ));
-    
     }
-
 
     public function destroyUser($id)
     {
@@ -63,14 +69,12 @@ class AdminController extends Controller
                     DB::table('applications_documents')->where('application_id', $app->id)->delete();
                     $app->delete();
                 }
-
                 $student->delete();
             }
 
             $company = Company::where('user_id', $user->id)->first();
             if ($company) {
                 $positions = DB::table('internship_positions')->where('company_id', $company->id)->pluck('id');
-
                 foreach ($positions as $posId) {
                     $apps = Application::where('internship_position_id', $posId)->get();
                     foreach ($apps as $app) {
@@ -79,7 +83,6 @@ class AdminController extends Controller
                         $app->delete();
                     }
                 }
-
                 DB::table('internship_positions')->where('company_id', $company->id)->delete();
                 $company->delete();
             }
@@ -96,7 +99,6 @@ class AdminController extends Controller
             $company = Company::findOrFail($id);
 
             $positions = DB::table('internship_positions')->where('company_id', $company->id)->pluck('id');
-
             foreach ($positions as $posId) {
                 $apps = Application::where('internship_position_id', $posId)->get();
                 foreach ($apps as $app) {
@@ -112,5 +114,21 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'ลบข้อมูลบริษัทเรียบร้อยแล้ว');
     }
-    
+    public function destroyDocument($id)
+    {
+        $appDoc = \App\Models\ApplicationDocument::find($id);
+        if ($appDoc) {
+            $appDoc->delete();
+            return redirect()->back()->with('success', 'ลบเอกสารเรียบร้อยแล้ว');
+        }
+
+
+        $doc = \App\Models\Document::find($id);
+        if ($doc) {
+            $doc->delete();
+            return redirect()->back()->with('success', 'ลบเอกสารเรียบร้อยแล้ว');
+        }
+
+        return redirect()->back()->with('error', 'ไม่พบข้อมูลเอกสารที่ต้องการลบ');
+    }
 }

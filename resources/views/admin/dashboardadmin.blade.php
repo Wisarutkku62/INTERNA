@@ -20,7 +20,7 @@ $activeTab = request('tab', 'dashboard');
                     สรุปภาพรวมและรายงาน
                 </a>
                 <a href="?tab=users" class="menu-link {{ $activeTab == 'users' ? 'active' : '' }}">
-                    จัดการ User
+                    จัดการข้อมูลนักศึกษา
                 </a>
                 <a href="?tab=companies" class="menu-link {{ $activeTab == 'companies' ? 'active' : '' }}">
                     จัดการข้อมูลบริษัท
@@ -34,7 +34,6 @@ $activeTab = request('tab', 'dashboard');
             </div>
         </div>
 
-        <!-- Content ฝั่งขวา -->
         <div class="admin-content">
 
             {{-- 1. หน้าสรุปภาพรวม --}}
@@ -60,12 +59,41 @@ $activeTab = request('tab', 'dashboard');
 
             <div class="content-card">
                 <div class="card-header">
-                    <h3 class="card-title">สรุปสถานะการฝึกงานล่าสุด</h3>
+                    <h3 class="card-title">รายการสมัครงานล่าสุดในระบบ</h3>
                 </div>
-                <p style="color: #718096;">แสดงข้อมูลสถิติภาพรวมของระบบ...</p>
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>ชื่อนักศึกษา</th>
+                                <th>ตำแหน่งงาน</th>
+                                <th>บริษัท</th>
+                                <th>วันที่สมัคร</th>
+                                <th>สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($recentApplications ?? [] as $app)
+                            <tr>
+                                <td>
+                                    {{ $app->student->student_fname ?? '' }} {{ $app->student->student_lname ?? 'นักศึกษา' }}
+                                </td>
+                                <td>{{ $app->internshipPosition->position_name ?? '-' }}</td>
+                                <td>{{ $app->internshipPosition->company->company_name ?? '-' }}</td>
+                                <td>{{ $app->created_at ? $app->created_at->format('d/m/Y H:i') : '-' }}</td>
+                                <td><span class="badge badge-warning">{{ $app->application_status }}</span></td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: #a0aec0;">ยังไม่มีรายการสมัครงานล่าสุด</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            {{-- 2. จัดการผู้ใช้งาน & Advisor --}}
+            {{-- 2. จัดการผู้ใช้งาน --}}
             @elseif($activeTab == 'users')
             <div class="content-card">
                 <div class="card-header">
@@ -88,13 +116,9 @@ $activeTab = request('tab', 'dashboard');
                             <tr>
                                 <td>{{ $user->id }}</td>
                                 <td>
-                                    @if($user->student && ($user->student->student_fname || $user->student->student_lname))
-                                    {{ $user->student->student_fname }} {{ $user->student->student_lname }}
-                                    @else
-                                    <span style="color: #a0aec0;">(ยังไม่กรอกข้อมูลส่วนตัว)</span>
-                                    @endif
+                                    {{ $user->student->student_fname ?? '-' }} {{ $user->student->student_lname ?? '' }}
                                 </td>
-                                <td>{{ $user->student->student_email ?? $user->email }}</td>
+                                <td>{{ $user->student->student_email ?? '-' }}</td>
                                 <td>{{ $user->student->student_phone ?? '-' }}</td>
                                 <td>
                                     <a href="{{ route('newprofile', ['user_id' => $user->id]) }}" class="btn-action btn-edit" style="text-decoration: none; display: inline-block;">แก้ไข</a>
@@ -108,7 +132,7 @@ $activeTab = request('tab', 'dashboard');
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" style="text-align: center; color: #a0aec0;">ไม่พบข้อมูลผู้ใช้งาน</td>
+                                <td colspan="5" style="text-align: center; color: #a0aec0;">ไม่พบข้อมูลนักศึกษา</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -116,10 +140,11 @@ $activeTab = request('tab', 'dashboard');
                 </div>
             </div>
 
+            {{-- 3. จัดการข้อมูลบริษัท --}}
             @elseif($activeTab == 'companies')
             <div class="content-card">
                 <div class="card-header">
-                    <h3 class="card-title">จัดการข้อมูลและอนุมัติบริษัท</h3>
+                    <h3 class="card-title">จัดการข้อมูลบริษัท</h3>
                 </div>
 
                 <div class="table-responsive">
@@ -139,7 +164,7 @@ $activeTab = request('tab', 'dashboard');
                                 <td>{{ $company->contact_name }}</td>
                                 <td>{{ $company->contact_phone ?? '-' }}</td>
                                 <td>
-                                    <button class="btn-action btn-edit">ตรวจ/แก้ไข</button>
+                                    <a href="{{ route('company.edit.profile', ['id' => $company->id]) }}" class="btn-action btn-edit" style="text-decoration: none; display: inline-block;">ตรวจ/แก้ไข</a>
 
                                     <form action="{{ route('admin.companies.destroy', $company->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบบริษัท {{ $company->company_name }}?');">
                                         @csrf
@@ -158,6 +183,7 @@ $activeTab = request('tab', 'dashboard');
                 </div>
             </div>
 
+            {{-- 4. ข้อมูลการฝึกงาน --}}
             @elseif($activeTab == 'internships')
             <div class="content-card">
                 <div class="card-header">
@@ -188,7 +214,7 @@ $activeTab = request('tab', 'dashboard');
                                 <td>{{ $intern->internshipPosition->position_worktype ?? '-' }}</td>
                                 <td><span class="badge badge-warning">{{ $intern->application_status }}</span></td>
                                 <td>
-                                    <button class="btn-action btn-edit">รายละเอียด</button>
+                                    <a href="{{ route('company.applicants.profile', ['id' => $intern->id]) }}" class="btn-action btn-edit" style="text-decoration: none; display: inline-block;">รายละเอียด</a>
                                 </td>
                             </tr>
                             @empty
@@ -201,6 +227,7 @@ $activeTab = request('tab', 'dashboard');
                 </div>
             </div>
 
+            {{-- 5. ตรวจสอบเอกสาร --}}
             @elseif($activeTab == 'documents')
             <div class="content-card">
                 <div class="card-header">
@@ -213,7 +240,7 @@ $activeTab = request('tab', 'dashboard');
                             <tr>
                                 <th>ชื่อนักศึกษา</th>
                                 <th>เอกสาร</th>
-                                <th>หมายเหตุ</th>
+                                <th>ประเภทเอกสาร</th>
                                 <th>สถานะ</th>
                                 <th>จัดการ</th>
                             </tr>
@@ -222,13 +249,39 @@ $activeTab = request('tab', 'dashboard');
                             @forelse($documents ?? [] as $doc)
                             <tr>
                                 <td>
-                                    {{ $doc->application->student->student_fname ?? '' }} {{ $doc->application->student->student_lname ?? '-' }}
+                                    {{ $doc->student->student_fname ?? '' }} {{ $doc->student->student_lname ?? '-' }}
                                 </td>
-                                <td>{{ $doc->document->doc_name ?? 'เอกสารสมัครงาน' }}</td>
-                                <td>{{ $doc->appdoc_remark ?? '-' }}</td>
-                                <td><span class="badge badge-success">{{ $doc->appdoc_status }}</span></td>
+                                <td>{{ $doc->document_type ?? 'เอกสารฝึกงาน' }}</td>
+                                <td>{{ $doc->document_type ?? '-' }}</td>
+                                <td><span class="badge badge-success">ส่งแล้ว</span></td>
                                 <td>
-                                    <button class="btn-action btn-edit">ตรวจเอกสาร</button>
+                                    {{-- ปุ่มตรวจเอกสาร --}}
+                                    @if(!empty($doc->document_file_path))
+                                    @php
+                                    $filePath = ltrim(str_replace('/storage/', '', $doc->document_file_path), '/');
+                                    @endphp
+                                    <a href="{{ asset('storage/' . $filePath) }}" target="_blank" class="btn-action btn-edit" style="text-decoration: none; display: inline-block;">
+                                        ตรวจเอกสาร
+                                    </a>
+                                    @elseif(!empty($doc->appdoc_file_path))
+                                    @php
+                                    $appPath = ltrim(str_replace('/storage/', '', $doc->appdoc_file_path), '/');
+                                    @endphp
+                                    <a href="{{ asset('storage/' . $appPath) }}" target="_blank" class="btn-action btn-edit" style="text-decoration: none; display: inline-block;">
+                                        ตรวจเอกสาร
+                                    </a>
+                                    @else
+                                    <button type="button" class="btn-action btn-edit" style="opacity: 0.5; cursor: not-allowed;" onclick="alert('ไม่พบไฟล์เอกสารในระบบ')">
+                                        ตรวจเอกสาร
+                                    </button>
+                                    @endif
+
+                                    {{-- ปุ่มลบเอกสาร --}}
+                                    <form action="{{ route('admin.documents.destroy', $doc->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบเอกสารรายการนี้?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-action btn-delete">ลบ</button>
+                                    </form>
                                 </td>
                             </tr>
                             @empty

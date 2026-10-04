@@ -4,16 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 class InternshipPosition extends Model
 {
     use SoftDeletes;
-    
-    public function company() 
+
+    public function company()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
-public function applications() 
+    public function applications()
     {
         return $this->hasMany(Application::class);
     }
