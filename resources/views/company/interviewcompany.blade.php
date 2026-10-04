@@ -28,11 +28,7 @@
         </div>
     @endif
 
-<<<<<<< Updated upstream
     <form class="appointment-form" action="{{ route('interviews.store', $applicants->id) }}" method="POST">
-=======
-    <form class="appointment-form" action="{{ route('interviews.store', $application->id) }}" method="POST">
->>>>>>> Stashed changes
         @csrf
 
         <div class="form-group">

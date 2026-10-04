@@ -20,7 +20,7 @@
         <ul class="nav-menu">
           <li class="nav-item"><a href="{{ route('intern.intern')}}" class="nav-link">ค้นหาผู้หางาน</a></li>
           <li class="nav-item"><a href="#" class="nav-link">ประเมินผล</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">ติดต่อเรา</a></li>
+          <li class="nav-item"><a href="{{ route('contact') }}">ติดต่อเรา</a></li>
         </ul>
         @auth
          <div class="nav-actions">

@@ -11,19 +11,14 @@ use App\Http\Controllers\InternController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
-Route::view('/yed','company.announcementedit');
-Route::view('/mg','company.ManageInternship');
-Route::view('/mf','InformationandHistory');
-Route::view('/mt','company.evaluation');
-Route::view('/ct','company.companydetail');
-Route::view('/ct','company.companydetail');
-Route::view('oom','viewresume');
-Route::view('/wsxz','recheck');
+
 // Public
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
 Route::get('/intern/detail/{id}', [InternController::class, 'internship_detail'])->name('intern.detail');
 Route::post('/intern/detail/{id}', [InternController::class, 'apply'])->name('intern.apply');
+Route::view('/contact', 'contactus')->name('contact');
+
 
 Route::get('/doc', [DocumentController::class, 'index'])->name('documents.index');
 Route::post('/doc', [DocumentController::class, 'store'])->name('documents.store');
@@ -79,7 +74,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
 Route::delete('/admin/companies/{id}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
+Route::delete('/admin/documents/{id}', [AdminController::class, 'destroyDocument'])->name('admin.documents.destroy');
 });
 
+Route::view('/c','recheck');
 
 require __DIR__.'/settings.php';
