@@ -21,7 +21,7 @@
       <div class="nav-container" id="navContainer">
         <ul class="nav-menu">
           <li class="nav-item"><a href="{{ route('intern.intern')}}" class="nav-link">ค้นหาผู้หางาน</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">ประเมินผล</a></li>
+          <li class="nav-item"><a href="{{ route('company.applicants.all')}}" class="nav-link">ตรวจสอบสถานะผู้สมัคร</a></li>
           <li class="nav-item"><a href="{{ route('contact') }}">ติดต่อเรา</a></li>
         </ul>
         @auth
