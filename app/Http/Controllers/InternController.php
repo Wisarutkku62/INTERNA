@@ -16,21 +16,35 @@ class InternController extends Controller
     }
     public function internship(Request $request)
     {
-        $query = InternshipPosition::query();
+
+    $query = InternshipPosition::with('company');
+
+    if ($request->filled('keyword')) {
         $keyword = $request->keyword;
-
-        if ($keyword) {
-            $query->where(
-                'position_name',
-                'LIKE',
-                '%' . $keyword . '%'
-            );
-        }
-
-        $internship_positions = $query->get();
-        return view('application', compact('internship_positions', 'keyword'));
+        $query->where(function($q) use ($keyword) {
+            $q->where('position_name', 'LIKE', '%' . $keyword . '%')
+              ->orWhereHas('company', function($compQuery) use ($keyword) {
+                  $compQuery->where('company_name', 'LIKE', '%' . $keyword . '%');
+              });
+        });
     }
 
+    if ($request->filled('category')) {
+        $query->where('position_category', $request->category);
+    }
+
+    if ($request->filled('worktype')) {
+        $query->where('position_worktype', $request->worktype);
+    }
+
+    if ($request->filled('interview_type')) {
+        $query->where('position_interview_type', $request->interview_type);
+    }
+
+    $internship_positions = $query->orderBy('id', 'desc')->get();
+
+    return view('application', compact('internship_positions'));
+    }
     public function internship_detail($id)
     {
         $positions = InternshipPosition::findOrFail($id);
