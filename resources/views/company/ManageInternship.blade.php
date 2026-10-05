@@ -1,6 +1,6 @@
 @extends("layouts.app")
 
-@push('styles') 
+@push('styles')
 <link rel="stylesheet" href="{{ asset('css/ManageInternship.css') }}?v={{ filemtime(public_path('css/ManageInternship.css')) }}">
 @endpush
 

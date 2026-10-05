@@ -2,7 +2,7 @@
 @use('Carbon\Carbon')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 @endpush
 
 @section('content')
@@ -36,7 +36,7 @@
                 <label>วันเกิด</label>
                 <div class="birthday-inputs">
                     @php
-                        $months = [1 => 'มกราคม', 2 => 'กุมภาพันธ์', 3 => 'มีนาคม', 4 => 'เมษายน', 5 => 'พฤษภาคม', 6 => 'มิถุนายน', 7 => 'กรกฎาคม', 8 => 'สิงหาคม', 9 => 'กันยายน', 10 => 'ตุลาคม', 11 => 'พฤศจิกายน', 12 => 'ธันวาคม'];
+                    $months = [1 => 'มกราคม', 2 => 'กุมภาพันธ์', 3 => 'มีนาคม', 4 => 'เมษายน', 5 => 'พฤษภาคม', 6 => 'มิถุนายน', 7 => 'กรกฎาคม', 8 => 'สิงหาคม', 9 => 'กันยายน', 10 => 'ตุลาคม', 11 => 'พฤศจิกายน', 12 => 'ธันวาคม'];
                     @endphp
                     <div class="field-value">{{ $user->student?->student_birthday ? Carbon::parse($user->student->student_birthday)->format('j') : 'วัน' }}</div>
                     <div class="field-value">{{ $user->student?->student_birthday ? Carbon::parse($user->student->student_birthday)->locale('th')->translatedFormat('F') : 'เดือน' }}</div>

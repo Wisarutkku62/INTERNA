@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -43,8 +44,8 @@ class ProfileController extends Controller
 
         if ($request->day && $request->month && $request->year) {
             $birthday = ($request->year) . '-' .
-                        str_pad($request->month, 2, '0', STR_PAD_LEFT) . '-' .
-                        str_pad($request->day, 2, '0', STR_PAD_LEFT);
+                str_pad($request->month, 2, '0', STR_PAD_LEFT) . '-' .
+                str_pad($request->day, 2, '0', STR_PAD_LEFT);
         }
 
         Student::updateOrCreate(
@@ -67,15 +68,15 @@ class ProfileController extends Controller
             ->route('profile.profile')
             ->with('success', 'บันทึกข้อมูลเรียบร้อยแล้ว');
     }
-    
+
     public function evaluation()
     {
-        return view ('evaluation');
+        return view('evaluation');
     }
 
     public function saveEvaluation(Request $request)
     {
-    // เดี๋ยวค่อยเขียนบันทึก DB
+        // เดี๋ยวค่อยเขียนบันทึก DB
     }
     public function overview()
     {
@@ -83,12 +84,12 @@ class ProfileController extends Controller
     }
     public function appointment()
     {
-    return view('appointment');
+        return view('appointment');
     }
     public function updateAppointment(Request $request)
     {
-    $action = $request->input('action');
+        $action = $request->input('action');
 
-    return back()->with('success', 'บันทึกสถานะการนัดหมายเรียบร้อยแล้ว');
+        return back()->with('success', 'บันทึกสถานะการนัดหมายเรียบร้อยแล้ว');
     }
 }

@@ -28,9 +28,9 @@ class Application extends Model
         return $this->hasMany(ApplicationDocument::class);
     }
 
-    public function evaluations()
+    public function evaluation()
     {
-        return $this->hasMany(Evaluation::class);
+        return $this->hasOne(Evaluation::class);
     }
 
     public function latestEvaluation()

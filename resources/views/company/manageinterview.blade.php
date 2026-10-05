@@ -1,7 +1,7 @@
 @extends('layouts.company_nav')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/manageinterview.css') }}">
+<link rel="stylesheet" href="{{ asset('css/manageinterview.css') }}">
 @endpush
 
 @section('content')
@@ -12,14 +12,14 @@
             <div class="avatar-box">
                 <div class="avatar-placeholder">
                     <svg width="70" height="70" viewBox="0 0 24 24" fill="#cbd5e1">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                     </svg>
                 </div>
             </div>
 
             <div class="candidate-info">
                 <h2 class="candidate-name">{{$applicants?->student?->student_fname}} {{$applicants?->student?->student_lname}}</h2>
-                
+
                 <div class="info-row">
                     <span class="info-label">ตำแหน่ง :</span>
                     <span class="info-value-bold">{{$applicants?->internshipPosition?->position_name}}</span>

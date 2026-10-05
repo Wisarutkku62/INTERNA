@@ -1,199 +1,196 @@
 @extends("layouts.auth")
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/register.css') }}?v={{ filemtime(public_path('css/register.css')) }}">
+<link rel="stylesheet" href="{{ asset('css/register.css') }}?v={{ filemtime(public_path('css/register.css')) }}">
 @endpush
 
 @section('title','Register')
 
 @section('content')
-    <div class="login-page">
-        <div class="left-section">
-            <img src="{{ asset('image/imagelogin_register1.png') }}" alt="Admin Login Image">
-        </div>
+<div class="login-page">
+    <div class="left-section">
+        <img src="{{ asset('image/imagelogin_register1.png') }}" alt="Admin Login Image">
+    </div>
 
-        <div class="right-section">
+    <div class="right-section">
 
-            <div class="login-container">
+        <div class="login-container">
 
-                <a href="{{ url('/') }}" class="back" class="back">
-                    <span>‹</span>กลับสู่หน้าหลัก
-                </a>
+            <a href="{{ url('/') }}" class="back" class="back">
+                <span>‹</span>กลับสู่หน้าหลัก
+            </a>
 
-                <div class="header">
+            <div class="header">
 
-                    <h1>ลงทะเบียน</h1>
+                <h1>ลงทะเบียน</h1>
 
-                    <p>
-                        สำหรับนักศึกษา ผู้หางาน และบริษัทประกาศงาน
-                    </p>
+                <p>
+                    สำหรับนักศึกษา ผู้หางาน และบริษัทประกาศงาน
+                </p>
 
+            </div>
+
+
+            <form action="{{ route('auth.register') }}" method='POST' id="RegForm">
+                @csrf
+                <div class="form-group">
+
+                    <label for="email">
+                        อีเมล
+                    </label>
+
+                    <div class="input-box" id="input-box-email">
+
+                        <span class="icon">
+
+                        </span>
+
+                        <input
+                            type="text"
+                            id="email"
+                            name="email"
+                            placeholder="อีเมล"
+                            class="">
+                    </div>
+                    <span class="email-validated" id="email-validated">
+
+                    </span>
                 </div>
 
-                
-                <form action="{{ route('auth.register') }}" method='POST' id="RegForm">
-                    @csrf
-                    <div class="form-group">
 
-                        <label for="email">
-                            อีเมล
-                        </label>
+                <div class="form-group">
 
-                        <div class="input-box" id="input-box-email">
+                    <label for="password">
+                        รหัสผ่าน
+                    </label>
 
-                            <span class="icon">
-                                
-                            </span>
+                    <div class="input-box" id="input-box-password">
 
-                            <input
-                                type="text"
-                                id="email"
-                                name="email"
-                                placeholder="อีเมล"
-                                class=""
-                            >
-                        </div>
-                        <span class="email-validated" id="email-validated">
+                        <span class="icon">
+
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="รหัสผ่าน"
+                            class="">
+
+                        <span class="show-password">
 
                         </span>
                     </div>
 
+                    <span class="password-validated" id="password-validated">
 
-                    <div class="form-group">
+                    </span>
+                </div>
 
-                        <label for="password">
-                            รหัสผ่าน
-                        </label>
 
-                        <div class="input-box" id="input-box-password">
+                <div class="form-group">
 
-                            <span class="icon">
-                                
-                            </span>
+                    <label for="password_confirmation">
+                        ยืนยันรหัสผ่าน
+                    </label>
 
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="รหัสผ่าน"
-                                class=""
-                            >
+                    <div class="input-box" id="input-box-password_confirmation">
 
-                            <span class="show-password">
-                            
-                            </span>
-                        </div>
+                        <span class="icon">
 
-                        <span class="password-validated" id="password-validated">
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password_confirmation"
+                            name="password_confirmation"
+                            placeholder="รหัสผ่าน"
+                            class="">
+
+                        <span class="show-password">
 
                         </span>
                     </div>
-
-
-                    <div class="form-group">
-
-                        <label for="password_confirmation">
-                            ยืนยันรหัสผ่าน
-                        </label>
-
-                        <div class="input-box" id="input-box-password_confirmation">
-
-                            <span class="icon">
-                                
-                            </span>
-
-                            <input
-                                type="password"
-                                id="password_confirmation"
-                                name="password_confirmation"
-                                placeholder="รหัสผ่าน"
-                                class=""
-                            >
-
-                            <span class="show-password">
-                            
-                            </span>
-                        </div>
 
                     <span class="password_confirmation-validated" id="password_confirmation-validated">
 
                     </span>
-                    </div>
+                </div>
 
 
-                    <div class="radio-option">
-                        <input type="radio" id="student" name="role" value="student" checked>
-                        <label for="student">นักศึกษา</label>
-                    </div>
-    
-                    <div class="radio-option">
-                        <input type="radio" id="company" name="role" value="company">
-                        <label for="company">บริษัท</label>
-                    </div>
+                <div class="radio-option">
+                    <input type="radio" id="student" name="role" value="student" checked>
+                    <label for="student">นักศึกษา</label>
+                </div>
+
+                <div class="radio-option">
+                    <input type="radio" id="company" name="role" value="company">
+                    <label for="company">บริษัท</label>
+                </div>
 
 
-                    <div class="buttonsubmit">
-                        <button type="submit">
-                            ลงทะเบียน
-                        </button>
-                    </div>
-                
+                <div class="buttonsubmit">
+                    <button type="submit">
+                        ลงทะเบียน
+                    </button>
+                </div>
 
-                </form>
 
-                @error('email')
-                <script>
-                    document.querySelector(".email-validated").innerHTML='{{$message}}'
-                    document.getElementById('input-box-email').classList.add('input-error')
-                    document.getElementById('input-box-password').classList.add('input-error')
-                    document.getElementById('input-box-password_confirmation').classList.add('input-error')
-                </script>
-                @enderror
+            </form>
 
-                <script>
-                    let RegFormJs = document.getElementById('RegForm')
-                    RegFormJs.addEventListener('submit', (e) => {
-                        let EmailNotFill = false;
-                        let PasswordNotFill = false;
-                        let PasswordConfirmationNotFill = false;
-                        let PasswordNotEight = false;
-                        const email_value = document.getElementById('email').value;
-                        const password_value = document.getElementById('password').value;
-                        const password_confirmation_value = document.getElementById('password_confirmation').value;
-                        const role_value = document.querySelector('input[name="role"]:checked').value;
-                    
-                    if(email_value=="") {
-                        document.querySelector(".email-validated").innerHTML='กรุณากรอกอีเมล'
+            @error('email')
+            <script>
+                document.querySelector(".email-validated").innerHTML = '{{$message}}'
+                document.getElementById('input-box-email').classList.add('input-error')
+                document.getElementById('input-box-password').classList.add('input-error')
+                document.getElementById('input-box-password_confirmation').classList.add('input-error')
+            </script>
+            @enderror
+
+            <script>
+                let RegFormJs = document.getElementById('RegForm')
+                RegFormJs.addEventListener('submit', (e) => {
+                    let EmailNotFill = false;
+                    let PasswordNotFill = false;
+                    let PasswordConfirmationNotFill = false;
+                    let PasswordNotEight = false;
+                    const email_value = document.getElementById('email').value;
+                    const password_value = document.getElementById('password').value;
+                    const password_confirmation_value = document.getElementById('password_confirmation').value;
+                    const role_value = document.querySelector('input[name="role"]:checked').value;
+
+                    if (email_value == "") {
+                        document.querySelector(".email-validated").innerHTML = 'กรุณากรอกอีเมล'
                         EmailNotFill = true;
                         document.getElementById('input-box-email').classList.add('input-error')
                     } else if (!email_value == "") {
-                        document.querySelector(".email-validated").innerHTML=''
+                        document.querySelector(".email-validated").innerHTML = ''
                         EmailNotFill = false;
                         document.getElementById('input-box-email').classList.remove('input-error')
                     }
 
-                    if(password_value=="") {
-                        document.querySelector(".password-validated").innerHTML='กรุณากรอกรหัสผ่าน'
+                    if (password_value == "") {
+                        document.querySelector(".password-validated").innerHTML = 'กรุณากรอกรหัสผ่าน'
                         PasswordNotFill = true;
                         document.getElementById('input-box-password').classList.add('input-error')
-                    }else if (!password_value == "") {
-                        document.querySelector(".password-validated").innerHTML=''
+                    } else if (!password_value == "") {
+                        document.querySelector(".password-validated").innerHTML = ''
                         PasswordNotFill = false;
                         document.getElementById('input-box-password').classList.remove('input-error')
                     }
 
-                    if(password_confirmation_value=="") {
-                        document.querySelector(".password_confirmation-validated").innerHTML='กรุณากรอกยืนยันรหัสผ่าน'
+                    if (password_confirmation_value == "") {
+                        document.querySelector(".password_confirmation-validated").innerHTML = 'กรุณากรอกยืนยันรหัสผ่าน'
                         PasswordConfirmationNotFill = true;
                         document.getElementById('input-box-password_confirmation').classList.add('input-error')
-                    }else if (!password_confirmation_value == "") {
-                        document.querySelector(".password_confirmation-validated").innerHTML=''
+                    } else if (!password_confirmation_value == "") {
+                        document.querySelector(".password_confirmation-validated").innerHTML = ''
                         PasswordConfirmationNotFill = false;
                         document.getElementById('input-box-password_confirmation').classList.remove('input-error')
                     }
-                    
+
                     if (PasswordNotFill == false) {
-                        if(password_value.length < 8 ) {
+                        if (password_value.length < 8) {
                             document.querySelector('.password-validated').innerHTML = 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัว'
                             PasswordNotEight = true;
                             document.getElementById('input-box-password_confirmation').classList.add('input-error')
@@ -205,22 +202,22 @@
                             document.getElementById('input-box-password').classList.remove('input-error')
                         }
                     }
-                    
+
                     if (PasswordConfirmationNotFill == false) {
                         if (!PasswordNotEight) {
                             if (password_value !== password_confirmation_value) {
-                            document.querySelector('.password_confirmation-validated').innerHTML = 'รหัสผ่านไม่ตรงกัน'
-                            document.querySelector('.password-validated').innerHTML = 'รหัสผ่านไม่ตรงกัน'
-                            PasswordConfirmationNotFill = true;
-                            document.getElementById('input-box-password').classList.add('input-error')
-                            document.getElementById('input-box-password_confirmation').classList.add('input-error')
-                        } else if (password_value === password_confirmation_value) {
-                            document.querySelector('.password_confirmation-validated').innerHTML = ''
-                            document.querySelector('.password-validated').innerHTML = ''
-                            PasswordConfirmationNotFill = false;
-                            document.getElementById('input-box-password').classList.remove('input-error')
-                            document.getElementById('input-box-password_confirmation').classList.remove('input-error')
-                        }
+                                document.querySelector('.password_confirmation-validated').innerHTML = 'รหัสผ่านไม่ตรงกัน'
+                                document.querySelector('.password-validated').innerHTML = 'รหัสผ่านไม่ตรงกัน'
+                                PasswordConfirmationNotFill = true;
+                                document.getElementById('input-box-password').classList.add('input-error')
+                                document.getElementById('input-box-password_confirmation').classList.add('input-error')
+                            } else if (password_value === password_confirmation_value) {
+                                document.querySelector('.password_confirmation-validated').innerHTML = ''
+                                document.querySelector('.password-validated').innerHTML = ''
+                                PasswordConfirmationNotFill = false;
+                                document.getElementById('input-box-password').classList.remove('input-error')
+                                document.getElementById('input-box-password_confirmation').classList.remove('input-error')
+                            }
                         } else if (PasswordNotEight) {
                             document.querySelector('.password_confirmation-validated').innerHTML = 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัว'
                             document.getElementById('input-box-password_confirmation').classList.add('input-error')
@@ -232,17 +229,16 @@
                     if (EmailNotFill || PasswordNotFill || PasswordConfirmationNotFill || PasswordNotEight) {
                         e.preventDefault()
                     }
-                    });
-                    
-                </script>
+                });
+            </script>
 
-                <div class="admin-info">
-                    หรือมีบัญชีอยู่แล้ว? <a href="{{ route('login') }}">เข้าสู่ระบบ</a>
-                </div>
-
+            <div class="admin-info">
+                หรือมีบัญชีอยู่แล้ว? <a href="{{ route('login') }}">เข้าสู่ระบบ</a>
             </div>
 
         </div>
 
     </div>
+
+</div>
 @endsection

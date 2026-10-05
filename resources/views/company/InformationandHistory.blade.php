@@ -16,23 +16,23 @@
         <h1>ข้อมูลและประวัติของการฝึกงาน</h1>
     </div>
 
-     
-        <!-- ตรวจสอบข้อมูลการฝึกงานที่ผ่านมา -->
 
-        <div class="section-block">
-            <!-- <h3 class="section-title">ตรวจสอบข้อมูลการฝึกงานที่ผ่านมา</h3> -->
+    <!-- ตรวจสอบข้อมูลการฝึกงานที่ผ่านมา -->
 
-            <div class="box info-box">
-                <p>ค้นหาด้วยรหัสนักศึกษาหรือชื่อนักศึกษา</p>
-                <!-- ฟอร์มค้นหา -->
-                <form onsubmit="return false;">
-                    <input type="text" placeholder="กรอกรหัสนักศึกษาหรือชื่อนักศึกษา" value="">
-                    <button type="submit">ตรวจสอบ</button>
-                </form>
-                
-            </div>
-       
+    <div class="section-block">
+        <!-- <h3 class="section-title">ตรวจสอบข้อมูลการฝึกงานที่ผ่านมา</h3> -->
+
+        <div class="box info-box">
+            <p>ค้นหาด้วยรหัสนักศึกษาหรือชื่อนักศึกษา</p>
+            <!-- ฟอร์มค้นหา -->
+            <form onsubmit="return false;">
+                <input type="text" placeholder="กรอกรหัสนักศึกษาหรือชื่อนักศึกษา" value="">
+                <button type="submit">ตรวจสอบ</button>
+            </form>
+
         </div>
+
+    </div>
 
     <!-- ดูรายชื่อนักศึกษาที่เคยฝึกงาน -->
     <div class="section-block">
@@ -109,7 +109,7 @@
         </div> -->
 
 
-       
+
     </div>
 
     @endsection

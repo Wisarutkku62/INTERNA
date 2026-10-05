@@ -361,7 +361,7 @@ class DatabaseSeeder extends Seeder
                 'id' => 1,
                 'internship_position_id' => 1,
                 'student_id' => 1,
-                'application_status' => 'interview_scheduled',
+                'application_status' => 'interning',
                 'reject_stage' => null,
                 'reject_reason' => null,
                 'created_at' => $now, 'updated_at' => $now
@@ -370,7 +370,7 @@ class DatabaseSeeder extends Seeder
                 'id' => 2,
                 'internship_position_id' => 2,
                 'student_id' => 2,
-                'application_status' => 'resume_approved',
+                'application_status' => 'pending',
                 'reject_stage' => null,
                 'reject_reason' => null,
                 'created_at' => $now, 'updated_at' => $now
@@ -379,7 +379,7 @@ class DatabaseSeeder extends Seeder
                 'id' => 3,
                 'internship_position_id' => 3,
                 'student_id' => 3,
-                'application_status' => 'interview_passed',
+                'application_status' => 'pending',
                 'reject_stage' => null,
                 'reject_reason' => null,
                 'created_at' => $now, 'updated_at' => $now
@@ -388,7 +388,7 @@ class DatabaseSeeder extends Seeder
                 'id' => 4,
                 'internship_position_id' => 4,
                 'student_id' => 4,
-                'application_status' => 'rejected',
+                'application_status' => 'pending',
                 'reject_stage' => 'resume',
                 'reject_reason' => 'คุณสมบัติยังไม่ตรงตามข้อกำหนดของตำแหน่งงาน',
                 'created_at' => $now, 'updated_at' => $now
@@ -458,7 +458,7 @@ class DatabaseSeeder extends Seeder
                 'interview_mode' => 'online',
                 'interview_location' => 'https://meet.google.com/abc-defg-hij',
                 'email_details' => 'กรุณาเตรียมตัวล่วงหน้า 5 นาที และเตรียมผลงานมานำเสนอ',
-                'interview_result' => 'pending',
+                'interview_result' => 'passed',
                 'created_at' => $now, 'updated_at' => $now
             ],
             [
@@ -469,7 +469,7 @@ class DatabaseSeeder extends Seeder
                 'interview_mode' => 'online',
                 'interview_location' => 'https://zoom.us/j/123456789',
                 'email_details' => 'สัมภาษณ์รอบแรกโดยฝ่าย HR และ Team Lead',
-                'interview_result' => 'pending',
+                'interview_result' => 'failed',
                 'created_at' => $now, 'updated_at' => $now
             ],
             [
@@ -508,47 +508,42 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // 9. evaluations (5 rows: เชื่อมกับ application_id 1-5)[cite: 9]
-        DB::table('evaluations')->insert([
-            [
-                'id' => 1,
-                'application_id' => 3, // เชื่อมกับสมัครฝึกงานที่ผ่านแล้ว
-                'evaluation_type' => 'midterm',
-                'evaluation_score' => 88.50,
-                'evaluation_feedback' => 'นักศึกษาเรียนรู้เร็ว มีความตั้งใจทำงานเป็นอย่างดี',
-                'created_at' => $now, 'updated_at' => $now
-            ],
-            [
-                'id' => 2,
-                'application_id' => 3,
-                'evaluation_type' => 'final',
-                'evaluation_score' => 92.00,
-                'evaluation_feedback' => 'ส่งงานได้ตรงเวลาเสมอ สามารถแก้ปัญหาเฉพาะหน้าได้ดีมาก',
-                'created_at' => $now, 'updated_at' => $now
-            ],
-            [
-                'id' => 3,
-                'application_id' => 1,
-                'evaluation_type' => 'interview_assessment',
-                'evaluation_score' => 85.00,
-                'evaluation_feedback' => 'พื้นฐานการเขียนโค้ดดี มีทัศนคติเชิงบวก',
-                'created_at' => $now, 'updated_at' => $now
-            ],
-            [
-                'id' => 4,
-                'application_id' => 2,
-                'evaluation_type' => 'interview_assessment',
-                'evaluation_score' => 80.00,
-                'evaluation_feedback' => 'มี Portfolio ผลงานสวยงาม เหมาะสมกับตำแหน่ง Front-end',
-                'created_at' => $now, 'updated_at' => $now
-            ],
-            [
-                'id' => 5,
-                'application_id' => 5,
-                'evaluation_type' => 'initial_screening',
-                'evaluation_score' => 75.00,
-                'evaluation_feedback' => 'ประวัติส่วนตัวครบถ้วน รอนัดสัมภาษณ์เพิ่มเติม',
-                'created_at' => $now, 'updated_at' => $now
-            ],
-        ]);
+        // DB::table('evaluations')->insert([
+        //     [
+        //         'id' => 1,
+        //         'application_id' => 3, // เชื่อมกับสมัครฝึกงานที่ผ่านแล้ว
+        //         'evaluation_score' => 88.50,
+        //         'evaluation_feedback' => 'นักศึกษาเรียนรู้เร็ว มีความตั้งใจทำงานเป็นอย่างดี',
+        //         'created_at' => $now, 'updated_at' => $now
+        //     ],
+        //     [
+        //         'id' => 2,
+        //         'application_id' => 3,
+        //         'evaluation_score' => 92.00,
+        //         'evaluation_feedback' => 'ส่งงานได้ตรงเวลาเสมอ สามารถแก้ปัญหาเฉพาะหน้าได้ดีมาก',
+        //         'created_at' => $now, 'updated_at' => $now
+        //     ],
+        //     [
+        //         'id' => 3,
+        //         'application_id' => 1,
+        //         'evaluation_score' => 85.00,
+        //         'evaluation_feedback' => 'พื้นฐานการเขียนโค้ดดี มีทัศนคติเชิงบวก',
+        //         'created_at' => $now, 'updated_at' => $now
+        //     ],
+        //     [
+        //         'id' => 4,
+        //         'application_id' => 2,
+        //         'evaluation_score' => 80.00,
+        //         'evaluation_feedback' => 'มี Portfolio ผลงานสวยงาม เหมาะสมกับตำแหน่ง Front-end',
+        //         'created_at' => $now, 'updated_at' => $now
+        //     ],
+        //     [
+        //         'id' => 5,
+        //         'application_id' => 5,
+        //         'evaluation_score' => 75.00,
+        //         'evaluation_feedback' => 'ประวัติส่วนตัวครบถ้วน รอนัดสัมภาษณ์เพิ่มเติม',
+        //         'created_at' => $now, 'updated_at' => $now
+        //     ],
+        // ]);
     }
 }

@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/positiondetail.css') }}">
+<link rel="stylesheet" href="{{ asset('css/positiondetail.css') }}">
 @endpush
 
 @section('content')
@@ -16,13 +16,13 @@
 
                 <div class="tags">
                     @if ($positions->position_interview_type == 'Onsite')
-                        <span class="tag-blue">สัมภาษณ์งานออนไซต์</span>
+                    <span class="tag-blue">สัมภาษณ์งานออนไซต์</span>
                     @elseif ($positions->position_interview_type == 'Online')
-                        <span class="tag-blue">สัมภาษณ์งานออนไลน์</span>
+                    <span class="tag-blue">สัมภาษณ์งานออนไลน์</span>
                     @endif
 
                     @if ($positions->position_worktype)
-                        <span class="tag-green">{{ $positions->position_worktype }}</span>
+                    <span class="tag-green">{{ $positions->position_worktype }}</span>
                     @endif
                 </div>
             </div>
@@ -61,15 +61,15 @@
 
                 <div class="apply-box">
                     @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
                     @endif
 
                     @if(session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
                     @endif
 
                     <form action="{{ route('intern.apply', $positions->id) }}" method="POST">

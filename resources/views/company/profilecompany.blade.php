@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/profilecompany.css') }}">
+<link rel="stylesheet" href="{{ asset('css/profilecompany.css') }}">
 @endpush
 
 @section('content')
 
-    <div class="profile-page-wrapper">
+<div class="profile-page-wrapper">
     <div class="profile-container">
 
         <div class="profile-left">
@@ -26,9 +26,9 @@
                 <label for="company_website">เว็บไซต์บริษัท</label>
                 <div class="field-value">
                     @if(!empty($user->company->company_website))
-                        <a href="{{ $user->company->company_website }}" target="_blank">{{ $user->company->company_website }}</a>
+                    <a href="{{ $user->company->company_website }}" target="_blank">{{ $user->company->company_website }}</a>
                     @else
-                        -
+                    -
                     @endif
                 </div>
             </div>

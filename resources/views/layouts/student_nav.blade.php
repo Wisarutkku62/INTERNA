@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title','INTERNA : หาที่ฝึกงาน งานเด็กจบใหม่')</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/apps.css') }}">
-    @stack('styles')
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@yield('title','INTERNA : หาที่ฝึกงาน งานเด็กจบใหม่')</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/apps.css') }}">
+  @stack('styles')
 </head>
+
 <body>
-    <header>
-      <nav class="navbar">
-        <a href="{{ route('index')}}" class="logo">
-          <span class="logo-text">INTERNA</span>
-        </a>
+  <header>
+    <nav class="navbar">
+      <a href="{{ route('index')}}" class="logo">
+        <span class="logo-text">INTERNA</span>
+      </a>
       <div class="nav-container" id="navContainer">
         <ul class="nav-menu">
           <li class="nav-item dropdown">
             <a href="{{ route('intern.intern')}}" class="nav-link">
               ค้นหาตำแหน่งงาน
-              <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+              <svg class="arrow-icon" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
             </a>
           </li>
           <!-- <li class="nav-item"><a href="{{ route('intern.intern') }}" class="nav-link">ค้นหานักศึกษาฝึกงาน</a></li> -->
@@ -32,21 +36,21 @@
 
         @auth
         <div class="nav-actions">
-        <div class="profile-dropdown">
-          <input type="checkbox" id="profile-toggle" class="profile-toggle">
-          <label for="profile-toggle" class="profile-label"> 
-            <img src="{{ asset('image/profile_m.png') }}" alt="Profile" class="user-avatar">
-          </label>
-          <div class="dropdown-menu">
-            <a href="{{route('student.evaluation')}}" class="dropdown-item">ภาพรวม</a>
-            <a href="{{route('profile.profile')}}" class="dropdown-item">โปรไฟล์</a>
-            <form action="{{ route('auth.logout')}}" method="POST" class="logout-form">
-              @csrf
-              <button type="submit" class="dropdown-item logout-btn">ออกจากระบบ</button>
-            </form>
+          <div class="profile-dropdown">
+            <input type="checkbox" id="profile-toggle" class="profile-toggle">
+            <label for="profile-toggle" class="profile-label">
+              <img src="{{ asset('image/profile_m.png') }}" alt="Profile" class="user-avatar">
+            </label>
+            <div class="dropdown-menu">
+              <a href="{{route('student.evaluation')}}" class="dropdown-item">ภาพรวม</a>
+              <a href="{{route('profile.profile')}}" class="dropdown-item">โปรไฟล์</a>
+              <form action="{{ route('auth.logout')}}" method="POST" class="logout-form">
+                @csrf
+                <button type="submit" class="dropdown-item logout-btn">ออกจากระบบ</button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
         @endauth
 
         @guest
@@ -56,18 +60,19 @@
         </div>
         @endguest
       </div>
-      </nav>
-    </header>
-<main>
-  @yield("content")
-</main>
+    </nav>
+  </header>
+  <main>
+    @yield("content")
+  </main>
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-col">
-        <span class="footer-text">INTERNA</span> 
-        <p>&copy; {{ date('Y') }} INTERNA. All rights reserved.</p>        
+        <span class="footer-text">INTERNA</span>
+        <p>&copy; {{ date('Y') }} INTERNA. All rights reserved.</p>
       </div>
     </div>
   </footer>
 </body>
+
 </html>

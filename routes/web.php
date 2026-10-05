@@ -9,9 +9,9 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\InternController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Company;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
-
 
 // Public
 Route::get('/', [InternController::class, 'index'])->name('index');
@@ -38,8 +38,6 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 Route::get('/newprofile', [ProfileController::class, 'newProfile'])->name('newprofile');
 Route::put('/profile/save', [ProfileController::class, 'saveProfile'])->name('profile.save');
 Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.profile');
-Route::get('/evaluation', [ProfileController::class, 'evaluation'])->name('evaluation');
-Route::post('/evaluation', [ProfileController::class, 'saveEvaluation'])->name('evaluation.save');
 Route::get('/student/evaluation', [EvaluationController::class, 'index'])->name('student.evaluation');
 
 });
@@ -59,12 +57,15 @@ Route::get('/company/applicant/{id}',[CompanyController::class, 'applicants_prof
 Route::get('/company/history',[CompanyController::class, 'history'])->name('company.history');
 Route::get('interview/create/{id}', [CompanyController::class, 'createInterview'])->name('interviews.create');
 Route::post('/interviews/store/{id}', [CompanyController::class, 'storeInterview'])->name('interviews.store');
-Route::get('/student/information/{id}', [CompanyController::class, 'studentInformation'])->name('student.information');
+// Route::get('/student/information/{id}', [CompanyController::class, 'studentInformation'])->name('student.information');
 Route::get('/company/viewresume/{id}', [CompanyController::class, 'viewresume'])->name('company.viewresume');
 Route::put('/company/viewresume/{id}/update', [CompanyController::class, 'updateDocumentStatus'])->name('document.updateStatus');
 Route::get('/company/interviewresult/{id}', [CompanyController::class, 'interview_evaluation'])->name('company.interview_evaluation');
 Route::put('/company/interviewresult/{id}/update', [CompanyController::class, 'interview_evaluation_update'])->name('company.interview_evaluation_update');
 Route::get('/company/applicants', [CompanyController::class, 'applicants_all'])->name('company.applicants.all');
+Route::get('/company/evaluation/{id}', [CompanyController::class, 'evaluation'])->name('company.evaluation');
+Route::post('/company/evaluation/{id}/store', [CompanyController::class, 'evaluation_store'])->name('company.evaluation.store');
+
 });
 
 // Admin Login

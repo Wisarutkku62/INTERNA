@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('evaluations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('application_id')->constrained();
-            $table->string('evaluation_type');
             $table->decimal('evaluation_score', 5, 2);
             $table->string('evaluation_feedback')->nullable();
             $table->timestamps();

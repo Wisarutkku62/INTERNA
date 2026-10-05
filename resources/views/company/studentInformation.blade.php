@@ -108,24 +108,24 @@
             {{ $applicants_profile?->internshipPosition?->position_name ?? '-' }}
         </h2>
 
-            <div class="interview-row">
-                <span class="detail-label">รายละเอียด:</span>
-                <span class="detail-value bold">{{ $applicants_profile?->internshipPosition?->position_description ?? '-' }}</span>
-            </div>
+        <div class="interview-row">
+            <span class="detail-label">รายละเอียด:</span>
+            <span class="detail-value bold">{{ $applicants_profile?->internshipPosition?->position_description ?? '-' }}</span>
+        </div>
 
-            <div class="interview-row">
-                <span class="detail-label">คุณสมบัติ:</span>
-                <span class="detail-value bold">{{ $applicants_profile?->internshipPosition?->position_qualification ?? '-' }}</span>
-            </div>
+        <div class="interview-row">
+            <span class="detail-label">คุณสมบัติ:</span>
+            <span class="detail-value bold">{{ $applicants_profile?->internshipPosition?->position_qualification ?? '-' }}</span>
+        </div>
 
-         
+
         <div class="profile-actions">
             <a href="{{ route('company.viewresume', $applicants_profile->id) }}" class="resume">ดูเอกสาร</a>
             <a href="{{ route('interviews.create',$applicants_profile->id ) }}" class="interview">สร้างนัดสัมภาษณ์</a>
         </div>
-        
 
-        </div>
+
     </div>
+</div>
 </div>
 @endsection
