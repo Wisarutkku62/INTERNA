@@ -1,125 +1,152 @@
-@extends('layouts.app')
+@extends("layouts.app")
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/evaluation.css') }}">
+@endpush
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/Recheck.css') }}">
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<div class="evaluation-page">
+    <div class="card-header">
+        <h1 class="card-title">แบบประเมินผลการฝึกงาน</h1>
+        <p class="card-subtitle">กรุณากรอกคะแนนประเมินและข้อเสนอแนะสำหรับนักศึกษาฝึกงาน</p>
+    </div>
 
-<div class="recheck-container">
-    <div class="main-card-wrapper">
-        <header class="page-header">
-            <h1 class="page-title">ตรวจสอบสถานะผู้สมัครและนักศึกษา</h1>
-            <p class="page-subtitle">จัดการและติดตามสถานะผู้สมัคร การสัมภาษณ์ และนักศึกษาฝึกงานทั้งหมด</p>
-        </header>
+    <form action="{{ route('company.evaluation.store', $applicants->id) }}" method="POST">
+        @csrf
+        
+        <input type="hidden" name="evaluation_score" id="inputTotalScore" value="0">
 
-        <div class="stats-grid">
-    <a href="{{ route('company.applicants.all', ['status' => 'all']) }}"
-        class="stat-card card-all {{ $currentStatus == 'all' ? 'active' : '' }}">
-        <div class="stat-info">
-            <span class="stat-label">ผู้สมัครทั้งหมด</span>
-            <span class="stat-value">{{ $applicants_all->count() }}</span>
-        </div>
-    </a>
-
-    <a href="{{ route('company.applicants.all', ['status' => 'passed']) }}"
-        class="stat-card card-passed {{ $currentStatus == 'passed' ? 'active' : '' }}">
-        <div class="stat-info">
-            <span class="stat-label">ผ่านการสัมภาษณ์</span>
-            <span class="stat-value">{{ $applicants_interview_passed->count() }}</span>
-        </div>
-    </a>
-
-    <a href="{{ route('company.applicants.all', ['status' => 'failed']) }}"
-        class="stat-card card-failed {{ $currentStatus == 'failed' ? 'active' : '' }}">
-        <div class="stat-info">
-            <span class="stat-label">ไม่ผ่านการสัมภาษณ์</span>
-            <span class="stat-value">{{ $applicants_interview_failed->count() }}</span>
-        </div>
-    </a>
-
-    <a href="{{ route('company.applicants.all', ['status' => 'interning']) }}"
-        class="stat-card card-interning {{ $currentStatus == 'interning' ? 'active' : '' }}">
-        <div class="stat-info">
-            <span class="stat-label">กำลังฝึกงาน</span>
-            <span class="stat-value">{{ $applicants_interning->count() }}</span>
-        </div>
-    </a>
-
-    <a href="{{ route('company.applicants.all', ['status' => 'completed']) }}"
-        class="stat-card card-completed {{ $currentStatus == 'completed' ? 'active' : '' }}">
-        <div class="stat-info">
-            <span class="stat-label">ฝึกงานสำเร็จ</span>
-            <span class="stat-value">{{ $applicants_completed->count() }}</span>
-        </div>
-    </a>
-</div>
-
-        <div class="table-card">
-            <div class="table-responsive">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>ผู้สมัคร / นักศึกษา</th>
-                            <th>ตำแหน่งที่สมัคร</th>
-                            <th>บริษัท</th>
-                            <th>สถานะปัจจุบัน</th>
-                            <th>วันที่สมัคร</th>
-                            <th class="text-center">การจัดการ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($applicants as $applicant)
-                        <tr>
-                            <td>
-                                <div class="user-profile">
-                                    <div class="avatar"></div>
-                                    <div>
-                                        <div class="user-name">{{ $applicant?->student?->student_fname ?? '' }} {{ $applicant?->student?->student_lname ?? '' }}</div>
-                                        <div class="user-email">{{ $applicant?->student?->student_email ?? '' }}</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>{{ $applicant?->internshipPosition?->position_name ?? '' }}</td>
-                            <td>{{ $applicant?->internshipPosition?->company?->company_name ?? '' }}</td>
-                            <td>
-                                {{-- 1. เช็คว่ามีข้อมูลการประเมินใน DB หรือสถานะเป็น completed หรือไม่ --}}
-                                @if ($applicant?->evaluation || $applicant?->application_status == 'completed')
-                                <span class="badge badge-success" style="background-color: #10b981; color: white; padding: 4px 8px; border-radius: 4px;">ฝึกงานสำเร็จ</span>
-                                @elseif ($applicant?->application_status == 'interning')
-                                <span class="badge badge-interning">กำลังฝึกงานอยู่</span>
-                                @elseif ($applicant?->interview?->interview_result == 'passed')
-                                <span class="badge badge-passed">ผ่านการสัมภาษณ์</span>
-                                @elseif ($applicant?->interview?->interview_result == 'failed')
-                                <span class="badge badge-failed">ไม่ผ่านการสัมภาษณ์</span>
-                                @elseif ($applicant?->interview?->interview_result == 'pending' || $applicant?->application_status == 'pending')
-                                <span class="badge badge-pending">กำลังรอดำเนินการ</span>
-                                @else
-                                <span class="badge badge-secondary">{{ $applicant?->application_status }}</span>
-                                @endif
-                            </td>
-                            <td>{{ $applicant?->updated_at }}</td>
-                            <td class="text-center">
-                                <button class="btn-action btn-view">ดูรายละเอียด</button>
-
-                                {{-- 2. แสดงปุ่มประเมินผลเฉพาะคนที่กำลังฝึกงานและยังไม่ได้รับการประเมิน --}}
-                                @if ($applicant?->application_status == 'interning' && !$applicant?->evaluation)
-                                <a href="{{ route('company.evaluation', $applicant->id) }}" class="btn-action btn-evaluate">
-                                    ประเมินผล
-                                </a>
-                                @endif
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="text-center" style="padding: 20px;">
-                                ไม่พบผู้สมัครในระบบ
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+        <div class="info-box">
+            <div class="info-item">
+                <span class="info-label">ชื่อ-นามสกุล นักศึกษา</span>
+                <span class="info-value">{{$applicants?->student?->student_fname ?? ''}} {{$applicants?->student?->student_lname ?? ''}}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">ตำแหน่ง / แผนก</span>
+                <span class="info-value">{{$applicants?->internshipPosition?->position_name ?? ''}}</span>
             </div>
         </div>
 
-    </div>
+        <div class="section-title">
+            เกณฑ์การประเมิน (คะแนน 1 - 5)
+        </div>
+
+        <div class="rating">
+            <label class="label-rate">1. ความรับผิดชอบตรงต่อเวลา</label>
+            <div rating="options">
+                @for($i = 1; $i <= 5; $i++)
+                    <label>
+                        <input type="radio" name="scores[punctuality]" value="{{ $i }}" class="score-radio" required>
+                        <span class="rating-btn">{{ $i }}</span>
+                    </label>
+                @endfor
+            </div>
+        </div>
+
+        <div class="rating">
+            <label class="label-rate">2. ความรับผิดชอบและวินัยในการทำงาน</label>
+            <div rating="options">
+                @for($i = 1; $i <= 5; $i++)
+                    <label>
+                        <input type="radio" name="scores[discipline]" value="{{ $i }}" class="score-radio" required>
+                        <span class="rating-btn">{{ $i }}</span>
+                    </label>
+                @endfor
+            </div>
+        </div>
+
+        <div class="rating">
+            <label class="label-rate">3. การปรับตัวและเรียนรู้</label>
+            <div rating="options">
+                @for($i = 1; $i <= 5; $i++)
+                    <label>
+                        <input type="radio" name="scores[adaptability]" value="{{ $i }}" class="score-radio" required>
+                        <span class="rating-btn">{{ $i }}</span>
+                    </label>
+                @endfor
+            </div>
+        </div>
+
+        <div class="rating">
+            <label class="label-rate">4. การสื่อสารและการทำงานร่วมกับผู้อื่น</label>
+            <div rating="options">
+                @for($i = 1; $i <= 5; $i++)
+                    <label>
+                        <input type="radio" name="scores[communication]" value="{{ $i }}" class="score-radio" required>
+                        <span class="rating-btn">{{ $i }}</span>
+                    </label>
+                @endfor
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="evaluation_feedback" class="form-label">ข้อเสนอแนะเพิ่มเติม</label>
+            <textarea id="evaluation_feedback" name="evaluation_feedback" class="form-textarea" placeholder="ใส่ข้อเสนอแนะหรือสิ่งที่ต้องการให้นักศึกษาพัฒนา"></textarea>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-left">
+                <span class="summary-label">คะแนนรวมสุทธิ</span>
+                <div class="score-box">
+                    <span class="score-number" id="totalScore">0</span>
+                    <span class="score-max">/ 100 คะแนน</span>
+                </div>
+            </div>
+            <div class="summary-right">
+                <span class="summary-label">ผลการประเมิน</span>
+                <div id="statusBadge" class="status-badge-pending">
+                    <span id="statusText">รอการประเมิน</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-1">บันทึกผลการประเมิน</button>
+            <button type="button" class="btn-2" onclick="history.back()">ยกเลิก</button>
+        </div>
+    </form>
 </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const radios = document.querySelectorAll('input[type="radio"]');
+        const totalScoreEl = document.getElementById('totalScore');
+        const statusBadge = document.getElementById('statusBadge');
+        
+        const inputTotalScore = document.getElementById('inputTotalScore');
+
+        function calculateScore() {
+            const checkedRadios = document.querySelectorAll('input[type="radio"]:checked');
+            let rawTotal = 0;
+
+            checkedRadios.forEach(function(radio) {
+                rawTotal += parseInt(radio.value, 10);
+            });
+
+            const finalScore = rawTotal * 5;
+
+            if (totalScoreEl) {
+                totalScoreEl.textContent = finalScore;
+            }
+
+            if (inputTotalScore) {
+                inputTotalScore.value = finalScore;
+            }
+
+            if (checkedRadios.length === 4 && statusBadge) {
+                if (finalScore >= 50) {
+                    statusBadge.className = 'status-badge-pass';
+                    statusBadge.innerHTML = '<span class="css-check"></span> ผ่านการประเมิน';
+                } else {
+                    statusBadge.className = 'status-badge-fail';
+                    statusBadge.innerHTML = 'ไม่ผ่านการประเมิน';
+                }
+            }
+        }
+
+        radios.forEach(function(radio) {
+            radio.addEventListener('change', calculateScore);
+        });
+    });
+</script>

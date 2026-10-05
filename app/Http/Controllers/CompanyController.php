@@ -314,7 +314,6 @@ class CompanyController extends Controller
     {
         $user = Auth::user();
         $companyId = $user?->company?->id;
-
         $currentStatus = $request->query('status', 'all');
 
         $allQuery = Application::whereHas('internshipPosition', function ($q) use ($companyId) {
@@ -329,17 +328,14 @@ class CompanyController extends Controller
             ->whereDoesntHave('evaluation')
             ->get();
 
-
         $applicants_interview_failed = (clone $allQuery)
             ->whereHas('interview', fn($q) => $q->where('interview_result', 'failed'))
             ->get();
-
 
         $applicants_interning = (clone $allQuery)
             ->where('application_status', 'interning')
             ->whereDoesntHave('evaluation')
             ->get();
-
 
         $applicants_completed = (clone $allQuery)
             ->where(function ($q) {

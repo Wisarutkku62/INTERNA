@@ -11,7 +11,7 @@
             <p class="page-subtitle">จัดการและติดตามสถานะผู้สมัคร การสัมภาษณ์ และนักศึกษาฝึกงานทั้งหมด</p>
         </header>
 
-
+        {{-- สถิติการ์ด 5 ใบ --}}
         <div class="stats-grid">
             <a href="{{ route('company.applicants.all', ['status' => 'all']) }}"
                 class="stat-card card-all {{ $currentStatus == 'all' ? 'active' : '' }}">
@@ -41,12 +41,20 @@
                 class="stat-card card-interning {{ $currentStatus == 'interning' ? 'active' : '' }}">
                 <div class="stat-info">
                     <span class="stat-label">กำลังฝึกงาน</span>
-                    <span class="stat-value">{{$applicants_interning->count()}}</span>
+                    <span class="stat-value">{{ $applicants_interning->count() }}</span>
+                </div>
+            </a>
+
+            <a href="{{ route('company.applicants.all', ['status' => 'completed']) }}"
+                class="stat-card card-completed {{ $currentStatus == 'completed' ? 'active' : '' }}">
+                <div class="stat-info">
+                    <span class="stat-label">ฝึกงานสำเร็จ</span>
+                    <span class="stat-value">{{ $applicants_completed->count() }}</span>
                 </div>
             </a>
         </div>
 
-
+        {{-- ตารางข้อมูล --}}
         <div class="table-card">
             <div class="table-responsive">
                 <table class="data-table">
@@ -75,26 +83,31 @@
                             <td>{{ $applicant?->internshipPosition?->position_name ?? '' }}</td>
                             <td>{{ $applicant?->internshipPosition?->company?->company_name ?? '' }}</td>
                             <td>
-                                @if ($applicant?->application_status == 'interning')
-                                <span class="badge badge-interning">กำลังฝึกงานอยู่</span>
+                                @if ($applicant?->evaluation || $applicant?->application_status == 'completed')
+                                    <span class="badge badge-completed">ฝึกงานสำเร็จ</span>
+                                @elseif ($applicant?->application_status == 'interning')
+                                    <span class="badge badge-interning">กำลังฝึกงานอยู่</span>
                                 @elseif ($applicant?->interview?->interview_result == 'passed')
-                                <span class="badge badge-passed">ผ่านการสัมภาษณ์</span>
+                                    <span class="badge badge-passed">ผ่านการสัมภาษณ์</span>
                                 @elseif ($applicant?->interview?->interview_result == 'failed')
-                                <span class="badge badge-failed">ไม่ผ่านการสัมภาษณ์</span>
+                                    <span class="badge badge-failed">ไม่ผ่านการสัมภาษณ์</span>
                                 @elseif ($applicant?->interview?->interview_result == 'pending' || $applicant?->application_status == 'pending')
-                                <span class="badge badge-pending">กำลังรอดำเนินการ</span>
+                                    <span class="badge badge-pending">กำลังรอดำเนินการ</span>
                                 @else
-                                <span class="badge badge-secondary">{{ $applicant?->application_status }}</span>
+                                    <span class="badge badge-secondary">{{ $applicant?->application_status }}</span>
                                 @endif
                             </td>
                             <td>{{ $applicant?->updated_at }}</td>
                             <td class="text-center">
-                                <button class="btn-action btn-view">ดูรายละเอียด</button>
-                                @if ($applicant?->application_status == 'interning')
-                                <a href="{{route('company.evaluation', $applicant->id)}}" class="btn-action btn-evaluate">
-                                    ประเมินผล
-                                </a>
-                                @endif
+                                <div class="action-buttons">
+                                    <button class="btn-action btn-view">ดูรายละเอียด</button>
+
+                                    @if ($applicant?->application_status == 'interning' && !$applicant?->evaluation)
+                                    <a href="{{ route('company.evaluation', $applicant->id) }}" class="btn-action btn-evaluate">
+                                        ประเมินผล
+                                    </a>
+                                    @endif
+                                </div>
                             </td>
                         </tr>
                         @empty
@@ -109,6 +122,6 @@
             </div>
         </div>
 
-    </div>
-</div>
+    </div> {{-- ปิด .main-card-wrapper --}}
+</div> {{-- ปิด .recheck-container --}}
 @endsection
