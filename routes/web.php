@@ -39,6 +39,7 @@ Route::get('/newprofile', [ProfileController::class, 'newProfile'])->name('newpr
 Route::put('/profile/save', [ProfileController::class, 'saveProfile'])->name('profile.save');
 Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.profile');
 Route::get('/student/evaluation', [EvaluationController::class, 'index'])->name('student.evaluation');
+Route::post('/student/evaluation/{id}/accept', [EvaluationController::class, 'updateAcceptance'])->name('student.application.accept');
 
 });
 

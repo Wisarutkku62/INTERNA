@@ -14,24 +14,46 @@ class EvaluationController extends Controller
         $user = Auth::user();
         $studentId = $user?->student?->id;
 
-        $application = Application::with(['internshipPosition.company', 'interview'])
+        $passedApplications = Application::with(['internshipPosition.company', 'interview'])
             ->where('student_id', $studentId)
-            ->whereHas('interview')
+            ->whereHas('interview', function ($q) {
+                $q->where('interview_result', 'passed');
+            })
+            ->whereDoesntHave('evaluation')
+            ->latest()
+            ->get();
+
+        $completedApplication = Application::with(['internshipPosition.company', 'evaluation'])
+            ->where('student_id', $studentId)
+            ->whereHas('evaluation')
             ->latest()
             ->first();
 
-        if (!$application) {
-            $application = Application::with(['internshipPosition.company', 'interview'])
-                ->where('student_id', $studentId)
-                ->latest()
-                ->first();
+        $evaluation = $completedApplication?->evaluation;
+
+        return view('evaluationstd', compact('user', 'passedApplications', 'completedApplication', 'evaluation'));
+    }
+
+    public function updateAcceptance(Request $request, $id)
+    {
+        $request->validate([
+            'action' => 'required|in:accept,decline',
+        ]);
+
+        $application = Application::findOrFail($id);
+
+        if ($request->action === 'accept') {
+            $application->application_status = 'interning';
+            $application->save();
+
+            return redirect()->back()->with('success', 'ยืนยันการเข้ารับการฝึกงานเรียบร้อยแล้ว');
+        } else {
+
+            $application->application_status = 'declined';
+            $application->save();
+
+            return redirect()->back()->with('info', 'ปฏิเสธการเข้ารับการฝึกงานเรียบร้อยแล้ว');
         }
-
-        $evaluation = $application
-            ? Evaluation::where('application_id', $application->id)->latest()->first()
-            : null;
-
-        return view('evaluationstd', compact('user', 'application', 'evaluation'));
     }
 
     public function store(Request $request)
