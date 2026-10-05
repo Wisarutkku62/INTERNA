@@ -31,7 +31,7 @@
           <!-- <li class="nav-item"><a href="{{ route('intern.intern') }}" class="nav-link">ค้นหานักศึกษาฝึกงาน</a></li> -->
           <!-- <li class="nav-item"><a href="#" class="nav-link">ประเมินผล</a></li>
           <li class="nav-item"><a href="#" class="nav-link">สำหรับบริษัท</a></li> -->
-          <li class="nav-item"><a href="{{ route('contact') }}">ติดต่อเรา</a></li>
+          <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">ติดต่อเรา</a></li>
         </ul>
 
         @auth
