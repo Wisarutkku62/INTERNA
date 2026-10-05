@@ -10,6 +10,15 @@
         <a href="{{route('company.overview')}}" class="back-btn" title="ย้อนกลับ">&larr;</a>
         <h2>สร้างประกาศงานใหม่</h2>
     </div>
+    @if ($errors->any())
+    <div style="background-color: #fee2e2; color: #dc2626; padding: 12px; border-radius: 8px; margin-bottom: 16px;">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <form action="{{route('company.announcement.create')}}" method="POST" id='form'>
         @csrf
         <div class="form-group">
@@ -21,8 +30,13 @@
         </div>
         <div class="form-row">
             <div class="form-group col">
+                <label for="position_category">แผนก/ฝ่าย </label>
+                <select id="position_category" name="position_category" required>
+                    <option value="Technology & IT">Technology & IT</option>
+                    <option value="Design & Creative">Design & Creative</option>
                     <option value="Marketing">Marketing</option>
                     <option value="HR & Admin">HR & Admin</option>
+                </select>
                 <span class="position_category-validated validated" id="position_category-validated">
 
                 </span>

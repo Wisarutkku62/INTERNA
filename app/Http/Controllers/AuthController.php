@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Company;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -25,39 +27,51 @@ class AuthController extends Controller
     }
 
     public function register(Request $request): RedirectResponse 
-    {
-        $validated = $request->validate([
-            // 'username' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'string']
-        ], [
+{
+    $validated = $request->validate([
+        'email'    => ['required', 'email', 'unique:users'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'role'     => ['required', 'string']
+    ], [
         'email.unique' => 'อีเมลนี้ถูกลงทะเบียนไปแล้ว',
-        'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง'
-        ]);   
+        'email.email'  => 'รูปแบบอีเมลไม่ถูกต้อง'
+    ]);   
 
-        // if (Auth::attempt($validated)) {
-        //     return redirect()->back();
-        // };
+    $user = new User();
+    $user->email    = $validated['email'];
+    $user->password = $validated['password'];
+    $user->role     = $validated['role'];
+    $user->save();
 
-        User::create([
-            'email' => $validated['email'],
-            'password' => $validated['password'],
-            'role' => $validated['role'],
-        ]);
-
-
-        return redirect()->route('login')->with('success','Register Successfully');
+    if ($validated['role'] === 'company') {
+        $company = new Company();
+        $company->user_id      = $user->id;
+        $company->company_name = '-'; 
+        $company->company_address = '-';
+        $company->contact_name = '-';
+        $company->contact_position = '-';
+        $company->save();
+        
+    } elseif ($validated['role'] === 'student') {
+        $student = new Student();
+        $student->user_id       = $user->id;
+        $student->student_fname = '-';
+        $student->student_lname = '-';
+        $student->student_email = $validated['email']; 
+        $student->save();
     }
-    
+
+    return redirect()->route('login')->with('success', 'Register Successfully');
+}
+
     public function login(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'string']
         ], [
-        'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง'
-        ]);  
+            'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง'
+        ]);
 
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
@@ -71,9 +85,9 @@ class AuthController extends Controller
             ->withInput();
     }
 
-    public function logout(Request $request): RedirectResponse 
+    public function logout(Request $request): RedirectResponse
     {
-            Auth::logout();
+        Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
@@ -85,18 +99,18 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required','string']
+            'password' => ['required', 'string']
         ]);
 
         if (Auth::validate($validated)) {
 
             $user = User::where('email', $request->email)->first();
 
-            if ($user->role !== 'admin') { 
+            if ($user->role !== 'admin') {
                 return redirect()->back()
-                ->withErrors([
-                    'email' => 'คุณไม่มีสิทธิ์เข้าใช้งานในส่วนนี้ (เฉพาะ Admin เท่านั้น)',
-                ]);
+                    ->withErrors([
+                        'email' => 'คุณไม่มีสิทธิ์เข้าใช้งานในส่วนนี้ (เฉพาะ Admin เท่านั้น)',
+                    ]);
             }
 
             Auth::login($user);
@@ -106,10 +120,9 @@ class AuthController extends Controller
         }
 
         return redirect()->back()
-        ->withErrors([ 
-            'email' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
-            'password' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'
-        ]);
+            ->withErrors([
+                'email' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
+                'password' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'
+            ]);
     }
-
 }

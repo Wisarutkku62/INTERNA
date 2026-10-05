@@ -72,41 +72,52 @@ class CompanyController extends Controller
         return view('company.announcement');
     }
     public function announcement_create(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'position_name' => ['string', 'max:100', 'required'],
-            'position_category' => ['string', 'max:100', 'required'],
-            'position_capacity' => ['integer', 'min:0', 'required'],
-            'position_worktype' => ['string', 'required'],
-            'position_interview_type' => ['string', 'required'],
-            'position_start_date' => ['required', 'string'],
-            'position_end_date' => ['required', 'string'],
-            'position_start_time' => ['required', 'date_format:H:i'],
-            'position_end_time' => ['required', 'date_format:H:i'],
-            'position_allowance' => ['integer', 'required', 'min:0'],
-            'position_qualification' => ['string', 'required'],
-            'position_description' => ['string', 'required']
+{
+    $validated = $request->validate([
+        'position_name' => ['string', 'max:100', 'required'],
+        'position_category' => ['string', 'max:100', 'required'],
+        'position_capacity' => ['integer', 'min:0', 'required'],
+        'position_worktype' => ['string', 'required'],
+        'position_interview_type' => ['string', 'required'],
+        'position_start_date' => ['required', 'string'],
+        'position_end_date' => ['required', 'string'],
+        'position_start_time' => ['required', 'date_format:H:i'],
+        'position_end_time' => ['required', 'date_format:H:i'],
+        'position_allowance' => ['integer', 'required', 'min:0'],
+        'position_qualification' => ['string', 'required'],
+        'position_description' => ['string', 'required']
+    ]);
+
+    $user = Auth::user();
+
+    $companyId = $user?->company?->id ?? $user?->company_id;
+
+    if (!$companyId) {
+        return back()->withInput()->withErrors([
+            'error' => 'ไม่พบข้อมูลบริษัทของบัญชีนี้ กรุณาลงทะเบียนหรือกรอกข้อมูลโปรไฟล์บริษัทก่อนสร้างประกาศ'
         ]);
-
-        $position = new InternshipPosition();
-        $position->company_id = Auth::user()->company->id;
-        $position->position_name = $validated['position_name'];
-        $position->position_description = $validated['position_description'];
-        $position->position_qualification = $validated['position_qualification'];
-        $position->position_category = $validated['position_category'];
-        $position->position_capacity = $validated['position_capacity'];
-        $position->position_allowance = $validated['position_allowance'];
-        $position->position_start_date = $validated['position_start_date'];
-        $position->position_end_date = $validated['position_end_date'];
-        $position->position_start_time = $validated['position_start_time'];
-        $position->position_end_time = $validated['position_end_time'];
-        $position->position_worktype = $validated['position_worktype'];
-        $position->position_interview_type = $validated['position_interview_type'];
-
-        $position->save();
-
-        return redirect()->route('company.announcement.all');
     }
+
+    $position = new InternshipPosition();
+    $position->company_id = $companyId; 
+    $position->position_name = $validated['position_name'];
+    $position->position_description = $validated['position_description'];
+    $position->position_qualification = $validated['position_qualification'];
+    $position->position_category = $validated['position_category'];
+    $position->position_capacity = $validated['position_capacity'];
+    $position->position_allowance = $validated['position_allowance'];
+    $position->position_start_date = $validated['position_start_date'];
+    $position->position_end_date = $validated['position_end_date'];
+    $position->position_start_time = $validated['position_start_time'];
+    $position->position_end_time = $validated['position_end_time'];
+    $position->position_worktype = $validated['position_worktype'];
+    $position->position_interview_type = $validated['position_interview_type'];
+
+    $position->save();
+
+    return redirect()->route('company.announcement.all')->with('success', 'สร้างประกาศรับสมัครเรียบร้อยแล้ว');
+}
+
     public function announcement_all()
     {
         $user = Auth::user();
