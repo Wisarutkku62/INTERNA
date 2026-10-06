@@ -54,15 +54,15 @@
   </header>
   <main>
     @yield("content")
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-col">
-          <span class="footer-text">INTERNA</span>
-          <p>&copy; {{ date('Y') }} INTERNA. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
   </main>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <span class="footer-text">INTERNA</span>
+        <p>&copy; {{ date('Y') }} INTERNA. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>
