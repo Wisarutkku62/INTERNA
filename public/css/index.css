@@ -22,6 +22,10 @@
     gap: 15px;
     flex: 1.2;
     min-width: 0;
+    border: white ;
+    box-shadow: 0 0 5px 0.08px rgba(17, 17, 17, 0.341);
+    padding: 20px;
+    border-radius: 15px;
 }
 
 .img-box {
@@ -29,6 +33,7 @@
     aspect-ratio: 400 / 520;
     border-radius: 20px;
     overflow: hidden;
+    border: #0037ff79 2px solid;
 }
 
 .img-group {
@@ -38,12 +43,15 @@
     flex: 1;
 }
 
+
+
 .img-box2,
 .img-box3 {
     width: 100%;
     aspect-ratio: 300 / 250;
     border-radius: 20px;
     overflow: hidden;
+    border: #0037ff79 2px solid;
 }
 
 .img-box img,
