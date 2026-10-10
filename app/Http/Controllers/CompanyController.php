@@ -72,29 +72,20 @@ class CompanyController extends Controller
         return view('company.announcement');
     }
     public function announcement_create(Request $request): RedirectResponse
-{
-    $validated = $request->validate([
-        'position_name' => ['string', 'max:100', 'required'],
-        'position_category' => ['string', 'max:100', 'required'],
-        'position_capacity' => ['integer', 'min:0', 'required'],
-        'position_worktype' => ['string', 'required'],
-        'position_interview_type' => ['string', 'required'],
-        'position_start_date' => ['required', 'string'],
-        'position_end_date' => ['required', 'string'],
-        'position_start_time' => ['required', 'date_format:H:i'],
-        'position_end_time' => ['required', 'date_format:H:i'],
-        'position_allowance' => ['integer', 'required', 'min:0'],
-        'position_qualification' => ['string', 'required'],
-        'position_description' => ['string', 'required']
-    ]);
-
-    $user = Auth::user();
-
-    $companyId = $user?->company?->id ?? $user?->company_id;
-
-    if (!$companyId) {
-        return back()->withInput()->withErrors([
-            'error' => 'ไม่พบข้อมูลบริษัทของบัญชีนี้ กรุณาลงทะเบียนหรือกรอกข้อมูลโปรไฟล์บริษัทก่อนสร้างประกาศ'
+    {
+        $validated = $request->validate([
+            'position_name' => ['string', 'max:100', 'required'],
+            'position_category' => ['string', 'max:100', 'required'],
+            'position_capacity' => ['integer', 'min:0', 'required'],
+            'position_worktype' => ['string', 'required'],
+            'position_interview_type' => ['string', 'required'],
+            'position_start_date' => ['required', 'string'],
+            'position_end_date' => ['required', 'string'],
+            'position_start_time' => ['required', 'date_format:H:i'],
+            'position_end_time' => ['required', 'date_format:H:i'],
+            'position_allowance' => ['integer', 'required', 'min:0'],
+            'position_qualification' => ['string', 'required'],
+            'position_description' => ['string', 'required']
         ]);
 
         $user = Auth::user();
@@ -227,12 +218,12 @@ class CompanyController extends Controller
     public function updateDocumentStatus(Request $request, int $appDocId)
     {
         $request->validate([
-            'status' => ['required', 'string', 'in:passed,rejected,pending'], 
+            'status' => ['required', 'string', 'in:passed,rejected,pending'],
             'appdoc_remark' => ['nullable', 'string'],
         ]);
 
         $appDoc = ApplicationDocument::findOrFail($appDocId);
-        $appDoc->appdoc_status = $request->status; 
+        $appDoc->appdoc_status = $request->status;
         if ($request->has('appdoc_remark')) {
             $appDoc->appdoc_remark = $request->appdoc_remark;
         }

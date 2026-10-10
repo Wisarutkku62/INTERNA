@@ -14,7 +14,7 @@ class EvaluationController extends Controller
         $user = \App\Models\User::with('student')->find(Auth::id());
         $studentId = $user?->student?->id;
 
-        $passedApplications = Application::with(['internshipPosition.company', 'interview'])
+        $application = Application::with(['internshipPosition.company', 'interview'])
             ->where('student_id', $studentId)
             ->where(function ($q) {
                 $q->where('application_status', 'pending')
@@ -27,7 +27,16 @@ class EvaluationController extends Controller
 
         $passedApplications = Application::with(['internshipPosition.company', 'interview'])
             ->where('student_id', $studentId)
-            ->whereHas('interview')
+            ->whereHas('interview', function ($q) {
+                $q->where('interview_result', 'passed');
+            })
+            ->whereDoesntHave('evaluation')
+            ->latest()
+            ->get();
+
+        $completedApplication = Application::with(['internshipPosition.company', 'evaluation'])
+            ->where('student_id', $studentId)
+            ->whereHas('evaluation')
             ->latest()
             ->first();
 
