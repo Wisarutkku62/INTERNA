@@ -26,43 +26,42 @@ class AuthController extends Controller
         return view('auth.loginadmin');
     }
 
-    public function register(Request $request): RedirectResponse 
-{
-    $validated = $request->validate([
-        'email'    => ['required', 'email', 'unique:users'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
-        'role'     => ['required', 'string']
-    ], [
-        'email.unique' => 'อีเมลนี้ถูกลงทะเบียนไปแล้ว',
-        'email.email'  => 'รูปแบบอีเมลไม่ถูกต้อง'
-    ]);   
+    public function register(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'email'    => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role'     => ['required', 'string']
+        ], [
+            'email.unique' => 'อีเมลนี้ถูกลงทะเบียนไปแล้ว',
+            'email.email'  => 'รูปแบบอีเมลไม่ถูกต้อง'
+        ]);
 
-    $user = new User();
-    $user->email    = $validated['email'];
-    $user->password = $validated['password'];
-    $user->role     = $validated['role'];
-    $user->save();
+        $user = new User();
+        $user->email    = $validated['email'];
+        $user->password = $validated['password'];
+        $user->role     = $validated['role'];
+        $user->save();
 
-    if ($validated['role'] === 'company') {
-        $company = new Company();
-        $company->user_id      = $user->id;
-        $company->company_name = '-'; 
-        $company->company_address = '-';
-        $company->contact_name = '-';
-        $company->contact_position = '-';
-        $company->save();
-        
-    } elseif ($validated['role'] === 'student') {
-        $student = new Student();
-        $student->user_id       = $user->id;
-        $student->student_fname = '-';
-        $student->student_lname = '-';
-        $student->student_email = $validated['email']; 
-        $student->save();
+        if ($validated['role'] === 'company') {
+            $company = new Company();
+            $company->user_id      = $user->id;
+            $company->company_name = '-';
+            $company->company_address = '-';
+            $company->contact_name = '-';
+            $company->contact_position = '-';
+            $company->save();
+        } elseif ($validated['role'] === 'student') {
+            $student = new Student();
+            $student->user_id       = $user->id;
+            $student->student_fname = '-';
+            $student->student_lname = '-';
+            $student->student_email = $validated['email'];
+            $student->save();
+        }
+
+        return redirect()->route('login')->with('success', 'Register Successfully');
     }
-
-    return redirect()->route('login')->with('success', 'Register Successfully');
-}
 
     public function login(Request $request): RedirectResponse
     {
@@ -75,6 +74,16 @@ class AuthController extends Controller
 
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            if ($user->role === 'admin') {
+                return redirect()->route('admin.dashboard');
+            }
+
+            if ($user->role === 'company') {
+                return redirect()->route('company.overview');
+            }
 
             return redirect()->route('index');
         }

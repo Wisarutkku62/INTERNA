@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Models\Company;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
+
 Route::view('/yed','company.announcementedit');
 Route::view('/mg','company.ManageInternship');
 Route::view('/mf','InformationandHistory');

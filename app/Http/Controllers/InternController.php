@@ -11,10 +11,19 @@ class InternController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        return view('index', compact('user'));
-    }
+        if (Auth::check()) {
 
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.dashboard');
+            }
+
+            if (Auth::user()->role === 'company') {
+                return redirect()->route('company.overview'); // หรือ url('/company/overview')
+            }
+        }
+
+        return view('index');
+    }
     public function internship(Request $request)
     {
         $query = InternshipPosition::with('company');
@@ -34,19 +43,19 @@ class InternController extends Controller
             $category = $request->category;
 
             if ($category === 'Technology & IT') {
-                $query->where(function($q) {
+                $query->where(function ($q) {
                     $q->where('position_category', 'Technology & IT')
-                      ->orWhere('position_category', 'LIKE', '%Software%')
-                      ->orWhere('position_category', 'LIKE', '%Frontend%')
-                      ->orWhere('position_category', 'LIKE', '%Backend%')
-                      ->orWhere('position_category', 'LIKE', '%Infrastructure%')
-                      ->orWhere('position_category', 'LIKE', '%IT%');
+                        ->orWhere('position_category', 'LIKE', '%Software%')
+                        ->orWhere('position_category', 'LIKE', '%Frontend%')
+                        ->orWhere('position_category', 'LIKE', '%Backend%')
+                        ->orWhere('position_category', 'LIKE', '%Infrastructure%')
+                        ->orWhere('position_category', 'LIKE', '%IT%');
                 });
             } elseif ($category === 'Design & Creative') {
-                $query->where(function($q) {
+                $query->where(function ($q) {
                     $q->where('position_category', 'Design & Creative')
-                      ->orWhere('position_category', 'LIKE', '%Design%')
-                      ->orWhere('position_category', 'LIKE', '%Graphic%');
+                        ->orWhere('position_category', 'LIKE', '%Design%')
+                        ->orWhere('position_category', 'LIKE', '%Graphic%');
                 });
             } else {
                 $query->where('position_category', 'LIKE', '%' . $category . '%');
@@ -85,32 +94,32 @@ class InternController extends Controller
     }
 
     public function apply(Request $request, $id)
-{
-    if (!Auth::check()) {
-        return redirect()->route('login')->with('error', 'กรุณาเข้าสู่ระบบก่อนสมัครงาน');
-    }
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'กรุณาเข้าสู่ระบบก่อนสมัครงาน');
+        }
 
-    $user = Auth::user();
-    $student = $user?->student;
+        $user = Auth::user();
+        $student = $user?->student;
 
-    if (!$student || empty($student->first_name) || $student->first_name === '-' || empty($student->phone)) {
-    return redirect('/newprofile')->with('error', 'กรุณากรอกข้อมูลส่วนตัวให้สมบูรณ์ก่อนทำการสมัครงาน');
-}
+        if (!$student || empty($student->first_name) || $student->first_name === '-' || empty($student->phone)) {
+            return redirect('/newprofile')->with('error', 'กรุณากรอกข้อมูลส่วนตัวให้สมบูรณ์ก่อนทำการสมัครงาน');
+        }
 
-    $existingApplication = Application::where('internship_position_id', $id)
-        ->where('student_id', $student->id)
-        ->first();
+        $existingApplication = Application::where('internship_position_id', $id)
+            ->where('student_id', $student->id)
+            ->first();
 
-    if ($existingApplication) {
-        return redirect()->back()->with('error', 'คุณได้ทำการสมัครตำแหน่งงานนี้ไปแล้ว');
-    }
+        if ($existingApplication) {
+            return redirect()->back()->with('error', 'คุณได้ทำการสมัครตำแหน่งงานนี้ไปแล้ว');
+        }
 
-    Application::create([
-        'internship_position_id' => $id,
-        'student_id'             => $student->id,
-        'application_status'     => 'pending',
-    ]);
+        Application::create([
+            'internship_position_id' => $id,
+            'student_id'             => $student->id,
+            'application_status'     => 'pending',
+        ]);
 
-    return redirect()->back()->with('success', 'ส่งใบสมัครงานเรียบร้อยแล้ว');
+        return redirect()->back()->with('success', 'ส่งใบสมัครงานเรียบร้อยแล้ว');
     }
 }
