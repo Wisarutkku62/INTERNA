@@ -23,6 +23,7 @@
 <form name="profileForm" action="{{ route('profile.save') }}" method="POST" class="profile">
     @csrf
     @method('PUT')
+    <a href="{{ url()->previous() }}" style="text-decoration: none;">← ย้อนกลับ</a>
     <div class="avatar-section full-width">
         <div class="avatar-wrapper">
             <img id="avatar-preview" src="/img/profile.png" alt="Profile Picture">

@@ -26,6 +26,7 @@ class InternController extends Controller
 
         return view('index');
     }
+
     public function internship(Request $request)
     {
         $query = InternshipPosition::with('company');
@@ -40,7 +41,6 @@ class InternController extends Controller
             });
         }
 
-        // --- แก้ไขตรงส่วนหมวดหมู่งานตรงนี้ ---
         if ($request->filled('category')) {
             $category = $request->category;
 
@@ -104,8 +104,13 @@ class InternController extends Controller
         $user = Auth::user();
         $student = $user?->student;
 
-        if (!$student || empty($student->first_name) || $student->first_name === '-' || empty($student->phone)) {
-            return redirect('/newprofile')->with('error', 'กรุณากรอกข้อมูลส่วนตัวให้สมบูรณ์ก่อนทำการสมัครงาน');
+        if (!$student || empty($student->student_fname) || $student->student_fname === '-' || empty($student->student_phone)) {
+            return redirect()->back()->with('error', 'กรุณากรอกข้อมูลส่วนตัวให้สมบูรณ์ก่อนทำการสมัครงาน');
+        }
+
+        $hasDocument = Document::where('student_id', $student->id)->exists();
+        if (!$hasDocument) {
+            return redirect()->back()->with('error', 'กรุณาอัปโหลดเอกสารสมัครงาน/เรซูเม่ในหน้าโปรไฟล์ก่อนทำการสมัครงาน');
         }
 
         $existingApplication = Application::where('internship_position_id', $id)

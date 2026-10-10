@@ -39,7 +39,11 @@
           <div class="profile-dropdown">
             <input type="checkbox" id="profile-toggle" class="profile-toggle">
             <label for="profile-toggle" class="profile-label">
-              <img src="{{ asset('image/profile_m.png') }}" alt="Profile" class="user-avatar">
+              @if(!empty(Auth::user()->student?->student_profile_image))
+                <img src="{{ asset('storage/' . Auth::user()->student->student_profile_image) }}" alt="Profile" class="user-avatar" style="object-fit: cover;">
+              @else
+                <img src="{{ asset('image/icon_std.png') }}" alt="Profile" class="user-avatar" style="object-fit: cover;">
+              @endif
             </label>
             <div class="dropdown-menu">
               <a href="{{route('student.evaluation')}}" class="dropdown-item">ภาพรวม</a>

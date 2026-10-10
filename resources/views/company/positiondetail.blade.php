@@ -69,10 +69,25 @@
 
                     @auth
                         @if(Auth::user()->role === 'student')
-                        <form action="{{ route('intern.apply', $positions->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn-primary btn-block">สมัครงาน</button>
-                        </form>
+                            {{-- การแจ้งเตือนมินิมอลก่อนถึงปุ่ม --}}
+                            @if(session('error'))
+                                <div style="font-size: 13px; color: #dc2626; background: #fef2f2; border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                                    <span>•</span>
+                                    <span>{{ session('error') }}</span>
+                                </div>
+                            @endif
+
+                            @if(session('success'))
+                                <div style="font-size: 13px; color: #16a34a; background: #f0fdf4; border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                                    <span>✓</span>
+                                    <span>{{ session('success') }}</span>
+                                </div>
+                            @endif
+
+                            <form action="{{ route('intern.apply', $positions->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn-primary btn-block">สมัครงาน</button>
+                            </form>
                         @endif
                     @endauth
                 </div>
