@@ -51,16 +51,28 @@
     margin: 15px 0;
 }
 
+.logo-form-wrapper {
+    position: relative;
+    width: 100px;
+    margin: 0 auto 8px;
+}
+
 .logo-box {
     width: 100px;
     height: 100px;
     background: #e2e8f0;
-    border-radius: 50px;
+    border-radius: 50%;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 8px;
+    overflow: hidden; 
+}
+
+.company-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .building-icon {
@@ -70,11 +82,11 @@
 
 .btn-camera {
     position: absolute;
-    bottom: -5px;
-    right: -5px;
+    bottom: 0px;
+    right: 0px;
     background: #000000;
     color: #ffffff;
-    border: none;
+    border: 2px solid #ffffff; 
     border-radius: 50%;
     width: 28px;
     height: 28px;
@@ -82,6 +94,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
 }
 
 .logo-label {

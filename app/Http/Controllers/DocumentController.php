@@ -63,4 +63,16 @@ class DocumentController extends Controller
 
     return back()->with('error', 'กรุณาเลือกไฟล์เอกสาร');
 }
+public function delete(int $id)
+    {
+        $document = Document::findOrFail($id);
+
+        if ($document->file_path && Storage::disk('public')->exists($document->file_path)) {
+            Storage::disk('public')->delete($document->file_path);
+        }
+
+        $document->delete();
+
+        return redirect()->back()->with('success', 'ลบเอกสารเรียบร้อยแล้ว');
+    }
 }

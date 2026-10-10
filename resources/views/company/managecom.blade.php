@@ -8,16 +8,28 @@
 <div class="dashboard-wrapper">
     <aside class="card profile-card">
         <div class="logo-section">
-            <div class="logo-box">
-                <button class="btn-camera" type="button" aria-label="Upload logo">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                        <circle cx="12" cy="13" r="4" />
-                    </svg>
-                </button>
-            </div>
-            <span class="logo-label">รูปโลโก้บริษัท</span>
+    <form action="{{ route('company.update.logo') }}" method="POST" enctype="multipart/form-data" id="logoForm" class="logo-form-wrapper">
+        @csrf
+        <div class="logo-box">
+            @if($user?->company?->company_profile)
+                <img src="{{ asset('storage/' . $user->company->company_profile) }}" alt="Logo" class="company-logo-img">
+            @else
+                <svg class="building-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M3 21h18M3 7v14M21 7v14M6 10h4M6 14h4M14 10h4M14 14h4M9 3h6v4H9z" />
+                </svg>
+            @endif
         </div>
+        <label for="company_logo_input" class="btn-camera" style="cursor: pointer;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                <circle cx="12" cy="13" r="4" />
+            </svg>
+        </label>
+        
+        <input type="file" name="company_logo" id="company_logo_input" accept="image/*" style="display: none;" onchange="document.getElementById('logoForm').submit();">
+    </form>
+    <span class="logo-label">รูปโลโก้บริษัท</span>
+</div>
 
         <h3 class="welcome-title">{{$user?->company?->company_name}}</h3>
         <a href="{{route('company.edit.profile')}}" class="btn-edit">แก้ไขข้อมูลบริษัท</a>

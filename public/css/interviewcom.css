@@ -204,3 +204,15 @@
     transform: translateY(-4px);
     box-shadow: 0 4px 12px rgba(0, 55, 255, .2);
 }
+
+.input-error {
+    border: 1.5px solid #e53e3e !important ;
+    background-color: #fff5f5 !important ; 
+}
+
+.validated {
+    color: #e53e3e; 
+    font-size: 14px;
+    margin-top: 4px;
+    display: block;
+}

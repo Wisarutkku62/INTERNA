@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\InternshipPosition;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Company;
 use App\Models\Interview;
 use App\Models\ApplicationDocument;
@@ -224,10 +225,21 @@ class CompanyController extends Controller
 
         $appDoc = ApplicationDocument::findOrFail($appDocId);
         $appDoc->appdoc_status = $request->status;
+
         if ($request->has('appdoc_remark')) {
             $appDoc->appdoc_remark = $request->appdoc_remark;
         }
+
         $appDoc->save();
+
+        if ($request->status === 'rejected') {
+            $application = Application::find($appDoc->application_id);
+            if ($application) {
+                $application->delete();
+            }
+
+            return redirect()->back()->with('success', 'ปฏิเสธเอกสารเรียบร้อยแล้ว (ยกเลิกการสมัครงานของนักศึกษาเพื่อให้อัปโหลด/ยื่นสมัครใหม่ได้)');
+        }
 
         return redirect()->back()->with('success', 'อัปเดตสถานะเอกสารเรียบร้อยแล้ว');
     }
@@ -409,5 +421,29 @@ class CompanyController extends Controller
         $evaluation->save();
 
         return redirect()->route('company.applicants.all')->with('success', 'บันทึกผลการประเมินเรียบร้อยแล้ว');
+    }
+    public function updateLogo(Request $request)
+    {
+        $request->validate([
+            'company_logo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'],
+        ]);
+
+        $user = Auth::user();
+        $company = $user?->company;
+
+        if (!$company) {
+            return redirect()->back()->withErrors(['error' => 'ไม่พบข้อมูลบริษัท']);
+        }
+
+        if ($company->company_profile && Storage::disk('public')->exists($company->company_profile)) {
+            Storage::disk('public')->delete($company->company_profile);
+        }
+
+        $path = $request->file('company_logo')->store('company_profiles', 'public');
+
+        $company->company_profile = $path;
+        $company->save();
+
+        return redirect()->back()->with('success', 'อัปเดตโลโก้บริษัทเรียบร้อยแล้ว');
     }
 }

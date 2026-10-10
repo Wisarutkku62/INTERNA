@@ -112,7 +112,7 @@
                             </td>
                             <td>
                                 {{-- ฟอร์มสำหรับกดลบเอกสาร --}}
-                                <form action="{{ route('company.announcement.delete', $doc->id) }}" method="POST" onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบเอกสารนี้?');">
+                                <form action="{{ route('documents.delete', $doc->id) }}" method="POST" onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบเอกสารนี้?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="Btnx">ลบ</button>

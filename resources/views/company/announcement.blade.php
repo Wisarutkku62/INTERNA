@@ -22,14 +22,14 @@
     <form action="{{route('company.announcement.create')}}" method="POST" id='form'>
         @csrf
         <div class="form-group">
-            <label for="position_name">ชื่อตำแหน่งงาน <span >*</span></label>
+            <label for="position_name">ชื่อตำแหน่งงาน <span style="color: crimson;" >*</span></label>
             <input type="text" id="position_name" name="position_name" placeholder="เช่น Backend Developer">
             <span class="position_name-validated validated" id="position_name-validated"></span>
         </div>
         <div class="form-row">
 
             <div class="form-group col">
-                <label for="position_category">หมวดหมู่ <span>*</span></label>
+                <label for="position_category">หมวดหมู่ <span style="color: crimson;" >*</span></label>
                 <select id="position_category" name="position_category">
                     <option value="" disabled selected>เลือกหมวดหมู่</option>
                     <option value="Technology & IT">Technology & IT</option>
@@ -42,7 +42,7 @@
                 </span>
             </div>
             <div class="form-group col">
-                <label for="position_capacity">จำนวนรับ (คน) <span >*</span></label>
+                <label for="position_capacity">จำนวนรับ (คน) <span style="color: crimson;" >*</span></label>
                 <input type="number" id="position_capacity" name="position_capacity" min="1" max="100" placeholder="เช่น 2">
                 <span class="position_capacity-validated validated" id="position_capacity-validated">
 
@@ -51,7 +51,7 @@
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="position_worktype">รูปแบบการทำงาน <span >*</span></label>
+                <label for="position_worktype">รูปแบบการทำงาน <span style="color: crimson;" >*</span></label>
                 <select id="position_worktype" name="position_worktype">
                     <option value="" disabled selected>เลือกรูปแบบการทำงาน</option>
                     <option value="Hybrid">Hybrid</option>
@@ -61,7 +61,7 @@
                 <span class="position_worktype-validated validated" id="position_worktype-validated"></span>
             </div>
             <div class="form-group col">
-                <label for="position_interview_type">รูปแบบสัมภาษณ์ <span >*</span></label>
+                <label for="position_interview_type">รูปแบบสัมภาษณ์ <span style="color: crimson;" >*</span></label>
                 <select id="position_interview_type" name="position_interview_type">
                     <option value="" disabled selected>เลือกรูปแบบสัมภาษณ์</option>
                     <option value="On-site">On-site</option>
@@ -72,7 +72,7 @@
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="position_start_date">วันเริ่มทำงาน <span>*</span></label>
+                <label for="position_start_date">วันเริ่มทำงาน <span style="color: crimson;" >*</span></label>
                 <select id="position_start_date" name="position_start_date" >
                     <option value="" disabled selected>เลือกวัน...</option>
                     <option value="Monday">จันทร์</option>
@@ -86,7 +86,7 @@
                 <span class="position_start_day-validated validated" id="position_start_day-validated"></span>
             </div>
             <div class="form-group col">
-                <label for="position_end_date">วันสิ้นสุดทำงาน <span >*</span></label>
+                <label for="position_end_date">วันสิ้นสุดทำงาน <span style="color: crimson;" >*</span></label>
                 <select id="position_end_date" name="position_end_date">
                     <option value="" disabled selected>เลือกวัน...</option>
                     <option value="Monday">จันทร์</option>
@@ -102,14 +102,14 @@
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="position_start_time">เวลาเริ่มทำงาน <span >*</span></label>
+                <label for="position_start_time">เวลาเริ่มทำงาน <span style="color: crimson;" >*</span></label>
                 <input type="time" id="position_start_time" name="position_start_time">
                 <span class="position_start_time-validated validated" id="position_start_time-validated">
 
                 </span>
             </div>
             <div class="form-group col">
-                <label for="position_end_time">เวลาเลิกทำงาน <span>*</span></label>
+                <label for="position_end_time">เวลาเลิกทำงาน <span style="color: crimson;" >*</span></label>
                 <input type="time" id="position_end_time" name="position_end_time">
                 <span class="position_end_time-validated validated" id="position_end_time-validated">
 
@@ -117,19 +117,19 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="position_allowance">อัตราเงินเดือน <span >*</span></label>
+            <label for="position_allowance">อัตราเงินเดือน <span style="color: crimson;" >*</span></label>
             <input type="text" id="position_allowance" name="position_allowance" min="0" placeholder="เช่น 9000">
             <span class="position_allowance-validated validated" id="position_allowance-validated">
 
             </span>
         </div>
         <div class="form-group">
-            <label for="position_qualification">คุณสมบัติผู้สมัคร <span >*</span></label>
+            <label for="position_qualification">คุณสมบัติผู้สมัคร <span style="color: crimson;" >*</span></label>
             <textarea id="position_qualification" name="position_qualification" rows="3" placeholder="ระบุคุณสมบัติเบื้องต้น..."></textarea>
             <span class="position_qualification-validated validated" id="position_qualification-validated"></span>
         </div>
         <div class="form-group">
-            <label for="position_description">รายละเอียดงาน <span >*</span></label>
+            <label for="position_description">รายละเอียดงาน <span style="color: crimson;" >*</span></label>
             <textarea id="position_description" name="position_description" rows="4" placeholder="ระบุรายละเอียดหน้าที่รับผิดชอบ..."></textarea>
             <span class="position_description-validated validated" id="position_description-validated"></span>
         </div>

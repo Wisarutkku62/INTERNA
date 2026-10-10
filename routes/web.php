@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
@@ -9,7 +8,6 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\InternController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Company;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
 
@@ -31,7 +29,8 @@ Route::view('/contact', 'contactus')->name('contact');
 
 
 Route::get('/doc', [DocumentController::class, 'index'])->name('documents.index');
-Route::post('/doc', [DocumentController::class, 'store'])->name('documents.store');
+Route::post('/doc/store', [DocumentController::class, 'store'])->name('documents.store');
+Route::delete('/doc/delete/{id}', [DocumentController::class, 'delete'])->name('documents.delete');
 
 //Login & Register | AuthController 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.showRegister');
@@ -75,6 +74,7 @@ Route::put('/company/interviewresult/{id}/update', [CompanyController::class, 'i
 Route::get('/company/applicants', [CompanyController::class, 'applicants_all'])->name('company.applicants.all');
 Route::get('/company/evaluation/{id}', [CompanyController::class, 'evaluation'])->name('company.evaluation');
 Route::post('/company/evaluation/{id}/store', [CompanyController::class, 'evaluation_store'])->name('company.evaluation.store');
+Route::post('/company/update-logo', [CompanyController::class, 'updateLogo'])->name('company.update.logo');
 
 });
 

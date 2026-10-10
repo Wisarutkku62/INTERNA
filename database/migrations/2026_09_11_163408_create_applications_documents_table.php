@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('applications_documents', function (Blueprint $table) {
-            $table->id(); // เพิ่ม Primary Key
-            $table->foreignId('application_id')->constrained(); 
-            $table->foreignId('document_id')->constrained();   
-            $table->string('appdoc_status');
-            $table->string('appdoc_remark')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-});
+        $table->id();
+        $table->foreignId('application_id')->constrained()->cascadeOnDelete(); 
+        $table->foreignId('document_id')->constrained()->cascadeOnDelete();
+        $table->string('appdoc_status');
+        $table->string('appdoc_remark')->nullable();
+        $table->timestamps();
+        $table->softDeletes();
+    });
     }
 
     /**
