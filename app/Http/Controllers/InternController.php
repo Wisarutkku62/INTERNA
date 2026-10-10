@@ -14,37 +14,70 @@ class InternController extends Controller
         $user = Auth::user();
         return view('index', compact('user'));
     }
+
     public function internship(Request $request)
     {
+        $query = InternshipPosition::with('company');
 
-    $query = InternshipPosition::with('company');
+        if ($request->filled('keyword')) {
+            $keyword = $request->keyword;
+            $query->where(function ($q) use ($keyword) {
+                $q->where('position_name', 'LIKE', "%{$keyword}%")
+                    ->orWhereHas('company', function ($compQuery) use ($keyword) {
+                        $compQuery->where('company_name', 'LIKE', "%{$keyword}%");
+                    });
+            });
+        }
 
-    if ($request->filled('keyword')) {
-        $keyword = $request->keyword;
-        $query->where(function($q) use ($keyword) {
-            $q->where('position_name', 'LIKE', '%' . $keyword . '%')
-              ->orWhereHas('company', function($compQuery) use ($keyword) {
-                  $compQuery->where('company_name', 'LIKE', '%' . $keyword . '%');
-              });
-        });
+        // --- แก้ไขตรงส่วนหมวดหมู่งานตรงนี้ ---
+        if ($request->filled('category')) {
+            $category = $request->category;
+
+            if ($category === 'Technology & IT') {
+                $query->where(function($q) {
+                    $q->where('position_category', 'Technology & IT')
+                      ->orWhere('position_category', 'LIKE', '%Software%')
+                      ->orWhere('position_category', 'LIKE', '%Frontend%')
+                      ->orWhere('position_category', 'LIKE', '%Backend%')
+                      ->orWhere('position_category', 'LIKE', '%Infrastructure%')
+                      ->orWhere('position_category', 'LIKE', '%IT%');
+                });
+            } elseif ($category === 'Design & Creative') {
+                $query->where(function($q) {
+                    $q->where('position_category', 'Design & Creative')
+                      ->orWhere('position_category', 'LIKE', '%Design%')
+                      ->orWhere('position_category', 'LIKE', '%Graphic%');
+                });
+            } else {
+                $query->where('position_category', 'LIKE', '%' . $category . '%');
+            }
+        }
+
+        if ($request->filled('worktype')) {
+            $worktype = $request->worktype;
+            if ($worktype === 'Onsite') {
+                $query->whereIn('position_worktype', ['Onsite', 'On-site']);
+            } elseif ($worktype === 'Online') {
+                $query->whereIn('position_worktype', ['Online', 'Remote']);
+            } else {
+                $query->where('position_worktype', $worktype);
+            }
+        }
+
+        if ($request->filled('interview_type')) {
+            $interviewType = $request->interview_type;
+            if ($interviewType === 'Onsite') {
+                $query->whereIn('position_interview_type', ['Onsite', 'On-site']);
+            } else {
+                $query->where('position_interview_type', $interviewType);
+            }
+        }
+
+        $internship_positions = $query->orderBy('id', 'desc')->get();
+
+        return view('application', compact('internship_positions'));
     }
 
-    if ($request->filled('category')) {
-        $query->where('position_category', $request->category);
-    }
-
-    if ($request->filled('worktype')) {
-        $query->where('position_worktype', $request->worktype);
-    }
-
-    if ($request->filled('interview_type')) {
-        $query->where('position_interview_type', $request->interview_type);
-    }
-
-    $internship_positions = $query->orderBy('id', 'desc')->get();
-
-    return view('application', compact('internship_positions'));
-    }
     public function internship_detail($id)
     {
         $positions = InternshipPosition::findOrFail($id);
@@ -53,7 +86,6 @@ class InternController extends Controller
 
     public function apply(Request $request, $id)
     {
-
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'กรุณาเข้าสู่ระบบก่อนสมัครงาน');
         }

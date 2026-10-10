@@ -1,13 +1,13 @@
 @extends("layouts.app")
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/application.css') }}">
+<link rel="stylesheet" href="{{ asset('css/application.css') }}">
 @endpush
 
 @section('content')
 <div class="application-page">
     <div class="header-section">
-        <h1 class="page-title">งานทั้งหมด</h1>    
+        <h1 class="page-title">งานทั้งหมด</h1>
     </div>
     <form action="{{ route('intern.intern') }}" method="GET" class="filter-container">
         <div class="search-main-box">
@@ -53,63 +53,64 @@
             </div>
 
             @if(request()->anyFilled(['keyword', 'category', 'worktype', 'interview_type']))
-                <a href="{{ route('intern.intern') }}" class="btn-clear-filter">ล้างตัวกรอง</a>
+            <a href="{{ route('intern.intern') }}" class="btn-clear-filter">ล้างตัวกรอง</a>
             @endif
         </div>
     </form>
 
     <div class="job-list">
         @forelse($internship_positions as $position)
-            <div class="job-card">
-                <div class="job-card-left">
-                    <div class="job-card-head">
-                        <h2 class="job-company">{{ $position->position_name }}</h2>
-                        <h3 class="job-title">{{ $position->company?->company_name }}</h3>
+        <div class="job-card">
+            <div class="job-card-left">
+                <div class="job-card-head">
+                    <h2 class="job-company">{{ $position->position_name }}</h2>
+                    <h3 class="job-title">{{ $position->company?->company_name }}</h3>
+                </div>
+
+                <div class="job-card-body">
+                    <div class="job-info-row">
+                        <span class="info-label">หมวดหมู่ :</span>
+                        <span class="info-value">{{ $position->position_category }}</span>
                     </div>
-
-                    <div class="job-card-body">
-                        <div class="job-info-row">
-                            <span class="info-label">หมวดหมู่ :</span>
-                            <span class="info-value">{{ $position->position_category }}</span>
-                        </div>
-                        <div class="job-info-row">
-                            <span class="info-label">เบี้ยเลี้ยง :</span>
-                            <span class="info-value">{{ number_format($position->position_allowance) }} บาท/วัน</span>
-                        </div>
-                        <div class="job-info-row">
-                            <span class="info-label">จำนวนรับสมัคร :</span>
-                            <span class="info-value">{{ $position->position_capacity }} อัตรา</span>
-                        </div>
+                    <div class="job-info-row">
+                        <span class="info-label">เบี้ยเลี้ยง :</span>
+                        <span class="info-value">{{ number_format($position->position_allowance) }} บาท/วัน</span>
                     </div>
-
-                    <div class="job-card-footer">
-                        @if ($position->position_interview_type == 'Online')
-                            <span class="badge badge-interview">สัมภาษณ์งานออนไลน์ (Online)</span>
-                        @elseif ($position->position_interview_type == 'Onsite')
-                            <span class="badge badge-interview">สัมภาษณ์งานออนไซต์ (Onsite)</span>
-                        @endif 
-
-                        @if ($position->position_worktype == 'Online')
-                            <span class="badge badge-worktype">Work From Home</span>
-                        @elseif ($position->position_worktype == 'Onsite')
-                            <span class="badge badge-worktype">Onsite</span>
-                        @elseif ($position->position_worktype == 'Hybrid')
-                            <span class="badge badge-worktype">Hybrid</span>
-                        @endif 
+                    <div class="job-info-row">
+                        <span class="info-label">จำนวนรับสมัคร :</span>
+                        <span class="info-value">{{ $position->position_capacity }} อัตรา</span>
                     </div>
                 </div>
 
-                <div class="job-card-right">
-                    <div class="job-card-media">
-                        <img src="{{ asset('img/Picturelogin.png') }}" alt="company picture">
-                        <a href="{{ route('intern.detail', $position->id) }}" class="detail-btn">ดูรายละเอียดงาน</a>
-                    </div>
+                <div class="job-card-footer">
+            
+                    @if (in_array($position->position_interview_type, ['Online', 'ออนไลน์']))
+                    <span class="badge badge-interview">สัมภาษณ์งานออนไลน์ (Online)</span>
+                    @elseif (in_array($position->position_interview_type, ['Onsite', 'On-site', 'ออนไซต์']))
+                    <span class="badge badge-interview">สัมภาษณ์งานออนไซต์ (Onsite)</span>
+                    @endif
+
+                    @if (in_array($position->position_worktype, ['Online', 'Remote', 'Work From Home']))
+                    <span class="badge badge-worktype">Work From Home</span>
+                    @elseif (in_array($position->position_worktype, ['Onsite', 'On-site', 'ออนไซต์']))
+                    <span class="badge badge-worktype">Onsite</span>
+                    @elseif (in_array($position->position_worktype, ['Hybrid', 'ไฮบริด']))
+                    <span class="badge badge-worktype">Hybrid</span>
+                    @endif
                 </div>
             </div>
+
+            <div class="job-card-right">
+                <div class="job-card-media">
+                    <img src="{{ asset('img/Picturelogin.png') }}" alt="company picture">
+                    <a href="{{ route('intern.detail', $position->id) }}" class="detail-btn">ดูรายละเอียดงาน</a>
+                </div>
+            </div>
+        </div>
         @empty
-            <div class="empty-state">
-                <p>ไม่พบข้อมูลตำแหน่งงานที่คุณค้นหา</p>
-            </div>
+        <div class="empty-state">
+            <p>ไม่พบข้อมูลตำแหน่งงานที่คุณค้นหา</p>
+        </div>
         @endforelse
     </div>
 </div>
