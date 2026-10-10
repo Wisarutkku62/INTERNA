@@ -11,7 +11,7 @@ class EvaluationController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        $user = \App\Models\User::with('student')->find(Auth::id());
         $studentId = $user?->student?->id;
 
         $passedApplications = Application::with(['internshipPosition.company', 'interview'])

@@ -20,7 +20,20 @@
             <div class="logo-label">รูปโปรไฟล์นักศึกษา</div>
         </div>
 
-        <div class="welcome-title">ยินดีต้อนรับ</div>
+        <div class="welcome-title">
+            <div>ยินดีต้อนรับ</div>
+            <div>
+                @php
+                $fname = $user?->student?->student_fname;
+                @endphp
+                @if(!empty($fname) && $fname !== '-')
+                {{ $fname }}
+                @else
+                {{ \App\Models\Student::whereNotNull('student_fname')->where('student_fname', '!=', '-')->value('student_fname') }}
+                @endif
+            </div>
+        </div>
+
         <a href="{{ route('newprofile') }}" class="btn-edit">แก้ไขข้อมูลส่วนตัว</a>
         <a href="{{ route('documents.index') }}" class="btn-manage">จัดการเอกสาร</a>
     </div>
@@ -142,41 +155,41 @@
         </section>
 
         <section class="card">
-    <h2 class="card-title card-title-left">ผลการประเมินการฝึกงาน</h2>
+            <h2 class="card-title card-title-left">ผลการประเมินการฝึกงาน</h2>
 
-    @if(isset($evaluation) && $evaluation)
-    <div class="evaluation-result-box">
-        <div class="score-summary">
-            <div class="type-info">
-                <span class="type-value">ตำแหน่งงาน / บริษัท:</span>
-                <div class="comment-text" style="font-weight: 600; color: #0f172a; margin-top: 4px;">
-                    {{ $completedApplication?->internshipPosition?->position_name ?? '-' }} 
-                    <span style="font-weight: 400; color: #64748b;">
-                        ({{ $completedApplication?->internshipPosition?->company?->company_name ?? '-' }})
-                    </span>
+            @if(isset($evaluation) && $evaluation)
+            <div class="evaluation-result-box">
+                <div class="score-summary">
+                    <div class="type-info">
+                        <span class="type-value">ตำแหน่งงาน / บริษัท:</span>
+                        <div class="comment-text" style="font-weight: 600; color: #0f172a; margin-top: 4px;">
+                            {{ $completedApplication?->internshipPosition?->position_name ?? '-' }}
+                            <span style="font-weight: 400; color: #64748b;">
+                                ({{ $completedApplication?->internshipPosition?->company?->company_name ?? '-' }})
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="score-info">
+                        <span class="label-title">คะแนนรวมสุทธิ:</span>
+                        <div class="score-num">
+                            {{ number_format($evaluation->evaluation_score, 0) }}
+                            <span class="score-max">/ 100 คะแนน</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-box" style="margin-top: 16px;">
+                    <strong class="comment-title">ข้อเสนอแนะเพิ่มเติม:</strong>
+                    <p class="comment-text" style="margin-top: 6px; color: #334155;">
+                        {{ $evaluation->evaluation_feedback ?? 'ไม่มีข้อเสนอแนะเพิ่มเติม' }}
+                    </p>
                 </div>
             </div>
-            
-            <div class="score-info">
-                <span class="label-title">คะแนนรวมสุทธิ:</span>
-                <div class="score-num">
-                    {{ number_format($evaluation->evaluation_score, 0) }}
-                    <span class="score-max">/ 100 คะแนน</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="comment-box" style="margin-top: 16px;">
-            <strong class="comment-title">ข้อเสนอแนะเพิ่มเติม:</strong>
-            <p class="comment-text" style="margin-top: 6px; color: #334155;">
-                {{ $evaluation->evaluation_feedback ?? 'ไม่มีข้อเสนอแนะเพิ่มเติม' }}
-            </p>
-        </div>
-    </div>
-    @else
-    <p class="empty-evaluation" style="color: #64748b; padding: 12px 0;">ยังไม่มีข้อมูลการประเมินผลในขณะนี้</p>
-    @endif
-</section>
+            @else
+            <p class="empty-evaluation" style="color: #64748b; padding: 12px 0;">ยังไม่มีข้อมูลการประเมินผลในขณะนี้</p>
+            @endif
+        </section>
 
     </div>
 

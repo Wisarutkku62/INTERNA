@@ -85,32 +85,32 @@ class InternController extends Controller
     }
 
     public function apply(Request $request, $id)
-    {
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'กรุณาเข้าสู่ระบบก่อนสมัครงาน');
-        }
+{
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'กรุณาเข้าสู่ระบบก่อนสมัครงาน');
+    }
 
-        $user = Auth::user();
-        $studentId = $user?->student?->id;
+    $user = Auth::user();
+    $student = $user?->student;
 
-        if (!$studentId) {
-            return redirect()->back()->with('error', 'กรุณากรอกข้อมูลโปรไฟล์นักศึกษาให้ครบถ้วนก่อนสมัครงาน');
-        }
+    if (!$student || empty($student->first_name) || $student->first_name === '-' || empty($student->phone)) {
+    return redirect('/newprofile')->with('error', 'กรุณากรอกข้อมูลส่วนตัวให้สมบูรณ์ก่อนทำการสมัครงาน');
+}
 
-        $existingApplication = Application::where('internship_position_id', $id)
-            ->where('student_id', $studentId)
-            ->first();
+    $existingApplication = Application::where('internship_position_id', $id)
+        ->where('student_id', $student->id)
+        ->first();
 
-        if ($existingApplication) {
-            return redirect()->back()->with('error', 'คุณได้ทำการสมัครตำแหน่งงานนี้ไปแล้ว');
-        }
+    if ($existingApplication) {
+        return redirect()->back()->with('error', 'คุณได้ทำการสมัครตำแหน่งงานนี้ไปแล้ว');
+    }
 
-        Application::create([
-            'internship_position_id' => $id,
-            'student_id'             => $studentId,
-            'application_status'     => 'pending',
-        ]);
+    Application::create([
+        'internship_position_id' => $id,
+        'student_id'             => $student->id,
+        'application_status'     => 'pending',
+    ]);
 
-        return redirect()->back()->with('success', 'ส่งใบสมัครงานเรียบร้อยแล้ว');
+    return redirect()->back()->with('success', 'ส่งใบสมัครงานเรียบร้อยแล้ว');
     }
 }
