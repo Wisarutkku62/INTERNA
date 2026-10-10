@@ -8,10 +8,8 @@
 <div class="doc-page-wrapper">
 
     <div class="headbtm">
-        <a href="{{ url()->previous() }}" class="back-bta">
-            <img src="{{ asset('img/lukson.png') }}" alt="กลับ" class="back-icons">
-            <span>งานทั้งหมด</span>
-        </a>
+    <a href="{{route('company.overview')}}" class="back-icons" title="ย้อนกลับ">&larr;</a>
+        <h2>งานทั้งหมด</h2>
     </div>
 
     <div class="doc-container">

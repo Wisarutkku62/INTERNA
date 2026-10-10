@@ -9,10 +9,11 @@
 }
 
 .headbtm {
-    margin-left:310px ;
-    margin-bottom: 20px;
+    max-width: 1100px;
+    margin: 0 auto 20px;
     display: flex;
     align-items: center;
+    padding: 0;
 }
 
 .back-bta {
@@ -26,7 +27,7 @@
     border-radius: 10px;
     padding: 8px 16px;
     transition: all 0.2s ease;
-    font-family: 'prompt',sans-serif;
+    font-family: 'prompt', sans-serif;
 }
 
 .back-bta:hover {
@@ -36,9 +37,23 @@
 
 
 .back-icons {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
+    font-size: 26px;
+    font-weight: bold;
+    color: #0f172a;
+    text-decoration: none;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.headbtm h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1;
+    margin: 0;
+    margin-right: auto;
 }
 
 .back-bta:hover .back-icons {
@@ -86,7 +101,7 @@
     margin-bottom: 20px;
     border-bottom: 2px solid #f1f5f9;
     padding-bottom: 12px;
-    
+
 }
 
 
@@ -94,7 +109,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
-    
+
     margin-right: 50px;
 }
 
@@ -146,14 +161,15 @@
     background: #0022b3;
 }
 
-.Btnx{
+.Btnx {
     border: red solid 1px;
     width: 50px;
     background: rgb(250, 244, 244);
     border-radius: 5px;
     margin-left: 20px;
 }
-.Btnx:hover{
+
+.Btnx:hover {
     background-color: #FF0000;
     color: white;
     border-radius: 5px;
@@ -195,9 +211,20 @@
     display: inline-block;
 }
 
-.badge-pending { background: #fffbeb; color: #d97706; }
-.badge-success { background: #f0fdf4; color: #16a34a; }
-.badge-rejected { background: #fef2f2; color: #dc2626; }
+.badge-pending {
+    background: #fffbeb;
+    color: #d97706;
+}
+
+.badge-success {
+    background: #f0fdf4;
+    color: #16a34a;
+}
+
+.badge-rejected {
+    background: #fef2f2;
+    color: #dc2626;
+}
 
 
 .reject-reason {
