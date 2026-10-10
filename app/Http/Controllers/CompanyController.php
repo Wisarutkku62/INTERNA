@@ -96,27 +96,36 @@ class CompanyController extends Controller
         return back()->withInput()->withErrors([
             'error' => 'ไม่พบข้อมูลบริษัทของบัญชีนี้ กรุณาลงทะเบียนหรือกรอกข้อมูลโปรไฟล์บริษัทก่อนสร้างประกาศ'
         ]);
+
+        $user = Auth::user();
+
+        $companyId = $user?->company?->id ?? $user?->company_id;
+
+        if (!$companyId) {
+            return back()->withInput()->withErrors([
+                'error' => 'ไม่พบข้อมูลบริษัทของบัญชีนี้ กรุณาลงทะเบียนหรือกรอกข้อมูลโปรไฟล์บริษัทก่อนสร้างประกาศ'
+            ]);
+        }
+
+        $position = new InternshipPosition();
+        $position->company_id = $companyId;
+        $position->position_name = $validated['position_name'];
+        $position->position_description = $validated['position_description'];
+        $position->position_qualification = $validated['position_qualification'];
+        $position->position_category = $validated['position_category'];
+        $position->position_capacity = $validated['position_capacity'];
+        $position->position_allowance = $validated['position_allowance'];
+        $position->position_start_date = $validated['position_start_date'];
+        $position->position_end_date = $validated['position_end_date'];
+        $position->position_start_time = $validated['position_start_time'];
+        $position->position_end_time = $validated['position_end_time'];
+        $position->position_worktype = $validated['position_worktype'];
+        $position->position_interview_type = $validated['position_interview_type'];
+
+        $position->save();
+
+        return redirect()->route('company.announcement.all')->with('success', 'สร้างประกาศรับสมัครเรียบร้อยแล้ว');
     }
-
-    $position = new InternshipPosition();
-    $position->company_id = $companyId; 
-    $position->position_name = $validated['position_name'];
-    $position->position_description = $validated['position_description'];
-    $position->position_qualification = $validated['position_qualification'];
-    $position->position_category = $validated['position_category'];
-    $position->position_capacity = $validated['position_capacity'];
-    $position->position_allowance = $validated['position_allowance'];
-    $position->position_start_date = $validated['position_start_date'];
-    $position->position_end_date = $validated['position_end_date'];
-    $position->position_start_time = $validated['position_start_time'];
-    $position->position_end_time = $validated['position_end_time'];
-    $position->position_worktype = $validated['position_worktype'];
-    $position->position_interview_type = $validated['position_interview_type'];
-
-    $position->save();
-
-    return redirect()->route('company.announcement.all')->with('success', 'สร้างประกาศรับสมัครเรียบร้อยแล้ว');
-}
 
     public function announcement_all()
     {
@@ -204,7 +213,10 @@ class CompanyController extends Controller
 
     public function viewresume(int $id)
     {
-        $application = Application::with(['student', 'applicationDocuments.document'])->findOrFail($id);
+        $application = Application::with([
+            'student',
+            'applicationDocuments.document'
+        ])->findOrFail($id);
 
         $student = $application->student;
         $documents = $application->applicationDocuments;
@@ -212,20 +224,18 @@ class CompanyController extends Controller
         return view('company.viewdocument', compact('application', 'student', 'documents'));
     }
 
-    public function updateDocumentStatus(Request $request, $id)
+    public function updateDocumentStatus(Request $request, int $appDocId)
     {
         $request->validate([
-            'status' => 'required|in:approved,rejected',
+            'status' => ['required', 'string', 'in:passed,rejected,pending'], 
+            'appdoc_remark' => ['nullable', 'string'],
         ]);
 
-        $appDoc = ApplicationDocument::findOrFail($id);
-
-        if (isset($appDoc->appdoc_status)) {
-            $appDoc->appdoc_status = $request->status;
-        } else {
-            $appDoc->status = $request->status;
+        $appDoc = ApplicationDocument::findOrFail($appDocId);
+        $appDoc->appdoc_status = $request->status; 
+        if ($request->has('appdoc_remark')) {
+            $appDoc->appdoc_remark = $request->appdoc_remark;
         }
-
         $appDoc->save();
 
         return redirect()->back()->with('success', 'อัปเดตสถานะเอกสารเรียบร้อยแล้ว');

@@ -9,6 +9,21 @@
     <div class="header-section">
         <h1 class="page-title">งานทั้งหมด</h1>
     </div>
+
+    {{-- 🛑 ส่วนแสดงข้อความ Alert แจ้งเตือนเมื่อไม่มีเอกสาร --}}
+    @if (session('error'))
+        <div class="alert alert-danger" >
+            ⚠️ {{ session('error') }}
+            <a href="{{ route('documents.index') }}" >ไปหน้าอัปโหลดเอกสาร</a>
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            ✅ {{ session('success') }}
+        </div>
+    @endif
+
     <form action="{{ route('intern.intern') }}" method="GET" class="filter-container">
         <div class="search-main-box">
             <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="ค้นหาชื่อตำแหน่งงาน หรือ ชื่อบริษัท..." class="search-input">

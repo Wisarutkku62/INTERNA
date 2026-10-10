@@ -14,7 +14,7 @@
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label for="position_name">ชื่อตำแหน่งงาน</label>
+            <label for="position_name">ชื่อตำแหน่งงาน <span >*</span></label>
             <input type="text" id="position_name" name="position_name" placeholder="เช่น Backend Developer" value="{{ $internshippositions_edit->position_name ?? '' }}">
             <span class="position_name-validated validated" id="position_name-validated">
 
@@ -22,7 +22,7 @@
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="position_category">แผนก/ฝ่าย </label>
+                <label for="position_category">หมวดหมู่ <span>*</span></label>
                 <select id="position_category" name="position_category" required>
                     <option value="Technology & IT" {{ ( $internshippositions_edit->position_category ?? '') == 'Technology & IT' ? 'selected' : '' }}>Technology & IT</option>
                     <option value="Design & Creative" {{ ( $internshippositions_edit->position_category ?? '') == 'Design & Creative' ? 'selected' : '' }}>Design & Creative</option>
@@ -34,7 +34,7 @@
                 </span>
             </div>
             <div class="form-group col">
-                <label for="position_capacity">จำนวนรับ (คน)</label>
+                <label for="position_capacity">จำนวนรับ (คน) <span >*</span></label>
                 <input type="number" id="position_capacity" name="position_capacity" min="1" placeholder="เช่น 2" value="{{ $internshippositions_edit->position_capacity ?? '' }}">
                 <span class="position_capacity-validated validated" id="position_capacity-validated">
 
@@ -43,7 +43,7 @@
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="position_worktype">รูปแบบการทำงาน</label>
+                <label for="position_worktype">รูปแบบการทำงาน <span>*</span></label>
                 <select id="position_worktype" name="position_worktype">
                     <option value="Hybrid" {{ ( $internshippositions_edit->position_worktype ?? '') == 'Hybrid' ? 'selected' : '' }}>Hybrid</option>
                     <option value="On-site" {{ ( $internshippositions_edit->position_worktype ?? '') == 'On-site' ? 'selected' : '' }}>On-site</option>
@@ -54,7 +54,7 @@
                 </span>
             </div>
             <div class="form-group col">
-                <label for="position_interview_type">รูปแบบสัมภาษณ์</label>
+                <label for="position_interview_type">รูปแบบสัมภาษณ์ <span >*</span></label>
                 <select id="position_interview_type" name="position_interview_type">
                     <option value="On-site" {{ ( $internshippositions_edit->position_interview_type ?? '') == 'On-site' ? 'selected' : '' }}>On-site</option>
                     <option value="Online" {{ ( $internshippositions_edit->position_interview_type ?? '') == 'Online' ? 'selected' : '' }}>Online</option>
@@ -66,7 +66,7 @@
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="position_start_date">วันเริ่มทำงาน</label>
+                <label for="position_start_date">วันเริ่มทำงาน <span>*</span></label>
                 <select id="position_start_date" name="position_start_date" required>
                     <option value="" disabled selected>เลือกวัน...</option>
                     <option value="Monday" {{ ( $internshippositions_edit->position_start_date ?? '') == 'Monday' ? 'selected' : '' }}>จันทร์</option>
@@ -82,7 +82,7 @@
                 </span>
             </div>
             <div class="form-group col">
-                <label for="position_end_date">วันสิ้นสุดทำงาน</label>
+                <label for="position_end_date">วันสิ้นสุดทำงาน <span >*</span></label>
                 <select id="position_end_date" name="position_end_date" required>
                     <option value="" disabled selected>เลือกวัน...</option>
                     <option value="Monday" {{ ( $internshippositions_edit->position_end_date ?? '') == 'Monday' ? 'selected' : '' }}>จันทร์</option>
@@ -100,14 +100,14 @@
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="position_start_time">เวลาเริ่มทำงาน</label>
+                <label for="position_start_time">เวลาเริ่มทำงาน <span >*</span></label>
                 <input type="time" id="position_start_time" name="position_start_time" value="{{ $internshippositions_edit->position_start_time ?? '' }}">
                 <span class="position_start_time-validated validated" id="position_start_time-validated">
 
                 </span>
             </div>
             <div class="form-group col">
-                <label for="position_end_time">เวลาเลิกทำงาน</label>
+                <label for="position_end_time">เวลาเลิกทำงาน <span >*</span></label>
                 <input type="time" id="position_end_time" name="position_end_time" value="{{ $internshippositions_edit->position_end_time ?? '' }}">
                 <span class="position_end_time-validated validated" id="position_end_time-validated">
 
@@ -115,21 +115,21 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="position_allowance">อัตราเงินเดือน </label>
-            <input type="text" id="position_allowance" name="position_allowance" placeholder="เช่น 4-5 บาท/เดือน" value="{{ $internshippositions_edit->position_allowance ?? '' }}">
+            <label for="position_allowance">อัตราเงินเดือน <span>*</span></label>
+            <input type="text" id="position_allowance" name="position_allowance" placeholder="เช่น 9000" min="0" value="{{ $internshippositions_edit->position_allowance ?? '' }}">
             <span class="position_allowance-validated validated" id="position_allowance-validated">
 
             </span>
         </div>
         <div class="form-group">
-            <label for="position_qualification">คุณสมบัติผู้สมัคร</label>
+            <label for="position_qualification">คุณสมบัติผู้สมัคร <span >*</span></label>
             <textarea id="position_qualification" name="position_qualification" rows="3" placeholder="ระบุคุณสมบัติเบื้องต้น...">{{ $internshippositions_edit->position_qualification ?? '' }}</textarea>
             <span class="position_qualification-validated validated" id="position_qualification-validated">
 
             </span>
         </div>
         <div class="form-group">
-            <label for="position_description">รายละเอียดงาน</label>
+            <label for="position_description">รายละเอียดงาน <span >*</span></label>
             <textarea id="position_description" name="position_description" rows="4" placeholder="ระบุรายละเอียดหน้าที่รับผิดชอบ...">{{ $internshippositions_edit->position_description ?? '' }}</textarea>
             <span class="position_description-validated validated" id="position_description-validated">
 

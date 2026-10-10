@@ -133,7 +133,7 @@
     color: #ffffff;
     border: none;
     padding: 10px 24px;
-    border-radius: 10px;
+    border-radius: 5px;
     font-family: 'Prompt', sans-serif;
     font-size: 14px;
     font-weight: 500;
@@ -146,6 +146,18 @@
     background: #0022b3;
 }
 
+.Btnx{
+    border: red solid 1px;
+    width: 50px;
+    background: rgb(250, 244, 244);
+    border-radius: 5px;
+    margin-left: 20px;
+}
+.Btnx:hover{
+    background-color: #FF0000;
+    color: white;
+    border-radius: 5px;
+}
 
 .table-responsive {
     width: 100%;

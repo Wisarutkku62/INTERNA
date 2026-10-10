@@ -121,7 +121,11 @@
 
         <div class="profile-actions">
             <a href="{{ route('company.viewresume', $applicants_profile->id) }}" class="resume">ดูเอกสาร</a>
-            <a href="{{ route('interviews.create',$applicants_profile->id ) }}" class="interview">สร้างนัดสัมภาษณ์</a>
+            @auth
+                @if(Auth::user()->role === 'company')
+                    <a href="{{ route('interviews.create',$applicants_profile->id ) }}" class="interview">สร้างนัดสัมภาษณ์</a>
+                @endif
+            @endauth
         </div>
 
 

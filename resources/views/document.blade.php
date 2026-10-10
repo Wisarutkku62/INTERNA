@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/document.css') }}?v={{ filemtime(public_path('css/document.css')) }}">
+<link rel="stylesheet" href="{{ asset('css/document.css') }}?v={{ filemtime(public_path('css/document.css')) }}">
 @endpush
 
 @section('content')
@@ -21,9 +21,9 @@
         </div>
 
         @if(session('success'))
-            <div class="alert alert-success" style="margin-bottom: 15px; padding: 10px; background-color: #d4edda; color: #155724; border-radius: 5px;">
-                {{ session('success') }}
-            </div>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
         @endif
 
         <div class="doc-card" id="upload-section">
@@ -33,12 +33,23 @@
                 @csrf
                 <div class="upload-form-grid">
                     <div class="form-group">
-                        <label class="form-label" for="file">เลือกไฟล์เอกสาร (PDF, DOCX) <span style="color:red;">*</span></label>
+                        <label class="form-label" for="file">เลือกไฟล์เอกสาร (PDF, DOCX) <span">*</span></label>
                         <input type="file" name="file" id="file" class="form-control" accept=".pdf,.doc,.docx" required>
                     </div>
                 </div>
 
-                <div style="text-align: right; margin-top: 10px;">
+                <div class="upload-form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="file">หมวดหมู่ <span>*</span></label>
+                        <select name="document_type" id="document_type" class="form-control" required>
+                            <option value="" disabled selected>เลือกหมวดหมู่</option>
+                            <option value="Resume">เรซูเม่</option>
+                            <option value="Transcript">ผลการเรียน</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
                     <button type="submit" class="btn-submit">ส่งเอกสาร</button>
                 </div>
             </form>
@@ -56,46 +67,66 @@
                             <th>วันที่อัปโหลด</th>
                             <th>สถานะ</th>
                             <th>หมายเหตุ / แก้ไข</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($documents ?? [] as $doc)
-                            <tr>
-                                <td><b>{{ $doc->doc_type ?? $doc->document_type ?? 'เอกสาร' }}</b></td>
-                                <td>
-                                    <a href="{{ asset($doc->file_path ?? $doc->document_file_path ?? '#') }}" target="_blank" style="color: #0037ff; text-decoration: none;">
-                                        ดูไฟล์แนบ
-                                    </a>
-                                </td>
-                                <td>{{ $doc->created_at ? $doc->created_at->format('d/m/Y') : '-' }}</td>
-                                <td>
-                                    @if(($doc->status ?? '') == 'approved')
-                                        <span class="badge badge-success">ผ่านการตรวจสอบ</span>
-                                    @elseif(($doc->status ?? '') == 'rejected')
-                                        <span class="badge badge-rejected">ถูกยกเลิก</span>
+                        <tr>
+                            <td>
+                                <b>
+                                    @if ($doc->document_type === "Resume")
+                                    เรซูเม่
+                                    @elseif ($doc->document_type === "Transcript")
+                                    ระเบียนการศึกษา
                                     @else
-                                        <span class="badge badge-pending">รอตรวจสอบ</span>
+                                    {{ $doc->document_type ?? 'เอกสารทั่วไป' }}
                                     @endif
-                                </td>
-                                <td>
-                                    @if(($doc->status ?? '') == 'rejected')
-                                        <div class="reject-reason">
-                                            <b>หมายเหตุ:</b> {{ $doc->remark ?? 'กรุณาส่งไฟล์เอกสารใหม่' }}
-                                        </div>
-                                        <div style="margin-top: 6px;">
-                                            <a href="#" class="btn-reupload">ส่งเอกสารใหม่</a>
-                                        </div>
-                                    @else
-                                        <span style="color: #64748b; font-size: 13px;">-</span>
-                                    @endif
-                                </td>
-                            </tr>
+                                </b>
+                            </td>
+                            <td>
+                                <a href="{{ asset('storage/' . ltrim($doc->document_file_path ?? $doc->file_path ?? '', '/')) }}"
+                                    target="_blank">
+                                    ดูไฟล์แนบ
+                                </a>
+                            </td>
+                            <td>{{ \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y H:i') }}</td>
+                            <td>
+                                @if(($doc->status ?? '') == 'approved')
+                                <span class="badge badge-success">ผ่านการตรวจสอบ</span>
+                                @elseif(($doc->status ?? '') == 'rejected')
+                                <span class="badge badge-rejected">ถูกยกเลิก</span>
+                                @else
+                                <span class="badge badge-pending">รอตรวจสอบ</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if(($doc->status ?? '') == 'rejected')
+                                <div class="reject-reason">
+                                    <b>หมายเหตุ:</b> {{ $doc->remark ?? 'กรุณาส่งไฟล์เอกสารใหม่' }}
+                                </div>
+                                <div >
+                                    <a href="#" class="btn-reupload">ส่งเอกสารใหม่</a>
+                                </div>
+                                @else
+                                <span >-</span>
+                                @endif
+                            </td>
+                            <td>
+                                {{-- ฟอร์มสำหรับกดลบเอกสาร --}}
+                                <form action="{{ route('company.announcement.delete', $doc->id) }}" method="POST" onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบเอกสารนี้?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="Btnx">ลบ</button>
+                                </form>
+                            </td>
+                        </tr>
                         @empty
-                            <tr>
-                                <td colspan="5" style="text-align: center; color: #94a3b8; padding: 30px;">
-                                    ยังไม่มีเอกสารในระบบ
-                                </td>
-                            </tr>
+                        <tr>
+                            <td colspan="6">
+                                ยังไม่มีเอกสารในระบบ
+                            </td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>

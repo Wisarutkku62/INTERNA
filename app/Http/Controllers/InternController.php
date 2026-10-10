@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use App\Models\InternshipPosition;
+use App\Models\Document;
+use App\Models\ApplicationDocument;
 use Illuminate\Support\Facades\Auth;
 
 class InternController extends Controller
@@ -87,7 +89,7 @@ class InternController extends Controller
         return view('application', compact('internship_positions'));
     }
 
-    public function internship_detail($id)
+    public function internship_detail(int $id)
     {
         $positions = InternshipPosition::findOrFail($id);
         return view('company.positiondetail', compact('positions'));

@@ -11,27 +11,27 @@
         <h2>สร้างประกาศงานใหม่</h2>
     </div>
     @if ($errors->any())
-    <div style="background-color: #fee2e2; color: #dc2626; padding: 12px; border-radius: 8px; margin-bottom: 16px;">
+    <div>
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+            <li>{{ $error }}</li>
             @endforeach
         </ul>
     </div>
-@endif
+    @endif
     <form action="{{route('company.announcement.create')}}" method="POST" id='form'>
         @csrf
         <div class="form-group">
-            <label for="position_name">ชื่อตำแหน่งงาน</label>
+            <label for="position_name">ชื่อตำแหน่งงาน <span >*</span></label>
             <input type="text" id="position_name" name="position_name" placeholder="เช่น Backend Developer">
             <span class="position_name-validated validated" id="position_name-validated"></span>
         </div>
         <div class="form-row">
-         
-            <div class="form-group col">
 
-                <label for="position_category">หมวดหมู่ </label>
-                <select id="position_category" name="position_category" required>
+            <div class="form-group col">
+                <label for="position_category">หมวดหมู่ <span>*</span></label>
+                <select id="position_category" name="position_category">
+                    <option value="" disabled selected>เลือกหมวดหมู่</option>
                     <option value="Technology & IT">Technology & IT</option>
                     <option value="Design & Creative">Design & Creative</option>
                     <option value="Marketing">Marketing</option>
@@ -42,15 +42,18 @@
                 </span>
             </div>
             <div class="form-group col">
-                <label for="position_capacity">จำนวนรับ (คน)</label>
-                <input type="number" id="position_capacity" name="position_capacity" min="1" placeholder="เช่น 2">
-                <span class="position_capacity-validated validated" id="position_capacity-validated"></span>
+                <label for="position_capacity">จำนวนรับ (คน) <span >*</span></label>
+                <input type="number" id="position_capacity" name="position_capacity" min="1" max="100" placeholder="เช่น 2">
+                <span class="position_capacity-validated validated" id="position_capacity-validated">
+
+                </span>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="position_worktype">รูปแบบการทำงาน</label>
+                <label for="position_worktype">รูปแบบการทำงาน <span >*</span></label>
                 <select id="position_worktype" name="position_worktype">
+                    <option value="" disabled selected>เลือกรูปแบบการทำงาน</option>
                     <option value="Hybrid">Hybrid</option>
                     <option value="Onsite">Onsite</option>
                     <option value="Online">Online</option>
@@ -58,9 +61,10 @@
                 <span class="position_worktype-validated validated" id="position_worktype-validated"></span>
             </div>
             <div class="form-group col">
-                <label for="position_interview_type">รูปแบบสัมภาษณ์</label>
+                <label for="position_interview_type">รูปแบบสัมภาษณ์ <span >*</span></label>
                 <select id="position_interview_type" name="position_interview_type">
-                    <option value="Onsite">Onsite</option>
+                    <option value="" disabled selected>เลือกรูปแบบสัมภาษณ์</option>
+                    <option value="On-site">On-site</option>
                     <option value="Online">Online</option>
                 </select>
                 <span class="position_interview_type-validated validated" id="position_interview_type-validated"></span>
@@ -68,8 +72,8 @@
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="position_start_date">วันเริ่มทำงาน</label>
-                <select id="position_start_date" name="position_start_date">
+                <label for="position_start_date">วันเริ่มทำงาน <span>*</span></label>
+                <select id="position_start_date" name="position_start_date" >
                     <option value="" disabled selected>เลือกวัน...</option>
                     <option value="Monday">จันทร์</option>
                     <option value="Tuesday">อังคาร</option>
@@ -82,7 +86,7 @@
                 <span class="position_start_day-validated validated" id="position_start_day-validated"></span>
             </div>
             <div class="form-group col">
-                <label for="position_end_date">วันสิ้นสุดทำงาน</label>
+                <label for="position_end_date">วันสิ้นสุดทำงาน <span >*</span></label>
                 <select id="position_end_date" name="position_end_date">
                     <option value="" disabled selected>เลือกวัน...</option>
                     <option value="Monday">จันทร์</option>
@@ -98,28 +102,34 @@
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label for="position_start_time">เวลาเริ่มทำงาน</label>
-                <input type="time" id="position_start_time" name="position_start_time" value="08:30">
-                <span class="position_start_time-validated validated" id="position_start_time-validated"></span>
+                <label for="position_start_time">เวลาเริ่มทำงาน <span >*</span></label>
+                <input type="time" id="position_start_time" name="position_start_time">
+                <span class="position_start_time-validated validated" id="position_start_time-validated">
+
+                </span>
             </div>
             <div class="form-group col">
-                <label for="position_end_time">เวลาเลิกทำงาน</label>
-                <input type="time" id="position_end_time" name="position_end_time" value="17:30">
-                <span class="position_end_time-validated validated" id="position_end_time-validated"></span>
+                <label for="position_end_time">เวลาเลิกทำงาน <span>*</span></label>
+                <input type="time" id="position_end_time" name="position_end_time">
+                <span class="position_end_time-validated validated" id="position_end_time-validated">
+
+                </span>
             </div>
         </div>
         <div class="form-group">
-            <label for="position_allowance">อัตราเบี้ยเลี้ยง (บาท/วัน หรือ บาท/เดือน)</label>
-            <input type="number" id="position_allowance" name="position_allowance" placeholder="เช่น 300">
-            <span class="position_allowance-validated validated" id="position_allowance-validated"></span>
+            <label for="position_allowance">อัตราเงินเดือน <span >*</span></label>
+            <input type="text" id="position_allowance" name="position_allowance" min="0" placeholder="เช่น 9000">
+            <span class="position_allowance-validated validated" id="position_allowance-validated">
+
+            </span>
         </div>
         <div class="form-group">
-            <label for="position_qualification">คุณสมบัติผู้สมัคร</label>
+            <label for="position_qualification">คุณสมบัติผู้สมัคร <span >*</span></label>
             <textarea id="position_qualification" name="position_qualification" rows="3" placeholder="ระบุคุณสมบัติเบื้องต้น..."></textarea>
             <span class="position_qualification-validated validated" id="position_qualification-validated"></span>
         </div>
         <div class="form-group">
-            <label for="position_description">รายละเอียดงาน</label>
+            <label for="position_description">รายละเอียดงาน <span >*</span></label>
             <textarea id="position_description" name="position_description" rows="4" placeholder="ระบุรายละเอียดหน้าที่รับผิดชอบ..."></textarea>
             <span class="position_description-validated validated" id="position_description-validated"></span>
         </div>
@@ -147,6 +157,7 @@
         const endTime = document.getElementById('position_end_time');
         const worktype = document.getElementById('position_worktype');
         const interview = document.getElementById('position_interview_type');
+
 
         if (name.value.trim() === "") {
             document.querySelector('.position_name-validated').innerHTML = 'กรุณากรอกชื่อตำแหน่ง';

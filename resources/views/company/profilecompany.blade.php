@@ -43,8 +43,8 @@
                 <div class="field-value">{{ $user->company->company_address ?? '-' }}</div>
             </div>
 
-            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-            <h3 style="margin-bottom: 15px; color: #333;">ข้อมูลผู้ติดต่อ</h3>
+            <hr>
+            <h3 >ข้อมูลผู้ติดต่อ</h3>
 
             <div class="profile-field half">
                 <label for="contact_name">ชื่อผู้ติดต่อ</label>

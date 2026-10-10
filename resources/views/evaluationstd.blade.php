@@ -44,17 +44,31 @@
             <section class="card">
                 <h2 class="card-title">ตำแหน่งงานที่สมัคร</h2>
                 <ul class="approval-list">
-                    @if(isset($application) && $application)
+                    @if($application)
                     <li class="approval-done">
                         <div>
-                            <div><strong>ตำแหน่ง:</strong> {{ $application->internshipPosition->position_name ?? '-' }}</div>
-                            <div><strong>บริษัท:</strong>
-                                {{ $application->internshipPosition->company->company_name ?? '-' }}
+                            <div>
+                                <strong>ตำแหน่ง:</strong>
+                                {{ $application->internshipPosition?->position_name ?? '-' }}
                             </div>
+                            <div>
+                                <strong>บริษัท:</strong>
+                                {{ $application->internshipPosition?->company?->company_name ?? '-' }}
+                            </div>
+                            @if($application->interview)
+                            <div>
+                                <strong>สถานะสัมภาษณ์:</strong>
+                                <span class="badge badge-warning">
+                                    {{ $application->interview->interview_result === 'pending' ? 'รอผลสัมภาษณ์' : $application->interview->interview_result }}
+                                </span>
+                            </div>
+                            @endif
                         </div>
                     </li>
                     @else
-                    <li class="text-muted">ยังไม่มีข้อมูลการสมัครงาน</li>
+                    <li class="text-muted">
+                        ยังไม่มีข้อมูลการสมัครงานที่รอผลสัมภาษณ์
+                    </li>
                     @endif
                 </ul>
             </section>
@@ -70,7 +84,7 @@
                     <div class="interview-item">
                         <div class="interview-time">
                             <span class="time-num">
-                                {{ \Carbon\Carbon::parse($application->interview->interview_start_time)->format('H:i') }}
+                                {{ \Carbon\Carbon::parse($application->interview->interview_start_time ?? $application->interview->created_at)->format('H:i') }}
                             </span>
                             <span class="time-date">
                                 {{ \Carbon\Carbon::parse($application->interview->interview_date)->isToday() ? 'วันนี้' : \Carbon\Carbon::parse($application->interview->interview_date)->format('d/m/Y') }}
@@ -81,7 +95,7 @@
                             <p>ตำแหน่ง: {{ $application->internshipPosition?->position_name ?? '-' }}</p>
                         </div>
                         <span class="badge-status">
-                            {{ strtolower($application->interview->interview_mode) == 'onsite' ? 'สัมภาษณ์ On-site' : 'สัมภาษณ์ Online' }}
+                            {{ strtolower($application->interview->interview_mode ?? '') == 'onsite' ? 'สัมภาษณ์ On-site' : 'สัมภาษณ์ Online' }}
                         </span>
                     </div>
                     @else
@@ -162,9 +176,9 @@
                 <div class="score-summary">
                     <div class="type-info">
                         <span class="type-value">ตำแหน่งงาน / บริษัท:</span>
-                        <div class="comment-text" style="font-weight: 600; color: #0f172a; margin-top: 4px;">
+                        <div class="comment-text" >
                             {{ $completedApplication?->internshipPosition?->position_name ?? '-' }}
-                            <span style="font-weight: 400; color: #64748b;">
+                            <span>
                                 ({{ $completedApplication?->internshipPosition?->company?->company_name ?? '-' }})
                             </span>
                         </div>

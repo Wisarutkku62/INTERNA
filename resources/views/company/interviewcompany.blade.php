@@ -13,13 +13,13 @@
     </div>
 
     @if(session('success'))
-    <div style="padding: 15px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 8px; margin-bottom: 20px;">
+    <div>
         {{ session('success') }}
     </div>
     @endif
 
     @if($errors->any())
-    <div style="padding: 15px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 8px; margin-bottom: 20px;">
+    <div>
         <ul>
             @foreach($errors->all() as $error)
             <li>{{ $error }}</li>

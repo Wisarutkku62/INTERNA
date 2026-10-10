@@ -67,29 +67,14 @@
                             บาท/วัน</span>
                     </div>
 
-                    <div class="info-row">
-                        <span class="info-label">จำนวนรับสมัคร :</span>
-                        <span class="info-value">{{ $positions->position_capacity }} อัตรา</span>
-                    </div>
-
-                    <div class="apply-box">
-                        @if(session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        @if(session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
-
+                    @auth
+                        @if(Auth::user()->role === 'student')
                         <form action="{{ route('intern.apply', $positions->id) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn-primary btn-block">สมัครงาน</button>
                         </form>
-                    </div>
+                        @endif
+                    @endauth
                 </div>
             </div>
         </div>

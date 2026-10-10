@@ -30,36 +30,37 @@ class DocumentController extends Controller
     }
 
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'file' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:20480'],
-        ]);
+{
+    $request->validate([
+        'document_type' => ['required', 'string'],
+        'file'          => ['required', 'file', 'mimes:pdf,doc,docx,jpg,png', 'max:10240'], 
+    ]);
 
-        if ($request->hasFile('file')) {
-            $user = Auth::user();
+    if ($request->hasFile('file')) {
+        $user = Auth::user();
 
-            $student = Student::firstOrCreate(
-                ['user_id' => $user->id ?? 1],
-                [
-                    'student_fname' => $user->name ?? 'Student',
-                    'student_lname' => 'User',
-                    'student_email' => $user->email ?? 'student@example.com',
-                ]
-            );
+        $student = Student::firstOrCreate(
+            ['user_id' => $user->id],
+            [
+                'student_fname' => $user->name ?? 'Student',
+                'student_lname' => 'User',
+                'student_email' => $user->email ?? 'student@example.com',
+            ]
+        );
 
-            $path = $request->file('file')->store('documents', 'public');
+        $path = $request->file('file')->store('documents', 'public');
 
-            $document = new Document();
-            $document->student_id = $student->id;
-            $document->document_type = 'เอกสารฝึกงาน';
-            $document->document_file_path = Storage::url($path);
-            $document->save();
+        $document = new Document();
+        $document->student_id         = $student->id;
+        $document->document_type       = $request->document_type; 
+        $document->document_file_path = $path;
+        $document->save();
 
-            return redirect()
-                ->route('documents.index')
-                ->with('success', 'ส่งไฟล์เอกสารเรียบร้อยแล้ว');
-        }
-
-        return back()->with('error', 'กรุณาเลือกไฟล์เอกสาร');
+        return redirect()
+            ->route('documents.index')
+            ->with('success', 'อัปโหลดเอกสารเรียบร้อยแล้ว');
     }
+
+    return back()->with('error', 'กรุณาเลือกไฟล์เอกสาร');
+}
 }

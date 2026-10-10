@@ -112,7 +112,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="text-center" style="padding: 20px;">
+                            <td colspan="6" class="text-center">
                                 ไม่พบผู้สมัครในระบบ
                             </td>
                         </tr>

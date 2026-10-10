@@ -16,22 +16,30 @@ class EvaluationController extends Controller
 
         $passedApplications = Application::with(['internshipPosition.company', 'interview'])
             ->where('student_id', $studentId)
-            ->whereHas('interview', function ($q) {
-                $q->where('interview_result', 'passed');
+            ->where(function ($q) {
+                $q->where('application_status', 'pending')
+                    ->orWhereHas('interview', function ($iq) {
+                        $iq->where('interview_result', 'pending');
+                    });
             })
-            ->whereDoesntHave('evaluation')
             ->latest()
-            ->get();
+            ->first();
 
-        $completedApplication = Application::with(['internshipPosition.company', 'evaluation'])
+        $passedApplications = Application::with(['internshipPosition.company', 'interview'])
             ->where('student_id', $studentId)
-            ->whereHas('evaluation')
+            ->whereHas('interview')
             ->latest()
             ->first();
 
         $evaluation = $completedApplication?->evaluation;
 
-        return view('evaluationstd', compact('user', 'passedApplications', 'completedApplication', 'evaluation'));
+        return view('evaluationstd', compact(
+            'user',
+            'application',
+            'passedApplications',
+            'completedApplication',
+            'evaluation'
+        ));
     }
 
     public function updateAcceptance(Request $request, $id)

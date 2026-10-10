@@ -13,7 +13,6 @@
     <div class="admin-page-wrapper">
         <div class="admin-container">
 
-            <!-- Sidebar เมนูด้านซ้าย -->
             <div class="admin-sidebar">
                 <div class="sidebar-title">เมนูผู้ดูแลระบบ</div>
                 <div class="admin-menu">
@@ -105,7 +104,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" style="text-align: center; color: #a0aec0;">ยังไม่มีรายการสมัครงานล่าสุด
+                                            <td colspan="5">ยังไม่มีรายการสมัครงานล่าสุด
                                             </td>
                                         </tr>
                                     @endforelse
@@ -143,11 +142,8 @@
                                             <td>{{ $user->student->student_phone ?? '-' }}</td>
                                             <td>
                                                 <a href="{{ route('newprofile', ['user_id' => $user->id]) }}"
-                                                    class="btn-action btn-edit"
-                                                    style="text-decoration: none; display: inline-block;">แก้ไข</a>
-
+                                                    class="btn-action btn-edit">แก้ไข</a>
                                                 <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
-                                                    style="display: inline-block;"
                                                     onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้งานรายนี้?');">
                                                     @csrf
                                                     @method('DELETE')
@@ -157,7 +153,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" style="text-align: center; color: #a0aec0;">ไม่พบข้อมูลนักศึกษา</td>
+                                            <td colspan="5">ไม่พบข้อมูลนักศึกษา</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -190,11 +186,10 @@
                                             <td>{{ $company->contact_phone ?? '-' }}</td>
                                             <td>
                                                 <a href="{{ route('company.edit.profile', ['id' => $company->id]) }}"
-                                                    class="btn-action btn-edit"
-                                                    style="text-decoration: none; display: inline-block;">ตรวจ/แก้ไข</a>
+                                                    class="btn-action btn-edit">ตรวจ/แก้ไข</a>
 
                                                 <form action="{{ route('admin.companies.destroy', $company->id) }}" method="POST"
-                                                    style="display: inline-block;"
+                                                    
                                                     onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบบริษัท {{ $company->company_name }}?');">
                                                     @csrf
                                                     @method('DELETE')
@@ -204,7 +199,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="4" style="text-align: center; color: #a0aec0;">ไม่พบข้อมูลบริษัท</td>
+                                            <td colspan="4">ไม่พบข้อมูลบริษัท</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -239,8 +234,7 @@
                                             </td>
                                             <td>
                                                 {{ $intern->internshipPosition->position_name ?? '-' }}
-                                                <br><small
-                                                    style="color: #718096;">{{ $intern->internshipPosition->company->company_name ?? '' }}</small>
+                                                <br><small>{{ $intern->internshipPosition->company->company_name ?? '' }}</small>
                                             </td>
                                             <td>{{ $intern->internshipPosition->position_worktype ?? '-' }}</td>
                                             <td>
@@ -254,13 +248,12 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('company.applicants.profile', ['id' => $intern->id]) }}"
-                                                    class="btn-action btn-edit"
-                                                    style="text-decoration: none; display: inline-block;">รายละเอียด</a>
+                                                    class="btn-action btn-edit" >รายละเอียด</a>
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" style="text-align: center; color: #a0aec0;">ยังไม่มีข้อมูลการฝึกงาน</td>
+                                            <td colspan="5">ยังไม่มีข้อมูลการฝึกงาน</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -303,7 +296,7 @@
                                                     @endphp
                                                     <a href="{{ asset('storage/' . $filePath) }}" target="_blank"
                                                         class="btn-action btn-edit"
-                                                        style="text-decoration: none; display: inline-block;">
+                                                       
                                                         ตรวจเอกสาร
                                                     </a>
                                                 @elseif(!empty($doc->appdoc_file_path))
@@ -312,12 +305,12 @@
                                                     @endphp
                                                     <a href="{{ asset('storage/' . $appPath) }}" target="_blank"
                                                         class="btn-action btn-edit"
-                                                        style="text-decoration: none; display: inline-block;">
+                                    
                                                         ตรวจเอกสาร
                                                     </a>
                                                 @else
                                                     <button type="button" class="btn-action btn-edit"
-                                                        style="opacity: 0.5; cursor: not-allowed;"
+                                                       
                                                         onclick="alert('ไม่พบไฟล์เอกสารในระบบ')">
                                                         ตรวจเอกสาร
                                                     </button>
@@ -325,7 +318,6 @@
 
                                                 {{-- ปุ่มลบเอกสาร --}}
                                                 <form action="{{ route('admin.documents.destroy', $doc->id) }}" method="POST"
-                                                    style="display: inline-block;"
                                                     onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบเอกสารรายการนี้?');">
                                                     @csrf
                                                     @method('DELETE')
@@ -335,7 +327,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" style="text-align: center; color: #a0aec0;">ไม่พบข้อมูลเอกสาร</td>
+                                            <td colspan="5" >ไม่พบข้อมูลเอกสาร</td>
                                         </tr>
                                     @endforelse
                                 </tbody>

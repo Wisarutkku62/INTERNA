@@ -15,20 +15,19 @@
         <div class="applicant-profile">
             <div class="applicant-avatar">
                 @if(isset($student->profile_image))
-                <img src="{{ asset('storage/' . $student->profile_image) }}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                <img src="{{ asset('storage/' . $student->profile_image) }}" alt="Avatar">
                 @endif
             </div>
             <div class="applicant-details">
                 <h2>
-                    {{ $student->first_name ?? $student->name ?? 'ไม่ระบุชื่อ' }}
-                    {{ $student->last_name ?? '' }}
+                    {{ $student?->student_fname}} {{ $student?->student_lname}}
                 </h2>
             </div>
         </div>
     </div>
 
     @if(session('success'))
-    <div class="alert alert-success" style="padding: 10px; margin-bottom: 15px; background-color: #d4edda; color: #155724; border-radius: 5px;">
+    <div class="alert alert-success">
         {{ session('success') }}
     </div>
     @endif
@@ -40,12 +39,12 @@
         <table>
             <thead>
                 <tr>
-                    <th style="width: 25%;">ชื่อเอกสาร</th>
-                    <th style="width: 15%;">รหัสเอกสาร</th>
-                    <th style="width: 15%;">วันที่ยื่น</th>
-                    <th style="width: 15%;">สถานะ</th>
-                    <th style="width: 15%;">การจัดการ</th>
-                    <th style="width: 15%;">อนุมัติเอกสาร</th>
+                    <th>ชื่อเอกสาร</th>
+                    <th>รหัสเอกสาร</th>
+                    <th>วันที่ยื่น</th>
+                    <th>สถานะ</th>
+                    <th>การจัดการ</th>
+                    <th>อนุมัติเอกสาร</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +52,13 @@
                 <tr>
                     <td>
                         <div class="name-doc">
-                            {{ $appDoc->document->document_name ?? $appDoc->document_name ?? 'เอกสารไม่มีชื่อ' }}
+                            @if ($appDoc?->document?->document_type === "Resume")
+                            เรซูเม่
+                            @elseif ($appDoc?->document?->document_type === "Transcript")
+                            ระเบียนการศึกษา
+                            @else
+                            {{ $appDoc?->document?->document_type ?? 'เอกสารทั่วไป' }}
+                            @endif
                         </div>
                     </td>
                     <td>
@@ -64,49 +69,67 @@
                     </td>
                     <td>
                         @php
-                        $status = $appDoc->appdoc_status ?? $appDoc->status;
+                        $status = $appDoc->appdoc_status ?? $appDoc->status ?? 'pending';
                         @endphp
 
-                        @if($status == 'approved' || $status == 'อนุมัติแล้ว')
-                        <span class="badge approved">อนุมัติแล้ว</span>
+                        @if($status == 'passed' || $status == 'approved' || $status == 'อนุมัติแล้ว')
+                        <span class="badge approved">ผ่านการอนุมัติ</span>
                         @elseif($status == 'rejected' || $status == 'ต้องแก้ไข')
-                        <span class="badge rejected">ต้องแก้ไข</span>
+                        <span class="badge rejected">ไม่อนุมัติ</span>
                         @else
                         <span class="badge pending">รอตรวจสอบ</span>
                         @endif
                     </td>
                     <td>
                         @php
-                        $filePath = $appDoc->document->file_path ?? $appDoc->file_path ?? null;
+                        $filePath = $appDoc->document->document_file_path ?? $appDoc->document_file_path ?? $appDoc->file_path ?? null;
+
+                        if ($filePath) {
+                            $cleanPath = str_replace(['public/', 'storage/'], '', $filePath);
+                        }
                         @endphp
 
                         @if($filePath)
-                        <a href="{{ asset('storage/' . $filePath) }}" target="_blank" style="text-decoration: none;">
+                        <a href="{{ asset('storage/' . ltrim($cleanPath, '/')) }}" target="_blank" ">
                             <button type="button" class="btn-action">ตรวจสอบเอกสาร</button>
                         </a>
                         @else
-                        <button type="button" class="btn-action" disabled style="opacity: 0.5;">ไม่มีไฟล์</button>
+                        <button type="button" class="btn-action" disabled >ไม่มีไฟล์</button>
                         @endif
                     </td>
                     <td class="group">
-                        <form action="{{ route('document.updateStatus', $appDoc->id) }}" method="POST" style="display: inline;">
+                        @php
+                        $status = $appDoc->appdoc_status ?? $appDoc->status ?? 'pending';
+                        @endphp
+
+                        @if($status === 'passed')
+                        <span class="badge approved">
+                            อนุมัติ
+                        </span>
+                        @elseif($status === 'rejected')
+                        <span class="badge rejected" >
+                            ไม่อนุมัติ
+                        </span>
+                        @else
+                        <form action="{{ route('document.updateStatus', $appDoc->id) }}" method="POST" >
                             @csrf
                             @method('PUT')
-                            <input type="hidden" name="status" value="approved">
+                            <input type="hidden" name="status" value="passed">
                             <button type="submit" class="btn-accept">อนุมัติ</button>
                         </form>
 
-                        <form action="{{ route('document.updateStatus', $appDoc->id) }}" method="POST" style="display: inline;">
+                        <form action="{{ route('document.updateStatus', $appDoc->id) }}" method="POST" >
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="status" value="rejected">
                             <button type="submit" class="btn-reject">ไม่อนุมัติ</button>
                         </form>
+                        @endif
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" style="text-align: center; padding: 20px;">
+                    <td colspan="6" >
                         ยังไม่มีรายการเอกสารที่ยื่นมา
                     </td>
                 </tr>
