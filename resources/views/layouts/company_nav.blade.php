@@ -22,7 +22,7 @@
         <ul class="nav-menu">
           <li class="nav-item"><a href="{{ route('intern.intern')}}" class="nav-link">ค้นหาผู้หางาน</a></li>
           <li class="nav-item"><a href="{{ route('company.applicants.all')}}" class="nav-link">ตรวจสอบสถานะผู้สมัคร</a></li>
-          <li class="nav-item"><a href="{{ route('contact') }}">ติดต่อเรา</a></li>
+          <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">ติดต่อเรา</a></li>
         </ul>
         @auth
         <div class="nav-actions">
@@ -54,15 +54,15 @@
   </header>
   <main>
     @yield("content")
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-col">
-          <span class="footer-text">INTERNA</span>
-          <p>&copy; {{ date('Y') }} INTERNA. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
   </main>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <span class="footer-text">INTERNA</span>
+        <p>&copy; {{ date('Y') }} INTERNA. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>

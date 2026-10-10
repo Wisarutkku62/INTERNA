@@ -85,7 +85,7 @@
                         </span>
                     </div>
                     @else
-                    <p class="text-muted" style="padding: 15px 0;">ยังไม่มีนัดหมายสัมภาษณ์</p>
+                    <p class="text-muted text-muted-padding">ยังไม่มีนัดหมายสัมภาษณ์</p>
                     @endif
                 </div>
             </section>
@@ -95,41 +95,41 @@
             <h2 class="card-title card-title-left">ตำแหน่งที่ผ่านการสัมภาษณ์</h2>
 
             @if(isset($passedApplications) && $passedApplications->count() > 0)
-            <div class="passed-applications-list" style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">
+            <div class="passed-applications-list">
                 @foreach($passedApplications as $app)
-                <div class="passed-item-card" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                <div class="passed-item-card">
 
                     <div class="item-info">
-                        <h3 class="position-title" style="font-size: 18px; font-weight: 600; color: #0f172a; margin-bottom: 6px;">
+                        <h3 class="position-title">
                             {{ $app->internshipPosition?->position_name ?? 'ไม่ระบุตำแหน่ง' }}
                         </h3>
-                        <p class="company-name" style="font-size: 14px; color: #64748b; margin-bottom: 8px;">
+                        <p class="company-name">
                             <strong>บริษัท:</strong> {{ $app->internshipPosition?->company?->company_name ?? 'ไม่ระบุบริษัท' }}
                         </p>
 
                         <div class="status-tag">
                             @if($app->application_status == 'interning')
-                            <span class="badge" style="background-color: #d1fae5; color: #047857; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500;">
+                            <span class="badge badge-interning">
                                 กำลังฝึกงานอยู่ที่นี่
                             </span>
                             @elseif($app->application_status == 'declined')
-                            <span class="badge" style="background-color: #fee2e2; color: #b91c1c; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500;">
+                            <span class="badge badge-declined">
                                 สิทธิ์ถูกปฏิเสธแล้ว
                             </span>
                             @else
-                            <span class="badge" style="background-color: #dcfce7; color: #15803d; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500;">
+                            <span class="badge badge-pending">
                                 ผ่านการสัมภาษณ์ (รอการยืนยัน)
                             </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="item-actions" style="display: flex; gap: 10px; align-items: center;">
+                    <div class="item-actions">
                         @if($app->application_status != 'interning' && $app->application_status != 'declined')
                         <form action="{{ route('student.application.accept', $app->id) }}" method="POST" onsubmit="return confirm('คุณต้องการยืนยันเข้ารับการฝึกงานในตำแหน่งนี้ใช่หรือไม่?');">
                             @csrf
                             <input type="hidden" name="action" value="accept">
-                            <button type="submit" class="btn-accept" style="background-color: #10b981; color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 500; cursor: pointer; transition: 0.2s;">
+                            <button type="submit" class="btn btn-accept">
                                 เข้ารับการฝึกงาน
                             </button>
                         </form>
@@ -137,12 +137,12 @@
                         <form action="{{ route('student.application.accept', $app->id) }}" method="POST" onsubmit="return confirm('คุณแน่ใจหรือไม่ที่จะปฏิเสธสิทธิ์การฝึกงานในตำแหน่งนี้?');">
                             @csrf
                             <input type="hidden" name="action" value="decline">
-                            <button type="submit" class="btn-decline" style="background-color: #f1f5f9; color: #64748b; border: 1px solid #cbd5e1; padding: 10px 18px; border-radius: 8px; font-weight: 500; cursor: pointer; transition: 0.2s;">
+                            <button type="submit" class="btn btn-decline">
                                 ไม่เข้ารับการฝึกงาน
                             </button>
                         </form>
                         @else
-                        <span style="font-size: 14px; color: #94a3b8;">ดำเนินการเรียบร้อยแล้ว</span>
+                        <span class="action-completed">ดำเนินการเรียบร้อยแล้ว</span>
                         @endif
                     </div>
 
@@ -150,7 +150,7 @@
                 @endforeach
             </div>
             @else
-            <p class="empty-evaluation" style="color: #64748b; margin-top: 12px;">ยังไม่มีข้อมูลการผ่านการสัมภาษณ์ในขณะนี้</p>
+            <p class="empty-evaluation">ยังไม่มีข้อมูลการผ่านการสัมภาษณ์ในขณะนี้</p>
             @endif
         </section>
 
@@ -169,7 +169,6 @@
                             </span>
                         </div>
                     </div>
-
                     <div class="score-info">
                         <span class="label-title">คะแนนรวมสุทธิ:</span>
                         <div class="score-num">
