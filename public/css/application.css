@@ -15,41 +15,31 @@
     font-weight: 700;
     margin-bottom: 20px;
     color: #1a202c;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 }
-html, body {
+
+html,
+body {
     overflow-x: clip;
 }
 
-=======
-}
-
-=======
-}
-
->>>>>>> Stashed changes
-html, body {
+html,
+body {
     overflow-x: clip;
 }
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 .header-section {
     margin-bottom: 12px;
 }
 
 .filter-container {
     position: sticky;
-    top: 20px; 
+    top: 20px;
     z-index: 100;
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
     padding: 20px;
-    margin-bottom: 24px; 
+    margin-bottom: 24px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     display: flex;
     flex-direction: column;
@@ -129,60 +119,6 @@ html, body {
     cursor: pointer;
     outline: none;
     transition: border-color 0.2s;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
-}
-
-.filter-select:focus {
-    border-color: #0037ff;
-}
-
-.btn-clear-filter {
-    display: inline-flex;
-    align-items: center;
-    height: 42px;
-    padding: 0 16px;
-    font-size: 0.85rem;
-    color: #e53e3e;
-    background: #fff5f5;
-    border: 1px solid #fed7d7;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.2s;
-    white-space: nowrap;
-}
-
-.btn-clear-filter:hover {
-    background: #fed7d7;
->>>>>>> Stashed changes
-}
-
-.filter-select:focus {
-    border-color: #0037ff;
-}
-
-.btn-clear-filter {
-    display: inline-flex;
-    align-items: center;
-    height: 42px;
-    padding: 0 16px;
-    font-size: 0.85rem;
-    color: #e53e3e;
-    background: #fff5f5;
-    border: 1px solid #fed7d7;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.2s;
-    white-space: nowrap;
-}
-
-.btn-clear-filter:hover {
-    background: #fed7d7;
->>>>>>> Stashed changes
 }
 
 .filter-select:focus {
@@ -209,7 +145,78 @@ html, body {
     background: #fed7d7;
 }
 
-/* รายการ Job Cards */
+.filter-select:focus {
+    border-color: #0037ff;
+}
+
+.btn-clear-filter {
+    display: inline-flex;
+    align-items: center;
+    height: 42px;
+    padding: 0 16px;
+    font-size: 0.85rem;
+    color: #e53e3e;
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-clear-filter:hover {
+    background: #fed7d7;
+}
+
+.filter-select:focus {
+    border-color: #0037ff;
+}
+
+.btn-clear-filter {
+    display: inline-flex;
+    align-items: center;
+    height: 42px;
+    padding: 0 16px;
+    font-size: 0.85rem;
+    color: #e53e3e;
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-clear-filter:hover {
+    background: #fed7d7;
+}
+
+.filter-select:focus {
+    border-color: #0037ff;
+}
+
+.btn-clear-filter {
+    display: inline-flex;
+    align-items: center;
+    height: 42px;
+    padding: 0 16px;
+    font-size: 0.85rem;
+    color: #e53e3e;
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-clear-filter:hover {
+    background: #fed7d7;
+}
+
 .job-list {
     display: flex;
     flex-direction: column;
@@ -350,4 +357,21 @@ html, body {
     border-radius: 12px;
     border: 1px solid #e2e8f0;
     color: #718096;
+}
+
+.job-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 12px;
+}
+
+.job-card-link .job-card {
+    height: 100%;
+    cursor: pointer;
+}
+
+.job-card-link:hover .job-card {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
 }
