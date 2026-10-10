@@ -26,10 +26,10 @@
                 <label for="category">หมวดหมู่งาน</label>
                 <select name="category" id="category" class="filter-select" onchange="this.form.submit()">
                     <option value="">หมวดหมู่ทั้งหมด</option>
-                    <option value="IT / Software" {{ request('category') == 'IT / Software' ? 'selected' : '' }}>IT / Software</option>
-                    <option value="Design / Graphic" {{ request('category') == 'Design / Graphic' ? 'selected' : '' }}>Design / Graphic</option>
+                    <option value="Technology & IT" {{ request('category') == 'IT / Software' ? 'selected' : '' }}>Technology & IT</option>
+                    <option value="Design & Creative" {{ request('category') == 'Design / Graphic' ? 'selected' : '' }}>Design & Creative</option>
                     <option value="Marketing" {{ request('category') == 'Marketing' ? 'selected' : '' }}>Marketing</option>
-                    <option value="Business / Admin" {{ request('category') == 'Business / Admin' ? 'selected' : '' }}>Business / Admin</option>
+                    <option value="HR & Admin" {{ request('category') == 'Business / Admin' ? 'selected' : '' }}>HR & Admin</option>
                 </select>
             </div>
 
