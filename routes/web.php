@@ -70,7 +70,7 @@ Route::post('/interviews/store/{id}', [CompanyController::class, 'storeInterview
 Route::get('/company/viewresume/{id}', [CompanyController::class, 'viewresume'])->name('company.viewresume');
 Route::put('/company/viewresume/{id}/update', [CompanyController::class, 'updateDocumentStatus'])->name('document.updateStatus');
 Route::get('/company/interviewresult/{id}', [CompanyController::class, 'interview_evaluation'])->name('company.interview_evaluation');
-Route::put('/company/interviewresult/{id}/update', [CompanyController::class, 'interview_evaluation_update'])->name('company.interview_evaluation_update');
+Route::post('/company/interviewresult/{id}/update', [CompanyController::class, 'interview_evaluation_update'])->name('company.interview_evaluation_update');
 Route::get('/company/applicants', [CompanyController::class, 'applicants_all'])->name('company.applicants.all');
 Route::get('/company/evaluation/{id}', [CompanyController::class, 'evaluation'])->name('company.evaluation');
 Route::post('/company/evaluation/{id}/store', [CompanyController::class, 'evaluation_store'])->name('company.evaluation.store');

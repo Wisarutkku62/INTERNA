@@ -52,7 +52,6 @@
     <div class="card-box">
         <form class="evaluation-form" id="form" action="{{ route('company.interview_evaluation_update', $applicants->id) }}" method="POST">
             @csrf
-            @method('PUT')
             <h3 class="form-title">แบบฟอร์มการประเมินผู้สมัคร</h3>
 
             <div class="form-group">

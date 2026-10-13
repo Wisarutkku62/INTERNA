@@ -311,7 +311,7 @@ class CompanyController extends Controller
         return view('company.manageinterview', compact('applicants'));
     }
 
-    public function interview_evaluation_update(Request $request, int $id)
+    public function interview_evaluation_update(Request $request, int $id): RedirectResponse
     {
         $validated = $request->validate([
             'interview_result' => 'required|string',

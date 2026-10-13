@@ -121,12 +121,23 @@ class InternController extends Controller
             return redirect()->back()->with('error', 'คุณได้ทำการสมัครตำแหน่งงานนี้ไปแล้ว');
         }
 
-        Application::create([
-            'internship_position_id' => $id,
-            'student_id'             => $student->id,
-            'application_status'     => 'pending',
-        ]);
+        $application = Application::create([
+        'internship_position_id' => $id,
+        'student_id'             => $student->id,
+        'application_status'     => 'pending',
+    ]);
 
-        return redirect()->back()->with('success', 'ส่งใบสมัครงานเรียบร้อยแล้ว');
+    $documents = Document::where('student_id', $student->id)->get();
+
+    foreach ($documents as $doc) {
+        ApplicationDocument::create([
+            'application_id' => $application->id,
+            'document_id'    => $doc->id,
+            'appdoc_status'  => 'pending',
+            'appdoc_remark'  => null,
+        ]);
     }
+
+    return redirect()->back()->with('success', 'ส่งใบสมัครงานเรียบร้อยแล้ว');
+}
 }
