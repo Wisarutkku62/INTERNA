@@ -149,21 +149,20 @@
 
     Form.addEventListener('submit', (e) => {
         let hasError = false;
+        const location = document.getElementById('interview_location');
 
-    const location = document.getElementById('interview_location');
-
-    if (location.value.trim() === "") {
-            document.querySelector('.interview_location-validated').innerHTML = 'กรุณากรอกชื่อตำแหน่ง';
-            name.classList.add('input-error');
+        if (location.value.trim() === "") {
+            document.querySelector('.interview_location-validated').innerHTML = 'กรุณากรอกสถานที่สัมภาษณ์ หรือลิงก์ห้องประชุม';
+            location.classList.add('input-error');
             hasError = true;
         } else {
             document.querySelector('.interview_location-validated').innerHTML = '';
-            name.classList.remove('input-error');
+            location.classList.remove('input-error');
         }
-    
-    if (hasError) {
-        e.preventDefault();
-    }
-})
+
+        if (hasError) {
+            e.preventDefault();
+        }
+    });
 </script>
 @endsection

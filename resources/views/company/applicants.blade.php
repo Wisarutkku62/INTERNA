@@ -100,7 +100,7 @@
                             <td>{{ $applicant?->updated_at }}</td>
                             <td class="text-center">
                                 <div class="action-buttons">
-                                    <button class="btn-action btn-view">ดูรายละเอียด</button>
+                                    <!-- <button class="btn-action btn-view">ดูรายละเอียด</button> -->
 
                                     @if ($applicant?->application_status == 'interning' && !$applicant?->evaluation)
                                     <a href="{{ route('company.evaluation', $applicant->id) }}" class="btn-action btn-evaluate">

@@ -237,7 +237,30 @@ div[rating="options"] input[type="radio"]:checked + .rating-btn,
     font-weight: 600;
 }
 
-.css-check {
+.status-badge-fail {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #ff00001b;
+    color: #ff0000;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+.status-badge-pending{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #ff00dd1b;
+    color: #c406b1;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;  
+}
+
+/* .css-check {
     display: inline-block;
     width: 5px;
     height: 10px;
@@ -245,7 +268,7 @@ div[rating="options"] input[type="radio"]:checked + .rating-btn,
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     margin-bottom: 3px;
-}
+} */
 .form-actions {
     display: flex;
     justify-content: flex-end;

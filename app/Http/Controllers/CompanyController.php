@@ -238,7 +238,7 @@ class CompanyController extends Controller
                 $application->delete();
             }
 
-            return redirect()->back()->with('success', 'ปฏิเสธเอกสารเรียบร้อยแล้ว (ยกเลิกการสมัครงานของนักศึกษาเพื่อให้อัปโหลด/ยื่นสมัครใหม่ได้)');
+            return redirect()->route('company.overview')->with('success', 'ปฏิเสธเอกสารเรียบร้อยแล้ว (ยกเลิกการสมัครงานของนักศึกษาเพื่อให้อัปโหลด/ยื่นสมัครใหม่ได้)');
         }
 
         return redirect()->back()->with('success', 'อัปเดตสถานะเอกสารเรียบร้อยแล้ว');
@@ -344,7 +344,9 @@ class CompanyController extends Controller
             $q->where('company_id', $companyId);
         })->with(['student', 'internshipPosition', 'interview', 'evaluation']);
 
-        $applicants_all = (clone $allQuery)->get();
+        $applicants_all = (clone $allQuery)
+        ->where('application_status', '!=', 'declined')
+        ->get();
 
         $applicants_interview_passed = (clone $allQuery)
             ->whereHas('interview', fn($q) => $q->where('interview_result', 'passed'))

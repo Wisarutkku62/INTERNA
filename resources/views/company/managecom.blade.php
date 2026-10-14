@@ -70,7 +70,7 @@
                         </div>
                         <div class="group-text">
                             <span class="badge-status">สัมภาษณ์ออนไลน์</span>
-                            <a href="{{route('company.interview_evaluation', $interview)}}" class="btn-estimate">ประเมินผลสัมภาษณ์</a>
+                            <a href="{{route('company.interview_evaluation', $interview->application_id)}}" class="btn-estimate">ประเมินผลสัมภาษณ์</a>
                         </div>
                     </div>
                     @empty
