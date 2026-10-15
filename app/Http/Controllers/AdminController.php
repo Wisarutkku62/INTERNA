@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Company;
@@ -42,7 +44,6 @@ class AdminController extends Controller
         } elseif ($activeTab == 'internships') {
             $internships = Application::with(['student', 'internshipPosition.company'])->orderBy('id', 'asc')->get();
         } elseif ($activeTab == 'documents') {
-
             $documents = Document::with('student')->orderBy('id', 'desc')->get();
         }
 
@@ -114,21 +115,45 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'ลบข้อมูลบริษัทเรียบร้อยแล้ว');
     }
+
     public function destroyDocument($id)
     {
-        $appDoc = \App\Models\ApplicationDocument::find($id);
-        if ($appDoc) {
-            $appDoc->delete();
-            return redirect()->back()->with('success', 'ลบเอกสารเรียบร้อยแล้ว');
+        try {
+            return DB::transaction(function () use ($id) {
+                $appDoc = ApplicationDocument::find($id);
+                if ($appDoc) {
+                    $filePath = $appDoc->appdoc_file_path ?? $appDoc->file_path;
+                    if ($filePath) {
+                        $cleanPath = ltrim(str_replace('/storage/', '', $filePath), '/');
+                        if (Storage::disk('public')->exists($cleanPath)) {
+                            Storage::disk('public')->delete($cleanPath);
+                        }
+                    }
+                    $appDoc->delete();
+                    return redirect()->back()->with('success', 'ลบเอกสารการสมัครเรียบร้อยแล้ว');
+                }
+
+                $doc = Document::find($id);
+                if ($doc) {
+                    DB::table('applications_documents')->where('document_id', $doc->id)->delete();
+
+                    $filePath = $doc->document_file_path ?? $doc->file_path;
+                    if ($filePath) {
+                        $cleanPath = ltrim(str_replace('/storage/', '', $filePath), '/');
+                        if (Storage::disk('public')->exists($cleanPath)) {
+                            Storage::disk('public')->delete($cleanPath);
+                        }
+                    }
+
+                    $doc->delete();
+                    return redirect()->back()->with('success', 'ลบเอกสารเรียบร้อยแล้ว');
+                }
+
+                return redirect()->back()->with('error', 'ไม่พบข้อมูลเอกสารที่ต้องการลบ');
+            });
+        } catch (\Exception $e) {
+            Log::error('Error destroying document: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'เกิดข้อผิดพลาดในการลบเอกสาร');
         }
-
-
-        $doc = \App\Models\Document::find($id);
-        if ($doc) {
-            $doc->delete();
-            return redirect()->back()->with('success', 'ลบเอกสารเรียบร้อยแล้ว');
-        }
-
-        return redirect()->back()->with('error', 'ไม่พบข้อมูลเอกสารที่ต้องการลบ');
     }
 }

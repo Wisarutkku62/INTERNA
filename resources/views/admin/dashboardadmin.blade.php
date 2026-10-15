@@ -36,7 +36,6 @@
 
             <div class="admin-content">
 
-                {{-- 1. หน้าสรุปภาพรวม --}}
                 @if($activeTab == 'dashboard')
                     <div class="stats-grid">
                         <div class="stat-card">
@@ -106,7 +105,6 @@
                         </div>
                     </div>
 
-                    {{-- 2. จัดการผู้ใช้งาน --}}
                 @elseif($activeTab == 'users')
                     <div class="content-card">
                         <div class="card-header">
@@ -156,7 +154,6 @@
                         </div>
                     </div>
 
-                    {{-- 3. จัดการข้อมูลบริษัท --}}
                 @elseif($activeTab == 'companies')
                     <div class="content-card">
                         <div class="card-header">
@@ -202,7 +199,6 @@
                         </div>
                     </div>
 
-                    {{-- 4. ข้อมูลการฝึกงาน --}}
                 @elseif($activeTab == 'internships')
                     <div class="content-card">
                         <div class="card-header">
@@ -258,7 +254,6 @@
                         </div>
                     </div>
 
-                    {{-- 5. ตรวจสอบเอกสาร --}}
                 @elseif($activeTab == 'documents')
                     <div class="content-card">
                         <div class="card-header">
@@ -287,31 +282,11 @@
                                             <td><span class="badge badge-success">ส่งแล้ว</span></td>
                                             <td>
                                                 <div class="action-group">
-                                                    {{-- ปุ่มตรวจเอกสาร --}}
-                                                    @if(!empty($doc->document_file_path))
-                                                        @php
-                                                            $filePath = ltrim(str_replace('/storage/', '', $doc->document_file_path), '/');
-                                                        @endphp
-                                                        <a href="{{ asset('storage/' . $filePath) }}" target="_blank"
-                                                            class="btn-action btn-edit">
-                                                            ตรวจเอกสาร
-                                                        </a>
-                                                    @elseif(!empty($doc->appdoc_file_path))
-                                                        @php
-                                                            $appPath = ltrim(str_replace('/storage/', '', $doc->appdoc_file_path), '/');
-                                                        @endphp
-                                                        <a href="{{ asset('storage/' . $appPath) }}" target="_blank"
-                                                            class="btn-action btn-edit">
-                                                            ตรวจเอกสาร
-                                                        </a>
-                                                    @else
-                                                        <button type="button" class="btn-action btn-edit"
-                                                            onclick="alert('ไม่พบไฟล์เอกสารในระบบ')">
-                                                            ตรวจเอกสาร
-                                                        </button>
-                                                    @endif
+                                                    <a href="{{ route('admin.documents.view', $doc->id) }}" target="_blank"
+                                                        class="btn-action btn-edit">
+                                                        ตรวจเอกสาร
+                                                    </a>
 
-                                                    {{-- ปุ่มลบเอกสาร --}}
                                                     <form action="{{ route('admin.documents.destroy', $doc->id) }}" method="POST"
                                                         onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบเอกสารรายการนี้?');">
                                                         @csrf
