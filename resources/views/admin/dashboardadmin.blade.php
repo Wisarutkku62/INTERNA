@@ -85,18 +85,12 @@
                                             <td>
                                                 @php $status = strtolower($app->application_status ?? ''); @endphp
 
-
                                                 @if(in_array($status, ['pending', 'รออนุมัติ', 'รอดำเนินการ']))
                                                     <span class="badge badge-warning">รอดำเนินการ</span>
-
-
                                                 @elseif(in_array($status, ['interning', 'approved', 'กำลังฝึกงาน', 'อนุมัติ']))
                                                     <span class="badge badge-success">กำลังฝึกงาน</span>
-
                                                 @elseif(in_array($status, ['rejected', 'ไม่อนุมัติ']))
                                                     <span class="badge badge-danger">ไม่อนุมัติ</span>
-
-
                                                 @else
                                                     <span class="badge badge-warning">รอดำเนินการ</span>
                                                 @endif
@@ -104,8 +98,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5">ยังไม่มีรายการสมัครงานล่าสุด
-                                            </td>
+                                            <td colspan="5">ยังไม่มีรายการสมัครงานล่าสุด</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -141,14 +134,16 @@
                                             <td>{{ $user->student->student_email ?? '-' }}</td>
                                             <td>{{ $user->student->student_phone ?? '-' }}</td>
                                             <td>
-                                                <a href="{{ route('newprofile', ['user_id' => $user->id]) }}"
-                                                    class="btn-action btn-edit">แก้ไข</a>
-                                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
-                                                    onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้งานรายนี้?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn-action btn-delete">ลบ</button>
-                                                </form>
+                                                <div class="action-group">
+                                                    <a href="{{ route('newprofile', ['user_id' => $user->id]) }}"
+                                                        class="btn-action btn-edit">แก้ไข</a>
+                                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
+                                                        onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้งานรายนี้?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn-action btn-delete">ลบ</button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @empty
@@ -185,16 +180,16 @@
                                             <td>{{ $company->contact_name }}</td>
                                             <td>{{ $company->contact_phone ?? '-' }}</td>
                                             <td>
-                                                <a href="{{ route('company.edit.profile', ['id' => $company->id]) }}"
-                                                    class="btn-action btn-edit">ตรวจ/แก้ไข</a>
-
-                                                <form action="{{ route('admin.companies.destroy', $company->id) }}" method="POST"
-                                                    
-                                                    onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบบริษัท {{ $company->company_name }}?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn-action btn-delete">ลบ</button>
-                                                </form>
+                                                <div class="action-group">
+                                                    <a href="{{ route('company.edit.profile', ['id' => $company->id]) }}"
+                                                        class="btn-action btn-edit">ตรวจ/แก้ไข</a>
+                                                    <form action="{{ route('admin.companies.destroy', $company->id) }}" method="POST"
+                                                        onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบบริษัท {{ $company->company_name }}?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn-action btn-delete">ลบ</button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @empty
@@ -247,8 +242,10 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('company.applicants.profile', ['id' => $intern->id]) }}"
-                                                    class="btn-action btn-edit" >รายละเอียด</a>
+                                                <div class="action-group">
+                                                    <a href="{{ route('company.applicants.profile', ['id' => $intern->id]) }}"
+                                                        class="btn-action btn-edit">รายละเอียด</a>
+                                                </div>
                                             </td>
                                         </tr>
                                     @empty
@@ -289,45 +286,44 @@
                                             <td>{{ $doc->document_type ?? '-' }}</td>
                                             <td><span class="badge badge-success">ส่งแล้ว</span></td>
                                             <td>
-                                                {{-- ปุ่มตรวจเอกสาร --}}
-                                                @if(!empty($doc->document_file_path))
-                                                    @php
-                                                        $filePath = ltrim(str_replace('/storage/', '', $doc->document_file_path), '/');
-                                                    @endphp
-                                                    <a href="{{ asset('storage/' . $filePath) }}" target="_blank"
-                                                        class="btn-action btn-edit"
-                                                       
-                                                        ตรวจเอกสาร
-                                                    </a>
-                                                @elseif(!empty($doc->appdoc_file_path))
-                                                    @php
-                                                        $appPath = ltrim(str_replace('/storage/', '', $doc->appdoc_file_path), '/');
-                                                    @endphp
-                                                    <a href="{{ asset('storage/' . $appPath) }}" target="_blank"
-                                                        class="btn-action btn-edit"
-                                    
-                                                        ตรวจเอกสาร
-                                                    </a>
-                                                @else
-                                                    <button type="button" class="btn-action btn-edit"
-                                                       
-                                                        onclick="alert('ไม่พบไฟล์เอกสารในระบบ')">
-                                                        ตรวจเอกสาร
-                                                    </button>
-                                                @endif
+                                                <div class="action-group">
+                                                    {{-- ปุ่มตรวจเอกสาร --}}
+                                                    @if(!empty($doc->document_file_path))
+                                                        @php
+                                                            $filePath = ltrim(str_replace('/storage/', '', $doc->document_file_path), '/');
+                                                        @endphp
+                                                        <a href="{{ asset('storage/' . $filePath) }}" target="_blank"
+                                                            class="btn-action btn-edit">
+                                                            ตรวจเอกสาร
+                                                        </a>
+                                                    @elseif(!empty($doc->appdoc_file_path))
+                                                        @php
+                                                            $appPath = ltrim(str_replace('/storage/', '', $doc->appdoc_file_path), '/');
+                                                        @endphp
+                                                        <a href="{{ asset('storage/' . $appPath) }}" target="_blank"
+                                                            class="btn-action btn-edit">
+                                                            ตรวจเอกสาร
+                                                        </a>
+                                                    @else
+                                                        <button type="button" class="btn-action btn-edit"
+                                                            onclick="alert('ไม่พบไฟล์เอกสารในระบบ')">
+                                                            ตรวจเอกสาร
+                                                        </button>
+                                                    @endif
 
-                                                {{-- ปุ่มลบเอกสาร --}}
-                                                <form action="{{ route('admin.documents.destroy', $doc->id) }}" method="POST"
-                                                    onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบเอกสารรายการนี้?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn-action btn-delete">ลบ</button>
-                                                </form>
+                                                    {{-- ปุ่มลบเอกสาร --}}
+                                                    <form action="{{ route('admin.documents.destroy', $doc->id) }}" method="POST"
+                                                        onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบเอกสารรายการนี้?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn-action btn-delete">ลบ</button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" >ไม่พบข้อมูลเอกสาร</td>
+                                            <td colspan="5">ไม่พบข้อมูลเอกสาร</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
