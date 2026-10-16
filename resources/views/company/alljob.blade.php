@@ -12,7 +12,7 @@
         <a href="{{route('company.announcement')}}" class="btn-create">+ สร้างประกาศงานใหม่</a>
     </div>
 
-    @forelse ($positions as $position )
+    @forelse ($positions as $position)
     <div class="job-list">
         <div class="job-item">
             <div class="job-info">

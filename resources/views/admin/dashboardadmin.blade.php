@@ -84,7 +84,8 @@
                                             <td>
                                                 @php $status = strtolower($app->application_status ?? ''); @endphp
 
-                                                @if(in_array($status, ['pending', 'รออนุมัติ', 'รอดำเนินการ']))
+
+                                                @if(in_array($status, ['pending', 'รออนุมัติ', 'รอดำเนินการ' , 'อนุมัติแล้ว']))
                                                     <span class="badge badge-warning">รอดำเนินการ</span>
                                                 @elseif(in_array($status, ['interning', 'approved', 'กำลังฝึกงาน', 'อนุมัติ']))
                                                     <span class="badge badge-success">กำลังฝึกงาน</span>
