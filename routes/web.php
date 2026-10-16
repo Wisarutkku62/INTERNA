@@ -11,16 +11,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
 
-Route::view('/yed','company.announcementedit');
-Route::view('/mg','company.ManageInternship');
-Route::view('/mf','InformationandHistory');
-Route::view('/mt','company.evaluation');
-Route::view('/ct','company.companydetail');
-Route::view('/kehee','company.manageinterview');
-Route::view('/ke','company.viewdocument');
-Route::view('/jj','company.profilecompany');
-Route::view('/u','contactus');
-
 // Public
 Route::get('/', [InternController::class, 'index'])->name('index');
 Route::get('/intern', [InternController::class, 'internship'])->name('intern.intern');
@@ -85,6 +75,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/companies/{id}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
     Route::delete('/admin/documents/{id}', [AdminController::class, 'destroyDocument'])->name('admin.documents.destroy');
     Route::get('/admin/documents/{id}/view', [DocumentController::class, 'viewDocument'])->name('admin.documents.view');
+    Route::get('/admin/studentProfile/{id}', [AdminController::class, 'viewStudentProfile'])->name('admin.student.profile');
+    Route::get('/admin/companyProfile/{id}', [AdminController::class, 'viewCompanyProfile'])->name('admin.company.profile');
 });
 
 require __DIR__.'/settings.php';

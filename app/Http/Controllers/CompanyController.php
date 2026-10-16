@@ -41,6 +41,7 @@ class CompanyController extends Controller
 
         return view('company.managecom', compact('user', 'applicants', 'interviews'));
     }
+
     public function editProfileSave(Request $request)
     {
         $validated = $request->validate([
@@ -55,19 +56,31 @@ class CompanyController extends Controller
             'company_logo_image'  => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
+        $user = Auth::user();
+
+        if ($user->role === 'admin' && $request->filled('company_id')) {
+            $company = Company::findOrFail($request->company_id);
+        } else {
+            $company = Company::where('user_id', $user->id)->firstOrFail();
+        }
+
         if ($request->hasFile('company_logo_image')) {
             $validated['company_logo_image'] = $request->file('company_logo_image')->store('logos', 'public');
         }
 
-        Company::updateOrCreate(
-            ['user_id' => Auth::id()],
-            $validated
-        );
+        $company->update($validated);
+
+        if ($user->role === 'admin') {
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('success', 'บันทึกโปรไฟล์บริษัทเรียบร้อยแล้ว');
+        }
 
         return redirect()
             ->route('company.overview')
             ->with('success', 'บันทึกโปรไฟล์เรียบร้อยแล้ว');
     }
+
     public function announcement()
     {
         return view('company.announcement');
@@ -345,8 +358,8 @@ class CompanyController extends Controller
         })->with(['student', 'internshipPosition', 'interview', 'evaluation']);
 
         $applicants_all = (clone $allQuery)
-        ->where('application_status', '!=', 'declined')
-        ->get();
+            ->where('application_status', '!=', 'declined')
+            ->get();
 
         $applicants_interview_passed = (clone $allQuery)
             ->whereHas('interview', fn($q) => $q->where('interview_result', 'passed'))

@@ -133,7 +133,7 @@
                                             <td>{{ $user->student->student_phone ?? '-' }}</td>
                                             <td>
                                                 <div class="action-group">
-                                                    <a href="{{ route('newprofile', ['user_id' => $user->id]) }}"
+                                                    <a href="{{ route('admin.student.profile', $user->id) }}"
                                                         class="btn-action btn-edit">แก้ไข</a>
                                                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
                                                         onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้งานรายนี้?');">
@@ -178,7 +178,7 @@
                                             <td>{{ $company->contact_phone ?? '-' }}</td>
                                             <td>
                                                 <div class="action-group">
-                                                    <a href="{{ route('company.edit.profile', ['id' => $company->id]) }}"
+                                                    <a href="{{ route('admin.company.profile', $company?->user?->id) }}"
                                                         class="btn-action btn-edit">ตรวจ/แก้ไข</a>
                                                     <form action="{{ route('admin.companies.destroy', $company->id) }}" method="POST"
                                                         onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบบริษัท {{ $company->company_name }}?');">

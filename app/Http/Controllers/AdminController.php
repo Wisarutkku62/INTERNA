@@ -156,4 +156,19 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'เกิดข้อผิดพลาดในการลบเอกสาร');
         }
     }
+    public function viewStudentProfile(int $id) 
+    {
+        $user = User::findOrFail($id);
+
+        return view('student.newprofile', compact('user'));
+    }
+
+    public function viewCompanyProfile(int $id) 
+    {
+        $user = User::findOrFail($id);
+
+        return view('company.companyedit', compact('user'));
+    }
+
+    
 }
