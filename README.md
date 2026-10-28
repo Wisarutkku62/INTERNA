@@ -227,4 +227,7 @@ herd open
 ```
 ถ้าต้องการใช้ชื่อเว็บไซต์เฉพาะ ให้ตรวจสอบชื่อโดเมนที่ Herd กำหนดให้โปรเจกต์ในแอป Herd หรือด้วยคำสั่ง CLI ที่ติดตั้งอยู่บนเครื่อง
 
+# โครงสร้างฐานข้อมูล
+<img width="949" height="1282" alt="webapp_erdiagram" src="https://github.com/user-attachments/assets/d95c2c84-2afe-4963-b64b-031d853e4923" />
+
 
