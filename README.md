@@ -4,8 +4,8 @@
   
 |ชื่อ|สาขา|รหัสนักศึกษา|หน้าที่|
 |---|---|---|---|
-|กมลณัฐ สุวรรณสุข| เทคโนโลยีสารสนเทศ | 683380034-8 | Backend Company + Student + Admin|
-|กรวิชญ์ วงษาเนาว์| เทคโนโลยีสารสนเทศ | 683380036-4 | Frontend Student|
+|กมลณัฐ สุวรรณสุข| เทคโนโลยีสารสนเทศ | 683380034-8 | Backend Company + Student + Admin and Controller Company|
+|กรวิชญ์ วงษาเนาว์| เทคโนโลยีสารสนเทศ | 683380036-4 | Frontend Student + Company|
 |ธนกฤต ใจสุข| เทคโนโลยีสารสนเทศ | 683380042-9 | Frontend Admin + Company|
 |วิศรุต เครือลุน| เทคโนโลยีสารสนเทศ | 683380054-2 | Frontend Company + Student and Controller Admin|
 |เบญญาภา โสรัตน์| เทคโนโลยีสารสนเทศ | 683380279-8 | Backend Student + Admin |
